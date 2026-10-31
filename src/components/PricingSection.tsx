@@ -1,241 +1,275 @@
 "use client";
 
 import { useState } from "react";
-import { Check, Sparkles, ArrowRight, Zap, Shield, HelpCircle } from "lucide-react";
+import { Check, Sparkles, ArrowRight } from "lucide-react";
 import Link from "next/link";
+
+interface PlanItem {
+  id: string;
+  name: string;
+  monthlyPrice: number | null;
+  yearlyPrice: number | null;
+  tagline: string;
+  isRecommended?: boolean;
+  metrics: {
+    aiAgents: string | number;
+    creditsPerMonth: string;
+    ragStorage: string;
+    workspaces: string | number;
+    members: string | number;
+  };
+  features: string[];
+}
+
+const YEDII_PLANS: PlanItem[] = [
+  {
+    id: "starter",
+    name: "Starter",
+    monthlyPrice: 39,
+    yearlyPrice: 31,
+    tagline: "For early-stage startups and small customer support teams",
+    isRecommended: false,
+    metrics: {
+      aiAgents: 2,
+      creditsPerMonth: "4,000",
+      ragStorage: "100 MB",
+      workspaces: 1,
+      members: 3,
+    },
+    features: [
+      "2 Autonomous AI agents",
+      "Web widget deployment with custom theme",
+      "File ingestion (PDF, DOCX, CSV, TXT)",
+      "Standard vector RAG embeddings",
+      "Email support & API keys access",
+    ],
+  },
+  {
+    id: "growth",
+    name: "Growth Pro",
+    monthlyPrice: 99,
+    yearlyPrice: 79,
+    tagline: "For scaling companies needing omnichannel deploy & live team inbox",
+    isRecommended: true,
+    metrics: {
+      aiAgents: 8,
+      creditsPerMonth: "25,000",
+      ragStorage: "1 GB",
+      workspaces: 3,
+      members: 10,
+    },
+    features: [
+      "8 Autonomous AI agents",
+      "Omnichannel: Web Widget, WhatsApp Business & Slack",
+      "Shared Team Inbox with real-time human escalation",
+      "Multi-model routing (Claude 3.5 Sonnet & GPT-4o)",
+      "Automated web crawling & Notion connectors",
+      "Sentiment alert webhooks & analytics dashboard",
+      "Priority email & chat support",
+    ],
+  },
+  {
+    id: "scale",
+    name: "Scale",
+    monthlyPrice: 249,
+    yearlyPrice: 199,
+    tagline: "For high-volume operations requiring multi-agent workflows",
+    isRecommended: false,
+    metrics: {
+      aiAgents: 25,
+      creditsPerMonth: "100,000",
+      ragStorage: "5 GB",
+      workspaces: 10,
+      members: "Unlimited",
+    },
+    features: [
+      "25 Autonomous AI agents",
+      "Unlimited team seats & advanced RBAC",
+      "Custom Model Context Protocol (MCP) server support",
+      "Continuous re-training & re-crawling scheduler",
+      "Zero Data Retention guarantee",
+      "Dedicated account manager & 99.9% SLA",
+    ],
+  },
+  {
+    id: "enterprise",
+    name: "Enterprise",
+    monthlyPrice: null,
+    yearlyPrice: null,
+    tagline: "Dedicated VPC, on-premise deployment, custom SLA, and strict data isolation",
+    isRecommended: false,
+    metrics: {
+      aiAgents: "Unlimited",
+      creditsPerMonth: "Custom Volume",
+      ragStorage: "Dedicated DB",
+      workspaces: "Unlimited",
+      members: "Unlimited",
+    },
+    features: [
+      "Unlimited agents & custom LLM fine-tuning",
+      "Dedicated VPC / On-premise private cluster",
+      "SOC2 Type II, HIPAA & GDPR compliance pack",
+      "Custom billing via Paddle, Stripe or Invoicing",
+      "24/7 dedicated solutions engineer",
+    ],
+  },
+];
 
 export function PricingSection() {
   const [billingCycle, setBillingCycle] = useState<"monthly" | "yearly">("yearly");
-
-  const plans = [
-    {
-      name: "Starter",
-      tagline: "Ideal for small teams launching their first customer-facing agent.",
-      monthlyPrice: 39,
-      yearlyPrice: 29,
-      highlight: false,
-      badge: null,
-      metrics: {
-        agents: "3 AI Agents",
-        credits: "5,000 Credits / mo",
-        storage: "100 MB RAG Grounding",
-        seats: "3 Team Members"
-      },
-      features: [
-        "Web widget deployment with custom branding",
-        "Document ingestion (PDF, Word, TXT, CSV)",
-        "GPT-4o mini & Claude 3.5 Haiku models",
-        "Community support & API access",
-        "Basic analytics & conversation logs"
-      ],
-      ctaText: "Start 14-Day Free Trial",
-      ctaLink: "/signup"
-    },
-    {
-      name: "Growth Pro",
-      tagline: "For scaling companies requiring omnichannel deploy and human handoff.",
-      monthlyPrice: 109,
-      yearlyPrice: 89,
-      highlight: true,
-      badge: "Most Popular",
-      metrics: {
-        agents: "10 AI Agents",
-        credits: "30,000 Credits / mo",
-        storage: "1 GB RAG Grounding",
-        seats: "10 Team Members"
-      },
-      features: [
-        "Everything in Starter, plus:",
-        "Omnichannel (WhatsApp Business, Slack, Web Widget)",
-        "Shared Team Inbox with live human escalation",
-        "Advanced models (Claude 3.5 Sonnet & GPT-4o)",
-        "Real-time sentiment alert webhooks",
-        "Automated website sync & Notion connectors",
-        "Priority email & Slack support"
-      ],
-      ctaText: "Get Started with Pro",
-      ctaLink: "/signup"
-    },
-    {
-      name: "Enterprise",
-      tagline: "Custom scale, dedicated VPC, custom SLA, and strict data isolation.",
-      monthlyPrice: null,
-      yearlyPrice: null,
-      highlight: false,
-      badge: "Dedicated Infra",
-      metrics: {
-        agents: "Unlimited AI Agents",
-        credits: "Custom High-Volume",
-        storage: "Unlimited Vectors",
-        seats: "Unlimited Seats"
-      },
-      features: [
-        "Everything in Growth Pro, plus:",
-        "Dedicated VPC / On-Premise deployment option",
-        "Zero Data Retention (ZDR) guarantee",
-        "Custom Model Context Protocol (MCP) servers",
-        "Role-based access control (RBAC) & SAML SSO",
-        "99.99% uptime SLA & 24/7 dedicated engineer",
-        "Custom billing via Paddle or Invoicing"
-      ],
-      ctaText: "Talk to Enterprise Sales",
-      ctaLink: "#contact"
-    }
-  ];
+  const [selectedPlanId, setSelectedPlanId] = useState<string>("growth");
 
   return (
-    <section id="pricing" className="py-20 md:py-28 relative">
+    <section id="pricing" className="py-8 md:py-12 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-zinc-100 text-zinc-700 text-xs font-semibold mb-3">
-            <Sparkles className="w-3.5 h-3.5 text-zinc-900" />
-            Transparent Pricing
+        {/* Header & Billing Cycle Toggle */}
+        <div className="w-full flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+          <div className="max-w-[560px] flex flex-col gap-1">
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-zinc-100 text-zinc-700 text-xs font-semibold w-fit mb-1">
+              <Sparkles className="w-3.5 h-3.5 text-zinc-900" />
+              Transparent Pricing
+            </div>
+            <h2 className="text-[22px] sm:text-[26px] font-semibold text-[#141C2E] tracking-[-0.48px] leading-tight">
+              Plans &amp; pricing
+            </h2>
+            <p className="text-[13.5px] font-normal text-[#6B7280] leading-snug">
+              Explore available plans to unlock additional features and expand your AI support capabilities.
+            </p>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-zinc-950">
-            Simple, predictable plans for every stage
-          </h2>
-          <p className="mt-4 text-base sm:text-lg text-zinc-600">
-            No surprise overages. Upgrade, downgrade, or cancel anytime with a 14-day risk-free trial.
-          </p>
 
-          {/* Billing Cycle Toggle */}
-          <div className="mt-8 inline-flex items-center p-1 rounded-full bg-zinc-100 border border-zinc-200">
+          {/* Yedii Application Style Billing Cycle Toggle */}
+          <div className="w-full sm:w-[272px] h-[39.6px] rounded-[10px] border-[0.8px] border-[#E4E5E8] bg-white p-[3px] flex items-center gap-[2px] shrink-0 self-start sm:self-auto shadow-2xs">
             <button
               type="button"
               onClick={() => setBillingCycle("monthly")}
-              className={`px-4 py-1.5 text-xs sm:text-sm font-semibold rounded-full transition-all cursor-pointer ${
+              className={`flex-1 sm:w-[80px] sm:flex-initial h-[32px] rounded-[8px] text-[13px] font-semibold flex items-center justify-center transition-colors cursor-pointer select-none leading-none ${
                 billingCycle === "monthly"
-                  ? "bg-white text-zinc-900 shadow-xs"
-                  : "text-zinc-600 hover:text-zinc-900"
+                  ? "bg-[#141C2E] text-white shadow-xs"
+                  : "bg-transparent text-[#5A6070] hover:text-[#17181C]"
               }`}
             >
-              Monthly billing
+              Monthly
             </button>
             <button
               type="button"
               onClick={() => setBillingCycle("yearly")}
-              className={`flex items-center gap-1.5 px-4 py-1.5 text-xs sm:text-sm font-semibold rounded-full transition-all cursor-pointer ${
+              className={`flex-1 sm:w-[182px] sm:flex-initial h-[32px] rounded-[8px] text-[13px] font-semibold flex items-center justify-center transition-colors cursor-pointer select-none leading-none gap-1.5 ${
                 billingCycle === "yearly"
-                  ? "bg-zinc-900 text-white shadow-xs"
-                  : "text-zinc-600 hover:text-zinc-900"
+                  ? "bg-[#141C2E] text-white shadow-xs"
+                  : "bg-transparent text-[#5A6070] hover:text-[#17181C]"
               }`}
             >
-              <span>Yearly billing</span>
-              <span className="text-[10px] font-bold uppercase tracking-wider bg-emerald-500 text-white px-1.5 py-0.2 rounded-full">
-                Save 20%
+              <span>Yearly</span>
+              <span className="text-[10px] font-bold uppercase tracking-wider bg-emerald-500 text-white px-1.5 py-0.5 rounded-full">
+                2 mo free
               </span>
             </button>
           </div>
         </div>
 
-        {/* Pricing Cards Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
-          {plans.map((p) => {
-            const price =
-              p.monthlyPrice === null
-                ? "Custom"
-                : billingCycle === "yearly"
-                ? `$${p.yearlyPrice}`
-                : `$${p.monthlyPrice}`;
+        {/* 4 Cards Grid (Matching Yedii_Application PlanCard.tsx) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {YEDII_PLANS.map((plan) => {
+            const isSelected = selectedPlanId === plan.id;
+            const isCustomPrice = plan.monthlyPrice === null;
+            const displayPrice = isCustomPrice
+              ? "Custom"
+              : billingCycle === "yearly"
+              ? `$${plan.yearlyPrice}`
+              : `$${plan.monthlyPrice}`;
+            const displayPeriod = isCustomPrice
+              ? ""
+              : billingCycle === "yearly"
+              ? "/ year"
+              : "/ month";
 
             return (
               <div
-                key={p.name}
-                className={`relative rounded-3xl p-7 sm:p-8 flex flex-col justify-between transition-all duration-200 ${
-                  p.highlight
-                    ? "bg-zinc-950 text-white border-2 border-zinc-900 shadow-xl lg:-translate-y-2"
-                    : "bg-white text-zinc-900 border border-zinc-200/90 shadow-xs hover:border-zinc-300"
+                key={plan.id}
+                onClick={() => setSelectedPlanId(plan.id)}
+                className={`w-full min-h-[500px] rounded-[12px] p-5 bg-white flex flex-col justify-between transition-all duration-200 select-none cursor-pointer ${
+                  isSelected
+                    ? "border-[0.8px] border-[#141C2E] shadow-[0px_6px_18px_0px_rgba(16,24,40,0.08),0px_0px_0px_1px_#141C2E]"
+                    : "border-[0.8px] border-[#E8E9EC] shadow-[0_1px_2px_rgba(0,0,0,0.02)] hover:border-[#D0D3D9]"
                 }`}
               >
-                {/* Popular Badge */}
-                {p.badge && (
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-emerald-500 text-white text-[11px] font-bold uppercase tracking-wider shadow-sm">
-                    {p.badge}
-                  </div>
-                )}
-
-                <div>
-                  <div className="flex items-center justify-between">
-                    <h3 className="text-xl font-bold">{p.name}</h3>
-                  </div>
-
-                  <p
-                    className={`mt-2 text-xs sm:text-sm leading-relaxed ${
-                      p.highlight ? "text-zinc-400" : "text-zinc-500"
-                    }`}
-                  >
-                    {p.tagline}
-                  </p>
-
-                  {/* Price */}
-                  <div className="mt-6 flex items-baseline gap-1">
-                    <span className="text-4xl sm:text-5xl font-extrabold tracking-tight">
-                      {price}
-                    </span>
-                    {p.monthlyPrice !== null && (
-                      <span
-                        className={`text-xs sm:text-sm font-medium ${
-                          p.highlight ? "text-zinc-400" : "text-zinc-500"
-                        }`}
-                      >
-                        / month {billingCycle === "yearly" && "billed annually"}
+                {/* Top Section */}
+                <div className="flex flex-col">
+                  {/* Name & Badge */}
+                  <div className="flex items-center justify-between h-[24px]">
+                    <h3 className="text-[15px] font-semibold text-[#141C2E] tracking-[-0.21px] leading-none">
+                      {plan.name}
+                    </h3>
+                    {plan.isRecommended && (
+                      <span className="h-[21px] px-2 rounded-[6px] bg-[#F4F5F7] border border-[#E0E2E6] text-[11px] font-semibold text-[#141C2E] flex items-center leading-none">
+                        Recommended
                       </span>
                     )}
                   </div>
 
-                  {/* Key Metrics Box */}
-                  <div
-                    className={`mt-6 p-4 rounded-2xl grid grid-cols-2 gap-2.5 text-xs font-medium ${
-                      p.highlight
-                        ? "bg-zinc-900 border border-zinc-800 text-zinc-300"
-                        : "bg-zinc-50 border border-zinc-100 text-zinc-700"
-                    }`}
-                  >
-                    <div>🤖 {p.metrics.agents}</div>
-                    <div>⚡ {p.metrics.credits}</div>
-                    <div>💾 {p.metrics.storage}</div>
-                    <div>👥 {p.metrics.seats}</div>
+                  {/* Price */}
+                  <div className="flex items-baseline gap-1 mt-3">
+                    <span className="text-[28px] font-semibold text-[#141C2E] tracking-[-0.84px] leading-none">
+                      {displayPrice}
+                    </span>
+                    {displayPeriod && (
+                      <span className="text-[13.5px] font-normal text-[#6B7280] leading-none">
+                        {displayPeriod}
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Tagline */}
+                  <p className="text-[13px] font-normal text-[#4A5058] mt-1.5 leading-snug min-h-[38px]">
+                    {plan.tagline}
+                  </p>
+
+                  {/* Metrics Table */}
+                  <div className="w-full py-3 my-3 border-t border-b border-[#F1F2F4] flex flex-col gap-2">
+                    <div className="flex items-center justify-between text-[13px]">
+                      <span className="text-[#6B7280]">AI agents</span>
+                      <span className="font-semibold text-[#22262E]">{plan.metrics.aiAgents}</span>
+                    </div>
+                    <div className="flex items-center justify-between text-[13px]">
+                      <span className="text-[#6B7280]">Credits / month</span>
+                      <span className="font-semibold text-[#22262E]">{plan.metrics.creditsPerMonth}</span>
+                    </div>
+                    <div className="flex items-center justify-between text-[13px]">
+                      <span className="text-[#6B7280]">RAG storage</span>
+                      <span className="font-semibold text-[#22262E]">{plan.metrics.ragStorage}</span>
+                    </div>
+                    <div className="flex items-center justify-between text-[13px]">
+                      <span className="text-[#6B7280]">Team members</span>
+                      <span className="font-semibold text-[#22262E]">{plan.metrics.members}</span>
+                    </div>
                   </div>
 
                   {/* Features List */}
-                  <div className="mt-8 space-y-3">
-                    <span
-                      className={`text-xs font-semibold uppercase tracking-wider ${
-                        p.highlight ? "text-zinc-400" : "text-zinc-400"
-                      }`}
-                    >
-                      Included Capabilities
+                  <div className="space-y-2 mt-1">
+                    <span className="text-[11px] font-semibold uppercase tracking-wider text-[#9AA0A8]">
+                      Includes
                     </span>
-                    {p.features.map((feat, i) => (
-                      <div key={i} className="flex items-start gap-2.5 text-xs sm:text-sm">
-                        <Check
-                          className={`w-4 h-4 shrink-0 mt-0.5 ${
-                            p.highlight ? "text-emerald-400" : "text-emerald-600"
-                          }`}
-                        />
-                        <span
-                          className={p.highlight ? "text-zinc-200" : "text-zinc-700"}
-                        >
-                          {feat}
-                        </span>
+                    {plan.features.map((feat, i) => (
+                      <div key={i} className="flex items-start gap-2 text-xs text-[#3A4049]">
+                        <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                        <span className="leading-tight">{feat}</span>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                {/* Card CTA */}
-                <div className="mt-8 pt-6 border-t border-zinc-200/20">
+                {/* Bottom Action Button */}
+                <div className="mt-5 pt-3 border-t border-[#F1F2F4]">
                   <Link
-                    href={p.ctaLink}
-                    className={`w-full py-3 px-4 rounded-full font-semibold text-sm inline-flex items-center justify-center gap-2 transition-all ${
-                      p.highlight
-                        ? "bg-white text-zinc-900 hover:bg-zinc-100 shadow-sm"
-                        : "bg-zinc-900 text-white hover:bg-black"
+                    href={plan.id === "enterprise" ? "#contact" : "/signup"}
+                    className={`w-full h-[38px] rounded-[8px] text-[13px] font-semibold flex items-center justify-center gap-1.5 transition-colors ${
+                      isSelected
+                        ? "bg-[#141C2E] text-white hover:bg-[#1E293B]"
+                        : "bg-[#F4F5F7] text-[#141C2E] hover:bg-[#E8E9EC]"
                     }`}
                   >
-                    <span>{p.ctaText}</span>
-                    <ArrowRight className="w-4 h-4" />
+                    <span>{plan.id === "enterprise" ? "Contact Enterprise" : "Select Plan"}</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>
               </div>

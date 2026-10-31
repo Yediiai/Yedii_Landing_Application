@@ -55,10 +55,10 @@ export function Testimonials() {
   ];
 
   return (
-    <section id="customers" className="py-20 md:py-28 bg-zinc-50/60 border-t border-zinc-200/60">
+    <section id="customers" className="py-8 md:py-12 bg-zinc-50/60 border-t border-zinc-200/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16">
+        <div className="text-center max-w-2xl mx-auto mb-8">
           <div className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-white border border-zinc-200 text-zinc-700 text-xs font-semibold mb-3">
             <Quote className="w-3.5 h-3.5 text-zinc-900" />
             Customer Success Stories

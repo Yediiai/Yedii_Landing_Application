@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import { SmoothScrollProvider } from "@/components/SmoothScrollProvider";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -16,8 +17,8 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Yedii - AI Agent Platform",
-  description: "Yedii Landing Application",
+  title: "Yedii | Autonomous AI Agent Platform",
+  description: "Deploy production-grade conversational and workflow agents grounded on your company data.",
 };
 
 export default function RootLayout({
@@ -28,9 +29,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${inter.className} ${jetbrainsMono.variable} h-full antialiased`}
+      className={`${inter.variable} ${jetbrainsMono.variable} scroll-smooth h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-sans">{children}</body>
+      <body
+        className={`${inter.className} min-h-full flex flex-col font-sans antialiased text-[#141C2E] bg-[#FAFAFA]`}
+      >
+        <SmoothScrollProvider>{children}</SmoothScrollProvider>
+      </body>
     </html>
   );
 }

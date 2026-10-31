@@ -43,10 +43,10 @@ export function ComparisonMatrix() {
   ];
 
   return (
-    <section id="enterprise" className="py-20 md:py-28 relative">
+    <section id="enterprise" className="py-8 md:py-12 relative">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-14">
+        <div className="text-center max-w-2xl mx-auto mb-8">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-zinc-100 text-zinc-700 text-xs font-semibold mb-3">
             <Sparkles className="w-3.5 h-3.5 text-zinc-900" />
             Clear Advantage

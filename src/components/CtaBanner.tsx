@@ -5,7 +5,7 @@ import { Sparkles, ArrowRight, ShieldCheck, Zap } from "lucide-react";
 
 export function CtaBanner() {
   return (
-    <section className="py-20 relative">
+    <section className="py-8 md:py-12 relative">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative rounded-3xl bg-zinc-950 text-white p-8 sm:p-14 lg:p-16 overflow-hidden shadow-2xl border border-zinc-800">
           {/* Subtle glowing radial background */}

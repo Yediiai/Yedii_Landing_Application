@@ -19,14 +19,14 @@ export function SocialProof() {
   ];
 
   return (
-    <section className="py-14 border-y border-zinc-200/60 bg-white/60">
+    <section className="py-8 border-y border-zinc-200/60 bg-white/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <p className="text-center text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-8">
+        <p className="text-center text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-5">
           Trusted by high-growth startups and global enterprise teams
         </p>
 
         {/* Logos Marquee / Grid */}
-        <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-14 opacity-75 grayscale hover:grayscale-0 transition-all duration-300">
+        <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-12 opacity-75 grayscale hover:grayscale-0 transition-all duration-300">
           {logos.map((logo) => (
             <div
               key={logo.name}
@@ -39,7 +39,7 @@ export function SocialProof() {
         </div>
 
         {/* Stats Row */}
-        <div className="mt-14 pt-10 border-t border-zinc-100 grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
+        <div className="mt-8 pt-6 border-t border-zinc-100 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
           {stats.map((s) => (
             <div key={s.label} className="text-center sm:text-left">
               <div className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-950">

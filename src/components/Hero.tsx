@@ -5,7 +5,7 @@ import { ArrowRight, Bot, Sparkles, Shield, Zap, Layers, PlayCircle } from "luci
 
 export function Hero() {
   return (
-    <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
+    <section className="relative pt-24 pb-8 md:pt-32 md:pb-10 overflow-hidden">
       {/* Background radial gradients for subtle glow (Peec AI / ElevenLabs feel) */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-gradient-to-tr from-zinc-200/50 via-zinc-100/60 to-transparent blur-3xl -z-10 pointer-events-none rounded-full" />
       <div className="absolute inset-0 bg-grid-pattern opacity-40 -z-20 pointer-events-none" />

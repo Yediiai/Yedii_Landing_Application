@@ -61,9 +61,9 @@ export function Footer() {
   ];
 
   return (
-    <footer className="border-t border-zinc-200/80 bg-white pt-16 pb-12 text-zinc-600">
+    <footer className="border-t border-zinc-200/80 bg-white pt-10 pb-8 text-zinc-600">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 lg:gap-12 pb-14 border-b border-zinc-100">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 lg:gap-12 pb-8 border-b border-zinc-100">
           {/* Brand Column */}
           <div className="col-span-2 md:col-span-1 space-y-4">
             <Link href="/" className="flex items-center gap-2.5">

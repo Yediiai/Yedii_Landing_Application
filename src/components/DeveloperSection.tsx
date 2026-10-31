@@ -68,7 +68,7 @@ for chunk in stream:
   };
 
   return (
-    <section className="py-20 bg-zinc-950 text-white relative overflow-hidden">
+    <section className="py-10 md:py-12 bg-zinc-950 text-white relative overflow-hidden">
       {/* Background Glow */}
       <div className="absolute top-0 right-1/4 w-[450px] h-[300px] bg-gradient-to-b from-zinc-800/40 via-zinc-900/10 to-transparent blur-3xl pointer-events-none rounded-full" />
 
