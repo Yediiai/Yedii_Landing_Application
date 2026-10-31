@@ -79,18 +79,16 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Left: Yedii Logo & Name */}
-          <Link href="/" className="flex items-center gap-2.5 group cursor-pointer">
-            <div className="relative w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center bg-zinc-900 shadow-sm border border-zinc-800 transition-transform group-hover:scale-105">
-              <Image
-                src="/images/yedii-logo.png"
-                alt="Yedii Logo"
-                width={32}
-                height={32}
-                className="object-contain p-1"
-                priority
-              />
-            </div>
-            <span className="font-semibold text-[19px] tracking-tight text-zinc-900 group-hover:text-black">
+          <Link href="/" className="flex items-center gap-2 group cursor-pointer">
+            <Image
+              src="/images/yedii-logo.png"
+              alt="Yedii Logo"
+              width={28}
+              height={28}
+              className="h-7 w-7 object-contain transition-transform group-hover:scale-105"
+              priority
+            />
+            <span className="font-bold text-[18px] tracking-tight text-zinc-900 group-hover:text-black">
               Yedii
             </span>
           </Link>
@@ -164,7 +162,7 @@ export function Navbar() {
             </div>
 
             <Link
-              href="#pricing"
+              href="/pricing"
               className="px-3 py-1.5 text-sm font-medium text-zinc-600 hover:text-zinc-950 rounded-md transition-colors"
             >
               Pricing
@@ -236,7 +234,7 @@ export function Navbar() {
 
           <div className="pt-2 border-t border-zinc-100 space-y-1">
             <Link
-              href="#pricing"
+              href="/pricing"
               onClick={() => setIsMobileMenuOpen(false)}
               className="block px-3 py-2 rounded-lg text-sm font-medium text-zinc-800 hover:bg-zinc-50"
             >

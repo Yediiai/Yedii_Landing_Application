@@ -65,18 +65,16 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8 lg:gap-12 pb-8 border-b border-zinc-100">
           {/* Brand Column */}
-          <div className="col-span-2 md:col-span-1 space-y-4">
-            <Link href="/" className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center bg-zinc-900 shadow-sm border border-zinc-800">
-                <Image
-                  src="/images/yedii-logo.png"
-                  alt="Yedii"
-                  width={32}
-                  height={32}
-                  className="object-contain p-1"
-                />
-              </div>
-              <span className="font-semibold text-lg tracking-tight text-zinc-950">
+          <div className="col-span-2 md:col-span-1 space-y-3">
+            <Link href="/" className="flex items-center gap-2">
+              <Image
+                src="/images/yedii-logo.png"
+                alt="Yedii"
+                width={28}
+                height={28}
+                className="h-7 w-7 object-contain"
+              />
+              <span className="font-bold text-lg tracking-tight text-zinc-950">
                 Yedii
               </span>
             </Link>

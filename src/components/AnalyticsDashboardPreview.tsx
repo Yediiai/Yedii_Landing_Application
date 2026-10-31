@@ -6,39 +6,55 @@ import {
   ArrowDownRight,
   ChevronDown,
   Calendar,
-  Filter,
   Check
 } from "lucide-react";
+import {
+  ResponsiveContainer,
+  AreaChart,
+  Area,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip
+} from "recharts";
 
 export function AnalyticsDashboardPreview() {
   const [selectedAgent, setSelectedAgent] = useState("All agents");
   const [isAgentDropdownOpen, setIsAgentDropdownOpen] = useState(false);
-  const [hoveredConvPoint, setHoveredConvPoint] = useState<number | null>(3); // Default show Oct 20 tooltip
-  const [hoveredMsgBar, setHoveredMsgBar] = useState<number | null>(4); // Default show Oct 26 tooltip
 
-  const agentsList = ["All agents", "Aura Support Bot", "Nexus SDR Agent", "Atlas Internal Copilot"];
+  const agentsList = ["All agents", "Nidan AI Agent", "Aura Support Bot", "Nexus SDR Agent"];
 
-  // Conversation chart points (matching screenshot curve)
-  const convPoints = [
-    { date: "Oct 2", val: 0, label: "Fri, Oct 2" },
-    { date: "Oct 8", val: 0, label: "Thu, Oct 8" },
-    { date: "Oct 14", val: 0, label: "Wed, Oct 14" },
-    { date: "Oct 20", val: 0, label: "Tue, Oct 20" },
-    { date: "Oct 26", val: 0.8, label: "Mon, Oct 26" },
-    { date: "Oct 28", val: 0.2, label: "Wed, Oct 28" },
-    { date: "Oct 30", val: 3.8, label: "Fri, Oct 30 (Peak)" },
-    { date: "Nov 1", val: 0, label: "Sun, Nov 1" },
+  // Recharts smooth conversation data
+  const conversationData = [
+    { date: "Oct 2", count: 0, label: "Fri, Oct 2" },
+    { date: "Oct 5", count: 0, label: "Mon, Oct 5" },
+    { date: "Oct 8", count: 0, label: "Thu, Oct 8" },
+    { date: "Oct 11", count: 0, label: "Sun, Oct 11" },
+    { date: "Oct 14", count: 0, label: "Wed, Oct 14" },
+    { date: "Oct 17", count: 0, label: "Sat, Oct 17" },
+    { date: "Oct 20", count: 0, label: "Tue, Oct 20" },
+    { date: "Oct 23", count: 0, label: "Fri, Oct 23" },
+    { date: "Oct 26", count: 1, label: "Mon, Oct 26" },
+    { date: "Oct 28", count: 0.5, label: "Wed, Oct 28" },
+    { date: "Oct 30", count: 4, label: "Fri, Oct 30" },
+    { date: "Nov 1", count: 0, label: "Sun, Nov 1" },
   ];
 
-  // Message activity bars (matching screenshot with dark peak bar)
-  const msgBars = [
-    { date: "Oct 2", val: 0, label: "Fri, Oct 2: 0 messages" },
-    { date: "Oct 8", val: 0, label: "Thu, Oct 8: 0 messages" },
-    { date: "Oct 14", val: 0, label: "Wed, Oct 14: 0 messages" },
-    { date: "Oct 20", val: 0, label: "Tue, Oct 20: 0 messages" },
-    { date: "Oct 26", val: 0, label: "Mon, Oct 26: 0 messages" },
-    { date: "Oct 30", val: 9.8, label: "Fri, Oct 30: 10 messages (Peak)" },
-    { date: "Nov 1", val: 0, label: "Sun, Nov 1: 0 messages" },
+  // Recharts smooth message activity data
+  const messageData = [
+    { date: "Oct 2", count: 0 },
+    { date: "Oct 5", count: 0 },
+    { date: "Oct 8", count: 0 },
+    { date: "Oct 11", count: 0 },
+    { date: "Oct 14", count: 0 },
+    { date: "Oct 17", count: 0 },
+    { date: "Oct 20", count: 0 },
+    { date: "Oct 23", count: 0 },
+    { date: "Oct 26", count: 0 },
+    { date: "Oct 28", count: 0 },
+    { date: "Oct 30", count: 10 },
+    { date: "Nov 1", count: 0 },
   ];
 
   // Circular Donut Dimensions
@@ -70,7 +86,7 @@ export function AnalyticsDashboardPreview() {
             <button
               type="button"
               onClick={() => setIsAgentDropdownOpen(!isAgentDropdownOpen)}
-              className="h-[32px] px-3 rounded-[8px] bg-white border border-[#E4E5E8] text-[12px] font-medium text-[#141C2E] flex items-center gap-1.5 hover:bg-slate-50 transition-colors shadow-2xs"
+              className="h-[32px] px-3 rounded-[8px] bg-white border border-[#E4E5E8] text-[12px] font-medium text-[#141C2E] flex items-center gap-1.5 hover:bg-slate-50 transition-colors shadow-2xs cursor-pointer"
             >
               <span>{selectedAgent}</span>
               <ChevronDown className="w-3.5 h-3.5 text-[#6B7280]" />
@@ -86,7 +102,7 @@ export function AnalyticsDashboardPreview() {
                       setSelectedAgent(a);
                       setIsAgentDropdownOpen(false);
                     }}
-                    className="w-full px-3 py-1.5 text-left text-xs text-[#141C2E] hover:bg-zinc-50 flex items-center justify-between"
+                    className="w-full px-3 py-1.5 text-left text-xs text-[#141C2E] hover:bg-zinc-50 flex items-center justify-between cursor-pointer"
                   >
                     <span>{a}</span>
                     {selectedAgent === a && <Check className="w-3.5 h-3.5 text-emerald-600" />}
@@ -162,10 +178,10 @@ export function AnalyticsDashboardPreview() {
         </div>
       </div>
 
-      {/* 3. Middle Charts Row: Conversation Activity & Message Activity */}
+      {/* 3. Middle Charts Row Powered by Recharts */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4">
-        {/* Chart 1: Conversation activity */}
-        <div className="bg-white rounded-[12px] border border-[#E8E9EC] p-4 sm:p-5 flex flex-col justify-between shadow-2xs relative">
+        {/* Chart 1: Conversation activity (Recharts AreaChart) */}
+        <div className="bg-white rounded-[12px] border border-[#E8E9EC] p-4 sm:p-5 flex flex-col justify-between shadow-2xs">
           <div className="flex items-start justify-between">
             <div>
               <h4 className="text-[13.5px] font-semibold text-[#141C2E]">Conversation activity</h4>
@@ -179,73 +195,56 @@ export function AnalyticsDashboardPreview() {
             </div>
           </div>
 
-          {/* SVG Line Curve Chart */}
-          <div className="relative mt-6 h-[170px] w-full flex flex-col justify-end">
-            {/* Tooltip Overlay */}
-            {hoveredConvPoint !== null && (
-              <div
-                className="absolute z-10 -top-2 rounded-[8px] bg-[#141C2E] text-white px-3 py-1.5 text-xs shadow-md pointer-events-none transform -translate-x-1/2"
-                style={{ left: `${(hoveredConvPoint / (convPoints.length - 1)) * 86 + 7}%` }}
-              >
-                <div className="font-semibold text-[11px]">{convPoints[hoveredConvPoint].label}</div>
-                <div className="text-[10px] text-zinc-300">
-                  {convPoints[hoveredConvPoint].val > 0
-                    ? `${convPoints[hoveredConvPoint].val} conversations`
-                    : "0 conversations"}
-                </div>
-              </div>
-            )}
-
-            {/* Y Axis Grid lines */}
-            <div className="absolute inset-0 flex flex-col justify-between text-[11px] text-[#8A9099] pointer-events-none">
-              <div className="flex items-center gap-2 border-b border-dashed border-[#F0F1F3] w-full">
-                <span className="w-4">4</span>
-              </div>
-              <div className="flex items-center gap-2 border-b border-dashed border-[#F0F1F3] w-full">
-                <span className="w-4">2</span>
-              </div>
-              <div className="flex items-center gap-2 border-b border-[#E8E9EC] w-full">
-                <span className="w-4">0</span>
-              </div>
-            </div>
-
-            {/* SVG Curve */}
-            <svg
-              className="w-full h-[130px] overflow-visible pl-6"
-              viewBox="0 0 500 130"
-              preserveAspectRatio="none"
-            >
-              {/* Path line */}
-              <path
-                d="M 0 125 C 100 125, 200 125, 300 125 C 330 125, 340 100, 360 100 C 380 100, 390 125, 410 125 C 425 125, 435 20, 450 20 C 465 20, 475 125, 500 125"
-                fill="none"
-                stroke="#141C2E"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-              />
-              {/* Peak indicator dot */}
-              <circle cx="450" cy="20" r="4.5" fill="#141C2E" stroke="#ffffff" strokeWidth="2" />
-            </svg>
-
-            {/* X Axis Dates */}
-            <div className="flex justify-between text-[11px] text-[#8A9099] pt-2 pl-6">
-              {convPoints.map((p, idx) => (
-                <span
-                  key={p.date}
-                  onMouseEnter={() => setHoveredConvPoint(idx)}
-                  className={`cursor-pointer transition-colors ${
-                    hoveredConvPoint === idx ? "font-semibold text-[#141C2E]" : ""
-                  }`}
-                >
-                  {p.date}
-                </span>
-              ))}
-            </div>
+          <div className="h-[180px] w-full mt-4">
+            <ResponsiveContainer width="100%" height="100%">
+              <AreaChart data={conversationData} margin={{ top: 10, right: 10, left: -25, bottom: 0 }}>
+                <defs>
+                  <linearGradient id="convGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#141C2E" stopOpacity={0.15} />
+                    <stop offset="95%" stopColor="#141C2E" stopOpacity={0.0} />
+                  </linearGradient>
+                </defs>
+                <XAxis
+                  dataKey="date"
+                  tickLine={false}
+                  axisLine={{ stroke: "#E8E9EC" }}
+                  tick={{ fill: "#8A9099", fontSize: 11 }}
+                />
+                <YAxis
+                  domain={[0, 4]}
+                  ticks={[0, 2, 4]}
+                  tickLine={false}
+                  axisLine={false}
+                  tick={{ fill: "#8A9099", fontSize: 11 }}
+                />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: "#141C2E",
+                    borderRadius: "8px",
+                    border: "none",
+                    color: "#fff",
+                    fontSize: "12px",
+                    boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+                  }}
+                  formatter={(val: any) => [`${val} conversations`, "Activity"]}
+                  labelStyle={{ color: "#9CA3AF", fontSize: "11px", fontWeight: "600" }}
+                />
+                <Area
+                  type="monotone"
+                  dataKey="count"
+                  stroke="#141C2E"
+                  strokeWidth={2.5}
+                  fillOpacity={1}
+                  fill="url(#convGrad)"
+                  activeDot={{ r: 5, fill: "#141C2E", stroke: "#fff", strokeWidth: 2 }}
+                />
+              </AreaChart>
+            </ResponsiveContainer>
           </div>
         </div>
 
-        {/* Chart 2: Message activity */}
-        <div className="bg-white rounded-[12px] border border-[#E8E9EC] p-4 sm:p-5 flex flex-col justify-between shadow-2xs relative">
+        {/* Chart 2: Message activity (Recharts BarChart) */}
+        <div className="bg-white rounded-[12px] border border-[#E8E9EC] p-4 sm:p-5 flex flex-col justify-between shadow-2xs">
           <div className="flex items-start justify-between">
             <div>
               <h4 className="text-[13.5px] font-semibold text-[#141C2E]">Message activity</h4>
@@ -259,69 +258,41 @@ export function AnalyticsDashboardPreview() {
             </div>
           </div>
 
-          {/* Activity Bars Chart */}
-          <div className="relative mt-6 h-[170px] w-full flex flex-col justify-end">
-            {/* Tooltip Overlay */}
-            {hoveredMsgBar !== null && (
-              <div
-                className="absolute z-10 -top-2 rounded-[8px] bg-[#141C2E] text-white px-3 py-1.5 text-xs shadow-md pointer-events-none transform -translate-x-1/2"
-                style={{ left: `${(hoveredMsgBar / (msgBars.length - 1)) * 86 + 7}%` }}
-              >
-                <div className="font-semibold text-[11px]">{msgBars[hoveredMsgBar].label}</div>
-              </div>
-            )}
-
-            {/* Y Axis Grid lines */}
-            <div className="absolute inset-0 flex flex-col justify-between text-[11px] text-[#8A9099] pointer-events-none">
-              <div className="flex items-center gap-2 border-b border-dashed border-[#F0F1F3] w-full">
-                <span className="w-5">10</span>
-              </div>
-              <div className="flex items-center gap-2 border-b border-dashed border-[#F0F1F3] w-full">
-                <span className="w-5">5</span>
-              </div>
-              <div className="flex items-center gap-2 border-b border-[#E8E9EC] w-full">
-                <span className="w-5">0</span>
-              </div>
-            </div>
-
-            {/* Bar Columns */}
-            <div className="h-[130px] flex items-end justify-between pl-7 pr-2 pb-1 relative z-5">
-              {msgBars.map((bar, idx) => {
-                const heightPct = bar.val > 0 ? (bar.val / 10) * 100 : 2;
-                const isSelected = hoveredMsgBar === idx;
-                return (
-                  <div
-                    key={bar.date}
-                    onMouseEnter={() => setHoveredMsgBar(idx)}
-                    className="flex-1 flex flex-col items-center justify-end h-full cursor-pointer group px-1"
-                  >
-                    <div
-                      className={`w-2.5 sm:w-3 rounded-t-[3px] transition-all duration-200 ${
-                        bar.val > 0
-                          ? "bg-[#141C2E] group-hover:bg-black"
-                          : "bg-transparent group-hover:bg-zinc-200"
-                      }`}
-                      style={{ height: `${heightPct}%` }}
-                    />
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* X Axis Dates */}
-            <div className="flex justify-between text-[11px] text-[#8A9099] pt-2 pl-7">
-              {msgBars.map((b, idx) => (
-                <span
-                  key={b.date}
-                  onMouseEnter={() => setHoveredMsgBar(idx)}
-                  className={`cursor-pointer transition-colors ${
-                    hoveredMsgBar === idx ? "font-semibold text-[#141C2E]" : ""
-                  }`}
-                >
-                  {b.date}
-                </span>
-              ))}
-            </div>
+          <div className="h-[180px] w-full mt-4">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={messageData} margin={{ top: 10, right: 10, left: -25, bottom: 0 }}>
+                <XAxis
+                  dataKey="date"
+                  tickLine={false}
+                  axisLine={{ stroke: "#E8E9EC" }}
+                  tick={{ fill: "#8A9099", fontSize: 11 }}
+                />
+                <YAxis
+                  domain={[0, 10]}
+                  ticks={[0, 5, 10]}
+                  tickLine={false}
+                  axisLine={false}
+                  tick={{ fill: "#8A9099", fontSize: 11 }}
+                />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: "#141C2E",
+                    borderRadius: "8px",
+                    border: "none",
+                    color: "#fff",
+                    fontSize: "12px",
+                    boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+                  }}
+                  formatter={(val: any) => [`${val} messages`, "Total messages"]}
+                />
+                <Bar
+                  dataKey="count"
+                  fill="#141C2E"
+                  radius={[3, 3, 0, 0]}
+                  barSize={12}
+                />
+              </BarChart>
+            </ResponsiveContainer>
           </div>
         </div>
       </div>
@@ -341,7 +312,6 @@ export function AnalyticsDashboardPreview() {
             {/* SVG Donut */}
             <div className="relative w-[136px] h-[136px] shrink-0 flex items-center justify-center">
               <svg width={donutSize} height={donutSize} className="transform -rotate-90">
-                {/* Background track */}
                 <circle
                   cx={donutSize / 2}
                   cy={donutSize / 2}
@@ -350,7 +320,6 @@ export function AnalyticsDashboardPreview() {
                   stroke="#F3F4F6"
                   strokeWidth={strokeWidth}
                 />
-                {/* Resolved (Emerald Green) */}
                 <circle
                   cx={donutSize / 2}
                   cy={donutSize / 2}
@@ -361,7 +330,6 @@ export function AnalyticsDashboardPreview() {
                   strokeDasharray={`${lenResolved} ${circumference}`}
                   strokeDashoffset={0}
                 />
-                {/* Unresolved (Amber) */}
                 <circle
                   cx={donutSize / 2}
                   cy={donutSize / 2}
@@ -422,7 +390,6 @@ export function AnalyticsDashboardPreview() {
           </div>
 
           <div className="space-y-4 py-2">
-            {/* High Tier */}
             <div>
               <div className="flex items-center justify-between text-[12.5px] mb-1">
                 <span className="text-[#3A4049] font-medium">High</span>
@@ -434,7 +401,6 @@ export function AnalyticsDashboardPreview() {
               </div>
             </div>
 
-            {/* Medium Tier */}
             <div>
               <div className="flex items-center justify-between text-[12.5px] mb-1">
                 <span className="text-[#3A4049] font-medium">Medium</span>
@@ -446,7 +412,6 @@ export function AnalyticsDashboardPreview() {
               </div>
             </div>
 
-            {/* Low Tier */}
             <div>
               <div className="flex items-center justify-between text-[12.5px] mb-1">
                 <span className="text-[#3A4049] font-medium">Low</span>
