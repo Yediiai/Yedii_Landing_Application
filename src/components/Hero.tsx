@@ -53,10 +53,10 @@ export function Hero() {
         </div>
 
         {/* Hero Action Buttons */}
-        <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3.5">
+        <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
           <Link
-            href="#playground"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-zinc-900 text-white font-medium text-sm hover:bg-black transition-all shadow-sm hover:shadow-md active:scale-[0.99] group"
+            href="https://app.yedii.com/signup"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-[8px] bg-[#141C2E] text-white font-semibold text-xs sm:text-sm hover:bg-black transition-all shadow-xs active:scale-[0.99] group"
           >
             <Sparkles className="w-4 h-4 text-zinc-300 group-hover:rotate-12 transition-transform" />
             <span>Start Free Trial</span>
@@ -64,8 +64,8 @@ export function Hero() {
           </Link>
 
           <Link
-            href="#enterprise"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-white text-zinc-800 font-medium text-sm border border-zinc-200/90 hover:bg-zinc-50 hover:border-zinc-300 transition-all shadow-xs active:scale-[0.99]"
+            href="/enterprise"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-[8px] bg-white text-[#141C2E] font-semibold text-xs sm:text-sm border border-[#E4E5E8] hover:bg-zinc-50 transition-all shadow-2xs active:scale-[0.99]"
           >
             <PlayCircle className="w-4 h-4 text-zinc-500" />
             <span>Talk to Sales</span>

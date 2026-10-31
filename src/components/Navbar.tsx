@@ -169,14 +169,14 @@ export function Navbar() {
             </Link>
 
             <Link
-              href="#enterprise"
+              href="/enterprise"
               className="px-3 py-1.5 text-sm font-medium text-zinc-600 hover:text-zinc-950 rounded-md transition-colors"
             >
               Enterprise
             </Link>
 
             <Link
-              href="#customers"
+              href="/customers"
               className="px-3 py-1.5 text-sm font-medium text-zinc-600 hover:text-zinc-950 rounded-md transition-colors"
             >
               Customers
@@ -186,13 +186,13 @@ export function Navbar() {
           {/* Right: Peec AI style Log In & Sign Up */}
           <div className="hidden md:flex items-center gap-3">
             <Link
-              href="/signin"
+              href="https://app.yedii.com/signin"
               className="px-3.5 py-1.5 text-sm font-medium text-zinc-700 hover:text-zinc-950 transition-colors"
             >
               Log in
             </Link>
             <Link
-              href="/signup"
+              href="https://app.yedii.com/signup"
               className="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-zinc-900 hover:bg-black rounded-full transition-all duration-150 shadow-sm hover:shadow"
             >
               Sign up
@@ -241,14 +241,14 @@ export function Navbar() {
               Pricing
             </Link>
             <Link
-              href="#enterprise"
+              href="/enterprise"
               onClick={() => setIsMobileMenuOpen(false)}
               className="block px-3 py-2 rounded-lg text-sm font-medium text-zinc-800 hover:bg-zinc-50"
             >
               Enterprise
             </Link>
             <Link
-              href="#customers"
+              href="/customers"
               onClick={() => setIsMobileMenuOpen(false)}
               className="block px-3 py-2 rounded-lg text-sm font-medium text-zinc-800 hover:bg-zinc-50"
             >
@@ -258,14 +258,14 @@ export function Navbar() {
 
           <div className="pt-3 border-t border-zinc-100 flex flex-col gap-2">
             <Link
-              href="/signin"
+              href="https://app.yedii.com/signin"
               onClick={() => setIsMobileMenuOpen(false)}
               className="w-full text-center py-2.5 text-sm font-medium text-zinc-700 bg-zinc-100 hover:bg-zinc-200 rounded-xl transition-colors"
             >
               Log in
             </Link>
             <Link
-              href="/signup"
+              href="https://app.yedii.com/signup"
               onClick={() => setIsMobileMenuOpen(false)}
               className="w-full text-center py-2.5 text-sm font-medium text-white bg-zinc-900 hover:bg-black rounded-xl transition-colors"
             >

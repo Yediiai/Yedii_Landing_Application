@@ -289,7 +289,7 @@ export default function PricingPage() {
                   {/* Select Plan Action Button */}
                   <div className="mt-6 pt-3 border-t border-[#F1F2F4]">
                     <Link
-                      href="/signup"
+                      href="https://app.yedii.com/signup"
                       className={`w-full h-[38px] rounded-[8px] text-[13px] font-semibold flex items-center justify-center gap-1.5 transition-colors ${
                         isSelected
                           ? "bg-[#141C2E] text-white hover:bg-black"
