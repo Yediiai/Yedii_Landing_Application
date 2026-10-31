@@ -124,20 +124,20 @@ export function FeaturesBento() {
               </p>
             </div>
 
-            <div className="mt-6 p-4 rounded-2xl bg-zinc-900 text-white font-mono text-xs space-y-2">
-              <div className="flex items-center justify-between text-zinc-400 pb-2 border-b border-zinc-800 text-[11px]">
-                <span>AGENT CONFIGURATION</span>
-                <span className="text-emerald-400 font-sans">Active</span>
+            <div className="mt-6 p-4 rounded-2xl bg-[#F8F9FB] border border-[#E8E9EC] text-[#141C2E] font-mono text-xs space-y-2">
+              <div className="flex items-center justify-between text-[#6B7280] pb-2 border-b border-[#E8E9EC] text-[11px]">
+                <span className="font-semibold">AGENT CONFIGURATION</span>
+                <span className="text-emerald-600 font-sans font-medium">Active</span>
               </div>
-              <div className="text-zinc-300">
-                <span className="text-purple-400">const</span> agent = <span className="text-blue-400">new</span> YediiAgent({`{`}
+              <div className="text-[#141C2E]">
+                <span className="text-purple-600 font-semibold">const</span> agent = <span className="text-blue-600 font-semibold">new</span> YediiAgent({`{`}
               </div>
-              <div className="pl-4 text-zinc-400">
-                model: <span className="text-emerald-300">&quot;claude-3-5-sonnet&quot;</span>,<br />
-                guardrails: <span className="text-amber-300">true</span>,<br />
-                confidenceThreshold: <span className="text-cyan-300">0.92</span>
+              <div className="pl-4 text-[#4B5563]">
+                model: <span className="text-emerald-700 font-semibold">&quot;claude-3-5-sonnet&quot;</span>,<br />
+                guardrails: <span className="text-amber-700 font-semibold">true</span>,<br />
+                confidenceThreshold: <span className="text-blue-700 font-semibold">0.92</span>
               </div>
-              <div className="text-zinc-300">{`}`});</div>
+              <div className="text-[#141C2E]">{`}`});</div>
             </div>
           </div>
 
@@ -183,7 +183,7 @@ export function FeaturesBento() {
                 <div className="text-zinc-500 text-[11px] mt-0.5">
                   {channelData[selectedChannel].desc}
                 </div>
-                <pre className="mt-2.5 p-2 rounded-lg bg-zinc-900 text-zinc-300 font-mono text-[10px] overflow-x-auto">
+                <pre className="mt-2.5 p-2.5 rounded-lg bg-[#F8F9FB] border border-[#E8E9EC] text-[#141C2E] font-mono text-[11px] overflow-x-auto">
                   {channelData[selectedChannel].snippet}
                 </pre>
               </div>

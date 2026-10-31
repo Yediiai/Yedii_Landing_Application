@@ -66,9 +66,9 @@ export function ComparisonMatrix() {
               <thead>
                 <tr className="border-b border-zinc-200 bg-zinc-50/80 text-xs font-semibold text-zinc-500 uppercase tracking-wider">
                   <th className="py-4 px-6 min-w-[220px]">Capability</th>
-                  <th className="py-4 px-6 min-w-[240px] bg-zinc-900 text-white font-bold">
+                  <th className="py-4 px-6 min-w-[240px] bg-emerald-50/70 border-x border-emerald-200/80 text-[#141C2E] font-bold">
                     <div className="flex items-center gap-2">
-                      <span className="w-2 h-2 rounded-full bg-emerald-400" />
+                      <span className="w-2 h-2 rounded-full bg-emerald-500" />
                       <span>Yedii Platform</span>
                     </div>
                   </th>

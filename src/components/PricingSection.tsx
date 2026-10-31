@@ -25,92 +25,98 @@ const YEDII_PLANS: PlanItem[] = [
   {
     id: "starter",
     name: "Starter",
-    monthlyPrice: 39,
-    yearlyPrice: 31,
-    tagline: "For early-stage startups and small customer support teams",
+    monthlyPrice: 19,
+    yearlyPrice: 110,
+    tagline: "For starter teams",
     isRecommended: false,
     metrics: {
-      aiAgents: 2,
-      creditsPerMonth: "4,000",
-      ragStorage: "100 MB",
+      aiAgents: 1,
+      creditsPerMonth: "500",
+      ragStorage: "15 MB",
       workspaces: 1,
-      members: 3,
+      members: 1,
     },
     features: [
-      "2 Autonomous AI agents",
-      "Web widget deployment with custom theme",
-      "File ingestion (PDF, DOCX, CSV, TXT)",
-      "Standard vector RAG embeddings",
-      "Email support & API keys access",
+      "Basic customizations",
+      "Basic analytics",
+      "Email support",
+      "Re-Training",
+      "Re-Crawling",
+      "Quick Summary",
+      "Remove Branding",
     ],
   },
   {
     id: "growth",
-    name: "Growth Pro",
-    monthlyPrice: 99,
-    yearlyPrice: 79,
-    tagline: "For scaling companies needing omnichannel deploy & live team inbox",
+    name: "Growth",
+    monthlyPrice: 49,
+    yearlyPrice: 468,
+    tagline: "For growth teams",
     isRecommended: true,
     metrics: {
-      aiAgents: 8,
-      creditsPerMonth: "25,000",
-      ragStorage: "1 GB",
-      workspaces: 3,
-      members: 10,
+      aiAgents: 3,
+      creditsPerMonth: "2,000",
+      ragStorage: "15 MB",
+      workspaces: 1,
+      members: 3,
     },
     features: [
-      "8 Autonomous AI agents",
-      "Omnichannel: Web Widget, WhatsApp Business & Slack",
-      "Shared Team Inbox with real-time human escalation",
-      "Multi-model routing (Claude 3.5 Sonnet & GPT-4o)",
-      "Automated web crawling & Notion connectors",
-      "Sentiment alert webhooks & analytics dashboard",
-      "Priority email & chat support",
+      "Standard customizations",
+      "Advanced analytics",
+      "Priority email support",
+      "Re-Training",
+      "Re-Crawling",
+      "Quick Summary",
+      "Remove Branding",
     ],
   },
   {
-    id: "scale",
-    name: "Scale",
-    monthlyPrice: 249,
-    yearlyPrice: 199,
-    tagline: "For high-volume operations requiring multi-agent workflows",
+    id: "pro",
+    name: "Pro",
+    monthlyPrice: 99,
+    yearlyPrice: 990,
+    tagline: "For pro teams",
     isRecommended: false,
     metrics: {
-      aiAgents: 25,
-      creditsPerMonth: "100,000",
-      ragStorage: "5 GB",
-      workspaces: 10,
-      members: "Unlimited",
+      aiAgents: 10,
+      creditsPerMonth: "1,000",
+      ragStorage: "15 MB",
+      workspaces: 1,
+      members: 10,
     },
     features: [
-      "25 Autonomous AI agents",
-      "Unlimited team seats & advanced RBAC",
-      "Custom Model Context Protocol (MCP) server support",
-      "Continuous re-training & re-crawling scheduler",
-      "Zero Data Retention guarantee",
-      "Dedicated account manager & 99.9% SLA",
+      "Advanced customizations",
+      "Advanced analytics",
+      "Priority chat support",
+      "Re-Training",
+      "Re-Crawling",
+      "Quick Summary",
+      "Remove Branding",
     ],
   },
   {
     id: "enterprise",
     name: "Enterprise",
-    monthlyPrice: null,
-    yearlyPrice: null,
-    tagline: "Dedicated VPC, on-premise deployment, custom SLA, and strict data isolation",
+    monthlyPrice: 299,
+    yearlyPrice: 2990,
+    tagline: "For enterprise teams",
     isRecommended: false,
     metrics: {
-      aiAgents: "Unlimited",
-      creditsPerMonth: "Custom Volume",
-      ragStorage: "Dedicated DB",
-      workspaces: "Unlimited",
-      members: "Unlimited",
+      aiAgents: "Custom",
+      creditsPerMonth: "Custom",
+      ragStorage: "Custom",
+      workspaces: "Custom",
+      members: "Custom",
     },
     features: [
-      "Unlimited agents & custom LLM fine-tuning",
-      "Dedicated VPC / On-premise private cluster",
-      "SOC2 Type II, HIPAA & GDPR compliance pack",
-      "Custom billing via Paddle, Stripe or Invoicing",
-      "24/7 dedicated solutions engineer",
+      "Custom customizations",
+      "Enterprise analytics",
+      "Dedicated manager support",
+      "Re-Training",
+      "Re-Crawling",
+      "Quick Summary",
+      "Remove Branding",
+      "Two-factor authentication (2FA)",
     ],
   },
 ];
@@ -120,24 +126,24 @@ export function PricingSection() {
   const [selectedPlanId, setSelectedPlanId] = useState<string>("growth");
 
   return (
-    <section id="pricing" className="py-8 md:py-12 relative">
+    <section id="pricing" className="py-6 md:py-10 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header & Billing Cycle Toggle */}
-        <div className="w-full flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+        <div className="w-full flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
           <div className="max-w-[560px] flex flex-col gap-1">
             <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-zinc-100 text-zinc-700 text-xs font-semibold w-fit mb-1">
               <Sparkles className="w-3.5 h-3.5 text-zinc-900" />
               Transparent Pricing
             </div>
-            <h2 className="text-[22px] sm:text-[26px] font-semibold text-[#141C2E] tracking-[-0.48px] leading-tight">
+            <h2 className="text-[20px] sm:text-[24px] font-semibold text-[#141C2E] tracking-[-0.48px] leading-tight">
               Plans &amp; pricing
             </h2>
-            <p className="text-[13.5px] font-normal text-[#6B7280] leading-snug">
+            <p className="text-[13px] font-normal text-[#6B7280] leading-snug">
               Explore available plans to unlock additional features and expand your AI support capabilities.
             </p>
           </div>
 
-          {/* Yedii Application Style Billing Cycle Toggle */}
+          {/* Billing Cycle Toggle */}
           <div className="w-full sm:w-[272px] h-[39.6px] rounded-[10px] border-[0.8px] border-[#E4E5E8] bg-white p-[3px] flex items-center gap-[2px] shrink-0 self-start sm:self-auto shadow-2xs">
             <button
               type="button"
@@ -159,15 +165,12 @@ export function PricingSection() {
                   : "bg-transparent text-[#5A6070] hover:text-[#17181C]"
               }`}
             >
-              <span>Yearly</span>
-              <span className="text-[10px] font-bold uppercase tracking-wider bg-emerald-500 text-white px-1.5 py-0.5 rounded-full">
-                2 mo free
-              </span>
+              <span>Yearly — 2 mo free</span>
             </button>
           </div>
         </div>
 
-        {/* 4 Cards Grid (Matching Yedii_Application PlanCard.tsx) */}
+        {/* 4 Cards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {YEDII_PLANS.map((plan) => {
             const isSelected = selectedPlanId === plan.id;
@@ -187,7 +190,7 @@ export function PricingSection() {
               <div
                 key={plan.id}
                 onClick={() => setSelectedPlanId(plan.id)}
-                className={`w-full min-h-[500px] rounded-[12px] p-5 bg-white flex flex-col justify-between transition-all duration-200 select-none cursor-pointer ${
+                className={`w-full min-h-[480px] rounded-[12px] p-5 bg-white flex flex-col justify-between transition-all duration-200 select-none cursor-pointer ${
                   isSelected
                     ? "border-[0.8px] border-[#141C2E] shadow-[0px_6px_18px_0px_rgba(16,24,40,0.08),0px_0px_0px_1px_#141C2E]"
                     : "border-[0.8px] border-[#E8E9EC] shadow-[0_1px_2px_rgba(0,0,0,0.02)] hover:border-[#D0D3D9]"
@@ -220,7 +223,7 @@ export function PricingSection() {
                   </div>
 
                   {/* Tagline */}
-                  <p className="text-[13px] font-normal text-[#4A5058] mt-1.5 leading-snug min-h-[38px]">
+                  <p className="text-[13px] font-normal text-[#4A5058] mt-1.5 leading-snug">
                     {plan.tagline}
                   </p>
 
@@ -246,9 +249,6 @@ export function PricingSection() {
 
                   {/* Features List */}
                   <div className="space-y-2 mt-1">
-                    <span className="text-[11px] font-semibold uppercase tracking-wider text-[#9AA0A8]">
-                      Includes
-                    </span>
                     {plan.features.map((feat, i) => (
                       <div key={i} className="flex items-start gap-2 text-xs text-[#3A4049]">
                         <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
@@ -261,7 +261,7 @@ export function PricingSection() {
                 {/* Bottom Action Button */}
                 <div className="mt-5 pt-3 border-t border-[#F1F2F4]">
                   <Link
-                    href={plan.id === "enterprise" ? "#contact" : "/signup"}
+                    href="/pricing"
                     className={`w-full h-[38px] rounded-[8px] text-[13px] font-semibold flex items-center justify-center gap-1.5 transition-colors ${
                       isSelected
                         ? "bg-[#141C2E] text-white hover:bg-[#1E293B]"

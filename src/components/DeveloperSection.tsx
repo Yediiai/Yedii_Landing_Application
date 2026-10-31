@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Code2, Copy, Check, Terminal, Sparkles, ArrowRight } from "lucide-react";
+import { Code2, Copy, Check, ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 export function DeveloperSection() {
@@ -56,7 +56,7 @@ for chunk in stream:
   src="https://cdn.yedii.online/widget.v2.js"
   data-agent-id="agt_prod_902f1a"
   data-theme="light"
-  data-primary-color="#09090b"
+  data-primary-color="#141C2E"
   defer
 ></script>`
   };
@@ -68,68 +68,65 @@ for chunk in stream:
   };
 
   return (
-    <section className="py-10 md:py-12 bg-zinc-950 text-white relative overflow-hidden">
-      {/* Background Glow */}
-      <div className="absolute top-0 right-1/4 w-[450px] h-[300px] bg-gradient-to-b from-zinc-800/40 via-zinc-900/10 to-transparent blur-3xl pointer-events-none rounded-full" />
-
+    <section className="py-8 md:py-12 bg-white border-y border-[#E8E9EC] text-[#141C2E] relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          {/* Left Text */}
-          <div className="lg:col-span-5 space-y-6">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-zinc-900 text-zinc-300 text-xs font-semibold border border-zinc-800">
-              <Code2 className="w-3.5 h-3.5 text-emerald-400" />
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          {/* Left Text Column */}
+          <div className="lg:col-span-5 space-y-4">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-zinc-100 text-zinc-700 text-xs font-semibold">
+              <Code2 className="w-3.5 h-3.5 text-[#141C2E]" />
               Built for Developers
             </div>
 
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white leading-tight">
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#141C2E] leading-tight">
               Integrate in seconds with idiomatic SDKs
             </h2>
 
-            <p className="text-zinc-400 text-sm sm:text-base leading-relaxed">
+            <p className="text-[#6B7280] text-xs sm:text-sm leading-relaxed">
               Every Yedii agent exposes a streaming REST API, WebSocket hooks, and lightweight TypeScript & Python SDKs. Drop in pre-built UI components or run fully headless.
             </p>
 
-            <ul className="space-y-3 text-sm text-zinc-300">
-              <li className="flex items-center gap-2.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+            <ul className="space-y-2.5 text-xs sm:text-sm text-[#3A4049]">
+              <li className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
                 <span>Zero-latency edge streaming (SSE & WebSockets)</span>
               </li>
-              <li className="flex items-center gap-2.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+              <li className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
                 <span>Strict TypeScript schemas with end-to-end type safety</span>
               </li>
-              <li className="flex items-center gap-2.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+              <li className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
                 <span>Standardized Model Context Protocol (MCP) server support</span>
               </li>
             </ul>
 
-            <div className="pt-2">
+            <div className="pt-1">
               <Link
                 href="https://github.com/Yediiai/Yedii_Landing_Application"
                 target="_blank"
-                className="inline-flex items-center gap-2 text-sm font-semibold text-white hover:text-zinc-300 transition-colors group"
+                className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#141C2E] hover:text-black transition-colors group"
               >
                 <span>Explore the API Documentation</span>
-                <ArrowRight className="w-4 h-4 text-zinc-400 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-3.5 h-3.5 text-zinc-500 group-hover:translate-x-0.5 transition-transform" />
               </Link>
             </div>
           </div>
 
-          {/* Right Code Window */}
+          {/* Right Clean Light-Mode Code Window */}
           <div className="lg:col-span-7">
-            <div className="rounded-2xl border border-zinc-800 bg-zinc-900/90 shadow-2xl overflow-hidden backdrop-blur-sm">
+            <div className="rounded-2xl border border-[#E8E9EC] bg-[#FBFBFC] shadow-xs overflow-hidden">
               {/* Window Header with Tabs */}
-              <div className="px-4 py-3 bg-zinc-900 border-b border-zinc-800 flex items-center justify-between gap-4">
-                <div className="flex items-center gap-2 overflow-x-auto">
+              <div className="px-4 py-2.5 bg-white border-b border-[#E8E9EC] flex items-center justify-between gap-3">
+                <div className="flex items-center gap-1.5 overflow-x-auto">
                   {(["ts", "python", "curl", "widget"] as const).map((tab) => (
                     <button
                       key={tab}
                       onClick={() => setActiveTab(tab)}
-                      className={`px-3 py-1 text-xs font-mono rounded-md transition-colors uppercase ${
+                      className={`px-3 py-1 text-xs font-mono rounded-md transition-colors uppercase cursor-pointer ${
                         activeTab === tab
-                          ? "bg-zinc-800 text-white font-semibold"
-                          : "text-zinc-400 hover:text-zinc-200"
+                          ? "bg-[#141C2E] text-white font-semibold shadow-2xs"
+                          : "text-[#6B7280] hover:text-[#141C2E] hover:bg-zinc-100"
                       }`}
                     >
                       {tab === "ts" ? "TypeScript" : tab === "widget" ? "Embed Script" : tab}
@@ -140,16 +137,16 @@ for chunk in stream:
                 <button
                   type="button"
                   onClick={handleCopy}
-                  className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium text-zinc-300 hover:text-white bg-zinc-800/80 hover:bg-zinc-800 rounded-md transition-colors cursor-pointer shrink-0"
+                  className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-medium text-[#141C2E] bg-white border border-[#E4E5E8] hover:bg-zinc-50 rounded-md transition-colors cursor-pointer shrink-0 shadow-2xs"
                 >
                   {copied ? (
                     <>
-                      <Check className="w-3.5 h-3.5 text-emerald-400" />
-                      <span className="text-emerald-400">Copied</span>
+                      <Check className="w-3.5 h-3.5 text-emerald-600" />
+                      <span className="text-emerald-700">Copied</span>
                     </>
                   ) : (
                     <>
-                      <Copy className="w-3.5 h-3.5" />
+                      <Copy className="w-3.5 h-3.5 text-[#6B7280]" />
                       <span>Copy</span>
                     </>
                   )}
@@ -157,8 +154,8 @@ for chunk in stream:
               </div>
 
               {/* Code Pre */}
-              <div className="p-4 sm:p-6 overflow-x-auto">
-                <pre className="font-mono text-xs sm:text-[13px] text-zinc-200 leading-relaxed">
+              <div className="p-4 sm:p-5 overflow-x-auto bg-[#FBFBFC]">
+                <pre className="font-mono text-xs text-[#1F2937] leading-relaxed">
                   <code>{snippets[activeTab]}</code>
                 </pre>
               </div>
