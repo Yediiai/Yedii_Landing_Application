@@ -9,7 +9,7 @@ export function InteractivePlayground() {
   const [activeView, setActiveView] = useState<"playground" | "analytics">("playground");
 
   return (
-    <section id="playground" className="py-6 md:py-10 relative">
+    <section id="playground" className="py-10 md:py-16 relative">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-5">
