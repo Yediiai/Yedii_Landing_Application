@@ -1,11 +1,9 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
-import Image from "next/image";
+import React, { useState, useRef } from "react";
 import {
   MessageSquare,
   Database,
-  Sliders,
   Send,
   Mic,
   ArrowUp,
@@ -62,6 +60,7 @@ Step 2 – Face Scan
   const [activeModel, setActiveModel] = useState("Deepseek V4.1 Flash");
   const [isModelDropdownOpen, setIsModelDropdownOpen] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const idCounterRef = useRef(1);
 
   const modelOptions = [
     "Deepseek V4.1 Flash",
@@ -74,8 +73,8 @@ Step 2 – Face Scan
     const text = textToSend || inputText;
     if (!text.trim() || isProcessing) return;
 
-    const userMsgId = `user-${Date.now()}`;
-    const agentMsgId = `agent-${Date.now()}`;
+    const userMsgId = `user-${idCounterRef.current++}`;
+    const agentMsgId = `agent-${idCounterRef.current++}`;
 
     // 1. Add user message
     const newMessages: Message[] = [

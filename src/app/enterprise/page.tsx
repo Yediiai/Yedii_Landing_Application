@@ -8,15 +8,8 @@ import {
   Lock,
   Cpu,
   Clock,
-  Key,
-  FileCheck,
   ArrowRight,
-  CheckCircle2,
-  Sliders,
-  DollarSign,
-  TrendingUp,
-  Building2,
-  Users
+  CheckCircle2
 } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";

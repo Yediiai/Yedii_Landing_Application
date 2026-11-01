@@ -2,18 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import {
-  Quote,
-  Star,
-  ArrowRight,
-  TrendingUp,
-  CheckCircle2,
-  Clock,
-  Sparkles,
-  Building2,
-  ExternalLink,
-  MessageSquare
-} from "lucide-react";
+import { Quote, ArrowRight } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 

@@ -226,7 +226,7 @@ export function AnalyticsDashboardPreview() {
                     fontSize: "12px",
                     boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
                   }}
-                  formatter={(val: any) => [`${val} conversations`, "Activity"]}
+                  formatter={(val: unknown) => [`${val} conversations`, "Activity"]}
                   labelStyle={{ color: "#9CA3AF", fontSize: "11px", fontWeight: "600" }}
                 />
                 <Area
@@ -283,7 +283,7 @@ export function AnalyticsDashboardPreview() {
                     fontSize: "12px",
                     boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
                   }}
-                  formatter={(val: any) => [`${val} messages`, "Total messages"]}
+                  formatter={(val: unknown) => [`${val} messages`, "Total messages"]}
                 />
                 <Bar
                   dataKey="count"

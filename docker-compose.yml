@@ -1,0 +1,19 @@
+services:
+  yedii-landing:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: yedii-landing-app
+    restart: unless-stopped
+    ports:
+      - "4001:4001"
+    environment:
+      - NODE_ENV=production
+      - PORT=4001
+      - HOSTNAME=0.0.0.0
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:4001/ || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s

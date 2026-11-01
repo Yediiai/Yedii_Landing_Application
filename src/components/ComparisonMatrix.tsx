@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, X, Sparkles, Shield, AlertCircle } from "lucide-react";
+import { Check, X, Sparkles, AlertCircle } from "lucide-react";
 
 export function ComparisonMatrix() {
   const comparisonItems = [

@@ -1,19 +1,13 @@
 "use client";
 
 import { useState } from "react";
+
 import {
   Database,
   Sparkles,
   Share2,
   Inbox,
-  ShieldCheck,
-  Check,
   Layers,
-  ArrowRight,
-  Code2,
-  Sliders,
-  ExternalLink,
-  MessageSquare,
   Bot
 } from "lucide-react";
 

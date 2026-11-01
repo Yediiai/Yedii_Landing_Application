@@ -1,6 +1,6 @@
 "use client";
 
-import { MessageSquare, ShieldCheck, Zap, CheckCircle2, TrendingUp, Sparkles } from "lucide-react";
+import { MessageSquare, ShieldCheck, Zap, TrendingUp } from "lucide-react";
 
 export function SocialProof() {
   const logos = [
