@@ -23,7 +23,28 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
-        // Allow cross-origin access for all static assets (fonts, chunks, media)
+        // Prevent HTML pages from being cached by CDN/browser.
+        // This ensures users always get fresh HTML with current chunk hashes
+        // after a new deployment, preventing "Failed to load chunk" errors.
+        source: "/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "no-cache, no-store, must-revalidate",
+          },
+          {
+            key: "Pragma",
+            value: "no-cache",
+          },
+          {
+            key: "Expires",
+            value: "0",
+          },
+        ],
+      },
+      {
+        // Allow cross-origin access for JS chunks and all static assets.
+        // Fixes CORS failures when www.yedii.com redirects to yedii.com.
         source: "/_next/static/:path*",
         headers: [
           {
@@ -41,7 +62,8 @@ const nextConfig: NextConfig = {
         ],
       },
       {
-        // CORS headers for fonts specifically
+        // CORS headers specifically for fonts (.woff2 etc).
+        // Fixes: "No Access-Control-Allow-Origin header" on font files.
         source: "/_next/static/media/:path*",
         headers: [
           {
