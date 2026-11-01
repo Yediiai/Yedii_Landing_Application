@@ -19,7 +19,9 @@ COPY . .
 
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production
+ENV PORT=4001
 
+RUN if [ -f .env.Development ]; then cp .env.Development .env.production; elif [ -f .env.development ]; then cp .env.development .env.production; fi
 RUN npm run build
 
 # 4. Production Runner

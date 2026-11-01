@@ -70,12 +70,12 @@ docker compose down
 
 1. **Build image:**
    ```bash
-   docker build -t yedii-landing-app .
+   docker build -t yedii/yedii_landing_application-frontend:latest .
    ```
 
 2. **Run container on Port 4001:**
    ```bash
-   docker run -d -p 4001:4001 --name yedii-landing yedii-landing-app
+   docker run -d -p 4001:4001 --name yedii_landing_frontend yedii/yedii_landing_application-frontend:latest
    ```
 
 ---
@@ -84,15 +84,27 @@ docker compose down
 
 Automated workflows are located in `.github/workflows/`:
 
+- **Production Deployment to EC2 (`deploy.yml`)** *(Matching Yedii_Application)*:
+  - Triggered on push to `Development` and `main` (or manual dispatch).
+  - Prepares environment variables (`.env.Development` / `secrets.ENV_FILE`).
+  - Builds Next.js production build and Docker image `yedii/yedii_landing_application-frontend`.
+  - Pushes images to Docker Hub (`latest` and `${{ github.sha }}`).
+  - Deploys via SSH to EC2 (`/home/ubuntu/Yedii_Landing_Application/`), runs `docker compose pull`, restarts containers, cleans old images, and verifies health check on port **4001**.
 - **CI & Docker Verification (`ci.yml`)**:
-  - Automatically triggered on push & pull requests to `main` and `Development`.
-  - Runs linting (`npm run lint`), Next.js production build (`npm run build`), builds the Docker container, and runs a smoke check on port **4001**.
-- **Docker GHCR Release (`docker-publish.yml`)**:
-  - Automatically builds and pushes production container images to GitHub Container Registry (`ghcr.io/yediiai/yedii_landing_application`) on merges to `main` or semantic release tags (`v*.*.*`).
+  - Automatically triggered on push & pull requests.
+  - Runs linting (`npm run lint`), Next.js production build (`npm run build`), builds the Docker container, and tests port **4001**.
 - **Dependabot (`dependabot.yml`)**:
   - Automatically creates weekly pull requests for outdated npm dependencies and GitHub Actions.
-- **PR & Issue Templates**:
-  - Structured templates for pull requests and bug/feature issues.
+
+### Required GitHub Secrets for Deployment
+
+Configure the following secrets in **GitHub Repository Settings ➔ Secrets and variables ➔ Actions**:
+- `DOCKER_USERNAME`: Docker Hub account username
+- `DOCKER_PASSWORD`: Docker Hub access token or password
+- `EC2_HOST`: IP address or DNS of the EC2 deployment server
+- `EC2_USER`: EC2 SSH username (e.g. `ubuntu`)
+- `EC2_KEY`: Private SSH key (`.pem`) for the EC2 instance
+- `ENV_FILE` *(optional)*: Custom environment file contents to inject during deployment
 
 ---
 
@@ -103,7 +115,7 @@ Automated workflows are located in `.github/workflows/`:
 │   ├── ISSUE_TEMPLATE/
 │   ├── workflows/
 │   │   ├── ci.yml
-│   │   └── docker-publish.yml
+│   │   └── deploy.yml
 │   ├── dependabot.yml
 │   └── pull_request_template.md
 ├── public/                 # Static assets (images, icons, svgs)
@@ -115,7 +127,7 @@ Automated workflows are located in `.github/workflows/`:
 │   │   └── page.tsx        # Homepage
 │   └── components/         # Reusable UI sections and components
 ├── Dockerfile              # Multi-stage production container definition (Port 4001)
-├── docker-compose.yml      # Local container orchestration (Port 4001:4001)
+├── docker-compose.yml      # Local and EC2 container orchestration (Port 4001)
 ├── .dockerignore           # Container build ignore rules
 ├── next.config.ts          # Next.js configuration (standalone output enabled)
 └── package.json
