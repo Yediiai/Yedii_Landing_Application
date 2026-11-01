@@ -1,5 +1,7 @@
 import type { NextConfig } from "next";
 
+const APP_BASE_URL = process.env.NEXT_PUBLIC_APP_BASE_URL || "https://app.yedii.com";
+
 const nextConfig: NextConfig = {
   output: "standalone",
   cacheComponents: true,
@@ -14,7 +16,7 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/signin",
-        destination: "https://app.yedii.com/signin",
+        destination: `${APP_BASE_URL}/signin`,
         permanent: false,
       },
     ];

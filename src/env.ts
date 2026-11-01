@@ -8,6 +8,7 @@ export interface EnvConfig {
   PORT: number;
   HOSTNAME: string;
   NEXT_PUBLIC_APP_URL: string;
+  NEXT_PUBLIC_APP_BASE_URL: string;
   YEDII_API_KEY?: string;
   YEDII_BACKEND_API_URL?: string;
   isDevelopment: boolean;
@@ -27,6 +28,7 @@ export const env: EnvConfig = {
   PORT: Number.isNaN(port) ? 4001 : port,
   HOSTNAME: hostname,
   NEXT_PUBLIC_APP_URL: appUrl,
+  NEXT_PUBLIC_APP_BASE_URL: process.env.NEXT_PUBLIC_APP_BASE_URL || "https://app.yedii.com",
   YEDII_API_KEY: process.env.YEDII_API_KEY,
   YEDII_BACKEND_API_URL: process.env.YEDII_BACKEND_API_URL,
   isDevelopment: nodeEnv === "development",
