@@ -40,7 +40,6 @@ jobs:
           elif [ -f .env ]; then
             cp .env .env.production
           else
-            echo "PORT=4001" > .env.production
             echo "PORT=4001" > .env.Development
           fi
 
