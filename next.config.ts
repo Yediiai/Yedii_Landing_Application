@@ -12,6 +12,11 @@ const nextConfig: NextConfig = {
         destination: "/pricing",
         permanent: true,
       },
+      {
+        source: "/signin",
+        destination: "https://app.yedii.com/signin",
+        permanent: false,
+      },
     ];
   },
   turbopack: {

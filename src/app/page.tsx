@@ -3,7 +3,6 @@ import { Hero } from "@/components/Hero";
 import { InteractivePlayground } from "@/components/InteractivePlayground";
 import { SocialProof } from "@/components/SocialProof";
 import { FeaturesBento } from "@/components/FeaturesBento";
-import { DeveloperSection } from "@/components/DeveloperSection";
 import { ComparisonMatrix } from "@/components/ComparisonMatrix";
 import { Testimonials } from "@/components/Testimonials";
 import { PricingSection } from "@/components/PricingSection";
@@ -30,9 +29,6 @@ export default function Home() {
         {/* Bento Grid Feature Breakdown */}
         <FeaturesBento />
 
-        {/* Developer Integration & Code Tabs */}
-        <DeveloperSection />
-
         {/* Competitive Comparison Matrix */}
         <ComparisonMatrix />
 
@@ -45,11 +41,10 @@ export default function Home() {
         {/* Frequently Asked Questions */}
         <FaqSection />
 
-        {/* Dark Call-to-Action Card */}
+        {/* Call-to-action Banner */}
         <CtaBanner />
       </main>
 
-      {/* Modern High-Craft Footer */}
       <Footer />
     </div>
   );

@@ -123,11 +123,10 @@ for chunk in stream:
                     <button
                       key={tab}
                       onClick={() => setActiveTab(tab)}
-                      className={`px-3 py-1 text-xs font-mono rounded-md transition-colors uppercase cursor-pointer ${
-                        activeTab === tab
+                      className={`px-3 py-1 text-xs font-mono rounded-md transition-colors uppercase cursor-pointer ${activeTab === tab
                           ? "bg-[#141C2E] text-white font-semibold shadow-2xs"
                           : "text-[#6B7280] hover:text-[#141C2E] hover:bg-zinc-100"
-                      }`}
+                        }`}
                     >
                       {tab === "ts" ? "TypeScript" : tab === "widget" ? "Embed Script" : tab}
                     </button>
