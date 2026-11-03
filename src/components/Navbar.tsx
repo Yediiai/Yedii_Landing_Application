@@ -256,7 +256,7 @@ export function Navbar() {
               href="/customers"
               className="px-3.5 py-1.5 text-sm font-medium text-[#4B5563] hover:text-[#111827] rounded-[8px] transition-colors"
             >
-              Careers
+              Customers
             </Link>
           </nav>
 
@@ -347,7 +347,7 @@ export function Navbar() {
               onClick={() => setIsMobileMenuOpen(false)}
               className="block px-3 py-2 rounded-lg text-sm font-medium text-zinc-800 hover:bg-zinc-50"
             >
-              Resources &amp; Careers
+              Customers
             </Link>
           </div>
 
