@@ -13,11 +13,11 @@ export function Footer() {
           <div className="lg:col-span-4 space-y-4">
             <Link href="/" className="inline-flex items-center gap-2.5 group">
               <Image
-                src="/images/yedii-logo.png"
+                src="/images/yedii-logo-white.png"
                 alt="Yedii Logo"
                 width={26}
                 height={26}
-                className="h-6.5 w-6.5 object-contain invert brightness-0 transition-transform group-hover:scale-105"
+                className="h-6.5 w-6.5 object-contain transition-transform group-hover:scale-105"
               />
               <span className="font-bold text-[22px] tracking-tight text-white group-hover:text-zinc-200 transition-colors">
                 Yedii
