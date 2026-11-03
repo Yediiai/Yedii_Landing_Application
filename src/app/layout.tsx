@@ -29,9 +29,11 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${inter.variable} ${jetbrainsMono.variable} scroll-smooth h-full antialiased`}
     >
       <body
+        suppressHydrationWarning
         className={`${inter.className} min-h-full flex flex-col font-sans antialiased text-[#141C2E] bg-[#FAFAFA]`}
       >
         <SmoothScrollProvider>{children}</SmoothScrollProvider>

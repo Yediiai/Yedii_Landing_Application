@@ -212,7 +212,7 @@ export default function EnterprisePage() {
                 <div>
                   <div className="flex items-center justify-between text-xs sm:text-sm font-semibold mb-2">
                     <span className="text-[#141C2E]">Monthly Inbound Tickets / Messages</span>
-                    <span className="text-emerald-700 font-mono text-sm">{ticketVolume.toLocaleString()}</span>
+                    <span className="text-emerald-700 font-mono text-sm">{ticketVolume.toLocaleString("en-US")}</span>
                   </div>
                   <input
                     type="range"
@@ -258,14 +258,14 @@ export default function EnterprisePage() {
                   <div className="p-3.5 bg-white rounded-[10px] border border-[#E8E9EC]">
                     <div className="text-[11px] text-[#6B7280] font-medium">Estimated Monthly Deflection</div>
                     <div className="text-xl sm:text-2xl font-bold text-[#141C2E] mt-1">
-                      {estimatedDeflection.toLocaleString()} <span className="text-xs font-normal text-[#8A9099]">(72%)</span>
+                      {estimatedDeflection.toLocaleString("en-US")} <span className="text-xs font-normal text-[#8A9099]">(72%)</span>
                     </div>
                   </div>
 
                   <div className="p-3.5 bg-white rounded-[10px] border border-[#E8E9EC]">
                     <div className="text-[11px] text-[#6B7280] font-medium">Hours Recovered / Month</div>
                     <div className="text-xl sm:text-2xl font-bold text-[#141C2E] mt-1">
-                      {hoursSavedPerMonth.toLocaleString()} hrs
+                      {hoursSavedPerMonth.toLocaleString("en-US")} hrs
                     </div>
                   </div>
                 </div>
@@ -274,7 +274,7 @@ export default function EnterprisePage() {
                   <div>
                     <div className="text-xs font-semibold text-emerald-900">Estimated Annual Cost Savings</div>
                     <div className="text-2xl sm:text-3xl font-extrabold text-emerald-950 mt-0.5">
-                      ${annualSavings.toLocaleString()}
+                      ${annualSavings.toLocaleString("en-US")}
                     </div>
                   </div>
                   <Link
