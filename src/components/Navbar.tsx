@@ -4,16 +4,11 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
-  ChevronDown,
   Sparkles,
-  Database,
-  Terminal,
-  Share2,
-  Inbox,
-  ShieldCheck,
   Menu,
   X,
-  ArrowRight
+  ArrowRight,
+  Plus
 } from "lucide-react";
 
 export function Navbar() {
@@ -29,73 +24,34 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const productFeatures = [
-    {
-      title: "Agent Studio",
-      desc: "Visual canvas for prompt flows, tool actions & multi-agent logic",
-      icon: Sparkles,
-      tag: "Core",
-    },
-    {
-      title: "Knowledge Grounding",
-      desc: "Connect PDFs, Notion, Web URLs & databases with vector RAG",
-      icon: Database,
-      tag: "Vector RAG",
-    },
-    {
-      title: "Interactive Playground",
-      desc: "Test reasoning, inspect latency & benchmark against top LLMs",
-      icon: Terminal,
-      tag: "Multi-Model",
-    },
-    {
-      title: "Omnichannel Deploy",
-      desc: "1-click deploy to Web Widget, WhatsApp, Slack & MCP server",
-      icon: Share2,
-      tag: "1-Click",
-    },
-    {
-      title: "Team Inbox & Escalation",
-      desc: "Live human handover, sentiment triggers & shared queue",
-      icon: Inbox,
-      tag: "Human-in-the-loop",
-    },
-    {
-      title: "Enterprise Governance",
-      desc: "SOC2-ready guardrails, custom VPC & strict data isolation",
-      icon: ShieldCheck,
-      tag: "Enterprise",
-    },
-  ];
-
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
         isScrolled
-          ? "bg-white/80 backdrop-blur-md border-b border-zinc-200/70 shadow-[0_1px_3px_rgba(0,0,0,0.03)]"
-          : "bg-transparent border-b border-zinc-200/40"
+          ? "bg-white/90 backdrop-blur-md border-b border-[#E5E7EB] shadow-[0_1px_3px_rgba(0,0,0,0.03)]"
+          : "bg-white/70 backdrop-blur-sm border-b border-[#E5E7EB]/60"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Left: Yedii Logo & Name */}
+          {/* Left: Brand Logo & Name */}
           <Link href="/" className="flex items-center gap-2 group cursor-pointer">
             <Image
               src="/images/yedii-logo.png"
               alt="Yedii Logo"
-              width={28}
-              height={28}
-              className="h-7 w-7 object-contain transition-transform group-hover:scale-105"
+              width={26}
+              height={26}
+              className="h-6.5 w-6.5 object-contain transition-transform group-hover:scale-105"
               priority
             />
-            <span className="font-bold text-[18px] tracking-tight text-zinc-900 group-hover:text-black">
+            <span className="font-bold text-[19px] tracking-tight text-[#111827] group-hover:text-black">
               Yedii
             </span>
           </Link>
 
-          {/* Center: Desktop Nav Links (Products, Pricing, Enterprise, Customers) */}
+          {/* Center: Desktop Nav Links (Peec AI Layout) */}
           <nav className="hidden md:flex items-center gap-1 lg:gap-2">
-            {/* Products with Dropdown */}
+            {/* Product with Peec AI Style Mega Dropdown */}
             <div
               className="relative"
               onMouseEnter={() => setProductsOpen(true)}
@@ -103,58 +59,172 @@ export function Navbar() {
             >
               <button
                 type="button"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-zinc-600 hover:text-zinc-950 rounded-md transition-colors cursor-pointer"
+                className={`px-3.5 py-1.5 text-sm font-medium rounded-[8px] transition-all cursor-pointer ${
+                  productsOpen
+                    ? "bg-[#F3F4F6] text-[#111827]"
+                    : "text-[#4B5563] hover:text-[#111827] hover:bg-[#F9FAFB]"
+                }`}
                 onClick={() => setProductsOpen(!productsOpen)}
               >
-                <span>Products</span>
-                <ChevronDown
-                  className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                    productsOpen ? "rotate-180 text-zinc-950" : "text-zinc-400"
-                  }`}
-                />
+                Product
               </button>
 
-              {/* Products Megamenu Dropdown */}
+              {/* Peec AI Exact Mega Menu Dropdown */}
               {productsOpen && (
-                <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 w-[540px]">
-                  <div className="glass-dropdown rounded-2xl p-4 shadow-xl border border-zinc-200/80 bg-white/95">
-                    <div className="grid grid-cols-2 gap-2">
-                      {productFeatures.map((feat) => {
-                        const Icon = feat.icon;
-                        return (
+                <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2.5 w-[640px]">
+                  <div className="rounded-[18px] p-6 bg-white border border-[#E5E7EB] shadow-[0_20px_50px_-10px_rgba(0,0,0,0.12),0_4px_12px_rgba(0,0,0,0.04)] grid grid-cols-2 gap-7">
+                    {/* LEFT COLUMN: Product */}
+                    <div className="flex flex-col">
+                      <div className="text-[12px] font-medium text-[#9CA3AF] mb-3 select-none">
+                        Product
+                      </div>
+
+                      <div className="space-y-4">
+                        {/* Item 1 */}
+                        <Link
+                          href="#features"
+                          onClick={() => setProductsOpen(false)}
+                          className="group block"
+                        >
+                          <div className="text-[14px] font-semibold text-[#111827] group-hover:text-black transition-colors">
+                            AI Visibility
+                          </div>
+                          <div className="text-[12.5px] text-[#6B7280] font-normal leading-snug mt-0.5">
+                            Track how you show up in AI
+                          </div>
+                        </Link>
+
+                        {/* Item 2 */}
+                        <Link
+                          href="#features"
+                          onClick={() => setProductsOpen(false)}
+                          className="group block"
+                        >
+                          <div className="text-[14px] font-semibold text-[#111827] group-hover:text-black transition-colors">
+                            Brand Perception
+                          </div>
+                          <div className="text-[12.5px] text-[#6B7280] font-normal leading-snug mt-0.5">
+                            Learn how AI talks about you
+                          </div>
+                        </Link>
+
+                        {/* Item 3 */}
+                        <Link
+                          href="#features"
+                          onClick={() => setProductsOpen(false)}
+                          className="group block"
+                        >
+                          <div className="text-[14px] font-semibold text-[#111827] group-hover:text-black transition-colors">
+                            Shopping
+                          </div>
+                          <div className="text-[12.5px] text-[#6B7280] font-normal leading-snug mt-0.5">
+                            See your products in AI
+                          </div>
+                        </Link>
+
+                        {/* Item 4 */}
+                        <Link
+                          href="/analytics"
+                          onClick={() => setProductsOpen(false)}
+                          className="group block"
+                        >
+                          <div className="text-[14px] font-semibold text-[#111827] group-hover:text-black transition-colors">
+                            Agent analytics
+                          </div>
+                          <div className="text-[12.5px] text-[#6B7280] font-normal leading-snug mt-0.5">
+                            Check how agents crawl your page
+                          </div>
+                        </Link>
+
+                        {/* Item 5 with New Badge */}
+                        <Link
+                          href="#features"
+                          onClick={() => setProductsOpen(false)}
+                          className="group block"
+                        >
+                          <div className="text-[14px] font-semibold text-[#111827] group-hover:text-black transition-colors flex items-center gap-2">
+                            <span>Actions</span>
+                            <span className="text-[10px] font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200/80 px-1.5 py-0.2 rounded">
+                              New
+                            </span>
+                          </div>
+                          <div className="text-[12.5px] text-[#6B7280] font-normal leading-snug mt-0.5">
+                            Know what to improve, and why
+                          </div>
+                        </Link>
+                      </div>
+                    </div>
+
+                    {/* RIGHT COLUMN: Featured */}
+                    <div className="flex flex-col justify-between">
+                      <div>
+                        <div className="text-[12px] font-medium text-[#9CA3AF] mb-3 select-none">
+                          Featured
+                        </div>
+
+                        <div className="space-y-4">
+                          {/* Featured Item 1: MCP */}
                           <Link
-                            key={feat.title}
-                            href="#features"
-                            className="group/item flex items-start gap-3 p-3 rounded-xl hover:bg-zinc-50 transition-colors border border-transparent hover:border-zinc-200/60"
+                            href="#developers"
                             onClick={() => setProductsOpen(false)}
+                            className="group block"
                           >
-                            <div className="w-8 h-8 rounded-lg bg-zinc-100 flex items-center justify-center text-zinc-700 group-hover/item:bg-zinc-900 group-hover/item:text-white transition-colors shrink-0 mt-0.5">
-                              <Icon className="w-4 h-4" />
+                            <div className="text-[14px] font-semibold text-[#111827] group-hover:text-black transition-colors">
+                              MCP
                             </div>
-                            <div className="flex-1 min-w-0">
-                              <div className="flex items-center justify-between">
-                                <span className="text-sm font-semibold text-zinc-900 group-hover/item:text-black">
-                                  {feat.title}
-                                </span>
-                              </div>
-                              <p className="text-xs text-zinc-500 line-clamp-2 mt-0.5 leading-relaxed">
-                                {feat.desc}
-                              </p>
+                            <div className="text-[12.5px] text-[#6B7280] font-normal leading-snug mt-0.5">
+                              Connect AI assistants and tools to Peec AI data
                             </div>
                           </Link>
-                        );
-                      })}
-                    </div>
-                    <div className="mt-3 pt-3 border-t border-zinc-100 flex items-center justify-between px-2 text-xs">
-                      <span className="text-zinc-500 font-medium">Looking for live demo?</span>
-                      <Link
-                        href="#playground"
-                        onClick={() => setProductsOpen(false)}
-                        className="font-medium text-zinc-900 hover:text-black flex items-center gap-1 group/link"
-                      >
-                        Try Agent Playground
-                        <ArrowRight className="w-3 h-3 group-hover/link:translate-x-0.5 transition-transform" />
-                      </Link>
+
+                          {/* Featured Item 2: Agent with New Badge */}
+                          <Link
+                            href="#playground"
+                            onClick={() => setProductsOpen(false)}
+                            className="group block"
+                          >
+                            <div className="text-[14px] font-semibold text-[#111827] group-hover:text-black transition-colors flex items-center gap-2">
+                              <span>Agent</span>
+                              <span className="text-[10px] font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200/80 px-1.5 py-0.2 rounded">
+                                New
+                              </span>
+                            </div>
+                            <div className="text-[12.5px] text-[#6B7280] font-normal leading-snug mt-0.5">
+                              Investigate your data, then act on it
+                            </div>
+                          </Link>
+                        </div>
+                      </div>
+
+                      {/* Interactive Mini Simulator Card (Exact replica from Peec AI screenshot) */}
+                      <div className="mt-5 rounded-[14px] border border-[#E2E8F0] bg-gradient-to-b from-[#F0F7FD] via-[#F6FAFE] to-[#FFFFFF] p-3.5 shadow-2xs">
+                        {/* Blue Tag */}
+                        <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-[5px] bg-[#E0F2FE] text-[#0284C7] text-[11px] font-semibold">
+                          <span>@ Visibility</span>
+                        </div>
+
+                        {/* Input Box with cursor */}
+                        <div className="mt-2.5 px-3 py-2 bg-white rounded-[8px] border border-[#E2E8F0] text-[12.5px] text-[#1E293B] flex items-center shadow-2xs">
+                          <span className="text-[#334155] font-normal">Ask ab</span>
+                          <span className="w-0.5 h-3.5 bg-zinc-800 ml-0.5 inline-block" />
+                        </div>
+
+                        {/* Bottom control pills */}
+                        <div className="mt-2.5 flex items-center justify-between text-[11px] text-[#64748B]">
+                          <div className="flex items-center gap-2">
+                            <span className="w-4 h-4 rounded bg-white border border-[#CBD5E1] flex items-center justify-center font-bold text-[#475569] text-xs">
+                              +
+                            </span>
+                            <span className="bg-white/80 border border-[#E2E8F0] px-2 py-0.5 rounded text-[#475569] font-medium">
+                              Normal
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-1 text-[#475569] font-medium">
+                            <Sparkles className="w-3 h-3 text-[#0284C7]" />
+                            <span>Ask first</span>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -162,38 +232,45 @@ export function Navbar() {
             </div>
 
             <Link
+              href="/customers"
+              className="px-3.5 py-1.5 text-sm font-medium text-[#4B5563] hover:text-[#111827] rounded-[8px] transition-colors"
+            >
+              Resources
+            </Link>
+
+            <Link
               href="/pricing"
-              className="px-3 py-1.5 text-sm font-medium text-zinc-600 hover:text-zinc-950 rounded-md transition-colors"
+              className="px-3.5 py-1.5 text-sm font-medium text-[#4B5563] hover:text-[#111827] rounded-[8px] transition-colors"
             >
               Pricing
             </Link>
 
             <Link
               href="/enterprise"
-              className="px-3 py-1.5 text-sm font-medium text-zinc-600 hover:text-zinc-950 rounded-md transition-colors"
+              className="px-3.5 py-1.5 text-sm font-medium text-[#4B5563] hover:text-[#111827] rounded-[8px] transition-colors"
             >
               Enterprise
             </Link>
 
             <Link
               href="/customers"
-              className="px-3 py-1.5 text-sm font-medium text-zinc-600 hover:text-zinc-950 rounded-md transition-colors"
+              className="px-3.5 py-1.5 text-sm font-medium text-[#4B5563] hover:text-[#111827] rounded-[8px] transition-colors"
             >
-              Customers
+              Careers
             </Link>
           </nav>
 
-          {/* Right: Peec AI style Log In & Sign Up */}
+          {/* Right: Peec AI style Log In & Sign Up Button */}
           <div className="hidden md:flex items-center gap-3">
             <Link
               href="https://app.yedii.com/signin"
-              className="px-3.5 py-1.5 text-sm font-medium text-zinc-700 hover:text-zinc-950 transition-colors"
+              className="px-3.5 py-1.5 text-sm font-medium text-[#374151] hover:text-[#111827] transition-colors"
             >
               Log in
             </Link>
             <Link
               href="https://app.yedii.com/signup"
-              className="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-zinc-900 hover:bg-black rounded-full transition-all duration-150 shadow-sm hover:shadow"
+              className="inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-white bg-[#111827] hover:bg-black rounded-[8px] transition-colors shadow-2xs"
             >
               Sign up
             </Link>
@@ -218,18 +295,36 @@ export function Navbar() {
         <div className="md:hidden border-b border-zinc-200 bg-white/98 backdrop-blur-xl px-4 pt-3 pb-6 space-y-3">
           <div className="space-y-1">
             <div className="px-3 py-1 text-xs font-semibold uppercase tracking-wider text-zinc-400">
-              Products
+              Product
             </div>
-            {productFeatures.slice(0, 4).map((feat) => (
-              <Link
-                key={feat.title}
-                href="#features"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium text-zinc-800 hover:bg-zinc-50"
-              >
-                <span>{feat.title}</span>
-              </Link>
-            ))}
+            <Link
+              href="#features"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="block px-3 py-2 rounded-lg text-sm font-medium text-zinc-800 hover:bg-zinc-50"
+            >
+              AI Visibility
+            </Link>
+            <Link
+              href="#features"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="block px-3 py-2 rounded-lg text-sm font-medium text-zinc-800 hover:bg-zinc-50"
+            >
+              Brand Perception
+            </Link>
+            <Link
+              href="#features"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="block px-3 py-2 rounded-lg text-sm font-medium text-zinc-800 hover:bg-zinc-50"
+            >
+              Shopping
+            </Link>
+            <Link
+              href="#playground"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="block px-3 py-2 rounded-lg text-sm font-medium text-zinc-800 hover:bg-zinc-50"
+            >
+              Agent (New)
+            </Link>
           </div>
 
           <div className="pt-2 border-t border-zinc-100 space-y-1">
@@ -252,7 +347,7 @@ export function Navbar() {
               onClick={() => setIsMobileMenuOpen(false)}
               className="block px-3 py-2 rounded-lg text-sm font-medium text-zinc-800 hover:bg-zinc-50"
             >
-              Customers
+              Resources &amp; Careers
             </Link>
           </div>
 
@@ -260,14 +355,14 @@ export function Navbar() {
             <Link
               href="https://app.yedii.com/signin"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="w-full text-center py-2.5 text-sm font-medium text-zinc-700 bg-zinc-100 hover:bg-zinc-200 rounded-xl transition-colors"
+              className="w-full text-center py-2 text-sm font-medium text-zinc-700 bg-zinc-100 hover:bg-zinc-200 rounded-[8px] transition-colors"
             >
               Log in
             </Link>
             <Link
               href="https://app.yedii.com/signup"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="w-full text-center py-2.5 text-sm font-medium text-white bg-zinc-900 hover:bg-black rounded-xl transition-colors"
+              className="w-full text-center py-2 text-sm font-semibold text-white bg-[#111827] hover:bg-black rounded-[8px] transition-colors"
             >
               Sign up
             </Link>
