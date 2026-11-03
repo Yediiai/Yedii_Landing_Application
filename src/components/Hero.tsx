@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Bot, Sparkles, Shield, Zap, Layers, PlayCircle } from "lucide-react";
+import { ArrowRight, Bot, Sparkles, Shield, Zap, Layers, PlayCircle, Check } from "lucide-react";
 
 export function Hero() {
   return (
@@ -11,15 +11,14 @@ export function Hero() {
       <div className="absolute inset-0 bg-grid-pattern opacity-40 -z-20 pointer-events-none" />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        {/* Top Announcement Badge (Peec AI Style) */}
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-zinc-200 bg-white/90 shadow-[0_1px_2px_rgba(0,0,0,0.04)] mb-8 backdrop-blur-sm transition-transform hover:scale-[1.02] cursor-pointer">
-          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+        {/* Top Announcement Badge (Peec AI Style without blinking dots) */}
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-zinc-200 bg-white/90 shadow-[0_1px_2px_rgba(0,0,0,0.04)] mb-8 backdrop-blur-sm transition-transform hover:scale-[1.02] cursor-pointer">
           <span className="text-xs font-semibold text-zinc-800">
             Yedii 2.0 is Live
           </span>
           <span className="text-zinc-300">|</span>
           <span className="text-xs text-zinc-500 font-medium inline-flex items-center gap-1">
-            Build & Deploy Autonomous Agents in Minutes
+            Build &amp; Deploy Autonomous Agents in Minutes
             <ArrowRight className="w-3 h-3 text-zinc-700" />
           </span>
         </div>
@@ -47,7 +46,7 @@ export function Hero() {
           </span>
           <span>and</span>
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white border border-zinc-200/80 text-zinc-800 font-medium text-xs shadow-xs hover:border-zinc-300 transition-colors">
-            <Bot className="w-3 h-3 text-emerald-500" />
+            <Bot className="w-3 h-3 text-zinc-700" />
             Human-in-the-Loop Inbox
           </span>
         </div>
@@ -75,12 +74,12 @@ export function Hero() {
         {/* Micro Social Proof & Security Badges */}
         <div className="mt-8 flex flex-wrap items-center justify-center gap-6 text-xs text-zinc-500 font-medium">
           <span className="flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+            <Check className="w-3.5 h-3.5 text-zinc-500" />
             No credit card required
           </span>
           <span className="flex items-center gap-1.5">
             <Shield className="w-3.5 h-3.5 text-zinc-400" />
-            SOC2 Type II & GDPR Ready
+            SOC2 Type II &amp; GDPR Ready
           </span>
           <span className="flex items-center gap-1.5">
             <Zap className="w-3.5 h-3.5 text-zinc-400" />

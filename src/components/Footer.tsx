@@ -84,8 +84,8 @@ export function Footer() {
             </p>
 
             {/* Status indicator */}
-            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200/60 text-[11px] font-medium text-emerald-800">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-zinc-100 border border-zinc-200/80 text-[11px] font-medium text-zinc-700">
+              <span className="w-1.5 h-1.5 rounded-full bg-zinc-400" />
               <span>All Systems Operational</span>
             </div>
           </div>

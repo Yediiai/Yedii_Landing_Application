@@ -88,15 +88,15 @@ for chunk in stream:
 
             <ul className="space-y-2.5 text-xs sm:text-sm text-[#3A4049]">
               <li className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
+                <span className="w-1.5 h-1.5 rounded-full bg-zinc-400" />
                 <span>Zero-latency edge streaming (SSE & WebSockets)</span>
               </li>
               <li className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
+                <span className="w-1.5 h-1.5 rounded-full bg-zinc-400" />
                 <span>Strict TypeScript schemas with end-to-end type safety</span>
               </li>
               <li className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
+                <span className="w-1.5 h-1.5 rounded-full bg-zinc-400" />
                 <span>Standardized Model Context Protocol (MCP) server support</span>
               </li>
             </ul>
