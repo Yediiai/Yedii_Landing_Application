@@ -1,12 +1,32 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Sparkles, BarChart3, MessageSquare } from "lucide-react";
 import { AnalyticsDashboardPreview } from "./AnalyticsDashboardPreview";
 import { PlaygroundPreview } from "./PlaygroundPreview";
 
 export function InteractivePlayground() {
   const [activeView, setActiveView] = useState<"playground" | "analytics">("playground");
+  const [isVisible, setIsVisible] = useState(true);
+  const [isHovered, setIsHovered] = useState(false);
+
+  useEffect(() => {
+    if (isHovered) return;
+
+    const interval = setInterval(() => {
+      // 1. Smoothly fade out and scale down
+      setIsVisible(false);
+
+      // 2. Switch view halfway through transition
+      setTimeout(() => {
+        setActiveView((prev) => (prev === "playground" ? "analytics" : "playground"));
+        // 3. Smoothly fade in and scale back up to 1
+        setIsVisible(true);
+      }, 400);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [isHovered]);
 
   return (
     <section id="playground" className="py-10 md:py-16 relative">
@@ -21,55 +41,47 @@ export function InteractivePlayground() {
             Experience Yedii in action
           </h2>
           <p className="mt-1.5 text-xs sm:text-sm text-zinc-600">
-            Try the real Yedii Agent Playground with dynamic thinking steps, or explore live analytics powered by Recharts.
+            Watch the real Yedii Agent Playground and live real-time Analytics cycle dynamically.
           </p>
         </div>
 
-        {/* View Switcher Pills */}
-        <div className="flex items-center justify-center gap-2 mb-4">
-          <button
-            type="button"
-            onClick={() => setActiveView("playground")}
-            className={`flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer ${
-              activeView === "playground"
-                ? "bg-[#141C2E] text-white shadow-xs ring-1 ring-[#141C2E]/20"
-                : "bg-white text-zinc-600 hover:text-zinc-900 border border-zinc-200/80 hover:bg-zinc-50"
-            }`}
-          >
-            <MessageSquare className="w-3.5 h-3.5" />
-            <span>Agent Playground</span>
-            <span className="text-[10px] px-1.5 py-0.2 rounded bg-emerald-500/20 text-emerald-300 font-normal">
-              Interactive
+        {/* Dynamic 5s Status Indicator Pill (Replaces the manual buttons) */}
+        <div className="flex items-center justify-center gap-2 mb-6">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border border-[#E5E7EB] text-xs font-medium text-zinc-700 shadow-2xs transition-all">
+            {activeView === "playground" ? (
+              <>
+                <MessageSquare className="w-3.5 h-3.5 text-zinc-900" />
+                <span className="font-semibold text-zinc-900">Agent Playground</span>
+              </>
+            ) : (
+              <>
+                <BarChart3 className="w-3.5 h-3.5 text-zinc-900" />
+                <span className="font-semibold text-zinc-900">Live Analytics</span>
+              </>
+            )}
+            <span className="text-zinc-300">|</span>
+            <span className="text-[11px] text-zinc-500 font-normal">
+              {isHovered ? "Paused on hover" : "Auto-cycling every 5s"}
             </span>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => setActiveView("analytics")}
-            className={`flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer ${
-              activeView === "analytics"
-                ? "bg-[#141C2E] text-white shadow-xs ring-1 ring-[#141C2E]/20"
-                : "bg-white text-zinc-600 hover:text-zinc-900 border border-zinc-200/80 hover:bg-zinc-50"
-            }`}
-          >
-            <BarChart3 className="w-3.5 h-3.5" />
-            <span>Live Analytics</span>
-          </button>
+          </div>
         </div>
 
-        {/* VIEW 1: EXACT APP.YEDII.COM/PLAYGROUND */}
-        {activeView === "playground" && (
-          <div className="transition-opacity duration-200">
+        {/* Animated Container: 5-second Loop with Opacity 0 -> 1 & Scale 0.98 -> 1 */}
+        <div
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          className={`transition-all duration-700 ease-out transform ${
+            isVisible
+              ? "opacity-100 scale-100 translate-y-0"
+              : "opacity-0 scale-[0.98] translate-y-1 pointer-events-none"
+          }`}
+        >
+          {activeView === "playground" ? (
             <PlaygroundPreview />
-          </div>
-        )}
-
-        {/* VIEW 2: EXACT APP.YEDII.COM/ANALYTICS POWERED BY RECHARTS */}
-        {activeView === "analytics" && (
-          <div className="transition-opacity duration-200">
+          ) : (
             <AnalyticsDashboardPreview />
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </section>
   );
