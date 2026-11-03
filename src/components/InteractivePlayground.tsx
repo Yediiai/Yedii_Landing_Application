@@ -7,22 +7,13 @@ import { PlaygroundPreview } from "./PlaygroundPreview";
 
 export function InteractivePlayground() {
   const [activeView, setActiveView] = useState<"playground" | "analytics">("playground");
-  const [isVisible, setIsVisible] = useState(true);
   const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     if (isHovered) return;
 
     const interval = setInterval(() => {
-      // 1. Smoothly fade out and scale down
-      setIsVisible(false);
-
-      // 2. Switch view halfway through transition
-      setTimeout(() => {
-        setActiveView((prev) => (prev === "playground" ? "analytics" : "playground"));
-        // 3. Smoothly fade in and scale back up to 1
-        setIsVisible(true);
-      }, 400);
+      setActiveView((prev) => (prev === "playground" ? "analytics" : "playground"));
     }, 5000);
 
     return () => clearInterval(interval);
@@ -45,21 +36,33 @@ export function InteractivePlayground() {
           </p>
         </div>
 
-        {/* Animated Container: 5-second Loop with Opacity 0 -> 1 & Scale 0.98 -> 1 */}
+        {/* Rock-Solid Fixed Height Container: Absolute Inset Crossfade Prevents Layout Shift */}
         <div
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
-          className={`transition-all duration-700 ease-out transform ${
-            isVisible
-              ? "opacity-100 scale-100 translate-y-0"
-              : "opacity-0 scale-[0.98] translate-y-1 pointer-events-none"
-          }`}
+          className="relative w-full h-[620px] sm:h-[650px] lg:h-[670px] rounded-2xl"
         >
-          {activeView === "playground" ? (
+          {/* 1. Playground View Layer */}
+          <div
+            className={`absolute inset-0 w-full h-full transition-all duration-700 ease-in-out ${
+              activeView === "playground"
+                ? "opacity-100 scale-100 pointer-events-auto z-10"
+                : "opacity-0 scale-[0.98] pointer-events-none z-0"
+            }`}
+          >
             <PlaygroundPreview />
-          ) : (
+          </div>
+
+          {/* 2. Analytics View Layer */}
+          <div
+            className={`absolute inset-0 w-full h-full transition-all duration-700 ease-in-out ${
+              activeView === "analytics"
+                ? "opacity-100 scale-100 pointer-events-auto z-10"
+                : "opacity-0 scale-[0.98] pointer-events-none z-0"
+            }`}
+          >
             <AnalyticsDashboardPreview />
-          )}
+          </div>
         </div>
       </div>
     </section>

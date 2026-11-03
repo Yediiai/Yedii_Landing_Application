@@ -130,7 +130,7 @@ Step 2 – Face Scan
   };
 
   return (
-    <div className="w-full bg-[#FAFAFA] rounded-2xl border border-[#E8E9EC] overflow-hidden shadow-sm flex flex-col md:flex-row min-h-[560px]">
+    <div className="w-full h-full bg-[#FAFAFA] rounded-2xl border border-[#E8E9EC] overflow-hidden shadow-sm flex flex-col md:flex-row">
       {/* 1. Left Sidebar (Matching app.yedii.com/playground sidebar) */}
       <div className="w-full md:w-[190px] bg-white border-b md:border-b-0 md:border-r border-[#E8E9EC] p-3.5 flex flex-col justify-between shrink-0">
         <div className="space-y-4">
@@ -204,7 +204,7 @@ Step 2 – Face Scan
         </div>
 
         {/* Chat Stream / Message Feed */}
-        <div className="flex-1 p-5 sm:p-7 overflow-y-auto space-y-6 max-h-[380px]">
+        <div className="flex-1 min-h-0 p-5 sm:p-7 overflow-y-auto space-y-6">
           {messages.map((msg) => (
             <div key={msg.id} className="w-full">
               {msg.sender === "user" ? (
