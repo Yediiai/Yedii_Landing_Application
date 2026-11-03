@@ -12,15 +12,13 @@ export function Footer() {
           {/* Left Column: Brand & Tagline */}
           <div className="lg:col-span-4 space-y-4">
             <Link href="/" className="inline-flex items-center gap-2.5 group">
-              <div className="w-7 h-7 rounded-[7px] bg-white flex items-center justify-center p-1 shadow-xs">
-                <Image
-                  src="/images/yedii-logo.png"
-                  alt="Yedii Logo"
-                  width={22}
-                  height={22}
-                  className="h-5 w-5 object-contain"
-                />
-              </div>
+              <Image
+                src="/images/yedii-logo.png"
+                alt="Yedii Logo"
+                width={26}
+                height={26}
+                className="h-6.5 w-6.5 object-contain invert brightness-0 transition-transform group-hover:scale-105"
+              />
               <span className="font-bold text-[22px] tracking-tight text-white group-hover:text-zinc-200 transition-colors">
                 Yedii
               </span>
