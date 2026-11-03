@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Sparkles, BarChart3, MessageSquare } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import { AnalyticsDashboardPreview } from "./AnalyticsDashboardPreview";
 import { PlaygroundPreview } from "./PlaygroundPreview";
 
@@ -32,7 +32,7 @@ export function InteractivePlayground() {
     <section id="playground" className="py-10 md:py-16 relative">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-5">
+        <div className="text-center max-w-2xl mx-auto mb-6">
           <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-zinc-100 text-zinc-800 text-xs font-semibold mb-2">
             <Sparkles className="w-3.5 h-3.5 text-zinc-900" />
             Live Platform Showcase
@@ -43,27 +43,6 @@ export function InteractivePlayground() {
           <p className="mt-1.5 text-xs sm:text-sm text-zinc-600">
             Watch the real Yedii Agent Playground and live real-time Analytics cycle dynamically.
           </p>
-        </div>
-
-        {/* Dynamic 5s Status Indicator Pill (Replaces the manual buttons) */}
-        <div className="flex items-center justify-center gap-2 mb-6">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border border-[#E5E7EB] text-xs font-medium text-zinc-700 shadow-2xs transition-all">
-            {activeView === "playground" ? (
-              <>
-                <MessageSquare className="w-3.5 h-3.5 text-zinc-900" />
-                <span className="font-semibold text-zinc-900">Agent Playground</span>
-              </>
-            ) : (
-              <>
-                <BarChart3 className="w-3.5 h-3.5 text-zinc-900" />
-                <span className="font-semibold text-zinc-900">Live Analytics</span>
-              </>
-            )}
-            <span className="text-zinc-300">|</span>
-            <span className="text-[11px] text-zinc-500 font-normal">
-              {isHovered ? "Paused on hover" : "Auto-cycling every 5s"}
-            </span>
-          </div>
         </div>
 
         {/* Animated Container: 5-second Loop with Opacity 0 -> 1 & Scale 0.98 -> 1 */}
