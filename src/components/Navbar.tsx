@@ -6,9 +6,7 @@ import Link from "next/link";
 import {
   Sparkles,
   Menu,
-  X,
-  ArrowRight,
-  Plus
+  X
 } from "lucide-react";
 
 export function Navbar() {
