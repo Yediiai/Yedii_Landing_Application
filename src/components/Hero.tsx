@@ -11,9 +11,10 @@ export function Hero() {
       <div className="absolute inset-0 bg-grid-pattern opacity-40 -z-20 pointer-events-none" />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        {/* Hero Main Headline (decreased size for refined enterprise typography) */}
-        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[52px] font-bold tracking-tight text-zinc-950 leading-[1.18] sm:leading-[1.16] max-w-3xl mx-auto">
-          AI that understands your business. Support that understands your customers.
+        {/* Hero Main Headline (Formatted in two clean lines) */}
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[50px] font-bold tracking-tight text-zinc-950 leading-[1.22] sm:leading-[1.18] max-w-4xl mx-auto">
+          <span className="block">AI that understands your business.</span>
+          <span className="block">Support that understands your customers.</span>
         </h1>
 
         {/* Subtitle */}
