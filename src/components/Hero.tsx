@@ -11,13 +11,13 @@ export function Hero() {
       <div className="absolute inset-0 bg-grid-pattern opacity-40 -z-20 pointer-events-none" />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        {/* Hero Main Headline */}
-        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-zinc-950 leading-[1.1] max-w-4xl mx-auto">
+        {/* Hero Main Headline (decreased size for refined enterprise typography) */}
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[52px] font-bold tracking-tight text-zinc-950 leading-[1.18] sm:leading-[1.16] max-w-3xl mx-auto">
           AI that understands your business. Support that understands your customers.
         </h1>
 
         {/* Subtitle */}
-        <p className="mt-6 text-lg sm:text-xl text-zinc-600 max-w-2xl mx-auto font-normal leading-relaxed">
+        <p className="mt-5 text-base sm:text-lg md:text-xl text-zinc-600 max-w-2xl mx-auto font-normal leading-relaxed">
           Yedii transforms your business knowledge into intelligent AI agents that guide customers, answer questions, and help resolve problems.
         </p>
 
