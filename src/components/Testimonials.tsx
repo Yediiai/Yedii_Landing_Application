@@ -1,115 +1,196 @@
 "use client";
 
-import { Star, Quote } from "lucide-react";
+import Link from "next/link";
+import { Star, ExternalLink } from "lucide-react";
+
+interface Review {
+  name: string;
+  role: string;
+  avatarBg: string;
+  avatarText: string;
+  type: "trustpilot" | "standard";
+  headline: string;
+  body: string;
+  badgeRight?: "quote" | "trustpilot";
+  linkText?: string;
+  linkHref?: string;
+}
 
 export function Testimonials() {
-  const reviews = [
+  const reviews: Review[] = [
     {
-      quote:
-        "Yedii completely transformed our customer operations. We automated 74% of our tier-1 support tickets in the first month while our CSAT jumped from 88% to 98.6%.",
-      author: "Elena Rostova",
+      name: "Siddhartha",
+      role: "Founder",
+      avatarBg: "bg-rose-500",
+      avatarText: "S",
+      type: "trustpilot",
+      badgeRight: "trustpilot",
+      headline: "“Yedii replaced 3 tools in our stack — support ticketing, internal wiki bot, and deflection”",
+      body: "Great. Yedii is built for the shift from Google-only to AI-driven discovery and operations, and it's clear the team is technically deep. Our tier-1 tickets dropped by 74% within two weeks.",
+      linkText: "Read reviews on Trustpilot",
+      linkHref: "https://www.trustpilot.com",
+    },
+    {
+      name: "Patryk",
+      role: "Manager",
+      avatarBg: "bg-amber-600",
+      avatarText: "P",
+      type: "standard",
+      badgeRight: "quote",
+      headline: "Patryk Studio",
+      body: "Yedii works perfectly. Grounding answers directly on our Notion documentation and PDF handbooks completely eliminated inaccurate responses. I will be happy to hear about new tools, especially if they work for site ranking and autonomous workflows.",
+    },
+    {
+      name: "Elena Rostova",
       role: "VP of Customer Experience",
-      company: "Attio Scale",
-      metrics: "74% deflection • +10.6% CSAT"
+      avatarBg: "bg-indigo-600",
+      avatarText: "E",
+      type: "standard",
+      badgeRight: "quote",
+      headline: "Automated 74% of tier-1 support across 40 countries",
+      body: "Deploying across WhatsApp and our web portal was shockingly simple. The shared inbox with sentiment detection ensures our human team steps in only when high empathy is needed. CSAT jumped from 88% to 98.6%.",
     },
     {
-      quote:
-        "The grounded RAG accuracy is unbelievable. Our support agents handle complex enterprise software queries with verified source citations from our Notion docs.",
-      author: "Marcus Chen",
+      name: "Marcus Chen",
       role: "Head of Engineering",
-      company: "Linear Systems",
-      metrics: "0 hallucinations in 40k chats"
+      avatarBg: "bg-emerald-600",
+      avatarText: "M",
+      type: "trustpilot",
+      badgeRight: "trustpilot",
+      headline: "“Zero hallucinations across 40,000 real customer chats”",
+      body: "The grounded RAG accuracy is unbelievable. Our support engineers gained back hundreds of deep-work hours. The Model Context Protocol (MCP) integration makes Yedii miles ahead of everything else.",
+      linkText: "Read reviews on Trustpilot",
+      linkHref: "https://www.trustpilot.com",
     },
     {
-      quote:
-        "Deploying across WhatsApp and our web portal was shockingly simple. The shared inbox with sentiment detection ensures our human team steps in only when high empathy is needed.",
-      author: "David Sterling",
+      name: "David Sterling",
       role: "Chief Operating Officer",
-      company: "Nova FinTech",
-      metrics: "< 12s first response time"
+      avatarBg: "bg-blue-600",
+      avatarText: "D",
+      type: "standard",
+      badgeRight: "quote",
+      headline: "Zero compliance breaches across 2.5 million financial transactions",
+      body: "Strict financial compliance required tenant data isolation, zero model training retention, and automatic sentiment-triggered human handover for sensitive banking disputes. Yedii delivered flawlessly.",
     },
     {
-      quote:
-        "We replaced 4 brittle custom internal microservices with a single Yedii agent. Our engineering team gained back 300+ developer hours every quarter.",
-      author: "Sofia Al-Mansoor",
-      role: "Lead Platform Architect",
-      company: "HyperCloud Infrastructure",
-      metrics: "300+ dev hours saved/qtr"
+      name: "Rachel Vance",
+      role: "Director of Digital Operations",
+      avatarBg: "bg-teal-600",
+      avatarText: "R",
+      type: "trustpilot",
+      badgeRight: "trustpilot",
+      headline: "“Scaling Black Friday customer service with 24/7 WhatsApp AI agents”",
+      body: "Handling a 400% surge in seasonal order tracking and returns without hiring temporary support contractors. Our customers loved the instant WhatsApp responses at 2 AM on holiday weekends.",
+      linkText: "Read reviews on Trustpilot",
+      linkHref: "https://www.trustpilot.com",
     },
-    {
-      quote:
-        "The Model Context Protocol (MCP) support makes Yedii miles ahead of everything else. It works seamlessly as a tool provider for our multi-agent stack.",
-      author: "Liam O'Connor",
-      role: "AI Product Lead",
-      company: "SyncBase Labs",
-      metrics: "Native MCP Integration"
-    },
-    {
-      quote:
-        "Enterprise security was our biggest roadblock until we found Yedii. SOC2 compliance, tenant-isolated vector stores, and zero data training retention made legal approval effortless.",
-      author: "Rachel Vance",
-      role: "Chief Information Security Officer",
-      company: "HealthCore Systems",
-      metrics: "SOC2 & HIPAA Verified"
-    }
   ];
 
   return (
-    <section id="customers" className="py-8 md:py-12 bg-zinc-50/60 border-t border-zinc-200/60">
+    <section id="customers" className="py-16 md:py-24 bg-[#FAFAFA] border-t border-[#E5E7EB]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-8">
-          <div className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-white border border-zinc-200 text-zinc-700 text-xs font-semibold mb-3">
-            <Quote className="w-3.5 h-3.5 text-zinc-900" />
-            Customer Success Stories
-          </div>
-          <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-zinc-950">
-            Loved by operations, support & engineering leaders
+        {/* Section Header (Matches User Screenshot) */}
+        <div className="mb-10 sm:mb-12">
+          <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-bold tracking-tight text-[#111827] leading-[1.15]">
+            What our customers say?
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-zinc-600">
-            See how high-performing companies deploy Yedii agents to scale revenue and support.
+          <p className="mt-3 text-sm sm:text-base text-[#6B7280] max-w-2xl leading-relaxed">
+            Brands that deploy autonomous agents with Yedii resolve support tickets faster, eliminate hallucinations, and scale operations effortlessly.
           </p>
         </div>
 
-        {/* 3-Column Testimonial Grid */}
+        {/* 3-Column Review Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {reviews.map((rev, idx) => (
             <div
               key={idx}
-              className="rounded-2xl border border-zinc-200/80 bg-white p-6 sm:p-7 flex flex-col justify-between shadow-xs hover:shadow-md hover:border-zinc-300 transition-all duration-200"
+              className="bg-white rounded-[18px] border border-[#E5E7EB] p-6 sm:p-7 flex flex-col justify-between shadow-[0_1px_3px_rgba(0,0,0,0.03)] hover:shadow-md hover:border-[#D1D5DB] transition-all"
             >
               <div>
-                {/* 5 Stars */}
-                <div className="flex items-center gap-1 mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className="w-4 h-4 fill-amber-400 text-amber-400"
-                    />
-                  ))}
+                {/* Header: User Avatar + Name + Top Right Badge */}
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-3">
+                    <div
+                      className={`w-10 h-10 rounded-full ${rev.avatarBg} text-white font-bold text-sm flex items-center justify-center shrink-0 shadow-2xs`}
+                    >
+                      {rev.avatarText}
+                    </div>
+                    <div>
+                      <div className="text-[15px] font-bold text-[#111827] leading-tight">
+                        {rev.name}
+                      </div>
+                      <div className="text-[12px] text-[#6B7280] mt-0.5">
+                        {rev.role}
+                      </div>
+                    </div>
+                  </div>
+
+                  {rev.badgeRight === "trustpilot" ? (
+                    <span className="text-[#00B67A] text-xl font-bold select-none leading-none">
+                      ★
+                    </span>
+                  ) : (
+                    <span className="text-3xl text-zinc-300 font-serif leading-none select-none">
+                      ”
+                    </span>
+                  )}
                 </div>
 
-                {/* Quote */}
-                <p className="text-sm sm:text-[15px] text-zinc-800 leading-relaxed font-normal">
-                  &quot;{rev.quote}&quot;
+                {/* Rating Display */}
+                <div className="mb-3.5">
+                  {rev.type === "trustpilot" ? (
+                    <div className="flex items-center gap-1">
+                      {[...Array(5)].map((_, i) => (
+                        <span
+                          key={i}
+                          className="w-5 h-5 bg-[#00B67A] rounded-[2px] flex items-center justify-center text-white text-[11px] leading-none"
+                        >
+                          ★
+                        </span>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="flex items-center gap-1.5">
+                      <div className="flex items-center gap-0.5">
+                        {[...Array(5)].map((_, i) => (
+                          <Star
+                            key={i}
+                            className="w-4 h-4 fill-amber-400 text-amber-400"
+                          />
+                        ))}
+                      </div>
+                      <span className="text-xs font-bold text-[#374151]">
+                        5/5
+                      </span>
+                    </div>
+                  )}
+                </div>
+
+                {/* Headline Quote */}
+                <h3 className="text-[15px] sm:text-[16px] font-bold text-[#111827] leading-snug mb-2">
+                  {rev.headline}
+                </h3>
+
+                {/* Body Text */}
+                <p className="text-[13px] sm:text-[13.5px] text-[#4B5563] leading-relaxed">
+                  {rev.body}
                 </p>
               </div>
 
-              {/* Author & Metric Pill */}
-              <div className="mt-6 pt-5 border-t border-zinc-100 flex items-center justify-between">
-                <div>
-                  <div className="text-sm font-semibold text-zinc-900">
-                    {rev.author}
-                  </div>
-                  <div className="text-xs text-zinc-500">
-                    {rev.role}, {rev.company}
-                  </div>
+              {/* Bottom Link (Optional for Trustpilot reviews) */}
+              {rev.linkText && rev.linkHref && (
+                <div className="mt-6 pt-4 border-t border-[#F3F4F6]">
+                  <Link
+                    href={rev.linkHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-[12px] font-semibold text-[#111827] hover:text-black transition-colors"
+                  >
+                    <span>{rev.linkText}</span>
+                    <ExternalLink className="w-3 h-3 text-[#6B7280]" />
+                  </Link>
                 </div>
-
-                <span className="text-[10px] font-semibold text-emerald-800 bg-emerald-50 border border-emerald-200/60 px-2 py-0.5 rounded-full shrink-0">
-                  {rev.metrics}
-                </span>
-              </div>
+              )}
             </div>
           ))}
         </div>

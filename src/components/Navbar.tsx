@@ -13,6 +13,7 @@ export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
+  const [resourcesOpen, setResourcesOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -229,12 +230,95 @@ export function Navbar() {
               )}
             </div>
 
-            <Link
-              href="/customers"
-              className="px-3.5 py-1.5 text-sm font-medium text-[#4B5563] hover:text-[#111827] rounded-[8px] transition-colors"
+            {/* Resources with Dropdown */}
+            <div
+              className="relative"
+              onMouseEnter={() => setResourcesOpen(true)}
+              onMouseLeave={() => setResourcesOpen(false)}
             >
-              Resources
-            </Link>
+              <button
+                type="button"
+                className={`px-3.5 py-1.5 text-sm font-medium rounded-[8px] transition-all cursor-pointer ${
+                  resourcesOpen
+                    ? "bg-[#F3F4F6] text-[#111827]"
+                    : "text-[#4B5563] hover:text-[#111827] hover:bg-[#F9FAFB]"
+                }`}
+                onClick={() => setResourcesOpen(!resourcesOpen)}
+              >
+                Resources
+              </button>
+
+              {resourcesOpen && (
+                <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2.5 w-[280px]">
+                  <div className="rounded-[16px] p-3 bg-white border border-[#E5E7EB] shadow-[0_20px_50px_-10px_rgba(0,0,0,0.12),0_4px_12px_rgba(0,0,0,0.04)] space-y-1">
+                    <Link
+                      href="/docs"
+                      onClick={() => setResourcesOpen(false)}
+                      className="group block px-3 py-2 rounded-[10px] hover:bg-[#F9FAFB] transition-colors"
+                    >
+                      <div className="text-[13.5px] font-semibold text-[#111827] group-hover:text-black">
+                        Documentation
+                      </div>
+                      <div className="text-[11.5px] text-[#6B7280] mt-0.5">
+                        Platform guides and SDK setup
+                      </div>
+                    </Link>
+
+                    <Link
+                      href="/docs"
+                      onClick={() => setResourcesOpen(false)}
+                      className="group block px-3 py-2 rounded-[10px] hover:bg-[#F9FAFB] transition-colors"
+                    >
+                      <div className="text-[13.5px] font-semibold text-[#111827] group-hover:text-black">
+                        API Reference
+                      </div>
+                      <div className="text-[11.5px] text-[#6B7280] mt-0.5">
+                        REST, WebSocket & MCP endpoints
+                      </div>
+                    </Link>
+
+                    <Link
+                      href="/blog"
+                      onClick={() => setResourcesOpen(false)}
+                      className="group block px-3 py-2 rounded-[10px] hover:bg-[#F9FAFB] transition-colors"
+                    >
+                      <div className="text-[13.5px] font-semibold text-[#111827] group-hover:text-black">
+                        Blog
+                      </div>
+                      <div className="text-[11.5px] text-[#6B7280] mt-0.5">
+                        Latest updates, AI research & articles
+                      </div>
+                    </Link>
+
+                    <Link
+                      href="/help-center"
+                      onClick={() => setResourcesOpen(false)}
+                      className="group block px-3 py-2 rounded-[10px] hover:bg-[#F9FAFB] transition-colors"
+                    >
+                      <div className="text-[13.5px] font-semibold text-[#111827] group-hover:text-black">
+                        Help Center
+                      </div>
+                      <div className="text-[11.5px] text-[#6B7280] mt-0.5">
+                        Customer support & FAQ knowledge
+                      </div>
+                    </Link>
+
+                    <Link
+                      href="/changelog"
+                      onClick={() => setResourcesOpen(false)}
+                      className="group block px-3 py-2 rounded-[10px] hover:bg-[#F9FAFB] transition-colors"
+                    >
+                      <div className="text-[13.5px] font-semibold text-[#111827] group-hover:text-black">
+                        Changelog
+                      </div>
+                      <div className="text-[11.5px] text-[#6B7280] mt-0.5">
+                        New features and release notes
+                      </div>
+                    </Link>
+                  </div>
+                </div>
+              )}
+            </div>
 
             <Link
               href="/pricing"
@@ -322,6 +406,47 @@ export function Navbar() {
               className="block px-3 py-2 rounded-lg text-sm font-medium text-zinc-800 hover:bg-zinc-50"
             >
               Agent (New)
+            </Link>
+          </div>
+
+          <div className="pt-2 border-t border-zinc-100 space-y-1">
+            <div className="px-3 py-1 text-xs font-semibold uppercase tracking-wider text-zinc-400">
+              Resources
+            </div>
+            <Link
+              href="/docs"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="block px-3 py-1.5 rounded-lg text-sm font-medium text-zinc-800 hover:bg-zinc-50"
+            >
+              Documentation
+            </Link>
+            <Link
+              href="/docs"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="block px-3 py-1.5 rounded-lg text-sm font-medium text-zinc-800 hover:bg-zinc-50"
+            >
+              API Reference
+            </Link>
+            <Link
+              href="/blog"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="block px-3 py-1.5 rounded-lg text-sm font-medium text-zinc-800 hover:bg-zinc-50"
+            >
+              Blog
+            </Link>
+            <Link
+              href="/help-center"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="block px-3 py-1.5 rounded-lg text-sm font-medium text-zinc-800 hover:bg-zinc-50"
+            >
+              Help Center
+            </Link>
+            <Link
+              href="/changelog"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="block px-3 py-1.5 rounded-lg text-sm font-medium text-zinc-800 hover:bg-zinc-50"
+            >
+              Changelog
             </Link>
           </div>
 

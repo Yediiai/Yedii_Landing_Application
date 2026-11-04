@@ -8,6 +8,8 @@ import {
   SITE_NAME,
   SITE_DESCRIPTION,
   DEFAULT_OG_IMAGE,
+  LINKEDIN_URL,
+  REDDIT_URL,
 } from "@/lib/seo/config";
 
 const inter = Inter({
@@ -37,11 +39,17 @@ export const metadata: Metadata = {
     "customer support automation",
     "chatbot platform",
     "conversational AI",
+    "enterprise AI agents",
+    "zero data retention AI",
   ],
   authors: [{ name: "Yedii" }],
   creator: "Yedii",
   publisher: "Yedii",
-  formatDetection: { email: false, address: false, telephone: false },
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   robots: {
     index: true,
     follow: true,
@@ -84,7 +92,7 @@ const organizationSchema = {
   name: "Yedii",
   url: "https://www.yedii.com",
   logo: "https://www.yedii.com/images/yedii-logo.png",
-  sameAs: [] as string[],
+  sameAs: [LINKEDIN_URL, REDDIT_URL],
   description:
     "AI-powered autonomous agent platform for customer support automation",
 };
@@ -112,12 +120,14 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${inter.variable} ${jetbrainsMono.variable} scroll-smooth h-full antialiased`}
     >
+      <head>
+        <JsonLd data={organizationSchema} />
+        <JsonLd data={webSiteSchema} />
+      </head>
       <body
         suppressHydrationWarning
         className={`${inter.className} min-h-full flex flex-col font-sans antialiased text-[#141C2E] bg-[#FAFAFA]`}
       >
-        <JsonLd data={organizationSchema} />
-        <JsonLd data={webSiteSchema} />
         <SmoothScrollProvider>{children}</SmoothScrollProvider>
       </body>
     </html>

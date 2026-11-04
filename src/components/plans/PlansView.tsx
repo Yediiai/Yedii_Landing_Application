@@ -5,20 +5,17 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { BillingCycle, PlanId, YEDII_APPLICATION_PLANS } from "./types";
 import { PlansHeader } from "./PlansHeader";
 import { PlanCardsCarousel, PlanCardsCarouselRef } from "./PlanCardsCarousel";
-import { AiModelUsageSection } from "./AiModelUsageSection";
 import { CompareFeaturesTable } from "./CompareFeaturesTable";
 
 interface PlansViewProps {
   initialCycle?: BillingCycle;
   initialPlanId?: PlanId;
-  showAiModelUsage?: boolean;
   showCompareTable?: boolean;
 }
 
 export function PlansView({
   initialCycle = "yearly",
   initialPlanId = "growth",
-  showAiModelUsage = true,
   showCompareTable = true,
 }: PlansViewProps) {
   const [billingCycle, setBillingCycle] = useState<BillingCycle>(initialCycle);
@@ -76,10 +73,7 @@ export function PlansView({
         onSelectPlan={setSelectedPlanId}
       />
 
-      {/* 4. AI Model Usage Section */}
-      {showAiModelUsage && <AiModelUsageSection />}
-
-      {/* 5. Compare All Features Table */}
+      {/* 4. Compare All Features Table */}
       {showCompareTable && (
         <CompareFeaturesTable plans={YEDII_APPLICATION_PLANS} />
       )}
