@@ -299,20 +299,31 @@ export function Footer() {
             </div>
 
             <div className="flex flex-wrap items-center gap-5 sm:gap-6">
-              <button type="button" className="hover:text-[#8E8E93] transition-colors cursor-pointer">
+              <button
+                type="button"
+                onClick={() => {
+                  if (typeof window !== "undefined") {
+                    window.dispatchEvent(new CustomEvent("yedii:open_cookie_settings"));
+                  }
+                }}
+                className="hover:text-white transition-colors cursor-pointer"
+              >
                 Cookie Settings
               </button>
-              <Link href="/dpa" className="hover:text-[#8E8E93] transition-colors">
+              <Link href="/legal" className="hover:text-white transition-colors">
+                Legal Hub
+              </Link>
+              <Link href="/legal/data-processing-agreement" className="hover:text-white transition-colors">
                 DPA
               </Link>
-              <Link href="/privacy" className="hover:text-[#8E8E93] transition-colors">
+              <Link href="/legal/privacy-policy" className="hover:text-white transition-colors">
                 Privacy Policy
               </Link>
-              <Link href="/terms" className="hover:text-[#8E8E93] transition-colors">
+              <Link href="/legal/terms-of-service" className="hover:text-white transition-colors">
                 Terms of Service
               </Link>
-              <Link href="/imprint" className="hover:text-[#8E8E93] transition-colors">
-                Imprint
+              <Link href="/legal/ai-usage-policy" className="hover:text-white transition-colors">
+                AI Policy
               </Link>
             </div>
           </div>

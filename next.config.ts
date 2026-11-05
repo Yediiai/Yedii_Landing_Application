@@ -12,6 +12,31 @@ const nextConfig: NextConfig = {
         destination: "/pricing",
         permanent: true,
       },
+      {
+        source: "/terms",
+        destination: "/legal/terms-of-service",
+        permanent: true,
+      },
+      {
+        source: "/privacy",
+        destination: "/legal/privacy-policy",
+        permanent: true,
+      },
+      {
+        source: "/dpa",
+        destination: "/legal/data-processing-agreement",
+        permanent: true,
+      },
+      {
+        source: "/cookies",
+        destination: "/legal/cookie-policy",
+        permanent: true,
+      },
+      {
+        source: "/security",
+        destination: "/legal/security-policy",
+        permanent: true,
+      },
     ];
   },
 

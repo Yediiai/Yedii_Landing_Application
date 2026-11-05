@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/seo/config";
+import { ALL_LEGAL_DOCUMENTS } from "@/data/legal";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = "2026-11-04";
@@ -184,5 +185,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.65,
     },
+
+    // Legal & Compliance Hub and Documents
+    {
+      url: `${SITE_URL}/legal`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    ...ALL_LEGAL_DOCUMENTS.map((doc) => ({
+      url: `${SITE_URL}/legal/${doc.slug}`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: doc.requiresAcceptance ? 0.75 : 0.65,
+    })),
   ];
 }

@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { SmoothScrollProvider } from "@/components/SmoothScrollProvider";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { CookieConsentManager } from "@/components/legal/CookieConsentManager";
 import {
   SITE_URL,
   SITE_NAME,
@@ -128,7 +130,12 @@ export default function RootLayout({
         suppressHydrationWarning
         className={`${inter.className} min-h-full flex flex-col font-sans antialiased text-[#141C2E] bg-[#FAFAFA]`}
       >
-        <SmoothScrollProvider>{children}</SmoothScrollProvider>
+        <SmoothScrollProvider>
+          {children}
+          <Suspense fallback={null}>
+            <CookieConsentManager />
+          </Suspense>
+        </SmoothScrollProvider>
       </body>
     </html>
   );
