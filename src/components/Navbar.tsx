@@ -1,19 +1,37 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
-  Sparkles,
   Menu,
-  X
+  X,
+  ChevronDown,
+  ArrowRight,
+  Bot,
+  Database,
+  Terminal,
+  MessageSquare,
+  UserCheck,
+  BarChart3,
+  Sparkles,
+  Zap,
+  BookOpen,
+  FileCode,
+  LifeBuoy,
+  History
 } from "lucide-react";
+import { ProductMegaMenu } from "./ProductMegaMenu";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
   const [resourcesOpen, setResourcesOpen] = useState(false);
+
+  const headerRef = useRef<HTMLElement | null>(null);
+  const productTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const resourcesTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,15 +41,70 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Handle click outside and Escape key to close open menus
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (headerRef.current && !headerRef.current.contains(event.target as Node)) {
+        setProductsOpen(false);
+        setResourcesOpen(false);
+      }
+    };
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setProductsOpen(false);
+        setResourcesOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
+  // Safe hover debounce for Product mega menu
+  const handleProductMouseEnter = () => {
+    if (productTimeoutRef.current) {
+      clearTimeout(productTimeoutRef.current);
+      productTimeoutRef.current = null;
+    }
+    setResourcesOpen(false);
+    setProductsOpen(true);
+  };
+
+  const handleProductMouseLeave = () => {
+    productTimeoutRef.current = setTimeout(() => {
+      setProductsOpen(false);
+    }, 180);
+  };
+
+  // Safe hover debounce for Resources dropdown
+  const handleResourcesMouseEnter = () => {
+    if (resourcesTimeoutRef.current) {
+      clearTimeout(resourcesTimeoutRef.current);
+      resourcesTimeoutRef.current = null;
+    }
+    setProductsOpen(false);
+    setResourcesOpen(true);
+  };
+
+  const handleResourcesMouseLeave = () => {
+    resourcesTimeoutRef.current = setTimeout(() => {
+      setResourcesOpen(false);
+    }, 180);
+  };
+
   return (
     <header
+      ref={headerRef}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
         isScrolled
           ? "bg-white/90 backdrop-blur-md border-b border-[#E5E7EB] shadow-[0_1px_3px_rgba(0,0,0,0.03)]"
           : "bg-white/70 backdrop-blur-sm border-b border-[#E5E7EB]/60"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="flex items-center justify-between h-16">
           {/* Left: Brand Logo & Name */}
           <Link href="/" className="flex items-center gap-2 group cursor-pointer">
@@ -48,13 +121,13 @@ export function Navbar() {
             </span>
           </Link>
 
-          {/* Center: Desktop Nav Links (Peec AI Layout) */}
+          {/* Center: Desktop Nav Links */}
           <nav className="hidden md:flex items-center gap-1 lg:gap-2">
-            {/* Product with Peec AI Style Mega Dropdown */}
+            {/* Product Trigger */}
             <div
               className="relative"
-              onMouseEnter={() => setProductsOpen(true)}
-              onMouseLeave={() => setProductsOpen(false)}
+              onMouseEnter={handleProductMouseEnter}
+              onMouseLeave={handleProductMouseLeave}
             >
               <button
                 type="button"
@@ -63,178 +136,29 @@ export function Navbar() {
                     ? "bg-[#F3F4F6] text-[#111827]"
                     : "text-[#4B5563] hover:text-[#111827] hover:bg-[#F9FAFB]"
                 }`}
-                onClick={() => setProductsOpen(!productsOpen)}
+                onClick={() => setProductsOpen((prev) => !prev)}
+                aria-expanded={productsOpen}
+                aria-haspopup="true"
               >
                 Product
               </button>
 
-              {/* Peec AI Exact Mega Menu Dropdown */}
+              {/* Exact 640px Mega Menu Dropdown */}
               {productsOpen && (
-                <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2.5 w-[640px]">
-                  <div className="rounded-[18px] p-6 bg-white border border-[#E5E7EB] shadow-[0_20px_50px_-10px_rgba(0,0,0,0.12),0_4px_12px_rgba(0,0,0,0.04)] grid grid-cols-2 gap-7">
-                    {/* LEFT COLUMN: Product */}
-                    <div className="flex flex-col">
-                      <div className="text-[12px] font-medium text-[#9CA3AF] mb-3 select-none">
-                        Product
-                      </div>
-
-                      <div className="space-y-4">
-                        {/* Item 1 */}
-                        <Link
-                          href="#features"
-                          onClick={() => setProductsOpen(false)}
-                          className="group block"
-                        >
-                          <div className="text-[14px] font-semibold text-[#111827] group-hover:text-black transition-colors">
-                            AI Visibility
-                          </div>
-                          <div className="text-[12.5px] text-[#6B7280] font-normal leading-snug mt-0.5">
-                            Track how you show up in AI
-                          </div>
-                        </Link>
-
-                        {/* Item 2 */}
-                        <Link
-                          href="#features"
-                          onClick={() => setProductsOpen(false)}
-                          className="group block"
-                        >
-                          <div className="text-[14px] font-semibold text-[#111827] group-hover:text-black transition-colors">
-                            Brand Perception
-                          </div>
-                          <div className="text-[12.5px] text-[#6B7280] font-normal leading-snug mt-0.5">
-                            Learn how AI talks about you
-                          </div>
-                        </Link>
-
-                        {/* Item 3 */}
-                        <Link
-                          href="#features"
-                          onClick={() => setProductsOpen(false)}
-                          className="group block"
-                        >
-                          <div className="text-[14px] font-semibold text-[#111827] group-hover:text-black transition-colors">
-                            Shopping
-                          </div>
-                          <div className="text-[12.5px] text-[#6B7280] font-normal leading-snug mt-0.5">
-                            See your products in AI
-                          </div>
-                        </Link>
-
-                        {/* Item 4 */}
-                        <Link
-                          href="/analytics"
-                          onClick={() => setProductsOpen(false)}
-                          className="group block"
-                        >
-                          <div className="text-[14px] font-semibold text-[#111827] group-hover:text-black transition-colors">
-                            Agent analytics
-                          </div>
-                          <div className="text-[12.5px] text-[#6B7280] font-normal leading-snug mt-0.5">
-                            Check how agents crawl your page
-                          </div>
-                        </Link>
-
-                        {/* Item 5 with New Badge */}
-                        <Link
-                          href="#features"
-                          onClick={() => setProductsOpen(false)}
-                          className="group block"
-                        >
-                          <div className="text-[14px] font-semibold text-[#111827] group-hover:text-black transition-colors flex items-center gap-2">
-                            <span>Actions</span>
-                            <span className="text-[10px] font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200/80 px-1.5 py-0.2 rounded">
-                              New
-                            </span>
-                          </div>
-                          <div className="text-[12.5px] text-[#6B7280] font-normal leading-snug mt-0.5">
-                            Know what to improve, and why
-                          </div>
-                        </Link>
-                      </div>
-                    </div>
-
-                    {/* RIGHT COLUMN: Featured */}
-                    <div className="flex flex-col justify-between">
-                      <div>
-                        <div className="text-[12px] font-medium text-[#9CA3AF] mb-3 select-none">
-                          Featured
-                        </div>
-
-                        <div className="space-y-4">
-                          {/* Featured Item 1: MCP */}
-                          <Link
-                            href="#developers"
-                            onClick={() => setProductsOpen(false)}
-                            className="group block"
-                          >
-                            <div className="text-[14px] font-semibold text-[#111827] group-hover:text-black transition-colors">
-                              MCP
-                            </div>
-                            <div className="text-[12.5px] text-[#6B7280] font-normal leading-snug mt-0.5">
-                              Connect AI assistants and tools to Peec AI data
-                            </div>
-                          </Link>
-
-                          {/* Featured Item 2: Agent with New Badge */}
-                          <Link
-                            href="#playground"
-                            onClick={() => setProductsOpen(false)}
-                            className="group block"
-                          >
-                            <div className="text-[14px] font-semibold text-[#111827] group-hover:text-black transition-colors flex items-center gap-2">
-                              <span>Agent</span>
-                              <span className="text-[10px] font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200/80 px-1.5 py-0.2 rounded">
-                                New
-                              </span>
-                            </div>
-                            <div className="text-[12.5px] text-[#6B7280] font-normal leading-snug mt-0.5">
-                              Investigate your data, then act on it
-                            </div>
-                          </Link>
-                        </div>
-                      </div>
-
-                      {/* Interactive Mini Simulator Card (Exact replica from Peec AI screenshot) */}
-                      <div className="mt-5 rounded-[14px] border border-[#E2E8F0] bg-gradient-to-b from-[#F0F7FD] via-[#F6FAFE] to-[#FFFFFF] p-3.5 shadow-2xs">
-                        {/* Blue Tag */}
-                        <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-[5px] bg-[#E0F2FE] text-[#0284C7] text-[11px] font-semibold">
-                          <span>@ Visibility</span>
-                        </div>
-
-                        {/* Input Box with cursor */}
-                        <div className="mt-2.5 px-3 py-2 bg-white rounded-[8px] border border-[#E2E8F0] text-[12.5px] text-[#1E293B] flex items-center shadow-2xs">
-                          <span className="text-[#334155] font-normal">Ask ab</span>
-                          <span className="w-0.5 h-3.5 bg-zinc-800 ml-0.5 inline-block" />
-                        </div>
-
-                        {/* Bottom control pills */}
-                        <div className="mt-2.5 flex items-center justify-between text-[11px] text-[#64748B]">
-                          <div className="flex items-center gap-2">
-                            <span className="w-4 h-4 rounded bg-white border border-[#CBD5E1] flex items-center justify-center font-bold text-[#475569] text-xs">
-                              +
-                            </span>
-                            <span className="bg-white/80 border border-[#E2E8F0] px-2 py-0.5 rounded text-[#475569] font-medium">
-                              Normal
-                            </span>
-                          </div>
-                          <div className="flex items-center gap-1 text-[#475569] font-medium">
-                            <Sparkles className="w-3 h-3 text-[#0284C7]" />
-                            <span>Ask first</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <ProductMegaMenu
+                  isOpen={productsOpen}
+                  onClose={() => setProductsOpen(false)}
+                  onMouseEnter={handleProductMouseEnter}
+                  onMouseLeave={handleProductMouseLeave}
+                />
               )}
             </div>
 
             {/* Resources with Dropdown */}
             <div
               className="relative"
-              onMouseEnter={() => setResourcesOpen(true)}
-              onMouseLeave={() => setResourcesOpen(false)}
+              onMouseEnter={handleResourcesMouseEnter}
+              onMouseLeave={handleResourcesMouseLeave}
             >
               <button
                 type="button"
@@ -243,76 +167,97 @@ export function Navbar() {
                     ? "bg-[#F3F4F6] text-[#111827]"
                     : "text-[#4B5563] hover:text-[#111827] hover:bg-[#F9FAFB]"
                 }`}
-                onClick={() => setResourcesOpen(!resourcesOpen)}
+                onClick={() => setResourcesOpen((prev) => !prev)}
+                aria-expanded={resourcesOpen}
+                aria-haspopup="true"
               >
                 Resources
               </button>
 
               {resourcesOpen && (
-                <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2.5 w-[280px]">
-                  <div className="rounded-[16px] p-3 bg-white border border-[#E5E7EB] shadow-[0_20px_50px_-10px_rgba(0,0,0,0.12),0_4px_12px_rgba(0,0,0,0.04)] space-y-1">
+                <div
+                  onMouseEnter={handleResourcesMouseEnter}
+                  onMouseLeave={handleResourcesMouseLeave}
+                  className="absolute top-full left-1/2 -translate-x-1/2 pt-2.5 w-[300px] animate-in fade-in slide-in-from-top-1 duration-150"
+                >
+                  <div className="rounded-[16px] p-2.5 bg-white border border-[#E5E7EB] shadow-[0_20px_50px_-10px_rgba(0,0,0,0.12),0_4px_12px_rgba(0,0,0,0.04)] space-y-1">
                     <Link
                       href="/docs"
                       onClick={() => setResourcesOpen(false)}
-                      className="group block px-3 py-2 rounded-[10px] hover:bg-[#F9FAFB] transition-colors"
+                      className="group flex items-start gap-2.5 px-3 py-2 rounded-[10px] hover:bg-[#F9FAFB] transition-colors"
                     >
-                      <div className="text-[13.5px] font-semibold text-[#111827] group-hover:text-black">
-                        Documentation
-                      </div>
-                      <div className="text-[11.5px] text-[#6B7280] mt-0.5">
-                        Platform guides and SDK setup
+                      <BookOpen className="w-4 h-4 text-zinc-500 mt-0.5 shrink-0 group-hover:text-black" />
+                      <div>
+                        <div className="text-[13px] font-semibold text-[#111827] group-hover:text-black">
+                          Documentation
+                        </div>
+                        <div className="text-[11.5px] text-[#6B7280]">
+                          Platform guides and SDK setup
+                        </div>
                       </div>
                     </Link>
 
                     <Link
                       href="/docs"
                       onClick={() => setResourcesOpen(false)}
-                      className="group block px-3 py-2 rounded-[10px] hover:bg-[#F9FAFB] transition-colors"
+                      className="group flex items-start gap-2.5 px-3 py-2 rounded-[10px] hover:bg-[#F9FAFB] transition-colors"
                     >
-                      <div className="text-[13.5px] font-semibold text-[#111827] group-hover:text-black">
-                        API Reference
-                      </div>
-                      <div className="text-[11.5px] text-[#6B7280] mt-0.5">
-                        REST, WebSocket & MCP endpoints
+                      <FileCode className="w-4 h-4 text-zinc-500 mt-0.5 shrink-0 group-hover:text-black" />
+                      <div>
+                        <div className="text-[13px] font-semibold text-[#111827] group-hover:text-black">
+                          API Reference
+                        </div>
+                        <div className="text-[11.5px] text-[#6B7280]">
+                          REST, WebSocket & MCP endpoints
+                        </div>
                       </div>
                     </Link>
 
                     <Link
                       href="/blog"
                       onClick={() => setResourcesOpen(false)}
-                      className="group block px-3 py-2 rounded-[10px] hover:bg-[#F9FAFB] transition-colors"
+                      className="group flex items-start gap-2.5 px-3 py-2 rounded-[10px] hover:bg-[#F9FAFB] transition-colors"
                     >
-                      <div className="text-[13.5px] font-semibold text-[#111827] group-hover:text-black">
-                        Blog
-                      </div>
-                      <div className="text-[11.5px] text-[#6B7280] mt-0.5">
-                        Latest updates, AI research & articles
+                      <Sparkles className="w-4 h-4 text-zinc-500 mt-0.5 shrink-0 group-hover:text-black" />
+                      <div>
+                        <div className="text-[13px] font-semibold text-[#111827] group-hover:text-black">
+                          Blog
+                        </div>
+                        <div className="text-[11.5px] text-[#6B7280]">
+                          Latest updates, AI research & articles
+                        </div>
                       </div>
                     </Link>
 
                     <Link
                       href="/help-center"
                       onClick={() => setResourcesOpen(false)}
-                      className="group block px-3 py-2 rounded-[10px] hover:bg-[#F9FAFB] transition-colors"
+                      className="group flex items-start gap-2.5 px-3 py-2 rounded-[10px] hover:bg-[#F9FAFB] transition-colors"
                     >
-                      <div className="text-[13.5px] font-semibold text-[#111827] group-hover:text-black">
-                        Help Center
-                      </div>
-                      <div className="text-[11.5px] text-[#6B7280] mt-0.5">
-                        Customer support & FAQ knowledge
+                      <LifeBuoy className="w-4 h-4 text-zinc-500 mt-0.5 shrink-0 group-hover:text-black" />
+                      <div>
+                        <div className="text-[13px] font-semibold text-[#111827] group-hover:text-black">
+                          Help Center
+                        </div>
+                        <div className="text-[11.5px] text-[#6B7280]">
+                          Customer support & FAQ knowledge
+                        </div>
                       </div>
                     </Link>
 
                     <Link
                       href="/changelog"
                       onClick={() => setResourcesOpen(false)}
-                      className="group block px-3 py-2 rounded-[10px] hover:bg-[#F9FAFB] transition-colors"
+                      className="group flex items-start gap-2.5 px-3 py-2 rounded-[10px] hover:bg-[#F9FAFB] transition-colors"
                     >
-                      <div className="text-[13.5px] font-semibold text-[#111827] group-hover:text-black">
-                        Changelog
-                      </div>
-                      <div className="text-[11.5px] text-[#6B7280] mt-0.5">
-                        New features and release notes
+                      <History className="w-4 h-4 text-zinc-500 mt-0.5 shrink-0 group-hover:text-black" />
+                      <div>
+                        <div className="text-[13px] font-semibold text-[#111827] group-hover:text-black">
+                          Changelog
+                        </div>
+                        <div className="text-[11.5px] text-[#6B7280]">
+                          New features and release notes
+                        </div>
                       </div>
                     </Link>
                   </div>
@@ -342,7 +287,7 @@ export function Navbar() {
             </Link>
           </nav>
 
-          {/* Right: Peec AI style Log In & Sign Up Button */}
+          {/* Right: Log In & Sign Up Button */}
           <div className="hidden md:flex items-center gap-3">
             <Link
               href="https://app.yedii.com/signin"
@@ -372,84 +317,148 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Drawer */}
+      {/* ======================================================== */}
+      {/* MOBILE DRAWER: Comprehensive & Touch-Friendly Responsive  */}
+      {/* ======================================================== */}
       {isMobileMenuOpen && (
-        <div className="md:hidden border-b border-zinc-200 bg-white/98 backdrop-blur-xl px-4 pt-3 pb-6 space-y-3">
+        <div className="md:hidden border-b border-zinc-200 bg-white/98 backdrop-blur-xl px-4 pt-3 pb-6 space-y-4 max-h-[calc(100vh-64px)] overflow-y-auto">
+          {/* Group 1: BUILD & TRAIN */}
           <div className="space-y-1">
-            <div className="px-3 py-1 text-xs font-semibold uppercase tracking-wider text-zinc-400">
-              Product
+            <div className="flex items-center justify-between px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-zinc-400">
+              <span>Build & Train</span>
+              <span className="text-[10px] text-blue-700 bg-blue-50 px-1.5 py-0.2 rounded border border-blue-200/60 font-semibold">
+                Intelligence
+              </span>
             </div>
+            
             <Link
-              href="#features"
+              href="/ai-agents"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="block px-3 py-2 rounded-lg text-sm font-medium text-zinc-800 hover:bg-zinc-50"
+              className="flex items-center justify-between px-3 py-2.5 rounded-xl text-zinc-800 hover:bg-zinc-50 active:bg-zinc-100 transition-colors"
             >
-              AI Visibility
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 border border-blue-100">
+                  <Bot className="w-4 h-4" />
+                </div>
+                <div>
+                  <div className="text-[13.5px] font-semibold text-zinc-900">AI Agents</div>
+                  <div className="text-[11.5px] text-zinc-500">Autonomous support agents tailored to your business</div>
+                </div>
+              </div>
+              <ArrowRight className="w-4 h-4 text-zinc-400 shrink-0" />
             </Link>
+
             <Link
-              href="#features"
+              href="/knowledge-base"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="block px-3 py-2 rounded-lg text-sm font-medium text-zinc-800 hover:bg-zinc-50"
+              className="flex items-center justify-between px-3 py-2.5 rounded-xl text-zinc-800 hover:bg-zinc-50 active:bg-zinc-100 transition-colors"
             >
-              Brand Perception
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 border border-emerald-100">
+                  <Database className="w-4 h-4" />
+                </div>
+                <div>
+                  <div className="text-[13.5px] font-semibold text-zinc-900">Knowledge Base</div>
+                  <div className="text-[11.5px] text-zinc-500">Vector RAG grounded on websites, PDFs & docs</div>
+                </div>
+              </div>
+              <ArrowRight className="w-4 h-4 text-zinc-400 shrink-0" />
             </Link>
+
             <Link
-              href="#features"
+              href="/ai-playground"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="block px-3 py-2 rounded-lg text-sm font-medium text-zinc-800 hover:bg-zinc-50"
+              className="flex items-center justify-between px-3 py-2.5 rounded-xl text-zinc-800 hover:bg-zinc-50 active:bg-zinc-100 transition-colors"
             >
-              Shopping
-            </Link>
-            <Link
-              href="#playground"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="block px-3 py-2 rounded-lg text-sm font-medium text-zinc-800 hover:bg-zinc-50"
-            >
-              Agent (New)
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-lg bg-violet-50 text-violet-600 flex items-center justify-center shrink-0 border border-violet-100">
+                  <Terminal className="w-4 h-4" />
+                </div>
+                <div>
+                  <div className="text-[13.5px] font-semibold text-zinc-900">AI Playground</div>
+                  <div className="text-[11.5px] text-zinc-500">Prompt experimentation & conversation sandbox</div>
+                </div>
+              </div>
+              <ArrowRight className="w-4 h-4 text-zinc-400 shrink-0" />
             </Link>
           </div>
 
+          {/* Group 2: DEPLOY & OPTIMIZE */}
           <div className="pt-2 border-t border-zinc-100 space-y-1">
-            <div className="px-3 py-1 text-xs font-semibold uppercase tracking-wider text-zinc-400">
-              Resources
+            <div className="flex items-center justify-between px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-zinc-400">
+              <span>Deploy & Optimize</span>
+              <span className="text-[10px] text-emerald-700 bg-emerald-50 px-1.5 py-0.2 rounded border border-emerald-200/60 font-semibold">
+                Omnichannel
+              </span>
             </div>
+
             <Link
-              href="/docs"
+              href="/customer-support-platform"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="block px-3 py-1.5 rounded-lg text-sm font-medium text-zinc-800 hover:bg-zinc-50"
+              className="flex items-center justify-between px-3 py-2.5 rounded-xl text-zinc-800 hover:bg-zinc-50 active:bg-zinc-100 transition-colors"
             >
-              Documentation
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-lg bg-sky-50 text-sky-600 flex items-center justify-center shrink-0 border border-sky-100">
+                  <MessageSquare className="w-4 h-4" />
+                </div>
+                <div>
+                  <div className="text-[13.5px] font-semibold text-zinc-900">Website Chat</div>
+                  <div className="text-[11.5px] text-zinc-500">Customizable chat launcher & branded widget</div>
+                </div>
+              </div>
+              <ArrowRight className="w-4 h-4 text-zinc-400 shrink-0" />
             </Link>
+
             <Link
-              href="/docs"
+              href="/solutions/customer-support"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="block px-3 py-1.5 rounded-lg text-sm font-medium text-zinc-800 hover:bg-zinc-50"
+              className="flex items-center justify-between px-3 py-2.5 rounded-xl text-zinc-800 hover:bg-zinc-50 active:bg-zinc-100 transition-colors"
             >
-              API Reference
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center shrink-0 border border-amber-100">
+                  <UserCheck className="w-4 h-4" />
+                </div>
+                <div>
+                  <div className="text-[13.5px] font-semibold text-zinc-900">Inbox</div>
+                  <div className="text-[11.5px] text-zinc-500">Shared team inbox for live and escalated chats</div>
+                </div>
+              </div>
+              <ArrowRight className="w-4 h-4 text-zinc-400 shrink-0" />
             </Link>
+
             <Link
-              href="/blog"
+              href="/solutions/customer-success"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="block px-3 py-1.5 rounded-lg text-sm font-medium text-zinc-800 hover:bg-zinc-50"
+              className="flex items-center justify-between px-3 py-2.5 rounded-xl text-zinc-800 hover:bg-zinc-50 active:bg-zinc-100 transition-colors"
             >
-              Blog
-            </Link>
-            <Link
-              href="/help-center"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="block px-3 py-1.5 rounded-lg text-sm font-medium text-zinc-800 hover:bg-zinc-50"
-            >
-              Help Center
-            </Link>
-            <Link
-              href="/changelog"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="block px-3 py-1.5 rounded-lg text-sm font-medium text-zinc-800 hover:bg-zinc-50"
-            >
-              Changelog
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center shrink-0 border border-rose-100">
+                  <BarChart3 className="w-4 h-4" />
+                </div>
+                <div>
+                  <div className="text-[13.5px] font-semibold text-zinc-900">Agent Analytics</div>
+                  <div className="text-[11.5px] text-zinc-500">Resolution rates, CSAT tracking & latency stats</div>
+                </div>
+              </div>
+              <ArrowRight className="w-4 h-4 text-zinc-400 shrink-0" />
             </Link>
           </div>
 
+          {/* Quick Showcase Callout Teaser in Mobile Menu */}
+          <div className="p-3 rounded-xl bg-gradient-to-r from-blue-50/70 to-indigo-50/70 border border-blue-100/80">
+            <div className="flex items-center justify-between">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-blue-700 flex items-center gap-1">
+                <Zap className="w-3 h-3 text-blue-600" />
+                Interactive Showcase
+              </span>
+              <span className="text-[10px] font-medium text-blue-600">320ms avg latency</span>
+            </div>
+            <p className="text-[12px] text-zinc-700 mt-1 font-medium">
+              Multi-model orchestration across Claude 3.7, GPT-4o & Gemini 2.0.
+            </p>
+          </div>
+
+          {/* General Navigation Links */}
           <div className="pt-2 border-t border-zinc-100 space-y-1">
             <Link
               href="/pricing"
@@ -472,22 +481,30 @@ export function Navbar() {
             >
               Customers
             </Link>
+            <Link
+              href="/docs"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="block px-3 py-2 rounded-lg text-sm font-medium text-zinc-800 hover:bg-zinc-50"
+            >
+              Documentation
+            </Link>
           </div>
 
+          {/* Action CTAs */}
           <div className="pt-3 border-t border-zinc-100 flex flex-col gap-2">
             <Link
               href="https://app.yedii.com/signin"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="w-full text-center py-2 text-sm font-medium text-zinc-700 bg-zinc-100 hover:bg-zinc-200 rounded-[8px] transition-colors"
+              className="w-full text-center py-2.5 text-sm font-medium text-zinc-700 bg-zinc-100 hover:bg-zinc-200 rounded-[10px] transition-colors"
             >
               Log in
             </Link>
             <Link
               href="https://app.yedii.com/signup"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="w-full text-center py-2 text-sm font-semibold text-white bg-[#111827] hover:bg-black rounded-[8px] transition-colors"
+              className="w-full text-center py-2.5 text-sm font-semibold text-white bg-[#111827] hover:bg-black rounded-[10px] transition-colors shadow-2xs"
             >
-              Sign up
+              Start Free Trial
             </Link>
           </div>
         </div>
