@@ -180,7 +180,7 @@ export function Navbar() {
                   onMouseLeave={handleResourcesMouseLeave}
                   className="absolute top-full left-1/2 -translate-x-1/2 pt-2.5 w-[300px] animate-in fade-in slide-in-from-top-1 duration-150"
                 >
-                  <div className="rounded-[16px] p-2.5 bg-white border border-[#E5E7EB] shadow-[0_20px_50px_-10px_rgba(0,0,0,0.12),0_4px_12px_rgba(0,0,0,0.04)] space-y-1">
+                  <div className="rounded-none p-2.5 bg-white border border-[#E5E7EB] shadow-[0_20px_50px_-10px_rgba(0,0,0,0.12),0_4px_12px_rgba(0,0,0,0.04)] space-y-1">
                     <Link
                       href="/docs"
                       onClick={() => setResourcesOpen(false)}

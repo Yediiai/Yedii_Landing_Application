@@ -25,7 +25,7 @@ export function ProductMegaMenu({
       role="menu"
       aria-label="Product Mega Menu"
     >
-      <div className="rounded-[18px] p-6 bg-white border border-[#E5E7EB] shadow-[0_20px_50px_-10px_rgba(0,0,0,0.12),0_4px_12px_rgba(0,0,0,0.04)] grid grid-cols-2 gap-7">
+      <div className="rounded-none p-6 bg-white border border-[#E5E7EB] shadow-[0_20px_50px_-10px_rgba(0,0,0,0.12),0_4px_12px_rgba(0,0,0,0.04)] grid grid-cols-2 gap-7">
         
         {/* ======================================================== */}
         {/* LEFT COLUMN: BUILD & TRAIN                               */}
