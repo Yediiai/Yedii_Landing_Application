@@ -218,7 +218,7 @@ export function Navbar() {
                       onClick={() => setResourcesOpen(false)}
                       className="group flex items-start gap-2.5 px-3 py-2 rounded-[10px] hover:bg-[#F9FAFB] transition-colors"
                     >
-                      <Sparkles className="w-4 h-4 text-zinc-500 mt-0.5 shrink-0 group-hover:text-black" />
+                      <BookOpen className="w-4 h-4 text-zinc-500 mt-0.5 shrink-0 group-hover:text-black" />
                       <div>
                         <div className="text-[13px] font-semibold text-[#111827] group-hover:text-black">
                           Blog

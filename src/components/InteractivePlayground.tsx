@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Sparkles } from "lucide-react";
 import { AnalyticsDashboardPreview } from "./AnalyticsDashboardPreview";
 import { PlaygroundPreview } from "./PlaygroundPreview";
 
@@ -25,7 +24,6 @@ export function InteractivePlayground() {
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-6">
           <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-zinc-100 text-zinc-800 text-xs font-semibold mb-2">
-            <Sparkles className="w-3.5 h-3.5 text-zinc-900" />
             Live Platform Showcase
           </div>
           <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-950">

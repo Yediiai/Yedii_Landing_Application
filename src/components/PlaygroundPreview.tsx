@@ -12,7 +12,8 @@ import {
   Loader2,
   Check,
   ChevronDown,
-  Sparkles,
+  Bot,
+  Sliders,
   ArrowLeft,
   Settings,
   GitCompare,
@@ -167,7 +168,7 @@ Step 2 – Face Scan
               type="button"
               className="w-full flex items-center gap-2.5 px-3 py-2 rounded-[8px] text-[13px] font-medium text-[#6B7280] hover:text-[#141C2E] hover:bg-zinc-50 text-left transition-colors"
             >
-              <Sparkles className="w-4 h-4 text-[#8A9099]" />
+              <Sliders className="w-4 h-4 text-[#8A9099]" />
               <span>Builder</span>
             </button>
 
@@ -222,7 +223,7 @@ Step 2 – Face Scan
                 <div className="flex items-start gap-3">
                   {/* Agent Avatar */}
                   <div className="w-7 h-7 rounded-[8px] bg-[#141C2E] text-white flex items-center justify-center shrink-0 mt-0.5">
-                    <Sparkles className="w-3.5 h-3.5" />
+                    <Bot className="w-3.5 h-3.5" />
                   </div>
 
                   <div className="flex-1 space-y-3 max-w-[88%]">

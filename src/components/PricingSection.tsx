@@ -2,7 +2,7 @@
 
 import React, { useState, useRef } from "react";
 import Link from "next/link";
-import { ChevronLeft, ChevronRight, ArrowRight, Sparkles } from "lucide-react";
+import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import {
   BillingCycle,
   PlanId,
@@ -30,8 +30,7 @@ export function PricingSection() {
     <section id="pricing" className="py-6 md:py-10 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
         {/* Subtle pill badge */}
-        <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-zinc-100 text-zinc-700 text-xs font-semibold w-fit">
-          <Sparkles className="w-3.5 h-3.5 text-zinc-900" />
+        <div className="inline-flex items-center px-2.5 py-0.5 rounded-full bg-zinc-100 text-zinc-700 text-xs font-semibold w-fit">
           Transparent Pricing
         </div>
 

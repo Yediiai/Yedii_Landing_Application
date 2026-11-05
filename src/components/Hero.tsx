@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Bot, Sparkles, Shield, Zap, Layers, PlayCircle, Check } from "lucide-react";
+import { ArrowRight, Bot, Shield, Zap, Layers, PlayCircle, Check } from "lucide-react";
 
 export function Hero() {
   return (
@@ -46,7 +46,6 @@ export function Hero() {
             href="https://app.yedii.com/signup"
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-[8px] bg-[#141C2E] text-white font-semibold text-xs sm:text-sm hover:bg-black transition-all shadow-xs active:scale-[0.99] group"
           >
-            <Sparkles className="w-4 h-4 text-zinc-300 group-hover:rotate-12 transition-transform" />
             <span>Start Free Trial</span>
             <ArrowRight className="w-4 h-4 text-zinc-400 group-hover:translate-x-0.5 transition-transform" />
           </Link>

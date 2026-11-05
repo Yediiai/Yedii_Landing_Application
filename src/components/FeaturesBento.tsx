@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import {
   Database,
-  Sparkles,
+  Sliders,
   Share2,
   Inbox,
   Layers,
@@ -105,7 +105,7 @@ export function FeaturesBento() {
           <div className="md:col-span-5 rounded-3xl border border-zinc-200/90 bg-white p-6 sm:p-8 flex flex-col justify-between shadow-xs hover:border-zinc-300 transition-all">
             <div>
               <div className="w-10 h-10 rounded-xl bg-zinc-100 flex items-center justify-center text-zinc-900 mb-5">
-                <Sparkles className="w-5 h-5" />
+                <Sliders className="w-5 h-5" />
               </div>
               <span className="text-xs font-semibold uppercase tracking-wider text-zinc-400">
                 Agent Studio

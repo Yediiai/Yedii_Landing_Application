@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { Sparkles, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { allComparisons } from "@/data/comparisons";
 import { ComparisonCard } from "./ComparisonCard";
 
@@ -10,9 +10,8 @@ export function ComparisonSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-zinc-200 text-zinc-700 text-xs font-semibold mb-3 shadow-2xs">
-            <Sparkles className="w-3.5 h-3.5 text-zinc-900" />
-            Competitive Analysis
+          <div className="inline-flex items-center px-3 py-1 rounded-full bg-white border border-zinc-200 text-zinc-700 text-xs font-semibold mb-3 shadow-2xs">
+            <span>Competitive Analysis</span>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-zinc-950 font-serif">
             See How Yedii Compares
@@ -39,23 +38,15 @@ export function ComparisonSection() {
               Our solutions team can review your existing helpdesk content and demonstrate a live AI agent pilot in 48 hours.
             </p>
           </div>
-          <div className="flex items-center gap-3 shrink-0">
-            <Link
-              href="/pricing"
-              className="px-4 py-2.5 rounded-xl bg-zinc-100 hover:bg-zinc-200 text-xs font-semibold text-zinc-800 transition-colors"
-            >
-              View Pricing
-            </Link>
-            <Link
-              href="https://app.yedii.com/signup"
-              className="px-5 py-2.5 rounded-xl bg-[#141C2E] text-white text-xs font-semibold hover:bg-black transition-colors inline-flex items-center gap-1.5"
-            >
-              Deploy Agent Free <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
-          </div>
+          <Link
+            href="/enterprise"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-zinc-900 text-white text-xs sm:text-sm font-semibold hover:bg-black transition-colors shrink-0 shadow-xs"
+          >
+            <span>Request Platform Audit</span>
+            <ArrowRight className="w-4 h-4" />
+          </Link>
         </div>
       </div>
     </section>
   );
 }
-

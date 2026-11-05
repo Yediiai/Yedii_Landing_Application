@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 export function ComparisonCTA() {
   return (
@@ -10,8 +10,7 @@ export function ComparisonCTA() {
         <div className="absolute -top-24 -right-24 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-emerald-300 text-xs font-semibold">
-          <Sparkles className="w-3.5 h-3.5" />
+        <div className="inline-flex items-center px-3 py-1 rounded-full bg-white/10 text-emerald-300 text-xs font-semibold">
           Deploy in 5 Minutes
         </div>
 
@@ -33,13 +32,12 @@ export function ComparisonCTA() {
           </Link>
           <Link
             href="/ai-playground"
-            className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-white/10 border border-white/20 text-white text-xs sm:text-sm font-semibold hover:bg-white/15 transition-colors text-center"
+            className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs sm:text-sm font-bold transition-colors inline-flex items-center justify-center gap-2 border border-white/20"
           >
-            Test in AI Playground
+            <span>Test in Playground</span>
           </Link>
         </div>
       </div>
     </section>
   );
 }
-

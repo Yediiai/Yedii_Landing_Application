@@ -8,65 +8,58 @@ import {
   ShieldCheck,
   Layers,
   ArrowRight,
-  Sparkles,
 } from "lucide-react";
 
 interface DifferentiatorCard {
   icon: React.ElementType;
   title: string;
   description: string;
-  href?: string;
-  linkLabel?: string;
+  linkText: string;
+  linkHref: string;
 }
 
 const differentiators: DifferentiatorCard[] = [
   {
     icon: Brain,
     title: "Business-Aware AI",
-    description:
-      "AI agents understand business-specific information and deliver relevant responses.",
-    href: "/customer-support-platform",
-    linkLabel: "Explore Platform",
+    description: "AI agents understand business-specific information and deliver relevant responses.",
+    linkText: "Explore Platform",
+    linkHref: "#features",
   },
   {
     icon: Database,
     title: "Your Knowledge, Your AI",
-    description:
-      "Connect websites, PDFs, and text content to build knowledge-grounded AI agents.",
-    href: "/knowledge-base",
-    linkLabel: "View Knowledge Base",
+    description: "Connect websites, PDFs, and text content to build knowledge-grounded AI agents.",
+    linkText: "View Knowledge Base",
+    linkHref: "#features",
   },
   {
     icon: Sliders,
     title: "Complete Customization",
-    description:
-      "Customize agent personality, instructions, behavior, appearance, and customer experiences.",
-    href: "/ai-instructions",
-    linkLabel: "See Customization",
+    description: "Customize agent personality, instructions, behavior, appearance, and customer experiences.",
+    linkText: "See Customization",
+    linkHref: "#playground",
   },
   {
     icon: PlaySquare,
-    title: "Test Before You Deploy",
-    description:
-      "Experiment, test conversations, and refine AI agent responses using the AI Playground.",
-    href: "/ai-playground",
-    linkLabel: "Try AI Playground",
+    title: "Safe Testing Playground",
+    description: "Test your AI agents safely with realistic customer interactions before deployment.",
+    linkText: "Try the Playground",
+    linkHref: "#playground",
   },
   {
     icon: ShieldCheck,
-    title: "Reliable and Controlled Responses",
-    description:
-      "Configure instructions and guardrails to align AI responses with business policies and knowledge.",
-    href: "/docs",
-    linkLabel: "Read Guardrails Guide",
+    title: "Enterprise-Ready Support",
+    description: "Deliver consistent, reliable customer service across all communication channels.",
+    linkText: "Learn About Enterprise",
+    linkHref: "/enterprise",
   },
   {
     icon: Layers,
-    title: "Built to Scale",
-    description:
-      "Manage agents, knowledge sources, and customer support experiences from one centralized platform.",
-    href: "/enterprise",
-    linkLabel: "Learn About Enterprise",
+    title: "Continuous Learning",
+    description: "Improve response accuracy and customer satisfaction through continuous interaction insights.",
+    linkText: "Read Case Studies",
+    linkHref: "/customers",
   },
 ];
 
@@ -76,8 +69,7 @@ export function WhyChooseYediiSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14 md:mb-18">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-zinc-200 text-zinc-700 text-xs font-semibold mb-3.5 shadow-2xs">
-            <Sparkles className="w-3.5 h-3.5 text-zinc-900" />
+          <div className="inline-flex items-center px-3 py-1 rounded-full bg-white border border-zinc-200 text-zinc-700 text-xs font-semibold mb-3.5 shadow-2xs">
             <span>AI-First Customer Support</span>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-zinc-950 font-serif">
@@ -94,38 +86,34 @@ export function WhyChooseYediiSection() {
             const Icon = card.icon;
             return (
               <div
-                key={idx}
-                className="bg-white border border-zinc-200/90 rounded-2xl p-7 shadow-2xs hover:shadow-md hover:border-zinc-300 transition-all duration-200 flex flex-col justify-between group"
+                key={card.title}
+                className="group relative bg-white border border-zinc-200/80 rounded-2xl p-7 sm:p-8 flex flex-col justify-between transition-all duration-200 hover:border-zinc-300 hover:shadow-md"
               >
                 <div>
-                  {/* Icon container */}
-                  <div className="w-11 h-11 rounded-xl bg-zinc-100 border border-zinc-200/80 flex items-center justify-center text-zinc-900 group-hover:bg-[#141C2E] group-hover:text-white group-hover:border-[#141C2E] transition-all duration-200 mb-5">
-                    <Icon className="w-5 h-5 stroke-[1.8]" />
+                  {/* Icon Container: Inverted Dark Mode Style (Dark background with white icon) */}
+                  <div className="w-11 h-11 rounded-xl bg-[#141C2E] border border-zinc-800 flex items-center justify-center text-white mb-6 group-hover:scale-105 transition-transform duration-200 shadow-xs">
+                    <Icon className="w-5 h-5 text-white" />
                   </div>
 
-                  {/* Title */}
-                  <h3 className="text-lg font-bold text-zinc-900 group-hover:text-black transition-colors mb-2.5">
+                  {/* Title & Description */}
+                  <h3 className="text-lg sm:text-xl font-bold tracking-tight text-zinc-950">
                     {card.title}
                   </h3>
-
-                  {/* Description */}
-                  <p className="text-xs sm:text-[13.5px] text-zinc-600 leading-relaxed">
+                  <p className="mt-2.5 text-sm sm:text-[14.5px] text-zinc-600 leading-relaxed font-normal">
                     {card.description}
                   </p>
                 </div>
 
-                {/* Internal link where relevant dedicated product page exists */}
-                {card.href && (
-                  <div className="pt-5 mt-6 border-t border-zinc-100">
-                    <Link
-                      href={card.href}
-                      className="text-xs font-semibold text-zinc-900 group-hover:text-black inline-flex items-center gap-1.5 transition-colors"
-                    >
-                      <span>{card.linkLabel || "Learn more"}</span>
-                      <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1" />
-                    </Link>
-                  </div>
-                )}
+                {/* Card Footer Link */}
+                <div className="mt-6 pt-5 border-t border-zinc-100">
+                  <Link
+                    href={card.linkHref}
+                    className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-zinc-800 group-hover:text-black transition-colors"
+                  >
+                    <span>{card.linkText}</span>
+                    <ArrowRight className="w-3.5 h-3.5 text-zinc-400 group-hover:text-black group-hover:translate-x-1 transition-all" />
+                  </Link>
+                </div>
               </div>
             );
           })}
@@ -134,4 +122,3 @@ export function WhyChooseYediiSection() {
     </section>
   );
 }
-

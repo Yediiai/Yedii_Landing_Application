@@ -118,7 +118,7 @@ export function SocialProof() {
       highlight: "Across 40+ countries globally",
       icon: MessageSquare,
       badge: "+100% YoY",
-      badgeColor: "bg-emerald-50 text-emerald-700 border-emerald-200/70"
+      textColor: "text-emerald-700"
     },
     {
       id: "deflection",
@@ -127,7 +127,7 @@ export function SocialProof() {
       highlight: "Resolved without human intervention",
       icon: Zap,
       badge: "Industry High",
-      badgeColor: "bg-blue-50 text-blue-700 border-blue-200/70"
+      textColor: "text-blue-700"
     },
     {
       id: "latency",
@@ -138,7 +138,7 @@ export function SocialProof() {
       highlight: "Edge-cached real-time streaming",
       icon: Gauge,
       badge: "Sub-second",
-      badgeColor: "bg-amber-50 text-amber-800 border-amber-200/70"
+      textColor: "text-amber-800"
     },
     {
       id: "accuracy",
@@ -147,7 +147,7 @@ export function SocialProof() {
       highlight: "Verified against source documentation",
       icon: ShieldCheck,
       badge: "Zero Hallucination",
-      badgeColor: "bg-purple-50 text-purple-700 border-purple-200/70"
+      textColor: "text-purple-700"
     }
   ];
 
@@ -195,12 +195,12 @@ export function SocialProof() {
                 key={s.id}
                 className="bg-[#FAFAFA] hover:bg-white rounded-[14px] border border-[#E8E9EC] hover:border-[#D0D3D9] p-5 sm:p-5.5 flex flex-col justify-between transition-all duration-200 shadow-2xs hover:shadow-xs group"
               >
-                {/* Card Top: Icon & Badge */}
+                {/* Card Top: Icon & Badge (Background and border removed, keeping only clean text) */}
                 <div className="flex items-center justify-between mb-4">
                   <div className="w-9 h-9 rounded-[10px] bg-white border border-[#E8E9EC] flex items-center justify-center text-[#141C2E] shadow-2xs group-hover:scale-105 transition-transform">
                     <Icon className="w-4 h-4 text-[#141C2E]" />
                   </div>
-                  <span className={`text-[10px] font-semibold px-2.5 py-0.5 rounded-full border ${s.badgeColor}`}>
+                  <span className={`text-[11.5px] font-semibold tracking-tight ${s.textColor}`}>
                     {s.badge}
                   </span>
                 </div>

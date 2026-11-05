@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, X, Sparkles, AlertCircle } from "lucide-react";
+import { Check, X, AlertCircle } from "lucide-react";
 
 export function ComparisonMatrix() {
   const comparisonItems = [
@@ -47,8 +47,7 @@ export function ComparisonMatrix() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-8">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-zinc-100 text-zinc-700 text-xs font-semibold mb-3">
-            <Sparkles className="w-3.5 h-3.5 text-zinc-900" />
+          <div className="inline-flex items-center px-3 py-1 rounded-full bg-zinc-100 text-zinc-700 text-xs font-semibold mb-3">
             Clear Advantage
           </div>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-zinc-950">
