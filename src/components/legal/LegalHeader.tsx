@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { Download, Link as LinkIcon, Check, Calendar, Globe, Shield, ChevronRight } from "lucide-react";
+import { Download, Link as LinkIcon, Check, Calendar, ChevronRight } from "lucide-react";
 import { LegalDocumentItem } from "@/data/legal";
 
 interface LegalHeaderProps {
@@ -69,22 +69,6 @@ export function LegalHeader({ document }: LegalHeaderProps) {
 
       {/* Main Title & Description */}
       <div className="space-y-3">
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-zinc-900 text-white">
-            Version {document.initialVersion}
-          </span>
-          <span className="px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-zinc-100 text-zinc-700 border border-zinc-200 flex items-center gap-1">
-            <Globe className="w-3 h-3" />
-            {document.jurisdiction}
-          </span>
-          {document.requiresAcceptance && (
-            <span className="px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-emerald-50 text-emerald-700 border border-emerald-200 flex items-center gap-1">
-              <Shield className="w-3 h-3" />
-              Acceptance Required
-            </span>
-          )}
-        </div>
-
         <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-zinc-900">
           {document.title}
         </h1>

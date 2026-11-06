@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { Search, Shield, FileText, ChevronRight, Scale, Lock, Cpu } from "lucide-react";
 import { ALL_LEGAL_DOCUMENTS, LEGAL_CATEGORIES, LegalDocumentItem } from "@/data/legal";
 
@@ -12,7 +11,6 @@ interface LegalSidebarProps {
 }
 
 export function LegalSidebar({ currentSlug, className = "" }: LegalSidebarProps) {
-  const pathname = usePathname();
   const [search, setSearch] = useState("");
 
   const filteredDocs = ALL_LEGAL_DOCUMENTS.filter((doc) => {
@@ -60,24 +58,6 @@ export function LegalSidebar({ currentSlug, className = "" }: LegalSidebarProps)
             &times;
           </button>
         )}
-      </div>
-
-      {/* Overview Hub Link */}
-      <div>
-        <Link
-          href="/legal"
-          className={`flex items-center justify-between px-3 py-2 text-xs font-semibold rounded-lg transition-colors ${
-            pathname === "/legal"
-              ? "bg-black text-white"
-              : "text-zinc-700 hover:bg-zinc-100"
-          }`}
-        >
-          <span className="flex items-center gap-2">
-            <Scale className="w-3.5 h-3.5" />
-            Legal &amp; Compliance Hub
-          </span>
-          <span className="text-[11px] opacity-70 font-mono">17</span>
-        </Link>
       </div>
 
       {/* Categories & Navigation */}

@@ -144,6 +144,15 @@ export function LegalContentRenderer({ document }: LegalContentRendererProps) {
         return;
       }
 
+      // Skip redundant top-level dates/version already displayed in LegalHeader
+      if (
+        line.startsWith("**Effective Date:**") ||
+        line.startsWith("**Last Updated:**") ||
+        line.startsWith("**Version:**")
+      ) {
+        return;
+      }
+
       // Horizontal rule
       if (line === "---") {
         elements.push(<hr key={`hr-${index}`} className="my-8 border-zinc-200" />);
