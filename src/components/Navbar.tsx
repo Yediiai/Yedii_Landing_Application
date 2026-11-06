@@ -182,7 +182,7 @@ export function Navbar() {
                 >
                   <div className="rounded-none p-2.5 bg-white border border-[#E5E7EB] shadow-[0_20px_50px_-10px_rgba(0,0,0,0.12),0_4px_12px_rgba(0,0,0,0.04)] space-y-1">
                     <Link
-                      href="/docs"
+                      href="/docs/product"
                       onClick={() => setResourcesOpen(false)}
                       className="group flex items-start gap-2.5 px-3 py-2 rounded-[10px] hover:bg-[#F9FAFB] transition-colors"
                     >
@@ -198,7 +198,7 @@ export function Navbar() {
                     </Link>
 
                     <Link
-                      href="/docs"
+                      href="/docs/developer/api-reference"
                       onClick={() => setResourcesOpen(false)}
                       className="group flex items-start gap-2.5 px-3 py-2 rounded-[10px] hover:bg-[#F9FAFB] transition-colors"
                     >

@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/seo/config";
 import { ALL_LEGAL_DOCUMENTS } from "@/data/legal";
+import { ALL_DOC_ARTICLES } from "@/docs/data";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = "2026-11-04";
@@ -84,13 +85,43 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.85,
     },
 
-    // Resources Pages
+    // Documentation Platform Pages
     {
       url: `${SITE_URL}/docs`,
+      lastModified: now,
+      changeFrequency: "daily",
+      priority: 0.9,
+    },
+    {
+      url: `${SITE_URL}/docs/product`,
       lastModified: now,
       changeFrequency: "weekly",
       priority: 0.85,
     },
+    {
+      url: `${SITE_URL}/docs/developer`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.85,
+    },
+    {
+      url: `${SITE_URL}/docs/developer/api-reference`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.85,
+    },
+    {
+      url: `${SITE_URL}/docs/learning`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.85,
+    },
+    ...ALL_DOC_ARTICLES.filter((art) => art.status === "PUBLISHED").map((art) => ({
+      url: `${SITE_URL}/docs/${art.section}/${art.slug}`,
+      lastModified: art.updatedAt || now,
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
+    })),
     {
       url: `${SITE_URL}/blog`,
       lastModified: now,

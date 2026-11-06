@@ -179,12 +179,12 @@ export function Footer() {
                 </h4>
                 <ul className="space-y-2.5 text-[13.5px]">
                   <li>
-                    <Link href="/docs" className="hover:text-white transition-colors">
+                    <Link href="/docs/product" className="hover:text-white transition-colors">
                       Documentation
                     </Link>
                   </li>
                   <li>
-                    <Link href="/docs" className="hover:text-white transition-colors">
+                    <Link href="/docs/developer/api-reference" className="hover:text-white transition-colors">
                       API Reference
                     </Link>
                   </li>
