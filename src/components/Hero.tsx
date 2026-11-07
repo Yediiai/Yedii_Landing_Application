@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Bot, Shield, Zap, Layers, PlayCircle, Check } from "lucide-react";
+import { ArrowRight, Bot, Zap, Layers, PlayCircle, Check } from "lucide-react";
 
 export function Hero() {
   return (
@@ -64,10 +64,6 @@ export function Hero() {
           <span className="flex items-center gap-1.5">
             <Check className="w-3.5 h-3.5 text-zinc-500" />
             No credit card required
-          </span>
-          <span className="flex items-center gap-1.5">
-            <Shield className="w-3.5 h-3.5 text-zinc-400" />
-            SOC2 Type II &amp; GDPR Ready
           </span>
           <span className="flex items-center gap-1.5">
             <Zap className="w-3.5 h-3.5 text-zinc-400" />
