@@ -54,7 +54,7 @@ export default function BrandPage() {
             <div className="bg-white border border-[#141C2E]/15 rounded-2xl p-8 flex flex-col justify-between shadow-sm">
               <div className="h-32 flex items-center justify-center">
                 <Image
-                  src="/images/yedii-logo.png"
+                  src="/images/Yedii.svg"
                   alt="Yedii Dark Logo"
                   width={64}
                   height={64}
@@ -67,11 +67,11 @@ export default function BrandPage() {
                   <div className="text-[11px] text-zinc-500">For light backgrounds</div>
                 </div>
                 <a
-                  href="/images/yedii-logo.png"
+                  href="/images/Yedii.svg"
                   download
                   className="px-3 py-1.5 rounded-lg bg-zinc-100 hover:bg-zinc-200 text-xs font-semibold text-zinc-800 inline-flex items-center gap-1"
                 >
-                  <Download className="w-3.5 h-3.5" /> PNG
+                  <Download className="w-3.5 h-3.5" /> SVG
                 </a>
               </div>
             </div>

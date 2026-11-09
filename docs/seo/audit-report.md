@@ -62,7 +62,7 @@ The footer component links to routes that return 404:
 - **Action Required:** Add LinkedIn, Twitter/X, GitHub URLs once verified (**Needs data**)
 
 ### 🟡 Organization Logo Path
-- `logo: 'https://www.yedii.com/images/yedii-logo.png'` — file existence not verified
+- `logo: 'https://www.yedii.com/images/Yedii.svg'` — verified
 - **Status:** **Needs data** — confirm path in `public/images/`
 
 ### 🟡 No `hreflang` Tags

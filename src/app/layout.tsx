@@ -93,7 +93,7 @@ const organizationSchema = {
   "@type": "Organization",
   name: "Yedii",
   url: "https://www.yedii.com",
-  logo: "https://www.yedii.com/images/yedii-logo.png",
+  logo: "https://www.yedii.com/images/Yedii.svg",
   sameAs: [LINKEDIN_URL, REDDIT_URL],
   description:
     "AI-powered autonomous agent platform for customer support automation",

@@ -57,7 +57,7 @@ export function DocsHeader({
           {/* Yedii Brand Logo & Docs Label */}
           <Link href="/docs/product" className="flex items-center gap-2 group cursor-pointer shrink-0">
             <Image
-              src="/images/yedii-logo.png"
+              src="/images/Yedii.svg"
               alt="Yedii Logo"
               width={26}
               height={26}
