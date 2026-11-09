@@ -40,7 +40,6 @@ import { ComparisonSection } from "@/components/comparison/ComparisonSection";
 import { Testimonials } from "@/components/Testimonials";
 import { PricingSection } from "@/components/PricingSection";
 import { FaqSection } from "@/components/FaqSection";
-import { CtaBanner } from "@/components/CtaBanner";
 import { Footer } from "@/components/Footer";
 
 export default function Home() {
@@ -76,9 +75,6 @@ export default function Home() {
 
         {/* Frequently Asked Questions */}
         <FaqSection />
-
-        {/* Call-to-action Banner */}
-        <CtaBanner />
       </main>
 
       <Footer />
