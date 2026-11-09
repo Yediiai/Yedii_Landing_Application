@@ -179,7 +179,7 @@ function CellContent({ cell }: { cell?: CellValue }) {
   if (cell.type === "boolean") {
     if (cell.value) {
       return (
-        <span className="inline-flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400">
+        <span className="inline-flex items-center gap-1.5 text-zinc-900 dark:text-white">
           <svg
             className="w-5 h-5 shrink-0"
             viewBox="0 0 20 20"
@@ -270,13 +270,13 @@ export function CompetitorComparison() {
                         <th
                           key={col.id}
                           scope="col"
-                          className="sticky top-0 z-20 py-4 px-5 text-left bg-emerald-500/[0.07] dark:bg-emerald-500/[0.14] border-t-2 border-l-2 border-r-2 border-emerald-500 dark:border-emerald-400 border-b border-emerald-500/30 min-w-[190px]"
+                          className="sticky top-0 z-20 py-4 px-5 text-left bg-zinc-100/90 dark:bg-white/[0.08] border-t-2 border-l-2 border-r-2 border-zinc-900 dark:border-white border-b border-zinc-200 dark:border-white/20 min-w-[190px]"
                         >
                           <div className="flex items-center gap-2">
                             <span className="font-bold text-base text-[#111111] dark:text-white">
                               {col.name}
                             </span>
-                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
+                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-zinc-900 text-white dark:bg-white dark:text-black border border-zinc-900 dark:border-white">
                               Yedii
                             </span>
                           </div>
@@ -324,10 +324,10 @@ export function CompetitorComparison() {
                           return (
                             <td
                               key={col.id}
-                              className={`py-4 px-5 align-middle bg-emerald-500/[0.04] dark:bg-emerald-500/[0.08] border-l-2 border-r-2 border-emerald-500 dark:border-emerald-400 font-medium ${
+                              className={`py-4 px-5 align-middle bg-zinc-50/80 dark:bg-white/[0.04] border-l-2 border-r-2 border-zinc-900 dark:border-white font-medium ${
                                 isLastRow
                                   ? "border-b-2"
-                                  : "border-b border-emerald-500/20 dark:border-emerald-500/30"
+                                  : "border-b border-zinc-200 dark:border-white/10"
                               }`}
                             >
                               <CellContent cell={cell} />
@@ -414,7 +414,7 @@ export function CompetitorComparison() {
                     className="flex items-start gap-2.5 text-[15px] leading-snug text-zinc-700 dark:text-zinc-200"
                   >
                     <svg
-                      className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5"
+                      className="w-4 h-4 text-zinc-900 dark:text-white shrink-0 mt-0.5"
                       viewBox="0 0 20 20"
                       fill="currentColor"
                       aria-hidden="true"

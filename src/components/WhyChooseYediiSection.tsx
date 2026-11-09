@@ -73,10 +73,10 @@ export function WhyChooseYediiSection() {
             <span>AI-First Customer Support</span>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-zinc-950 font-serif">
-            Why teams choose Yedii
+            What Makes Yedii Different
           </h2>
           <p className="mt-4 text-base sm:text-lg text-zinc-600 leading-relaxed max-w-2xl mx-auto">
-            More than an AI chatbot. A smarter way to understand your business, support your customers, and scale every interaction.
+            Not just answering questions. Understanding context, solving problems, and creating better customer experiences at scale..
           </p>
         </div>
 
