@@ -9,6 +9,7 @@ export interface EnvConfig {
   HOSTNAME: string;
   NEXT_PUBLIC_APP_URL: string;
   NEXT_PUBLIC_APP_BASE_URL: string;
+  NEXT_PUBLIC_SIGNUP_URL: string;
   LINKEDIN_URL: string;
   REDDIT_URL: string;
   INDUSTRIES_URL: string;
@@ -32,6 +33,9 @@ export const env: EnvConfig = {
   HOSTNAME: hostname,
   NEXT_PUBLIC_APP_URL: appUrl,
   NEXT_PUBLIC_APP_BASE_URL: process.env.NEXT_PUBLIC_APP_BASE_URL || "https://app.yedii.com",
+  NEXT_PUBLIC_SIGNUP_URL:
+    process.env.NEXT_PUBLIC_SIGNUP_URL ||
+    `${process.env.NEXT_PUBLIC_APP_BASE_URL || "https://app.yedii.com"}/signup`,
   LINKEDIN_URL: process.env.NEXT_PUBLIC_LINKEDIN_URL || process.env.LINKEDIN_URL || "https://linkedin.com/company/yedii",
   REDDIT_URL: process.env.NEXT_PUBLIC_REDDIT_URL || process.env.REDDIT_URL || "https://reddit.com/r/yedii",
   INDUSTRIES_URL: process.env.NEXT_PUBLIC_INDUSTRIES_URL || process.env.INDUSTRIES_URL || "/customers",

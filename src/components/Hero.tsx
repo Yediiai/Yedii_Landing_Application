@@ -4,6 +4,10 @@ import Link from "next/link";
 import { ArrowRight, Bot, Zap, Layers, PlayCircle, Check } from "lucide-react";
 
 export function Hero() {
+  const signupUrl =
+    process.env.NEXT_PUBLIC_SIGNUP_URL ||
+    `${process.env.NEXT_PUBLIC_APP_BASE_URL || "https://app.yedii.com"}/signup`;
+
   return (
     <section className="relative pt-24 pb-8 md:pt-32 md:pb-10 overflow-hidden bg-white">
       {/* Background radial gradients for subtle glow */}
@@ -43,7 +47,7 @@ export function Hero() {
         {/* Hero Action Buttons */}
         <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
           <Link
-            href="https://app.yedii.com/signup"
+            href={signupUrl}
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-[8px] bg-[#141C2E] text-white font-semibold text-xs sm:text-sm hover:bg-black transition-all shadow-xs active:scale-[0.99] group"
           >
             <span>Start Free Trial</span>
