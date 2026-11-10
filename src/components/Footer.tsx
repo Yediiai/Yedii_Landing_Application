@@ -49,7 +49,7 @@ export function Footer() {
                   </li>
                   <li>
                     <Link href="/careers" className="hover:text-white transition-colors">
-                      Careers
+                      About us
                     </Link>
                   </li>
                   <li>
@@ -93,7 +93,7 @@ export function Footer() {
                   </li>
                   <li>
                     <Link href="/knowledge-base" className="hover:text-white transition-colors">
-                      Knowledge Base
+                      Agent Memory
                     </Link>
                   </li>
                   <li>
