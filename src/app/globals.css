@@ -127,3 +127,14 @@ body {
 .animate-marquee:hover {
   animation-play-state: paused;
 }
+
+.animate-marquee-testimonials {
+  display: flex;
+  width: max-content;
+  animation: marquee 50s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-testimonials:hover {
+  animation-play-state: paused;
+}

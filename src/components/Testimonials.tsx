@@ -86,25 +86,42 @@ export function Testimonials() {
     },
   ];
 
-  return (
-    <section id="customers" className="py-16 md:py-24 bg-[#FAFAFA] border-t border-[#E5E7EB]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header (Matches User Screenshot) */}
-        <div className="mb-10 sm:mb-12">
-          <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-bold tracking-tight text-[#111827] leading-[1.15]">
-            What our customers say?
-          </h2>
-          <p className="mt-3 text-sm sm:text-base text-[#6B7280] max-w-2xl leading-relaxed">
-            Brands that deploy autonomous agents with Yedii resolve support tickets faster, eliminate hallucinations, and scale operations effortlessly.
-          </p>
-        </div>
+  // Duplicated for a seamless, continuous 360-degree auto-scrolling loop
+  const marqueeReviews = [...reviews, ...reviews];
 
-        {/* 3-Column Review Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {reviews.map((rev, idx) => (
+  return (
+    <section id="customers" className="py-16 md:py-24 bg-[#FAFAFA] border-t border-[#E5E7EB] overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
+        <div className="mb-10 sm:mb-12 flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div>
+            <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-bold tracking-tight text-[#111827] leading-[1.15]">
+              What our customers say?
+            </h2>
+            <p className="mt-3 text-sm sm:text-base text-[#6B7280] max-w-2xl leading-relaxed">
+              Brands that deploy autonomous agents with Yedii resolve support tickets faster, eliminate hallucinations, and scale operations effortlessly.
+            </p>
+          </div>
+
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-[#E5E7EB] text-xs font-medium text-[#4B5563] shadow-2xs self-start md:self-auto shrink-0">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+            <span>Hover card to pause</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Infinite Horizontal Auto-Moving Slider */}
+      <div className="relative w-full overflow-hidden py-4">
+        {/* Left & Right gradient edge masks for smooth fade */}
+        <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-12 sm:w-28 md:w-44 bg-gradient-to-r from-[#FAFAFA] to-transparent" />
+        <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-12 sm:w-28 md:w-44 bg-gradient-to-l from-[#FAFAFA] to-transparent" />
+
+        {/* Moving Track */}
+        <div className="animate-marquee-testimonials flex items-stretch gap-6 px-4">
+          {marqueeReviews.map((rev, idx) => (
             <div
-              key={idx}
-              className="bg-white rounded-[18px] border border-[#E5E7EB] p-6 sm:p-7 flex flex-col justify-between shadow-[0_1px_3px_rgba(0,0,0,0.03)] hover:shadow-md hover:border-[#D1D5DB] transition-all"
+              key={`${rev.name}-${idx}`}
+              className="w-[340px] sm:w-[380px] md:w-[420px] shrink-0 bg-white rounded-[18px] border border-[#E5E7EB] p-6 sm:p-7 flex flex-col justify-between shadow-[0_1px_3px_rgba(0,0,0,0.03)] hover:shadow-lg hover:border-[#D1D5DB] transition-all"
             >
               <div>
                 {/* Header: User Avatar + Name + Top Right Badge */}

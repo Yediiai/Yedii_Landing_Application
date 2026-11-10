@@ -117,17 +117,14 @@ export function ProductMegaMenu({
               </div>
             </Link>
 
-            {/* 6. Agent Analytics with New Badge */}
+            {/* 6. Agent Analytics */}
             <Link
               href="/solutions/customer-success"
               onClick={onClose}
               className="group block"
             >
-              <div className="text-[14px] font-semibold text-[#111827] group-hover:text-black transition-colors flex items-center gap-2">
-                <span>Agent Analytics</span>
-                <span className="text-[10px] font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200/80 px-1.5 py-0.2 rounded">
-                  New
-                </span>
+              <div className="text-[14px] font-semibold text-[#111827] group-hover:text-black transition-colors">
+                Agent Analytics
               </div>
               <div className="text-[12.5px] text-[#6B7280] font-normal leading-snug mt-0.5">
                 Monitor resolution rates, sentiment &amp; CSAT
