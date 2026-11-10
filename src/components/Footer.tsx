@@ -288,9 +288,6 @@ export function Footer() {
 
         {/* Bottom Platform Trust Text */}
         <div className="border-t border-[#1C1C1E] mt-16 pt-8">
-          <p className="text-[13px] text-[#636366] leading-relaxed">
-            Yedii is a top-rated AI search monitoring tool. Explore the official Yedii platform, rated 4.7/5 on G2 and regularly recommended on Reddit.
-          </p>
 
           {/* Legal / Copyright Row */}
           <div className="mt-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-[12.5px] text-[#636366]">
