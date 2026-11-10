@@ -65,11 +65,11 @@ const differentiators: DifferentiatorCard[] = [
 
 export function WhyChooseYediiSection() {
   return (
-    <section id="why-yedii" className="py-20 md:py-28 bg-[#FAFAFA] border-t border-zinc-200/80">
+    <section id="why-yedii" className="py-20 md:py-28 bg-transparent border-t border-zinc-200/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14 md:mb-18">
-          <div className="inline-flex items-center px-3 py-1 rounded-full bg-white border border-zinc-200 text-zinc-700 text-xs font-semibold mb-3.5 shadow-2xs">
+          <div className="inline-flex items-center px-3 py-1 rounded-full bg-white/80 backdrop-blur-xs border border-zinc-200 text-zinc-700 text-xs font-semibold mb-3.5 shadow-2xs">
             <span>AI-First Customer Support</span>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-zinc-950 font-serif">
@@ -87,7 +87,7 @@ export function WhyChooseYediiSection() {
             return (
               <div
                 key={card.title}
-                className="group relative bg-white border border-zinc-200/80 rounded-2xl p-7 sm:p-8 flex flex-col justify-between transition-all duration-200 hover:border-zinc-300 hover:shadow-md"
+                className="group relative bg-white/40 backdrop-blur-xs border border-zinc-200/80 rounded-2xl p-7 sm:p-8 flex flex-col justify-between transition-all duration-200 hover:border-zinc-300 hover:bg-white/70 hover:shadow-md"
               >
                 <div>
                   {/* Icon Container: Inverted Dark Mode Style (Dark background with white icon) */}

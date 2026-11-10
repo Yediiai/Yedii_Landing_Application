@@ -152,7 +152,7 @@ export function SocialProof() {
   ];
 
   return (
-    <section className="py-12 md:py-16 my-2 border-y border-[#E8E9EC] bg-white overflow-hidden">
+    <section className="py-12 md:py-16 my-2 border-y border-zinc-200/60 bg-transparent overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Brand Logos Header */}
         <p className="text-center text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-[#8A9099] mb-8">
@@ -163,8 +163,8 @@ export function SocialProof() {
       {/* Infinite Continuous Marquee Ticker */}
       <div className="relative w-full overflow-hidden py-3">
         {/* Left & Right gradient edge masks for seamless entry & exit */}
-        <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-24 sm:w-44 bg-gradient-to-r from-white to-transparent" />
-        <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-24 sm:w-44 bg-gradient-to-l from-white to-transparent" />
+        <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-24 sm:w-44 bg-gradient-to-r from-[#f7f7f5] to-transparent" />
+        <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-24 sm:w-44 bg-gradient-to-l from-[#f7f7f5] to-transparent" />
 
         {/* Marquee Track */}
         <div className="animate-marquee flex items-center gap-10 sm:gap-16">
@@ -186,18 +186,18 @@ export function SocialProof() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* 14M+ Metric Cards Grid (Clean Aligned White Cards with Fixed Formatting) */}
-        <div className="mt-12 pt-8 border-t border-[#F0F1F3] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+        {/* 14M+ Metric Cards Grid (Clean Aligned Cards with FlowBackground Transparency) */}
+        <div className="mt-12 pt-8 border-t border-zinc-200/60 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
           {stats.map((s) => {
             const Icon = s.icon;
             return (
               <div
                 key={s.id}
-                className="bg-[#FAFAFA] hover:bg-white rounded-[14px] border border-[#E8E9EC] hover:border-[#D0D3D9] p-5 sm:p-5.5 flex flex-col justify-between transition-all duration-200 shadow-2xs hover:shadow-xs group"
+                className="bg-white/40 backdrop-blur-xs hover:bg-white/70 rounded-[14px] border border-zinc-200/80 hover:border-zinc-300 p-5 sm:p-5.5 flex flex-col justify-between transition-all duration-200 shadow-2xs hover:shadow-xs group"
               >
-                {/* Card Top: Icon & Badge (Background and border removed, keeping only clean text) */}
+                {/* Card Top: Icon & Badge */}
                 <div className="flex items-center justify-between mb-4">
-                  <div className="w-9 h-9 rounded-[10px] bg-white border border-[#E8E9EC] flex items-center justify-center text-[#141C2E] shadow-2xs group-hover:scale-105 transition-transform">
+                  <div className="w-9 h-9 rounded-[10px] bg-white/80 border border-zinc-200/80 flex items-center justify-center text-[#141C2E] shadow-2xs group-hover:scale-105 transition-transform">
                     <Icon className="w-4 h-4 text-[#141C2E]" />
                   </div>
                   <span className={`text-[11.5px] font-semibold tracking-tight ${s.textColor}`}>

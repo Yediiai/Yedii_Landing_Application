@@ -76,7 +76,7 @@ export function FaqSection() {
   };
 
   return (
-    <section className="py-16 md:py-24 bg-white border-t border-[#E5E7EB]">
+    <section className="py-16 md:py-24 bg-transparent border-t border-[#E5E7EB]">
       {/* FAQ Schema for SEO rich snippets */}
       <script
         type="application/ld+json"

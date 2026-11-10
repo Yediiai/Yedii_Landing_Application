@@ -9,10 +9,7 @@ export function Hero() {
     `${process.env.NEXT_PUBLIC_APP_BASE_URL || "https://app.yedii.com"}/signup`;
 
   return (
-    <section className="relative pt-24 pb-8 md:pt-32 md:pb-10 overflow-hidden bg-white">
-      {/* Background radial gradients for subtle glow */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-gradient-to-tr from-zinc-200/50 via-zinc-100/60 to-transparent blur-3xl -z-10 pointer-events-none rounded-full" />
-      <div className="absolute inset-0 bg-grid-pattern opacity-40 -z-20 pointer-events-none" />
+    <section className="relative pt-24 pb-8 md:pt-32 md:pb-10 overflow-hidden bg-transparent">
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         {/* Hero Main Headline (Formatted in two clean lines) */}

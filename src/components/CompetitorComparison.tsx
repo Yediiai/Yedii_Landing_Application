@@ -229,24 +229,24 @@ export function CompetitorComparison() {
     <section
       id="competitor-comparison"
       aria-labelledby="comparison-heading"
-      className="w-full bg-white dark:bg-zinc-950 py-16 sm:py-20 md:py-24 text-[#111111] dark:text-zinc-100 font-sans border-t border-[#E5E7EB] dark:border-zinc-800"
+      className="w-full bg-transparent py-16 sm:py-20 md:py-24 text-zinc-950 font-sans border-t border-[#E5E7EB]"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* 1. Heading & One-line Subheading */}
         <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
           <h2
             id="comparison-heading"
-            className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#111111] dark:text-white"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-zinc-950 font-serif"
           >
             See how Yedii compares
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-zinc-600 dark:text-zinc-400 font-normal">
+          <p className="mt-4 text-base sm:text-lg text-zinc-700 font-normal">
             Transparent pricing, model choice, and setup in minutes.
           </p>
         </div>
 
         {/* 2. Comparison Table (Responsive with self-contained overflow scroll) */}
-        <div className="w-full max-w-full overflow-hidden rounded-xl border border-[#E5E7EB] dark:border-zinc-800 shadow-xs bg-white dark:bg-zinc-900">
+        <div className="w-full max-w-full overflow-hidden rounded-xl border border-[#E5E7EB] dark:border-zinc-800 shadow-xs bg-white/70 backdrop-blur-xs dark:bg-zinc-900">
           <div className="overflow-x-auto w-full max-w-full">
             <table className="min-w-[800px] w-full border-separate border-spacing-0 text-left">
               <caption className="sr-only">
@@ -445,7 +445,7 @@ export function CompetitorComparison() {
         </div>
 
         {/* 4. Small Footnote */}
-        <p className="mt-8 text-xs text-zinc-500 dark:text-zinc-400 text-center sm:text-left">
+        <p className="mt-8 text-xs text-zinc-500 text-center sm:text-left">
           Competitor pricing as of November 2026. Based on publicly available information.
         </p>
       </div>

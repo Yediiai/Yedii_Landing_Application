@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import { FlowBackground } from "@/components/FlowBackground";
 import { SmoothScrollProvider } from "@/components/SmoothScrollProvider";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { CookieConsentManager } from "@/components/legal/CookieConsentManager";
@@ -129,10 +130,13 @@ export default function RootLayout({
       </head>
       <body
         suppressHydrationWarning
-        className={`${inter.className} min-h-full flex flex-col font-sans antialiased text-[#141C2E] bg-white`}
+        className={`${inter.className} min-h-full flex flex-col font-sans antialiased text-[#141C2E] bg-[#f7f7f5]`}
       >
+        <FlowBackground />
         <SmoothScrollProvider>
-          {children}
+          <div className="relative z-10 flex-1 flex flex-col">
+            {children}
+          </div>
           <Suspense fallback={null}>
             <CookieConsentManager />
           </Suspense>
