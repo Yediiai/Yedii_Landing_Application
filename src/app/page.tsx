@@ -34,7 +34,6 @@ export const metadata: Metadata = {
 import { Hero } from "@/components/Hero";
 import { InteractivePlayground } from "@/components/InteractivePlayground";
 import { SocialProof } from "@/components/SocialProof";
-import { FeaturesBento } from "@/components/FeaturesBento";
 import { WhyChooseYediiSection } from "@/components/WhyChooseYediiSection";
 import { ComparisonSection } from "@/components/comparison/ComparisonSection";
 import { Testimonials } from "@/components/Testimonials";
@@ -57,9 +56,6 @@ export default function Home() {
 
         {/* Social Proof Marquee & Platform Statistics */}
         <SocialProof />
-
-        {/* Bento Grid Feature Breakdown */}
-        <FeaturesBento />
 
         {/* Why Teams Choose Yedii (6 Core Differentiator Cards) */}
         <WhyChooseYediiSection />
