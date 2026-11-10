@@ -21,7 +21,7 @@ export function ProductMegaMenu({
     <div
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      className="absolute top-full left-1/2 -translate-x-1/2 pt-2.5 w-[640px] z-50 animate-in fade-in slide-in-from-top-1 duration-150"
+      className="absolute top-full left-0 pt-2.5 w-[640px] z-50 animate-in fade-in slide-in-from-top-1 duration-150"
       role="menu"
       aria-label="Product Mega Menu"
     >

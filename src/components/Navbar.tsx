@@ -106,24 +106,25 @@ export function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="flex items-center justify-between h-16">
-          {/* Left: Brand Logo & Name */}
-          <Link href="/" className="flex items-center gap-2 group cursor-pointer">
-            <Image
-              src="/images/Yedii.svg"
-              alt="Yedii Logo"
-              width={26}
-              height={26}
-              className="h-6.5 w-6.5 object-contain transition-transform group-hover:scale-105"
-              priority
-            />
-            <span className="font-bold text-[19px] tracking-tight text-[#111827] group-hover:text-black">
-              Yedii
-            </span>
-          </Link>
+          {/* Left: Brand Logo & Desktop Nav Links grouped on the left */}
+          <div className="flex items-center gap-6 lg:gap-8">
+            <Link href="/" className="flex items-center gap-2 group cursor-pointer shrink-0">
+              <Image
+                src="/images/Yedii.svg"
+                alt="Yedii Logo"
+                width={26}
+                height={26}
+                className="h-6.5 w-6.5 object-contain transition-transform group-hover:scale-105"
+                priority
+              />
+              <span className="font-bold text-[19px] tracking-tight text-[#111827] group-hover:text-black">
+                Yedii
+              </span>
+            </Link>
 
-          {/* Center: Desktop Nav Links */}
-          <nav className="hidden md:flex items-center gap-1 lg:gap-2">
-            {/* Product Trigger */}
+            {/* Nav Links on the left */}
+            <nav className="hidden md:flex items-center gap-1 lg:gap-2">
+              {/* Product Trigger */}
             <div
               className="relative"
               onMouseEnter={handleProductMouseEnter}
@@ -178,7 +179,7 @@ export function Navbar() {
                 <div
                   onMouseEnter={handleResourcesMouseEnter}
                   onMouseLeave={handleResourcesMouseLeave}
-                  className="absolute top-full left-1/2 -translate-x-1/2 pt-2.5 w-[300px] animate-in fade-in slide-in-from-top-1 duration-150"
+                  className="absolute top-full left-0 pt-2.5 w-[300px] animate-in fade-in slide-in-from-top-1 duration-150"
                 >
                   <div className="rounded-none p-2.5 bg-white border border-[#E5E7EB] shadow-[0_20px_50px_-10px_rgba(0,0,0,0.12),0_4px_12px_rgba(0,0,0,0.04)] space-y-1">
                     <Link
@@ -286,6 +287,7 @@ export function Navbar() {
               Customers
             </Link>
           </nav>
+        </div>
 
           {/* Right: Log In & Sign Up Button */}
           <div className="hidden md:flex items-center gap-3">
