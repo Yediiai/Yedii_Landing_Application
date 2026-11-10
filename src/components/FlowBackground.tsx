@@ -5,7 +5,7 @@ import React, { useEffect, useRef } from "react";
 export interface FlowBackgroundProps {
   /** Background color (default: #f7f7f5) */
   backgroundColor?: string;
-  /** Flow line color: rgb string or hex (default: rgb(22, 190, 150)) */
+  /** Flow line color: rgb string or hex (default: rgb(0, 0, 0)) */
   lineColor?: string;
   /** Grid line color (default: rgba(0, 0, 0, 0.08)) */
   gridColor?: string;
@@ -20,11 +20,11 @@ export interface FlowBackgroundProps {
 }
 
 /**
- * Parses color strings into [r, g, b] array. Supports hex (#16be96), rgb(...), rgba(...), or "22, 190, 150".
+ * Parses color strings into [r, g, b] array. Supports hex (#000000), rgb(...), rgba(...), or "0, 0, 0".
  */
 function parseRgb(
   color?: string,
-  fallback: [number, number, number] = [22, 190, 150]
+  fallback: [number, number, number] = [0, 0, 0]
 ): [number, number, number] {
   if (!color) return fallback;
   const trimmed = color.trim();
@@ -45,13 +45,14 @@ function parseRgb(
  * Renders a lightweight, high-DPI animated canvas background matching the reference spec:
  * - Off-white (#f7f7f5) background.
  * - 48px grid lines that fade from the top-left towards the center/edges.
- * - 26 teal ribbon lines (rgb 22,190,150) flowing and fanning across the middle.
+ * - 26 pure black ribbon lines (rgb 0, 0, 0) flowing and fanning across the middle.
+ * - Center lines are most opaque (max about 55% opacity); top and bottom edges fade to almost transparent.
  * - Fades out toward the right edge.
  * - Pauses on tab blur and respects prefers-reduced-motion.
  */
 export function FlowBackground({
   backgroundColor = "#f7f7f5",
-  lineColor = "rgb(22, 190, 150)",
+  lineColor = "rgb(0, 0, 0)",
   gridColor = "rgba(0, 0, 0, 0.08)",
   gridSize = 48,
   lineCount = 26,
@@ -67,7 +68,7 @@ export function FlowBackground({
     const ctx = canvas.getContext("2d", { alpha: false });
     if (!ctx) return;
 
-    const [lr, lg, lb] = parseRgb(lineColor, [22, 190, 150]);
+    const [lr, lg, lb] = parseRgb(lineColor, [0, 0, 0]);
     const [gr, gg, gb] = parseRgb(gridColor, [0, 0, 0]);
 
     let width = 0;
@@ -141,16 +142,17 @@ export function FlowBackground({
       for (let i = 0; i < lineCount; i++) {
         const norm = lineCount > 1 ? i / (lineCount - 1) : 0.5; // 0 (top) to 1 (bottom)
 
-        // Center lines are the most opaque; top & bottom edges fade to almost transparent
+        // Lines in the middle of the band are the most opaque (max about 55% opacity);
+        // lines at the top and bottom edges fade to almost transparent.
         const centerWeight = Math.sin(norm * Math.PI);
-        const lineAlpha = 0.05 + 0.65 * Math.pow(centerWeight, 1.1);
+        const lineAlpha = 0.03 + 0.52 * Math.pow(centerWeight, 1.15);
 
         // Horizontal gradient fading toward right edge
         const lineGrad = ctx.createLinearGradient(0, 0, width, 0);
-        lineGrad.addColorStop(0, `rgba(${lr}, ${lg}, ${lb}, ${lineAlpha * 0.8})`);
+        lineGrad.addColorStop(0, `rgba(${lr}, ${lg}, ${lb}, ${lineAlpha * 0.85})`);
         lineGrad.addColorStop(0.2, `rgba(${lr}, ${lg}, ${lb}, ${lineAlpha})`);
         lineGrad.addColorStop(0.6, `rgba(${lr}, ${lg}, ${lb}, ${lineAlpha * 0.85})`);
-        lineGrad.addColorStop(0.8, `rgba(${lr}, ${lg}, ${lb}, ${lineAlpha * 0.45})`);
+        lineGrad.addColorStop(0.82, `rgba(${lr}, ${lg}, ${lb}, ${lineAlpha * 0.4})`);
         lineGrad.addColorStop(0.95, `rgba(${lr}, ${lg}, ${lb}, 0)`);
         lineGrad.addColorStop(1, `rgba(${lr}, ${lg}, ${lb}, 0)`);
 
