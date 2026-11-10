@@ -129,7 +129,7 @@ export default function RootLayout({
       </head>
       <body
         suppressHydrationWarning
-        className={`${inter.className} min-h-full flex flex-col font-sans antialiased text-[#141C2E] bg-[#FAFAFA]`}
+        className={`${inter.className} min-h-full flex flex-col font-sans antialiased text-[#141C2E] bg-white`}
       >
         <SmoothScrollProvider>
           {children}
