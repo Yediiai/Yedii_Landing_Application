@@ -103,10 +103,6 @@ export function Testimonials() {
             </p>
           </div>
 
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-[#E5E7EB] text-xs font-medium text-[#4B5563] shadow-2xs self-start md:self-auto shrink-0">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span>Hover card to pause</span>
-          </div>
         </div>
       </div>
 
