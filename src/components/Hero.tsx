@@ -36,7 +36,7 @@ export function Hero() {
           <span>and</span>
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white border border-zinc-200/80 text-zinc-800 font-medium text-xs shadow-xs hover:border-zinc-300 transition-colors">
             <Bot className="w-3 h-3 text-zinc-700" />
-            Human-in-the-Loop Inbox
+            Inbox
           </span>
         </div>
 
