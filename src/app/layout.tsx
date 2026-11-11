@@ -121,8 +121,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      data-scroll-behavior="smooth"
-      className={`${inter.variable} ${jetbrainsMono.variable} scroll-smooth h-full antialiased`}
+      className={`${inter.variable} ${jetbrainsMono.variable} antialiased`}
     >
       <head>
         <JsonLd data={organizationSchema} />
@@ -130,7 +129,7 @@ export default function RootLayout({
       </head>
       <body
         suppressHydrationWarning
-        className={`${inter.className} min-h-full flex flex-col font-sans antialiased text-[#141C2E] bg-[#f7f7f5]`}
+        className={`${inter.className} min-h-screen flex flex-col font-sans antialiased text-[#141C2E] bg-[#f7f7f5]`}
       >
         <FlowBackground />
         <SmoothScrollProvider>

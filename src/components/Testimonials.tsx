@@ -117,7 +117,7 @@ export function Testimonials() {
           {marqueeReviews.map((rev, idx) => (
             <div
               key={`${rev.name}-${idx}`}
-              className="w-[340px] sm:w-[380px] md:w-[420px] shrink-0 bg-white/70 backdrop-blur-xs rounded-[18px] border border-[#E5E7EB] p-6 sm:p-7 flex flex-col justify-between shadow-[0_1px_3px_rgba(0,0,0,0.03)] hover:shadow-lg hover:border-[#D1D5DB] transition-all"
+              className="w-[340px] sm:w-[380px] md:w-[420px] shrink-0 bg-white/95 rounded-[18px] border border-[#E5E7EB] p-6 sm:p-7 flex flex-col justify-between shadow-[0_1px_3px_rgba(0,0,0,0.03)] hover:shadow-lg hover:border-[#D1D5DB] transition-all"
             >
               <div>
                 {/* Header: User Avatar + Name + Top Right Badge */}

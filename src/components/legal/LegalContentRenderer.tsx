@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { Mail, ArrowRight, ShieldCheck, FileText } from "lucide-react";
+import { ShieldCheck, FileText } from "lucide-react";
 import { LegalDocumentItem, getRelatedLegalDocuments } from "@/data/legal";
 
 interface LegalContentRendererProps {
@@ -240,37 +240,6 @@ export function LegalContentRenderer({ document }: LegalContentRendererProps) {
       <article className="prose prose-zinc max-w-none">
         {renderFormattedMarkdown(document.content)}
       </article>
-
-      {/* Official Legal Inquiries Card */}
-      <div className="p-6 rounded-2xl border border-zinc-200 bg-white shadow-xs space-y-4">
-        <div className="flex items-center gap-3">
-          <div className="p-2.5 rounded-xl bg-zinc-100 text-zinc-900">
-            <Mail className="w-5 h-5" />
-          </div>
-          <div>
-            <h4 className="text-sm font-semibold text-zinc-900">
-              Questions Regarding This Document?
-            </h4>
-            <p className="text-xs text-zinc-500">
-              Our legal and data protection officers are available to clarify clauses or review enterprise requirements.
-            </p>
-          </div>
-        </div>
-
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-2 border-t border-zinc-100 text-xs">
-          <div className="space-y-0.5">
-            <div className="text-zinc-500">Legal Department: <strong className="text-zinc-800">legal@yedii.com</strong></div>
-            <div className="text-zinc-500">Data Protection Officer: <strong className="text-zinc-800">dpo@yedii.com</strong></div>
-          </div>
-          <a
-            href="mailto:legal@yedii.com"
-            className="inline-flex items-center justify-center gap-1.5 px-4 py-2 text-xs font-semibold text-white bg-black hover:bg-zinc-800 rounded-lg transition-colors cursor-pointer"
-          >
-            Contact Legal Team
-            <ArrowRight className="w-3.5 h-3.5" />
-          </a>
-        </div>
-      </div>
 
       {/* Related Legal Documents */}
       {related.length > 0 && (

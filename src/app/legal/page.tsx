@@ -1,7 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Scale, Shield, FileText, Lock, Cpu, ArrowRight, CheckCircle2, Search } from "lucide-react";
+import { Scale, Shield, FileText, Lock, Cpu, ArrowRight, Search } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { ALL_LEGAL_DOCUMENTS, LEGAL_CATEGORIES } from "@/data/legal";
@@ -45,11 +45,6 @@ export default function LegalHubPage() {
         {/* Hero Section */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-12 border-b border-zinc-200">
           <div className="max-w-3xl space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-zinc-100 text-zinc-800 border border-zinc-200">
-              <Scale className="w-3.5 h-3.5" />
-              <span>Trust, Governance &amp; Compliance</span>
-            </div>
-
             <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-zinc-900 leading-[1.15]">
               Yedii Legal &amp; Compliance Hub
             </h1>
@@ -57,38 +52,6 @@ export default function LegalHubPage() {
             <p className="text-base sm:text-lg text-zinc-600 leading-relaxed">
               We hold our enterprise AI customer support platform to the highest standards of data security, contractual clarity, and global privacy compliance. Review all 17 public policies and agreements below.
             </p>
-          </div>
-
-          {/* Trust Guarantees */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10 pt-8 border-t border-zinc-100">
-            <div className="flex items-start gap-2.5">
-              <CheckCircle2 className="w-4 h-4 text-zinc-900 shrink-0 mt-0.5" />
-              <div className="text-xs">
-                <strong className="text-zinc-900 block font-semibold">Zero AI Model Training</strong>
-                <span className="text-zinc-500">Your customer data is never used to train foundation models.</span>
-              </div>
-            </div>
-            <div className="flex items-start gap-2.5">
-              <CheckCircle2 className="w-4 h-4 text-zinc-900 shrink-0 mt-0.5" />
-              <div className="text-xs">
-                <strong className="text-zinc-900 block font-semibold">AES-256 Encryption</strong>
-                <span className="text-zinc-500">End-to-end TLS 1.3 in transit and AES-256 at rest across MongoDB &amp; Qdrant.</span>
-              </div>
-            </div>
-            <div className="flex items-start gap-2.5">
-              <CheckCircle2 className="w-4 h-4 text-zinc-900 shrink-0 mt-0.5" />
-              <div className="text-xs">
-                <strong className="text-zinc-900 block font-semibold">DPDPA 2023 &amp; GDPR</strong>
-                <span className="text-zinc-500">Statutory alignment with India DPDPA and European GDPR Art. 28.</span>
-              </div>
-            </div>
-            <div className="flex items-start gap-2.5">
-              <CheckCircle2 className="w-4 h-4 text-zinc-900 shrink-0 mt-0.5" />
-              <div className="text-xs">
-                <strong className="text-zinc-900 block font-semibold">Merchant of Record</strong>
-                <span className="text-zinc-500">Global billing, tax remittance, and invoicing powered by Paddle.</span>
-              </div>
-            </div>
           </div>
         </section>
 
@@ -115,12 +78,6 @@ export default function LegalHubPage() {
                       className="group p-5 rounded-2xl border border-zinc-200 bg-white hover:border-black hover:shadow-md transition-all flex flex-col justify-between space-y-4"
                     >
                       <div className="space-y-2">
-                        <div className="flex items-center justify-between text-[11px] text-zinc-500 font-mono">
-                          <span>v{doc.initialVersion}</span>
-                          <span className="px-2 py-0.5 rounded bg-zinc-100 text-zinc-700 font-sans">
-                            {doc.jurisdiction}
-                          </span>
-                        </div>
                         <h3 className="text-base font-bold text-zinc-900 group-hover:text-black transition-colors">
                           {doc.title}
                         </h3>
@@ -139,27 +96,6 @@ export default function LegalHubPage() {
               </div>
             );
           })}
-        </section>
-
-        {/* Need Custom Review Banner */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="p-8 sm:p-10 rounded-3xl bg-black text-white flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-            <div className="space-y-2 max-w-2xl">
-              <h3 className="text-2xl font-bold tracking-tight">
-                Enterprise Custom Legal Review
-              </h3>
-              <p className="text-sm text-zinc-400 leading-relaxed">
-                Enterprise plans support custom legal review, security questionnaire assistance, bilateral non-disclosure agreements, and tailored data residency requirements.
-              </p>
-            </div>
-            <a
-              href="mailto:enterprise@yedii.com?subject=Enterprise%20Legal%20Agreement%20Inquiry"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-black font-semibold text-sm hover:bg-zinc-200 transition-colors shrink-0"
-            >
-              Contact Enterprise Legal
-              <ArrowRight className="w-4 h-4" />
-            </a>
-          </div>
         </section>
       </main>
 

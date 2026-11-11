@@ -26,7 +26,6 @@ export interface CompetitorCardData {
   id: string;
   name: string;
   slug: string;
-  initials: string;
   headlineStat: string;
   statLabel: string;
   description: string; // Strictly max 110 characters, fits naturally without line-clamp
@@ -107,7 +106,6 @@ export const COMPETITOR_CARDS: CompetitorCardData[] = [
     id: "intercom",
     name: "Intercom",
     slug: "yedii-vs-intercom",
-    initials: "IN",
     headlineStat: "$0.99 / resolution",
     statLabel: "Intercom AI cost",
     description: "Pay only for actual tokens consumed, avoiding steep and unpredictable per-resolution surcharges.",
@@ -120,7 +118,6 @@ export const COMPETITOR_CARDS: CompetitorCardData[] = [
     id: "zendesk",
     name: "Zendesk",
     slug: "yedii-vs-zendesk",
-    initials: "ZD",
     headlineStat: "$50 / agent / mo",
     statLabel: "Zendesk AI cost",
     description: "Deploy in minutes with zero seat taxes instead of paying $50/agent monthly add-on fees.",
@@ -133,7 +130,6 @@ export const COMPETITOR_CARDS: CompetitorCardData[] = [
     id: "freshdesk",
     name: "Freshdesk",
     slug: "yedii-vs-freshdesk",
-    initials: "FD",
     headlineStat: "$100 / 1,000 sessions",
     statLabel: "Freshdesk AI cost",
     description: "Get transparent token-based pricing and multi-model choice instead of capped session bundles.",
@@ -146,7 +142,6 @@ export const COMPETITOR_CARDS: CompetitorCardData[] = [
     id: "tidio",
     name: "Tidio",
     slug: "yedii-vs-tidio",
-    initials: "TI",
     headlineStat: "50–200 convo cap",
     statLabel: "Tidio AI cost",
     description: "Run enterprise-grade multi-model RAG without strict 50–200 conversation monthly quota limits.",
@@ -245,9 +240,9 @@ export function CompetitorComparison() {
           </p>
         </div>
 
-        {/* 2. Comparison Table (Responsive with self-contained overflow scroll) */}
-        <div className="w-full max-w-full overflow-hidden rounded-xl border border-[#E5E7EB] dark:border-zinc-800 shadow-xs bg-white/70 backdrop-blur-xs dark:bg-zinc-900">
-          <div className="overflow-x-auto w-full max-w-full">
+        {/* 2. Comparison Table (Responsive with self-contained horizontal overflow scroll) */}
+        <div className="w-full max-w-full overflow-hidden rounded-xl border border-[#E5E7EB] dark:border-zinc-800 shadow-xs bg-white/95 dark:bg-zinc-900">
+          <div className="overflow-x-auto overflow-y-hidden w-full max-w-full">
             <table className="min-w-[800px] w-full border-separate border-spacing-0 text-left">
               <caption className="sr-only">
                 Detailed feature and pricing comparison between Yedii and competitor customer support platforms
@@ -255,10 +250,10 @@ export function CompetitorComparison() {
 
               <thead>
                 <tr>
-                  {/* Sticky Top-Left Header: Feature */}
+                  {/* Sticky Left Header: Feature */}
                   <th
                     scope="col"
-                    className="sticky top-0 left-0 z-30 py-4 px-5 text-[15px] font-semibold text-[#111111] dark:text-zinc-100 bg-zinc-50 dark:bg-zinc-900 border-b border-r border-[#E5E7EB] dark:border-zinc-800 min-w-[240px] whitespace-nowrap"
+                    className="sticky left-0 z-20 py-4 px-5 text-[15px] font-semibold text-[#111111] dark:text-zinc-100 bg-zinc-50 dark:bg-zinc-900 border-b border-r border-[#E5E7EB] dark:border-zinc-800 min-w-[240px] whitespace-nowrap"
                   >
                     Feature
                   </th>
@@ -270,16 +265,9 @@ export function CompetitorComparison() {
                         <th
                           key={col.id}
                           scope="col"
-                          className="sticky top-0 z-20 py-4 px-5 text-left bg-zinc-100/90 dark:bg-white/[0.08] border-t-2 border-l-2 border-r-2 border-zinc-900 dark:border-white border-b border-zinc-200 dark:border-white/20 min-w-[190px]"
+                          className="py-4 px-5 text-left font-bold text-base text-[#111111] dark:text-white bg-zinc-100/90 dark:bg-white/[0.08] border-t-2 border-l-2 border-r-2 border-zinc-900 dark:border-white border-b border-zinc-200 dark:border-white/20 min-w-[190px] whitespace-nowrap"
                         >
-                          <div className="flex items-center gap-2">
-                            <span className="font-bold text-base text-[#111111] dark:text-white">
-                              {col.name}
-                            </span>
-                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-zinc-900 text-white dark:bg-white dark:text-black border border-zinc-900 dark:border-white">
-                              Yedii
-                            </span>
-                          </div>
+                          {col.name}
                         </th>
                       );
                     }
@@ -288,7 +276,7 @@ export function CompetitorComparison() {
                       <th
                         key={col.id}
                         scope="col"
-                        className="sticky top-0 z-20 py-4 px-5 text-left font-semibold text-base text-zinc-800 dark:text-zinc-200 bg-zinc-50 dark:bg-zinc-900 border-b border-[#E5E7EB] dark:border-zinc-800 min-w-[170px] whitespace-nowrap"
+                        className="py-4 px-5 text-left font-semibold text-base text-zinc-800 dark:text-zinc-200 bg-zinc-50 dark:bg-zinc-900 border-b border-[#E5E7EB] dark:border-zinc-800 min-w-[170px] whitespace-nowrap"
                       >
                         {col.name}
                       </th>
@@ -364,29 +352,10 @@ export function CompetitorComparison() {
               aria-labelledby={`card-title-${card.id}`}
               className="flex flex-col h-full bg-white dark:bg-zinc-900 border border-[#E5E7EB] dark:border-zinc-800 rounded-xl p-6 shadow-2xs hover:shadow-md transition-shadow motion-reduce:transition-none"
             >
-              {/* Logo Pair */}
-              <div className="flex items-center gap-2">
-                <span
-                  className="flex items-center justify-center w-8 h-8 rounded-lg bg-[#111111] text-white dark:bg-white dark:text-[#111111] font-bold text-xs shadow-xs"
-                  aria-hidden="true"
-                >
-                  Y
-                </span>
-                <span className="text-xs font-semibold text-zinc-400 dark:text-zinc-500 uppercase tracking-wider">
-                  vs
-                </span>
-                <span
-                  className="flex items-center justify-center w-8 h-8 rounded-lg bg-zinc-100 text-zinc-800 dark:bg-zinc-800 dark:text-zinc-200 font-bold text-xs border border-zinc-200 dark:border-zinc-700"
-                  aria-hidden="true"
-                >
-                  {card.initials}
-                </span>
-              </div>
-
               {/* Title */}
               <h3
                 id={`card-title-${card.id}`}
-                className="text-xl font-bold text-[#111111] dark:text-white mt-4 tracking-tight"
+                className="text-xl font-bold text-[#111111] dark:text-white tracking-tight"
               >
                 Yedii vs {card.name}
               </h3>
