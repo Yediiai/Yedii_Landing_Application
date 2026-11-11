@@ -161,7 +161,7 @@ function CellContent({ cell }: { cell?: CellValue }) {
   if (!cell || cell.type === "todo") {
     return (
       <span
-        className="text-zinc-400 dark:text-zinc-500 font-medium select-none"
+        className="text-zinc-400 font-medium select-none"
         aria-label="Information not available"
       >
         {/* Data not verified / public information not available; rendered as em dash per specification */}
@@ -174,7 +174,7 @@ function CellContent({ cell }: { cell?: CellValue }) {
   if (cell.type === "boolean") {
     if (cell.value) {
       return (
-        <span className="inline-flex items-center gap-1.5 text-zinc-900 dark:text-white">
+        <span className="inline-flex items-center gap-1.5 text-zinc-900">
           <svg
             className="w-5 h-5 shrink-0"
             viewBox="0 0 20 20"
@@ -192,7 +192,7 @@ function CellContent({ cell }: { cell?: CellValue }) {
       );
     }
     return (
-      <span className="inline-flex items-center gap-1.5 text-zinc-400 dark:text-zinc-500">
+      <span className="inline-flex items-center gap-1.5 text-zinc-400">
         <svg
           className="w-5 h-5 shrink-0"
           viewBox="0 0 20 20"
@@ -209,7 +209,7 @@ function CellContent({ cell }: { cell?: CellValue }) {
   }
 
   return (
-    <span className="text-[15px] leading-relaxed text-[#111111] dark:text-zinc-200">
+    <span className="text-[15px] leading-relaxed text-[#111111]">
       {cell.text}
     </span>
   );
@@ -241,7 +241,7 @@ export function CompetitorComparison() {
         </div>
 
         {/* 2. Comparison Table (Responsive with self-contained horizontal overflow scroll) */}
-        <div className="w-full max-w-full overflow-hidden rounded-xl border border-[#E5E7EB] dark:border-zinc-800 shadow-xs bg-white/95 dark:bg-zinc-900">
+        <div className="w-full max-w-full overflow-hidden rounded-xl border border-[#E5E7EB] shadow-xs bg-white">
           <div className="overflow-x-auto overflow-y-hidden w-full max-w-full">
             <table className="min-w-[800px] w-full border-separate border-spacing-0 text-left">
               <caption className="sr-only">
@@ -253,7 +253,7 @@ export function CompetitorComparison() {
                   {/* Sticky Left Header: Feature */}
                   <th
                     scope="col"
-                    className="sticky left-0 z-20 py-4 px-5 text-[15px] font-semibold text-[#111111] dark:text-zinc-100 bg-zinc-50 dark:bg-zinc-900 border-b border-r border-[#E5E7EB] dark:border-zinc-800 min-w-[240px] whitespace-nowrap"
+                    className="sticky left-0 z-20 py-4 px-5 text-[15px] font-semibold text-[#111111] bg-zinc-50 border-b border-r border-[#E5E7EB] min-w-[240px] whitespace-nowrap"
                   >
                     Feature
                   </th>
@@ -265,7 +265,7 @@ export function CompetitorComparison() {
                         <th
                           key={col.id}
                           scope="col"
-                          className="py-4 px-5 text-left font-bold text-base text-[#111111] dark:text-white bg-zinc-100/90 dark:bg-white/[0.08] border-t-2 border-l-2 border-r-2 border-zinc-900 dark:border-white border-b border-zinc-200 dark:border-white/20 min-w-[190px] whitespace-nowrap"
+                          className="py-4 px-5 text-left font-bold text-base text-[#111111] bg-zinc-100/90 border-t-2 border-l-2 border-r-2 border-zinc-900 border-b border-zinc-200 min-w-[190px] whitespace-nowrap"
                         >
                           {col.name}
                         </th>
@@ -276,7 +276,7 @@ export function CompetitorComparison() {
                       <th
                         key={col.id}
                         scope="col"
-                        className="py-4 px-5 text-left font-semibold text-base text-zinc-800 dark:text-zinc-200 bg-zinc-50 dark:bg-zinc-900 border-b border-[#E5E7EB] dark:border-zinc-800 min-w-[170px] whitespace-nowrap"
+                        className="py-4 px-5 text-left font-semibold text-base text-zinc-800 bg-zinc-50 border-b border-[#E5E7EB] min-w-[170px] whitespace-nowrap"
                       >
                         {col.name}
                       </th>
@@ -292,13 +292,13 @@ export function CompetitorComparison() {
                   return (
                     <tr
                       key={row.id}
-                      className="transition-colors hover:bg-zinc-50/70 dark:hover:bg-zinc-800/40 motion-reduce:transition-none"
+                      className="transition-colors hover:bg-zinc-50/70 motion-reduce:transition-none"
                     >
                       {/* Sticky First Column: Feature Name */}
                       <th
                         scope="row"
-                        className={`sticky left-0 z-10 py-4 px-5 text-left font-medium text-[15px] text-[#111111] dark:text-zinc-100 bg-white dark:bg-zinc-900 border-r border-[#E5E7EB] dark:border-zinc-800 min-w-[240px] ${
-                          isLastRow ? "border-b-0" : "border-b border-[#E5E7EB] dark:border-zinc-800"
+                        className={`sticky left-0 z-10 py-4 px-5 text-left font-medium text-[15px] text-[#111111] bg-white border-r border-[#E5E7EB] min-w-[240px] ${
+                          isLastRow ? "border-b-0" : "border-b border-[#E5E7EB]"
                         }`}
                       >
                         {row.feature}
@@ -312,10 +312,10 @@ export function CompetitorComparison() {
                           return (
                             <td
                               key={col.id}
-                              className={`py-4 px-5 align-middle bg-zinc-50/80 dark:bg-white/[0.04] border-l-2 border-r-2 border-zinc-900 dark:border-white font-medium ${
+                              className={`py-4 px-5 align-middle bg-zinc-50/80 border-l-2 border-r-2 border-zinc-900 font-medium ${
                                 isLastRow
                                   ? "border-b-2"
-                                  : "border-b border-zinc-200 dark:border-white/10"
+                                  : "border-b border-zinc-200"
                               }`}
                             >
                               <CellContent cell={cell} />
@@ -329,7 +329,7 @@ export function CompetitorComparison() {
                             className={`py-4 px-5 align-middle ${
                               isLastRow
                                 ? "border-b-0"
-                                : "border-b border-[#E5E7EB] dark:border-zinc-800"
+                                : "border-b border-[#E5E7EB]"
                             }`}
                           >
                             <CellContent cell={cell} />
@@ -350,28 +350,28 @@ export function CompetitorComparison() {
             <article
               key={card.id}
               aria-labelledby={`card-title-${card.id}`}
-              className="flex flex-col h-full bg-white dark:bg-zinc-900 border border-[#E5E7EB] dark:border-zinc-800 rounded-xl p-6 shadow-2xs hover:shadow-md transition-shadow motion-reduce:transition-none"
+              className="flex flex-col h-full bg-white border border-[#E5E7EB] rounded-xl p-6 shadow-2xs hover:shadow-md transition-shadow motion-reduce:transition-none"
             >
               {/* Title */}
               <h3
                 id={`card-title-${card.id}`}
-                className="text-xl font-bold text-[#111111] dark:text-white tracking-tight"
+                className="text-xl font-bold text-[#111111] tracking-tight"
               >
                 Yedii vs {card.name}
               </h3>
 
               {/* Headline Stat & AI Cost Label */}
-              <div className="mt-4 pb-4 border-b border-[#E5E7EB] dark:border-zinc-800">
-                <span className="block text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+              <div className="mt-4 pb-4 border-b border-[#E5E7EB]">
+                <span className="block text-xs font-semibold uppercase tracking-wider text-zinc-500">
                   {card.statLabel}
                 </span>
-                <p className="text-2xl sm:text-3xl font-extrabold text-[#111111] dark:text-white tracking-tight mt-1">
+                <p className="text-2xl sm:text-3xl font-extrabold text-[#111111] tracking-tight mt-1">
                   {card.headlineStat}
                 </p>
               </div>
 
               {/* Description Sentence (strictly <= 110 chars without truncation) */}
-              <p className="mt-4 text-[15px] leading-relaxed text-zinc-600 dark:text-zinc-300">
+              <p className="mt-4 text-[15px] leading-relaxed text-zinc-600">
                 {card.description}
               </p>
 
@@ -380,10 +380,10 @@ export function CompetitorComparison() {
                 {card.bullets.map((bullet, idx) => (
                   <li
                     key={idx}
-                    className="flex items-start gap-2.5 text-[15px] leading-snug text-zinc-700 dark:text-zinc-200"
+                    className="flex items-start gap-2.5 text-[15px] leading-snug text-zinc-700"
                   >
                     <svg
-                      className="w-4 h-4 text-zinc-900 dark:text-white shrink-0 mt-0.5"
+                      className="w-4 h-4 text-zinc-900 shrink-0 mt-0.5"
                       viewBox="0 0 20 20"
                       fill="currentColor"
                       aria-hidden="true"
@@ -404,7 +404,7 @@ export function CompetitorComparison() {
               <div className="mt-auto pt-6">
                 <Link
                   href={`/compare/${card.slug}`}
-                  className="w-full inline-flex items-center justify-center px-4 py-2.5 rounded-lg text-[15px] font-semibold text-[#111111] dark:text-white bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 border border-[#E5E7EB] dark:border-zinc-700 transition-colors motion-reduce:transition-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-900 dark:focus-visible:outline-zinc-100"
+                  className="w-full inline-flex items-center justify-center px-4 py-2.5 rounded-lg text-[15px] font-semibold text-[#111111] bg-zinc-100 hover:bg-zinc-200 border border-[#E5E7EB] transition-colors motion-reduce:transition-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-900"
                 >
                   Compare Yedii vs {card.name} &rarr;
                 </Link>
