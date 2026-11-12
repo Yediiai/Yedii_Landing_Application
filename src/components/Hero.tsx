@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Bot, Zap, Layers, Check } from "lucide-react";
+import { ArrowRight, Zap, Check } from "lucide-react";
 
 export function Hero() {
   const signupUrl =
@@ -85,24 +85,6 @@ export function Hero() {
         <p className="mt-5 text-base sm:text-lg md:text-xl text-zinc-600 max-w-2xl mx-auto font-normal leading-relaxed">
           Yedii transforms your business knowledge into intelligent AI agents that guide customers, answer questions, and help resolve problems.
         </p>
-
-        {/* Capability Pills */}
-        <div className="mt-6 flex flex-wrap items-center justify-center gap-2 text-sm text-zinc-600 font-normal">
-          <span>powered by key systems like</span>
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white border border-zinc-200/80 text-zinc-800 font-medium text-xs shadow-xs hover:border-zinc-300 transition-colors">
-            <Zap className="w-3 h-3 text-amber-500" />
-            Instant Vector RAG
-          </span>
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white border border-zinc-200/80 text-zinc-800 font-medium text-xs shadow-xs hover:border-zinc-300 transition-colors">
-            <Layers className="w-3 h-3 text-blue-500" />
-            Multi-Model Orchestration
-          </span>
-          <span>and</span>
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white border border-zinc-200/80 text-zinc-800 font-medium text-xs shadow-xs hover:border-zinc-300 transition-colors">
-            <Bot className="w-3 h-3 text-zinc-700" />
-            Inbox
-          </span>
-        </div>
 
         {/* Hero Action Buttons */}
         <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
