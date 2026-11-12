@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Bot, Zap, Layers, PlayCircle, Check } from "lucide-react";
+import { ArrowRight, Bot, Zap, Layers, Check } from "lucide-react";
 
 export function Hero() {
   const signupUrl =
@@ -112,14 +112,6 @@ export function Hero() {
           >
             <span>Start Free Trial</span>
             <ArrowRight className="w-4 h-4 text-zinc-400 group-hover:translate-x-0.5 transition-transform" />
-          </Link>
-
-          <Link
-            href="/enterprise"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-[8px] bg-white text-[#141C2E] font-semibold text-xs sm:text-sm border border-[#E4E5E8] hover:bg-zinc-50 transition-all shadow-2xs active:scale-[0.99]"
-          >
-            <PlayCircle className="w-4 h-4 text-zinc-500" />
-            <span>Talk to Sales</span>
           </Link>
         </div>
 

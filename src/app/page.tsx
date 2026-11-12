@@ -35,7 +35,6 @@ import { Hero } from "@/components/Hero";
 import { InteractivePlayground } from "@/components/InteractivePlayground";
 import { SocialProof } from "@/components/SocialProof";
 import { WhyChooseYediiSection } from "@/components/WhyChooseYediiSection";
-import { ComparisonSection } from "@/components/comparison/ComparisonSection";
 import { Testimonials } from "@/components/Testimonials";
 import { PricingSection } from "@/components/PricingSection";
 import { FaqSection } from "@/components/FaqSection";
@@ -59,9 +58,6 @@ export default function Home() {
 
         {/* Why Teams Choose Yedii (6 Core Differentiator Cards) */}
         <WhyChooseYediiSection />
-
-        {/* Dedicated Competitor Comparison (Intercom, Zendesk, Freshdesk, Tidio) */}
-        <ComparisonSection />
 
         {/* Customer Success Stories & Reviews */}
         <Testimonials />
