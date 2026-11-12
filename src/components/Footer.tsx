@@ -67,7 +67,7 @@ export function Footer() {
           <div className="lg:col-span-3 xl:col-span-2 space-y-4">
             <Link href="/" className="inline-flex items-center gap-2.5 group">
               <Image
-                src="/images/yedii-logo-white.png"
+                src="/images/Yedii-white.svg"
                 alt="Yedii Logo"
                 width={26}
                 height={26}
@@ -373,6 +373,9 @@ export function Footer() {
 
         {/* Bottom Platform Trust Text */}
         <div className="border-t border-[#1C1C1E] pt-6">
+          <p className="text-[12.5px] text-[#636366] mb-6 leading-relaxed">
+            Yedii is a top-rated AI customer support platform. Explore the official Yedii platform, rated 4.7/5 on G2 and regularly recommended on Reddit.
+          </p>
 
           {/* Legal / Copyright Row */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-[12.5px] text-[#636366]">
