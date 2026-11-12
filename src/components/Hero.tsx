@@ -9,31 +9,49 @@ const LLM_PROVIDERS = [
     name: "OpenAI",
     src: "/images/providers/openai.svg",
     alt: "OpenAI",
-    positionClass: "lg:top-2 lg:left-1 xl:left-4",
+    positionClass: "lg:top-1 lg:left-2 xl:left-4",
   },
   {
     name: "Claude 3.5",
     src: "/images/providers/claude.svg",
     alt: "Claude",
-    positionClass: "lg:top-16 lg:right-2 xl:right-6",
+    positionClass: "lg:top-6 lg:right-2 xl:right-6",
+  },
+  {
+    name: "Mistral",
+    src: "/images/providers/mistral.svg",
+    alt: "Mistral",
+    positionClass: "lg:top-[25%] lg:left-[18%] xl:left-[20%]",
+  },
+  {
+    name: "Grok",
+    src: "/images/providers/grok.svg",
+    alt: "Grok",
+    positionClass: "lg:top-[30%] lg:right-0 xl:right-2",
   },
   {
     name: "DeepSeek",
     src: "/images/providers/deepseek.svg",
     alt: "DeepSeek",
-    positionClass: "lg:top-[44%] lg:left-6 xl:left-12",
+    positionClass: "lg:top-[52%] lg:left-0 xl:left-2",
   },
   {
-    name: "Gemini 1.5",
-    src: "/images/providers/gemini.svg",
-    alt: "Google Gemini",
-    positionClass: "lg:bottom-16 lg:right-0 xl:right-4",
+    name: "Cohere",
+    src: "/images/providers/cohere.svg",
+    alt: "Cohere",
+    positionClass: "lg:top-[57%] lg:right-[12%] xl:right-[16%]",
   },
   {
     name: "Llama 3.3",
     src: "/images/providers/meta.svg",
     alt: "Meta Llama",
-    positionClass: "lg:bottom-2 lg:left-2 xl:left-6",
+    positionClass: "lg:bottom-4 lg:left-6 xl:left-10",
+  },
+  {
+    name: "Gemini 1.5",
+    src: "/images/providers/gemini.svg",
+    alt: "Google Gemini",
+    positionClass: "lg:bottom-1 lg:right-1 xl:right-4",
   },
 ] as const;
 
@@ -47,9 +65,9 @@ export function Hero() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
           {/* Left Side: Hero Headline, Subtitle, CTA & Trust Badges */}
-          <div className="lg:col-span-8 text-center lg:text-left flex flex-col items-center lg:items-start">
+          <div className="lg:col-span-7 text-center lg:text-left flex flex-col items-center lg:items-start">
             {/* Hero Main Headline (Formatted in two clean lines) */}
-            <h1 className="text-3xl sm:text-4xl lg:text-[40px] xl:text-[44px] font-bold tracking-tight text-zinc-950 leading-[1.2] sm:leading-[1.16] max-w-3xl">
+            <h1 className="text-3xl sm:text-4xl lg:text-[36px] xl:text-[42px] font-bold tracking-tight text-zinc-950 leading-[1.2] sm:leading-[1.16] max-w-3xl">
               <span className="block">AI that understands your business.</span>
               <span className="block">Support that understands your customers.</span>
             </h1>
@@ -83,8 +101,8 @@ export function Hero() {
             </div>
           </div>
 
-          {/* Right Side: All 5 LLM Provider Badges */}
-          <div className="lg:col-span-4 flex flex-wrap items-center justify-center gap-2.5 lg:block lg:relative lg:h-[340px] w-full">
+          {/* Right Side: All 8 LLM Provider Badges */}
+          <div className="lg:col-span-5 flex flex-wrap items-center justify-center gap-2.5 lg:block lg:relative lg:h-[360px] w-full">
             {LLM_PROVIDERS.map((provider) => (
               <div
                 key={provider.name}
