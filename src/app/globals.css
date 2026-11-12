@@ -58,6 +58,20 @@ body {
   overflow-x: clip;
 }
 
+/* Locomotive / Lenis Smooth Scroll Core Rules */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis:not(.lenis-autoToggle).lenis-stopped {
+  overflow: clip;
+}
+
+[data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
 /* Subtle dot grid background for hero & preview sections */
 .bg-grid-pattern {
   background-image: radial-gradient(rgba(0, 0, 0, 0.06) 1px, transparent 1px);
