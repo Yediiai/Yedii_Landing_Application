@@ -32,7 +32,7 @@ export interface ModelUsageItem {
 export const YEDII_APPLICATION_PLANS: PlanItem[] = [
   {
     id: "free",
-    name: "Free Trial",
+    name: "Free",
     monthlyPrice: 0,
     yearlyPrice: 0,
     tagline: "For testing & exploration",

@@ -1,7 +1,6 @@
 "use client";
 
-import Link from "next/link";
-import { Star, ExternalLink } from "lucide-react";
+import { Star } from "lucide-react";
 
 interface Review {
   name: string;
@@ -12,8 +11,6 @@ interface Review {
   headline: string;
   body: string;
   badgeRight?: "quote" | "trustpilot";
-  linkText?: string;
-  linkHref?: string;
 }
 
 export function Testimonials() {
@@ -27,8 +24,6 @@ export function Testimonials() {
       badgeRight: "trustpilot",
       headline: "“Yedii replaced 3 tools in our stack — support ticketing, internal wiki bot, and deflection”",
       body: "Great. Yedii is built for the shift from Google-only to AI-driven discovery and operations, and it's clear the team is technically deep. Our tier-1 tickets dropped by 74% within two weeks.",
-      linkText: "Read reviews on Trustpilot",
-      linkHref: "https://www.trustpilot.com",
     },
     {
       name: "Patryk",
@@ -59,8 +54,6 @@ export function Testimonials() {
       badgeRight: "trustpilot",
       headline: "“Zero hallucinations across 40,000 real customer chats”",
       body: "The grounded RAG accuracy is unbelievable. Our support engineers gained back hundreds of deep-work hours. The Model Context Protocol (MCP) integration makes Yedii miles ahead of everything else.",
-      linkText: "Read reviews on Trustpilot",
-      linkHref: "https://www.trustpilot.com",
     },
     {
       name: "David Sterling",
@@ -81,8 +74,6 @@ export function Testimonials() {
       badgeRight: "trustpilot",
       headline: "“Scaling Black Friday customer service with 24/7 WhatsApp AI agents”",
       body: "Handling a 400% surge in seasonal order tracking and returns without hiring temporary support contractors. Our customers loved the instant WhatsApp responses at 2 AM on holiday weekends.",
-      linkText: "Read reviews on Trustpilot",
-      linkHref: "https://www.trustpilot.com",
     },
   ];
 
@@ -189,21 +180,6 @@ export function Testimonials() {
                   {rev.body}
                 </p>
               </div>
-
-              {/* Bottom Link (Optional for Trustpilot reviews) */}
-              {rev.linkText && rev.linkHref && (
-                <div className="mt-6 pt-4 border-t border-[#F3F4F6]">
-                  <Link
-                    href={rev.linkHref}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-[12px] font-semibold text-[#111827] hover:text-black transition-colors"
-                  >
-                    <span>{rev.linkText}</span>
-                    <ExternalLink className="w-3 h-3 text-[#6B7280]" />
-                  </Link>
-                </div>
-              )}
             </div>
           ))}
         </div>

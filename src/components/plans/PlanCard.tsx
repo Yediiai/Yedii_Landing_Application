@@ -50,15 +50,11 @@ export function PlanCard({
           <h3 className="text-[15px] font-semibold text-[#141C2E] tracking-[-0.21px] leading-none">
             {plan.name}
           </h3>
-          {plan.isRecommended ? (
+          {plan.isRecommended && (
             <span className="h-[21px] px-2 rounded-[6px] bg-[#F4F5F7] border border-[#E0E2E6] text-[11px] font-semibold text-[#141C2E] flex items-center leading-none">
               Recommended
             </span>
-          ) : plan.isFree ? (
-            <span className="h-[21px] px-2 rounded-[6px] bg-emerald-50 border border-emerald-200 text-[11px] font-semibold text-emerald-800 flex items-center leading-none">
-              Free
-            </span>
-          ) : null}
+          )}
         </div>
 
         {/* Price Row */}
