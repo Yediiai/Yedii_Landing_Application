@@ -1,59 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Zap, Check } from "lucide-react";
-
-const LLM_PROVIDERS = [
-  {
-    name: "OpenAI",
-    src: "/images/providers/openai.svg",
-    alt: "OpenAI",
-    positionClass: "lg:top-1 lg:left-2 xl:left-4",
-  },
-  {
-    name: "Claude 3.5",
-    src: "/images/providers/claude.svg",
-    alt: "Claude",
-    positionClass: "lg:top-6 lg:right-2 xl:right-6",
-  },
-  {
-    name: "Mistral",
-    src: "/images/providers/mistral.svg",
-    alt: "Mistral",
-    positionClass: "lg:top-[25%] lg:left-[18%] xl:left-[20%]",
-  },
-  {
-    name: "Grok",
-    src: "/images/providers/grok.svg",
-    alt: "Grok",
-    positionClass: "lg:top-[30%] lg:right-0 xl:right-2",
-  },
-  {
-    name: "DeepSeek",
-    src: "/images/providers/deepseek.svg",
-    alt: "DeepSeek",
-    positionClass: "lg:top-[52%] lg:left-0 xl:left-2",
-  },
-  {
-    name: "Cohere",
-    src: "/images/providers/cohere.svg",
-    alt: "Cohere",
-    positionClass: "lg:top-[57%] lg:right-[12%] xl:right-[16%]",
-  },
-  {
-    name: "Llama 3.3",
-    src: "/images/providers/meta.svg",
-    alt: "Meta Llama",
-    positionClass: "lg:bottom-4 lg:left-6 xl:left-10",
-  },
-  {
-    name: "Gemini 1.5",
-    src: "/images/providers/gemini.svg",
-    alt: "Google Gemini",
-    positionClass: "lg:bottom-1 lg:right-1 xl:right-4",
-  },
-] as const;
+import { ModelOrbit } from "./ModelOrbit";
 
 export function Hero() {
   const signupUrl =
@@ -101,23 +50,9 @@ export function Hero() {
             </div>
           </div>
 
-          {/* Right Side: All 8 LLM Provider Badges */}
-          <div className="lg:col-span-5 flex flex-wrap items-center justify-center gap-2.5 lg:block lg:relative lg:h-[360px] w-full">
-            {LLM_PROVIDERS.map((provider) => (
-              <div
-                key={provider.name}
-                className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/85 backdrop-blur-md border border-zinc-200/90 shadow-[0_2px_10px_rgba(0,0,0,0.04)] text-xs font-semibold text-zinc-800 lg:absolute hover:scale-105 hover:bg-white transition-all select-none ${provider.positionClass}`}
-              >
-                <Image
-                  src={provider.src}
-                  alt={provider.alt}
-                  width={16}
-                  height={16}
-                  className="w-4 h-4 object-contain"
-                />
-                <span>{provider.name}</span>
-              </div>
-            ))}
+          {/* Right Side: ModelOrbit — animated LLM provider rings */}
+          <div className="lg:col-span-5 w-full h-[300px] sm:h-[380px] lg:h-[430px]">
+            <ModelOrbit />
           </div>
         </div>
       </div>
