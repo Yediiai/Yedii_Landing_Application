@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { SITE_URL } from "@/lib/seo/config";
+import { FooterNewsletter } from "./FooterNewsletter";
 
 const ASK_AI_PROMPT = encodeURIComponent(
   `Tell me about Yedii (${SITE_URL}) — what it does, its key features, pricing, and how it compares to alternatives like Intercom and Zendesk.`
@@ -337,28 +338,36 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Ask AI about Yedii */}
+        {/* Ask AI about Yedii & Newsletter Updates */}
         <div className="border-t border-[#1C1C1E] mt-14 pt-8 pb-8">
-          <h3 className="text-[18px] sm:text-[20px] font-bold text-white tracking-tight">
-            Ask AI about Yedii
-          </h3>
-          <p className="mt-1.5 text-[13.5px] text-[#8E8E93]">
-            Get an instant, unbiased rundown of Yedii from your favourite AI assistant.
-          </p>
-          <div className="mt-4 flex flex-wrap items-center gap-3">
-            {AI_ASSISTANTS.map((ai) => (
-              <a
-                key={ai.name}
-                href={ai.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`inline-flex items-center gap-2 px-4 py-2 rounded-md text-[13.5px] font-semibold transition-colors shadow-xs ${ai.className}`}
-              >
-                {ai.icon}
-                <span>{ai.name}</span>
-                <ArrowUpRight className="w-3.5 h-3.5 opacity-85" aria-hidden="true" />
-              </a>
-            ))}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+            <div className="lg:col-span-6">
+              <h3 className="text-[18px] sm:text-[20px] font-bold text-white tracking-tight">
+                Ask AI about Yedii
+              </h3>
+              <p className="mt-1.5 text-[13.5px] text-[#8E8E93]">
+                Get an instant, unbiased rundown of Yedii from your favourite AI assistant.
+              </p>
+              <div className="mt-4 flex flex-wrap items-center gap-3">
+                {AI_ASSISTANTS.map((ai) => (
+                  <a
+                    key={ai.name}
+                    href={ai.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`inline-flex items-center gap-2 px-4 py-2 rounded-md text-[13.5px] font-semibold transition-colors shadow-xs ${ai.className}`}
+                  >
+                    {ai.icon}
+                    <span>{ai.name}</span>
+                    <ArrowUpRight className="w-3.5 h-3.5 opacity-85" aria-hidden="true" />
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            <div className="lg:col-span-6">
+              <FooterNewsletter />
+            </div>
           </div>
         </div>
 
