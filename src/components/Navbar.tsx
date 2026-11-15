@@ -22,15 +22,18 @@ import {
   History
 } from "lucide-react";
 import { ProductMegaMenu } from "./ProductMegaMenu";
+import { SolutionsMegaMenu } from "./SolutionsMegaMenu";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
+  const [solutionsOpen, setSolutionsOpen] = useState(false);
   const [resourcesOpen, setResourcesOpen] = useState(false);
 
   const headerRef = useRef<HTMLElement | null>(null);
   const productTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const solutionsTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const resourcesTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
@@ -47,12 +50,14 @@ export function Navbar() {
     const handleClickOutside = (event: MouseEvent) => {
       if (headerRef.current && !headerRef.current.contains(event.target as Node)) {
         setProductsOpen(false);
+        setSolutionsOpen(false);
         setResourcesOpen(false);
       }
     };
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         setProductsOpen(false);
+        setSolutionsOpen(false);
         setResourcesOpen(false);
       }
     };
@@ -71,12 +76,30 @@ export function Navbar() {
       productTimeoutRef.current = null;
     }
     setResourcesOpen(false);
+    setSolutionsOpen(false);
     setProductsOpen(true);
   };
 
   const handleProductMouseLeave = () => {
     productTimeoutRef.current = setTimeout(() => {
       setProductsOpen(false);
+    }, 180);
+  };
+
+  // Safe hover debounce for Solutions mega menu
+  const handleSolutionsMouseEnter = () => {
+    if (solutionsTimeoutRef.current) {
+      clearTimeout(solutionsTimeoutRef.current);
+      solutionsTimeoutRef.current = null;
+    }
+    setProductsOpen(false);
+    setResourcesOpen(false);
+    setSolutionsOpen(true);
+  };
+
+  const handleSolutionsMouseLeave = () => {
+    solutionsTimeoutRef.current = setTimeout(() => {
+      setSolutionsOpen(false);
     }, 180);
   };
 
@@ -87,6 +110,7 @@ export function Navbar() {
       resourcesTimeoutRef.current = null;
     }
     setProductsOpen(false);
+    setSolutionsOpen(false);
     setResourcesOpen(true);
   };
 
@@ -274,19 +298,36 @@ export function Navbar() {
               Pricing
             </Link>
 
-            <Link
-              href="/enterprise"
-              className="px-3.5 py-1.5 text-sm font-medium text-[#4B5563] hover:text-[#111827] rounded-[8px] transition-colors"
+            {/* Solutions Mega Menu Trigger (Replaces Customers) */}
+            <div
+              className="relative"
+              onMouseEnter={handleSolutionsMouseEnter}
+              onMouseLeave={handleSolutionsMouseLeave}
             >
-              Enterprise
-            </Link>
+              <button
+                type="button"
+                className={`px-3.5 py-1.5 text-sm font-medium rounded-[8px] transition-all cursor-pointer ${
+                  solutionsOpen
+                    ? "bg-[#F3F4F6] text-[#111827]"
+                    : "text-[#4B5563] hover:text-[#111827] hover:bg-[#F9FAFB]"
+                }`}
+                onClick={() => setSolutionsOpen((prev) => !prev)}
+                aria-expanded={solutionsOpen}
+                aria-haspopup="true"
+              >
+                Solutions
+              </button>
 
-            <Link
-              href="/customers"
-              className="px-3.5 py-1.5 text-sm font-medium text-[#4B5563] hover:text-[#111827] rounded-[8px] transition-colors"
-            >
-              Customers
-            </Link>
+              {/* Exact 880px 3-Column Solutions Mega Menu */}
+              {solutionsOpen && (
+                <SolutionsMegaMenu
+                  isOpen={solutionsOpen}
+                  onClose={() => setSolutionsOpen(false)}
+                  onMouseEnter={handleSolutionsMouseEnter}
+                  onMouseLeave={handleSolutionsMouseLeave}
+                />
+              )}
+            </div>
           </nav>
         </div>
 
@@ -471,18 +512,11 @@ export function Navbar() {
               Pricing
             </Link>
             <Link
-              href="/enterprise"
+              href="/solutions/use-cases"
               onClick={() => setIsMobileMenuOpen(false)}
               className="block px-3 py-2 rounded-lg text-sm font-medium text-zinc-800 hover:bg-zinc-50"
             >
-              Enterprise
-            </Link>
-            <Link
-              href="/customers"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="block px-3 py-2 rounded-lg text-sm font-medium text-zinc-800 hover:bg-zinc-50"
-            >
-              Customers
+              Solutions &amp; Use Cases
             </Link>
             <Link
               href="/docs"
