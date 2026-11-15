@@ -8,6 +8,7 @@ import { PlanCardsCarousel, PlanCardsCarouselRef } from "./PlanCardsCarousel";
 import { WhichPlanIsRight } from "./WhichPlanIsRight";
 import { CompareFeaturesTable } from "./CompareFeaturesTable";
 import { AiModelUsageSection } from "./AiModelUsageSection";
+import { EnterpriseInquiryDialog } from "./EnterpriseInquiryDialog";
 
 interface PlansViewProps {
   initialCycle?: BillingCycle;
@@ -22,7 +23,16 @@ export function PlansView({
 }: PlansViewProps) {
   const [billingCycle, setBillingCycle] = useState<BillingCycle>(initialCycle);
   const [selectedPlanId, setSelectedPlanId] = useState<PlanId>(initialPlanId);
+  const [isEnterpriseModalOpen, setIsEnterpriseModalOpen] = useState(false);
   const carouselRef = useRef<PlanCardsCarouselRef>(null);
+
+  const handleSelectPlan = (planId: PlanId) => {
+    if (planId === "enterprise") {
+      setIsEnterpriseModalOpen(true);
+      return;
+    }
+    setSelectedPlanId(planId);
+  };
 
   const handleScrollLeft = () => {
     carouselRef.current?.scrollLeft();
@@ -72,7 +82,8 @@ export function PlansView({
         plans={YEDII_APPLICATION_PLANS}
         billingCycle={billingCycle}
         selectedPlanId={selectedPlanId}
-        onSelectPlan={setSelectedPlanId}
+        onSelectPlan={handleSelectPlan}
+        onContactSales={() => setIsEnterpriseModalOpen(true)}
       />
 
       {/* Guide: Which plan is right for you? */}
@@ -88,6 +99,12 @@ export function PlansView({
 
       {/* 5. AI Model Usage Section */}
       <AiModelUsageSection />
+
+      {/* 6. Enterprise Inquiry Modal (Matching Yedii_Application) */}
+      <EnterpriseInquiryDialog
+        open={isEnterpriseModalOpen}
+        onOpenChange={setIsEnterpriseModalOpen}
+      />
     </div>
   );
 }

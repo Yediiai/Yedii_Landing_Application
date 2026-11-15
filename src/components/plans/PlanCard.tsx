@@ -11,13 +11,15 @@ interface PlanCardProps {
   billingCycle: BillingCycle;
   isSelected: boolean;
   onSelect: (id: PlanId) => void;
+  onContactSales?: () => void;
 }
 
 export function PlanCard({
   plan,
   billingCycle,
   isSelected,
-  onSelect
+  onSelect,
+  onContactSales,
 }: PlanCardProps) {
   const isCustomPrice = plan.monthlyPrice === null;
   const displayPrice = isCustomPrice
@@ -37,8 +39,14 @@ export function PlanCard({
 
   return (
     <div
-      onClick={() => onSelect(plan.id)}
-      className={`w-[285px] sm:w-[296px] min-w-[285px] sm:min-w-[296px] min-h-[500px] sm:min-h-[517px] snap-start shrink-0 rounded-[12px] p-4 sm:p-5 bg-white flex flex-col justify-between transition-all duration-200 select-none cursor-pointer ${
+      onClick={() => {
+        if (plan.id === "enterprise" && onContactSales) {
+          onContactSales();
+        } else {
+          onSelect(plan.id);
+        }
+      }}
+      className={`w-full sm:w-[296px] min-w-[285px] sm:min-w-[296px] min-h-[500px] sm:min-h-[517px] snap-start shrink-0 rounded-[12px] p-4 sm:p-5 bg-white flex flex-col justify-between transition-all duration-200 select-none cursor-pointer ${
         isSelected
           ? "border-[0.8px] border-[#141C2E] shadow-[0px_6px_18px_0px_rgba(16,24,40,0.08),0px_0px_0px_1px_#141C2E]"
           : "border-[0.8px] border-[#E8E9EC] shadow-[0_1px_2px_rgba(0,0,0,0.02)] hover:border-[#D0D3D9]"
@@ -112,26 +120,45 @@ export function PlanCard({
 
       {/* Select Plan Action Button */}
       <div className="pt-2">
-        <Link
-          href={plan.isFree ? "https://app.yedii.com/signup" : `https://app.yedii.com/signup?plan=${plan.id}`}
-          className={`w-full h-[40px] rounded-[9px] text-[14px] font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer select-none shadow-xs ${
-            plan.isFree
-              ? "border-[0.8px] border-[#141C2E] bg-[#141C2E] text-white hover:bg-slate-800"
-              : isSelected
-              ? "border-[0.8px] border-[#141C2E] bg-[#141C2E] text-white hover:bg-slate-800"
-              : "border-[0.8px] border-[#E0E2E6] bg-white hover:bg-slate-50 text-[#141C2E]"
-          }`}
-        >
-          <span>
-            {plan.isFree
-              ? "Continue with Free"
-              : isSelected
-              ? "Selected"
-              : plan.id === "enterprise"
-              ? "Contact sales"
-              : `Select ${plan.name}`}
-          </span>
-        </Link>
+        {plan.id === "enterprise" ? (
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              if (onContactSales) {
+                onContactSales();
+              } else {
+                onSelect(plan.id);
+              }
+            }}
+            className={`w-full h-[40px] rounded-[9px] text-[14px] font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer select-none shadow-xs ${
+              isSelected
+                ? "border-[0.8px] border-[#141C2E] bg-[#141C2E] text-white hover:bg-slate-800"
+                : "border-[0.8px] border-[#E0E2E6] bg-white hover:bg-slate-50 text-[#141C2E]"
+            }`}
+          >
+            <span>Contact sales</span>
+          </button>
+        ) : (
+          <Link
+            href={plan.isFree ? "https://app.yedii.com/signup" : `https://app.yedii.com/signup?plan=${plan.id}`}
+            className={`w-full h-[40px] rounded-[9px] text-[14px] font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer select-none shadow-xs ${
+              plan.isFree
+                ? "border-[0.8px] border-[#141C2E] bg-[#141C2E] text-white hover:bg-slate-800"
+                : isSelected
+                ? "border-[0.8px] border-[#141C2E] bg-[#141C2E] text-white hover:bg-slate-800"
+                : "border-[0.8px] border-[#E0E2E6] bg-white hover:bg-slate-50 text-[#141C2E]"
+            }`}
+          >
+            <span>
+              {plan.isFree
+                ? "Continue with Free"
+                : isSelected
+                ? "Selected"
+                : `Select ${plan.name}`}
+            </span>
+          </Link>
+        )}
       </div>
     </div>
   );

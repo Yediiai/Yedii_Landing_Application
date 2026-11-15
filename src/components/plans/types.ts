@@ -48,7 +48,6 @@ export const YEDII_APPLICATION_PLANS: PlanItem[] = [
       "Basic customizations",
       "Basic analytics",
       "Community support",
-      "Standard Web Widget",
       "No credit card required",
     ],
   },
@@ -143,7 +142,6 @@ export const YEDII_APPLICATION_PLANS: PlanItem[] = [
       "Re-Crawling",
       "Quick Summary",
       "Remove Branding",
-      "Two-factor authentication (2FA)",
     ],
   },
 ];

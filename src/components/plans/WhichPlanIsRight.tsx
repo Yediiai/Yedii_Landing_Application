@@ -9,59 +9,33 @@ export interface PlanGuideItem {
 
 export const DEFAULT_PLAN_GUIDES: PlanGuideItem[] = [
   {
-    category: "JUST GETTING STARTED",
+    category: "GETTING STARTED",
     name: "Free",
     description:
-      "You want to test UTM tracking on a side project or small campaign before committing.",
+      "Explore AI-powered customer support and experience how Yedii works before upgrading.",
   },
   {
-    category: "SOLO CREATORS",
-    name: "Personal",
+    category: "SMALL BUSINESSES",
+    name: "Starter",
     description:
-      "You run newsletters, social posts, or one brand and want clean links with your own domain.",
+      "Launch your first AI support agent, train it on your knowledge, and automate everyday customer questions.",
   },
   {
-    category: "MARKETING TEAMS",
+    category: "GROWING TEAMS",
     name: "Growth",
     description:
-      "You run campaigns across channels with a small team and need shared templates and rules.",
+      "Scale customer support with multiple AI agents, larger knowledge bases, and growing customer conversations.",
     isHighlighted: true,
   },
   {
-    category: "AGENCIES & MULTI-BRAND",
-    name: "Agency",
+    category: "ESTABLISHED BUSINESSES",
+    name: "Pro / Enterprise",
     description:
-      "You manage links for multiple clients and need separate domains and more seats.",
+      "Power high-volume customer support with advanced capabilities, greater flexibility, and support for complex operations.",
   },
 ];
 
-export const YEDII_AI_PLAN_GUIDES: PlanGuideItem[] = [
-  {
-    category: "JUST GETTING STARTED",
-    name: "Free",
-    description:
-      "You want to test autonomous AI agents on a side project or website before committing.",
-  },
-  {
-    category: "SOLO CREATORS",
-    name: "Starter",
-    description:
-      "You run one brand or support channel and want clean custom AI widgets with re-crawling.",
-  },
-  {
-    category: "MARKETING & SUPPORT TEAMS",
-    name: "Growth",
-    description:
-      "You run customer support across multiple channels with advanced analytics and priority support.",
-    isHighlighted: true,
-  },
-  {
-    category: "AGENCIES & ENTERPRISE",
-    name: "Pro / Agency",
-    description:
-      "You manage high-volume AI agents for multiple clients or brands with custom credits and 2FA.",
-  },
-];
+export const YEDII_AI_PLAN_GUIDES: PlanGuideItem[] = DEFAULT_PLAN_GUIDES;
 
 interface WhichPlanIsRightProps {
   items?: PlanGuideItem[];
@@ -82,7 +56,7 @@ export function WhichPlanIsRight({
           {title || (
             <>
               Which plan is{" "}
-              <span className="italic text-[#EA580C]">right</span>{" "}
+              <span className="italic text-[#141C2E]">right</span>{" "}
               for you?
             </>
           )}
@@ -101,7 +75,7 @@ export function WhichPlanIsRight({
             key={idx}
             className={`keep-round p-6 sm:p-7 flex flex-col justify-start text-left transition-all duration-200 ${
               item.isHighlighted
-                ? "bg-[#FFF9F5] border border-[#FED7AA] shadow-[0_2px_8px_rgba(234,88,12,0.06)]"
+                ? "bg-white border-[1.5px] border-[#141C2E] shadow-[0_4px_16px_rgba(20,28,46,0.08)]"
                 : "bg-white border border-[#E5E7EB] shadow-[0_1px_3px_rgba(0,0,0,0.03)] hover:border-[#D1D5DB]"
             }`}
           >
@@ -112,9 +86,7 @@ export function WhichPlanIsRight({
 
             {/* Plan Name */}
             <h3
-              className={`text-[20px] font-bold tracking-tight mb-3 ${
-                item.isHighlighted ? "text-[#EA580C]" : "text-[#141C2E]"
-              }`}
+              className="text-[20px] font-bold tracking-tight mb-3 text-[#141C2E]"
             >
               {item.name}
             </h3>

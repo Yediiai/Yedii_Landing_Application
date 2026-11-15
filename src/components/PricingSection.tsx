@@ -9,14 +9,24 @@ import {
   YEDII_APPLICATION_PLANS,
   PlansHeader,
   PlanCardsCarousel,
-  PlanCardsCarouselRef
+  PlanCardsCarouselRef,
+  EnterpriseInquiryDialog,
 } from "@/components/plans";
 
 export function PricingSection() {
   const [billingCycle, setBillingCycle] = useState<BillingCycle>("monthly");
   const [selectedPlanId, setSelectedPlanId] = useState<PlanId>("growth");
+  const [isEnterpriseModalOpen, setIsEnterpriseModalOpen] = useState(false);
 
   const carouselRef = useRef<PlanCardsCarouselRef>(null);
+
+  const handleSelectPlan = (planId: PlanId) => {
+    if (planId === "enterprise") {
+      setIsEnterpriseModalOpen(true);
+      return;
+    }
+    setSelectedPlanId(planId);
+  };
 
   const handleScrollLeft = () => {
     carouselRef.current?.scrollLeft();
@@ -74,7 +84,8 @@ export function PricingSection() {
           plans={YEDII_APPLICATION_PLANS}
           billingCycle={billingCycle}
           selectedPlanId={selectedPlanId}
-          onSelectPlan={setSelectedPlanId}
+          onSelectPlan={handleSelectPlan}
+          onContactSales={() => setIsEnterpriseModalOpen(true)}
         />
 
         {/* View Detailed Comparison Link */}
@@ -87,6 +98,12 @@ export function PricingSection() {
             <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>
+
+        {/* Enterprise Inquiry Modal */}
+        <EnterpriseInquiryDialog
+          open={isEnterpriseModalOpen}
+          onOpenChange={setIsEnterpriseModalOpen}
+        />
       </div>
     </section>
   );

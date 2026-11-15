@@ -13,8 +13,10 @@ import {
 } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { EnterpriseInquiryDialog } from "@/components/plans/EnterpriseInquiryDialog";
 
 export function EnterpriseClient() {
+  const [isInquiryOpen, setIsInquiryOpen] = useState(false);
   // Enterprise ROI Calculator State
   const [ticketVolume, setTicketVolume] = useState<number>(25000);
   const [supportAgents, setSupportAgents] = useState<number>(15);
@@ -302,12 +304,13 @@ export function EnterpriseClient() {
                       ${annualSavings.toLocaleString("en-US")}
                     </div>
                   </div>
-                  <Link
-                    href="https://app.yedii.com/signup"
-                    className="px-4 py-2 rounded-[8px] bg-[#141C2E] text-white text-xs font-semibold hover:bg-black transition-colors shrink-0"
+                  <button
+                    type="button"
+                    onClick={() => setIsInquiryOpen(true)}
+                    className="px-4 py-2 rounded-[8px] bg-[#141C2E] text-white text-xs font-semibold hover:bg-black transition-colors shrink-0 cursor-pointer"
                   >
                     Deploy Enterprise
-                  </Link>
+                  </button>
                 </div>
               </div>
             </div>
@@ -371,18 +374,24 @@ export function EnterpriseClient() {
             </div>
 
             <div className="flex items-center gap-3 shrink-0">
-              <Link
-                href="https://app.yedii.com/signup"
-                className="px-5 py-2.5 rounded-[8px] bg-[#141C2E] text-white text-xs sm:text-sm font-semibold hover:bg-black transition-colors shadow-2xs"
+              <button
+                type="button"
+                onClick={() => setIsInquiryOpen(true)}
+                className="px-5 py-2.5 rounded-[8px] bg-[#141C2E] text-white text-xs sm:text-sm font-semibold hover:bg-black transition-colors shadow-2xs cursor-pointer"
               >
                 Schedule Technical Briefing
-              </Link>
+              </button>
             </div>
           </div>
         </section>
       </main>
 
       <Footer />
+
+      <EnterpriseInquiryDialog
+        open={isInquiryOpen}
+        onOpenChange={setIsInquiryOpen}
+      />
     </div>
   );
 }

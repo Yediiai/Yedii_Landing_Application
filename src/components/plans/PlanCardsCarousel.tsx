@@ -14,12 +14,13 @@ interface PlanCardsCarouselProps {
   billingCycle: BillingCycle;
   selectedPlanId: PlanId | null;
   onSelectPlan: (id: PlanId) => void;
+  onContactSales?: () => void;
 }
 
 export const PlanCardsCarousel = forwardRef<
   PlanCardsCarouselRef,
   PlanCardsCarouselProps
->(({ plans, billingCycle, selectedPlanId, onSelectPlan }, ref) => {
+>(({ plans, billingCycle, selectedPlanId, onSelectPlan, onContactSales }, ref) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useImperativeHandle(ref, () => ({
@@ -47,6 +48,7 @@ export const PlanCardsCarousel = forwardRef<
           billingCycle={billingCycle}
           isSelected={selectedPlanId === plan.id}
           onSelect={onSelectPlan}
+          onContactSales={onContactSales}
         />
       ))}
     </div>

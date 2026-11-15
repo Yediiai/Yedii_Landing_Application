@@ -50,7 +50,6 @@ export function CompareFeaturesTable({
     /re-?crawl/i,
     /quick summary|summary/i,
     /remove branding|custom branding|branding/i,
-    /two-factor|2fa/i,
   ];
 
   const extraFeatures = Array.from(
@@ -480,32 +479,6 @@ export function CompareFeaturesTable({
                   ))}
                 </tr>
 
-                {/* ROW: 2FA (if any plan has it) */}
-                {displayPlans.some((p) => hasFeature(p.features || [], /two-factor|2fa/i)) && (
-                  <tr className="group">
-                    <td className="p-[13px_18px] font-medium text-[#374151] bg-[#FAFAFC] border-b border-r border-[#E5E7EB] group-hover:bg-[#F3F4F7] transition-colors">
-                      Two-factor authentication (2FA)
-                    </td>
-                    {displayPlans.map((plan) => (
-                      <td
-                        key={plan.id}
-                        className={`p-[13px_20px] border-b border-r border-[#E5E7EB] last:border-r-0 transition-colors ${
-                          plan.isRecommended
-                            ? "bg-[#FAFBFD] group-hover:bg-[#F0F3FA]"
-                            : "bg-white group-hover:bg-[#F9FAFB]"
-                        }`}
-                      >
-                        <div className="flex items-center justify-center w-full">
-                          {hasFeature(plan.features || [], /two-factor|2fa/i) ? (
-                            <Check className="w-[18px] h-[18px] text-[#141C2E] stroke-[2.5]" />
-                          ) : (
-                            <Minus className="w-4 h-4 text-[#9AA0A8] stroke-[2]" />
-                          )}
-                        </div>
-                      </td>
-                    ))}
-                  </tr>
-                )}
 
                 {/* EXTRA DYNAMIC FEATURES */}
                 {extraFeatures.map((feat) => (

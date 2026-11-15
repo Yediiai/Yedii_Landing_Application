@@ -6,4 +6,5 @@ export * from "./PlanCardsCarousel";
 export * from "./CompareFeaturesTable";
 export * from "./WhichPlanIsRight";
 export * from "./AiModelUsageSection";
+export * from "./EnterpriseInquiryDialog";
 export * from "./PlansView";
