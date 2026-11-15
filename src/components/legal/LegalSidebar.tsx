@@ -99,20 +99,6 @@ export function LegalSidebar({ currentSlug, className = "" }: LegalSidebarProps)
           );
         })}
       </div>
-
-      {/* Enterprise Contact Box */}
-      <div className="p-4 rounded-xl border border-zinc-200 bg-white shadow-xs space-y-2 mt-auto">
-        <h4 className="text-xs font-semibold text-zinc-900">Custom Enterprise Terms?</h4>
-        <p className="text-[11px] text-zinc-500 leading-relaxed">
-          Need a dedicated DPA, customized SLA, or corporate Master Services Agreement?
-        </p>
-        <a
-          href="mailto:legal@yedii.com?subject=Enterprise%20Legal%20Inquiry"
-          className="inline-flex items-center gap-1 text-xs font-semibold text-black hover:underline underline-offset-2 pt-1"
-        >
-          Contact Legal Team &rarr;
-        </a>
-      </div>
     </aside>
   );
 }

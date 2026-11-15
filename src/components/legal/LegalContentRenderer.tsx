@@ -1,16 +1,14 @@
 "use client";
 
 import React from "react";
-import Link from "next/link";
 import { ShieldCheck, FileText } from "lucide-react";
-import { LegalDocumentItem, getRelatedLegalDocuments } from "@/data/legal";
+import { LegalDocumentItem } from "@/data/legal";
 
 interface LegalContentRendererProps {
   document: LegalDocumentItem;
 }
 
 export function LegalContentRenderer({ document }: LegalContentRendererProps) {
-  const related = getRelatedLegalDocuments(document.slug, 3);
 
   // Render markdown into formatted JSX
   const renderFormattedMarkdown = (markdown: string) => {
@@ -240,37 +238,6 @@ export function LegalContentRenderer({ document }: LegalContentRendererProps) {
       <article className="prose prose-zinc max-w-none">
         {renderFormattedMarkdown(document.content)}
       </article>
-
-      {/* Related Legal Documents */}
-      {related.length > 0 && (
-        <div className="space-y-4 pt-6 border-t border-zinc-200">
-          <h4 className="text-sm font-semibold text-zinc-900">Related Legal Documents</h4>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {related.map((item) => (
-              <Link
-                key={item.slug}
-                href={`/legal/${item.slug}`}
-                className="group p-4 rounded-xl border border-zinc-200 bg-white hover:border-zinc-400 hover:shadow-xs transition-all flex flex-col justify-between space-y-2"
-              >
-                <div>
-                  <div className="text-[10px] uppercase font-bold tracking-wider text-zinc-400">
-                    {item.category.replace("_", " ")}
-                  </div>
-                  <h5 className="text-xs font-bold text-zinc-900 group-hover:text-black pt-1">
-                    {item.title}
-                  </h5>
-                  <p className="text-[11px] text-zinc-500 line-clamp-2 mt-1 leading-snug">
-                    {item.description}
-                  </p>
-                </div>
-                <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-black pt-2">
-                  Read Policy &rarr;
-                </span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      )}
     </div>
   );
 }
