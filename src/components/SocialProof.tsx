@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { MessageSquare, ShieldCheck, Zap, Gauge } from "lucide-react";
 
 export function SocialProof() {
   const brandLogos = [
@@ -110,52 +109,11 @@ export function SocialProof() {
   // Duplicated for perfectly smooth, continuous 360-degree marquee loop
   const marqueeItems = [...brandLogos, ...brandLogos];
 
-  const stats = [
-    {
-      id: "conversations",
-      value: "14M+",
-      label: "Conversations Automated",
-      highlight: "Across 40+ countries globally",
-      icon: MessageSquare,
-      badge: "+100% YoY",
-      textColor: "text-emerald-700"
-    },
-    {
-      id: "deflection",
-      value: "74%",
-      label: "Autonomous Deflection",
-      highlight: "Resolved without human intervention",
-      icon: Zap,
-      badge: "Industry High",
-      textColor: "text-blue-700"
-    },
-    {
-      id: "latency",
-      prefix: "<",
-      number: "120",
-      unit: "ms",
-      label: "Time-to-First-Token",
-      highlight: "Edge-cached real-time streaming",
-      icon: Gauge,
-      badge: "Sub-second",
-      textColor: "text-amber-800"
-    },
-    {
-      id: "accuracy",
-      value: "99.4%",
-      label: "Accuracy & Grounding",
-      highlight: "Verified against source documentation",
-      icon: ShieldCheck,
-      badge: "Zero Hallucination",
-      textColor: "text-purple-700"
-    }
-  ];
-
   return (
-    <section className="py-12 md:py-16 my-2 border-y border-zinc-200/60 bg-transparent overflow-hidden">
+    <section className="py-8 md:py-10 my-2 border-y border-zinc-200/60 bg-transparent overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Brand Logos Header */}
-        <p className="text-center text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-[#8A9099] mb-8">
+        <p className="text-center text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-[#8A9099] mb-6">
           Trusted by high-growth startups and global enterprise teams
         </p>
       </div>
@@ -182,57 +140,6 @@ export function SocialProof() {
               </span>
             </div>
           ))}
-        </div>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* 14M+ Metric Cards Grid (Clean Aligned Cards with FlowBackground Transparency) */}
-        <div className="mt-12 pt-8 border-t border-zinc-200/60 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
-          {stats.map((s) => {
-            const Icon = s.icon;
-            return (
-              <div
-                key={s.id}
-                className="bg-white/40 backdrop-blur-xs hover:bg-white/70 rounded-[14px] border border-zinc-200/80 hover:border-zinc-300 p-5 sm:p-5.5 flex flex-col justify-between transition-all duration-200 shadow-2xs hover:shadow-xs group"
-              >
-                {/* Card Top: Icon & Badge */}
-                <div className="flex items-center justify-between mb-4">
-                  <div className="w-9 h-9 rounded-[10px] bg-white/80 border border-zinc-200/80 flex items-center justify-center text-[#141C2E] shadow-2xs group-hover:scale-105 transition-transform">
-                    <Icon className="w-4 h-4 text-[#141C2E]" />
-                  </div>
-                  <span className={`text-[11.5px] font-semibold tracking-tight ${s.textColor}`}>
-                    {s.badge}
-                  </span>
-                </div>
-
-                {/* Card Content: Numbers & Description */}
-                <div className="space-y-1.5">
-                  {s.prefix ? (
-                    <div className="text-2xl sm:text-3xl font-bold tracking-tight text-[#141C2E] flex items-baseline">
-                      <span className="text-lg sm:text-xl font-medium text-[#6B7280] mr-1">
-                        &lt;
-                      </span>
-                      <span>{s.number}</span>
-                      <span className="text-sm sm:text-base font-semibold text-[#6B7280] ml-1">
-                        {s.unit}
-                      </span>
-                    </div>
-                  ) : (
-                    <div className="text-2xl sm:text-3xl font-bold tracking-tight text-[#141C2E]">
-                      {s.value}
-                    </div>
-                  )}
-
-                  <div className="text-[13.5px] font-semibold text-[#141C2E] leading-snug">
-                    {s.label}
-                  </div>
-                  <div className="text-[12px] text-[#6B7280] leading-normal">
-                    {s.highlight}
-                  </div>
-                </div>
-              </div>
-            );
-          })}
         </div>
       </div>
     </section>
