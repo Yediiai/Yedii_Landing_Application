@@ -50,7 +50,7 @@ export interface FaqItem {
 }
 
 export interface DedicatedPageProps {
-  badge: {
+  badge?: {
     icon: LucideIcon;
     text: string;
   };
@@ -61,12 +61,12 @@ export interface DedicatedPageProps {
     secondaryCta?: { text: string; href: string };
   };
   mockPreview?: React.ReactNode;
-  problemSolution: {
+  problemSolution?: {
     title: string;
     subtitle: string;
     items: ProblemSolution[];
   };
-  features: {
+  features?: {
     title: string;
     subtitle: string;
     items: FeatureItem[];
@@ -100,7 +100,7 @@ export interface DedicatedPageProps {
 }
 
 export function DedicatedPageTemplate(props: DedicatedPageProps) {
-  const BadgeIcon = props.badge.icon;
+  const BadgeIcon = props.badge?.icon;
 
   return (
     <div className="min-h-screen bg-[#FBFBFC] text-[#141C2E] font-sans selection:bg-[#141C2E] selection:text-white flex flex-col">
@@ -109,10 +109,12 @@ export function DedicatedPageTemplate(props: DedicatedPageProps) {
       <main className="flex-1 w-full pt-20 pb-16">
         {/* A. Hero Section */}
         <section className="py-12 md:py-16 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-white border border-[#E8E9EC] text-[#141C2E] text-xs font-semibold mb-4 shadow-2xs">
-            <BadgeIcon className="w-3.5 h-3.5 text-zinc-900" />
-            <span>{props.badge.text}</span>
-          </div>
+          {props.badge && BadgeIcon && (
+            <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-white border border-[#E8E9EC] text-[#141C2E] text-xs font-semibold mb-4 shadow-2xs">
+              <BadgeIcon className="w-3.5 h-3.5 text-zinc-900" />
+              <span>{props.badge.text}</span>
+            </div>
+          )}
 
           <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-[#141C2E] leading-tight max-w-4xl mx-auto">
             {props.hero.title}
@@ -150,96 +152,100 @@ export function DedicatedPageTemplate(props: DedicatedPageProps) {
         )}
 
         {/* B. Problem and Solution */}
-        <section className="py-12 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-10">
-            <span className="text-[11px] font-semibold uppercase tracking-wider text-[#8A9099]">
-              The Shift
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-[#141C2E] mt-1">
-              {props.problemSolution.title}
-            </h2>
-            <p className="text-xs sm:text-sm text-[#6B7280] mt-1.5 leading-relaxed">
-              {props.problemSolution.subtitle}
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {props.problemSolution.items.map((item, idx) => (
-              <div
-                key={idx}
-                className="bg-white rounded-[16px] border border-[#E8E9EC] p-6 shadow-2xs flex flex-col justify-between space-y-4"
-              >
-                <div className="space-y-3">
-                  <div className="flex items-start gap-2.5 text-xs text-rose-700 bg-rose-50/80 p-3 rounded-[10px] border border-rose-100">
-                    <XCircle className="w-4 h-4 shrink-0 text-rose-600 mt-0.5" />
-                    <div>
-                      <span className="font-semibold block text-rose-900">Traditional Bottleneck</span>
-                      <p className="mt-0.5 text-rose-700">{item.problem}</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-2.5 text-xs text-emerald-800 bg-emerald-50/70 p-3 rounded-[10px] border border-emerald-100">
-                    <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-600 mt-0.5" />
-                    <div>
-                      <span className="font-semibold block text-emerald-950">The Yedii Solution</span>
-                      <p className="mt-0.5 text-emerald-800">{item.solution}</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="pt-3 border-t border-[#F1F2F4] text-[11px] font-semibold text-[#141C2E] flex items-center justify-between">
-                  <span className="text-[#8A9099] uppercase tracking-wider font-medium">Business Impact</span>
-                  <span className="text-emerald-700">{item.benefit}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* C. Key Features */}
-        <section className="py-12 bg-white border-y border-[#E8E9EC]">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        {props.problemSolution && (
+          <section className="py-12 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-2xl mx-auto mb-10">
               <span className="text-[11px] font-semibold uppercase tracking-wider text-[#8A9099]">
-                Core Capabilities
+                The Shift
               </span>
               <h2 className="text-2xl sm:text-3xl font-bold text-[#141C2E] mt-1">
-                {props.features.title}
+                {props.problemSolution.title}
               </h2>
               <p className="text-xs sm:text-sm text-[#6B7280] mt-1.5 leading-relaxed">
-                {props.features.subtitle}
+                {props.problemSolution.subtitle}
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-              {props.features.items.map((feat, idx) => {
-                const Icon = feat.icon;
-                return (
-                  <div
-                    key={idx}
-                    className="p-6 rounded-[14px] border border-[#E8E9EC] bg-[#FAFAFA] hover:bg-white hover:border-[#D0D3D9] transition-all flex flex-col justify-between shadow-2xs"
-                  >
-                    <div>
-                      <div className="w-10 h-10 rounded-[10px] bg-white border border-[#E8E9EC] flex items-center justify-center text-[#141C2E] mb-4 shadow-2xs">
-                        <Icon className="w-5 h-5 text-[#141C2E]" />
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+              {props.problemSolution.items.map((item, idx) => (
+                <div
+                  key={idx}
+                  className="bg-white rounded-[16px] border border-[#E8E9EC] p-6 shadow-2xs flex flex-col justify-between space-y-4"
+                >
+                  <div className="space-y-3">
+                    <div className="flex items-start gap-2.5 text-xs text-rose-700 bg-rose-50/80 p-3 rounded-[10px] border border-rose-100">
+                      <XCircle className="w-4 h-4 shrink-0 text-rose-600 mt-0.5" />
+                      <div>
+                        <span className="font-semibold block text-rose-900">Traditional Bottleneck</span>
+                        <p className="mt-0.5 text-rose-700">{item.problem}</p>
                       </div>
-                      <h3 className="text-[16px] font-bold text-[#141C2E]">
-                        {feat.title}
-                      </h3>
-                      <p className="text-xs sm:text-[13px] text-[#6B7280] mt-2 leading-relaxed">
-                        {feat.desc}
-                      </p>
                     </div>
 
-                    <div className="mt-4 pt-3 border-t border-[#E8E9EC] text-[11px] font-semibold text-emerald-700">
-                      {feat.value}
+                    <div className="flex items-start gap-2.5 text-xs text-emerald-800 bg-emerald-50/70 p-3 rounded-[10px] border border-emerald-100">
+                      <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-600 mt-0.5" />
+                      <div>
+                        <span className="font-semibold block text-emerald-950">The Yedii Solution</span>
+                        <p className="mt-0.5 text-emerald-800">{item.solution}</p>
+                      </div>
                     </div>
                   </div>
-                );
-              })}
+
+                  <div className="pt-3 border-t border-[#F1F2F4] text-[11px] font-semibold text-[#141C2E] flex items-center justify-between">
+                    <span className="text-[#8A9099] uppercase tracking-wider font-medium">Business Impact</span>
+                    <span className="text-emerald-700">{item.benefit}</span>
+                  </div>
+                </div>
+              ))}
             </div>
-          </div>
-        </section>
+          </section>
+        )}
+
+        {/* C. Key Features */}
+        {props.features && (
+          <section className="py-12 bg-white border-y border-[#E8E9EC]">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center max-w-2xl mx-auto mb-10">
+                <span className="text-[11px] font-semibold uppercase tracking-wider text-[#8A9099]">
+                  Core Capabilities
+                </span>
+                <h2 className="text-2xl sm:text-3xl font-bold text-[#141C2E] mt-1">
+                  {props.features.title}
+                </h2>
+                <p className="text-xs sm:text-sm text-[#6B7280] mt-1.5 leading-relaxed">
+                  {props.features.subtitle}
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                {props.features.items.map((feat, idx) => {
+                  const Icon = feat.icon;
+                  return (
+                    <div
+                      key={idx}
+                      className="p-6 rounded-[14px] border border-[#E8E9EC] bg-[#FAFAFA] hover:bg-white hover:border-[#D0D3D9] transition-all flex flex-col justify-between shadow-2xs"
+                    >
+                      <div>
+                        <div className="w-10 h-10 rounded-[10px] bg-white border border-[#E8E9EC] flex items-center justify-center text-[#141C2E] mb-4 shadow-2xs">
+                          <Icon className="w-5 h-5 text-[#141C2E]" />
+                        </div>
+                        <h3 className="text-[16px] font-bold text-[#141C2E]">
+                          {feat.title}
+                        </h3>
+                        <p className="text-xs sm:text-[13px] text-[#6B7280] mt-2 leading-relaxed">
+                          {feat.desc}
+                        </p>
+                      </div>
+
+                      <div className="mt-4 pt-3 border-t border-[#E8E9EC] text-[11px] font-semibold text-emerald-700">
+                        {feat.value}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* D. How It Works */}
         <section className="py-12 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
