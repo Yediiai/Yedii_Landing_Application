@@ -40,6 +40,10 @@ select[class*="rounded"],
   border-radius: 0px !important;
 }
 
+.keep-round {
+  border-radius: 18px !important;
+}
+
 * {
   box-sizing: border-box;
 }

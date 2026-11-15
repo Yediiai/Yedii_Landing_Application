@@ -5,6 +5,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { BillingCycle, PlanId, YEDII_APPLICATION_PLANS } from "./types";
 import { PlansHeader } from "./PlansHeader";
 import { PlanCardsCarousel, PlanCardsCarouselRef } from "./PlanCardsCarousel";
+import { WhichPlanIsRight } from "./WhichPlanIsRight";
 import { CompareFeaturesTable } from "./CompareFeaturesTable";
 
 interface PlansViewProps {
@@ -72,6 +73,9 @@ export function PlansView({
         selectedPlanId={selectedPlanId}
         onSelectPlan={setSelectedPlanId}
       />
+
+      {/* Guide: Which plan is right for you? */}
+      <WhichPlanIsRight />
 
       {/* 4. Compare All Features Table */}
       {showCompareTable && (
