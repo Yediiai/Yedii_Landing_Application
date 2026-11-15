@@ -7,6 +7,7 @@ import { PlansHeader } from "./PlansHeader";
 import { PlanCardsCarousel, PlanCardsCarouselRef } from "./PlanCardsCarousel";
 import { WhichPlanIsRight } from "./WhichPlanIsRight";
 import { CompareFeaturesTable } from "./CompareFeaturesTable";
+import { AiModelUsageSection } from "./AiModelUsageSection";
 
 interface PlansViewProps {
   initialCycle?: BillingCycle;
@@ -79,8 +80,14 @@ export function PlansView({
 
       {/* 4. Compare All Features Table */}
       {showCompareTable && (
-        <CompareFeaturesTable plans={YEDII_APPLICATION_PLANS} />
+        <CompareFeaturesTable
+          plans={YEDII_APPLICATION_PLANS}
+          billingCycle={billingCycle}
+        />
       )}
+
+      {/* 5. AI Model Usage Section */}
+      <AiModelUsageSection />
     </div>
   );
 }

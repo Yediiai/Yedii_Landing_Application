@@ -33,24 +33,22 @@ export function PlansHeader({
         <button
           type="button"
           onClick={() => onBillingCycleChange("monthly")}
-          className={`flex-1 sm:w-[80px] sm:flex-initial h-[32px] rounded-[8px] text-[13px] sm:text-[14px] font-semibold flex items-center justify-center transition-colors cursor-pointer select-none leading-none ${
-            billingCycle === "monthly"
+          className={`flex-1 sm:w-[80px] sm:flex-initial h-[32px] rounded-[8px] text-[13px] sm:text-[14px] font-semibold flex items-center justify-center transition-colors cursor-pointer select-none leading-none ${billingCycle === "monthly"
               ? "bg-[#141C2E] text-white shadow-xs"
               : "bg-transparent text-[#5A6070] hover:text-[#17181C]"
-          }`}
+            }`}
         >
           Monthly
         </button>
         <button
           type="button"
           onClick={() => onBillingCycleChange("yearly")}
-          className={`flex-1 sm:w-[182px] sm:flex-initial h-[32px] rounded-[8px] text-[13px] sm:text-[14px] font-semibold flex items-center justify-center transition-colors cursor-pointer select-none leading-none gap-1.5 ${
-            billingCycle === "yearly"
+          className={`flex-1 sm:w-[182px] sm:flex-initial h-[32px] rounded-[8px] text-[13px] sm:text-[14px] font-semibold flex items-center justify-center transition-colors cursor-pointer select-none leading-none gap-1.5 ${billingCycle === "yearly"
               ? "bg-[#141C2E] text-white shadow-xs"
               : "bg-transparent text-[#5A6070] hover:text-[#17181C]"
-          }`}
+            }`}
         >
-          <span>Yearly — 2 mo free</span>
+          <span>Yearly</span>
         </button>
       </div>
     </div>
