@@ -16,7 +16,7 @@ interface PlansViewProps {
 }
 
 export function PlansView({
-  initialCycle = "yearly",
+  initialCycle = "monthly",
   initialPlanId = "growth",
   showCompareTable = true,
 }: PlansViewProps) {

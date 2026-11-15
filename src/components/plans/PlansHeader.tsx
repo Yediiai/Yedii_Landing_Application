@@ -29,26 +29,28 @@ export function PlansHeader({
       </div>
 
       {/* Monthly / Yearly Toggle Container */}
-      <div className="w-full sm:w-[271.6px] max-w-[320px] h-[39.6px] rounded-[10px] border-[0.8px] border-[#E4E5E8] bg-white p-[3px] flex items-center gap-[2px] shrink-0 self-start sm:self-auto shadow-2xs">
+      <div className="w-auto h-[38px] rounded-[10px] border-[0.8px] border-[#E4E5E8] bg-white p-[3px] flex items-center gap-[2px] shrink-0 self-start sm:self-auto shadow-2xs">
         <button
           type="button"
           onClick={() => onBillingCycleChange("monthly")}
-          className={`flex-1 sm:w-[80px] sm:flex-initial h-[32px] rounded-[8px] text-[13px] sm:text-[14px] font-semibold flex items-center justify-center transition-colors cursor-pointer select-none leading-none ${billingCycle === "monthly"
+          className={`px-4 sm:px-5 h-[32px] rounded-[8px] text-[13px] sm:text-[14px] font-semibold flex items-center justify-center transition-colors cursor-pointer select-none leading-none ${
+            billingCycle === "monthly"
               ? "bg-[#141C2E] text-white shadow-xs"
               : "bg-transparent text-[#5A6070] hover:text-[#17181C]"
-            }`}
+          }`}
         >
           Monthly
         </button>
         <button
           type="button"
           onClick={() => onBillingCycleChange("yearly")}
-          className={`flex-1 sm:w-[182px] sm:flex-initial h-[32px] rounded-[8px] text-[13px] sm:text-[14px] font-semibold flex items-center justify-center transition-colors cursor-pointer select-none leading-none gap-1.5 ${billingCycle === "yearly"
+          className={`px-4 sm:px-5 h-[32px] rounded-[8px] text-[13px] sm:text-[14px] font-semibold flex items-center justify-center transition-colors cursor-pointer select-none leading-none ${
+            billingCycle === "yearly"
               ? "bg-[#141C2E] text-white shadow-xs"
               : "bg-transparent text-[#5A6070] hover:text-[#17181C]"
-            }`}
+          }`}
         >
-          <span>Yearly</span>
+          Yearly
         </button>
       </div>
     </div>

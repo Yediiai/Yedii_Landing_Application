@@ -13,7 +13,7 @@ import {
 } from "@/components/plans";
 
 export function PricingSection() {
-  const [billingCycle, setBillingCycle] = useState<BillingCycle>("yearly");
+  const [billingCycle, setBillingCycle] = useState<BillingCycle>("monthly");
   const [selectedPlanId, setSelectedPlanId] = useState<PlanId>("growth");
 
   const carouselRef = useRef<PlanCardsCarouselRef>(null);
