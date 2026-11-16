@@ -28,8 +28,8 @@ export const LEGAL_CATEGORIES = [
 export const ALL_LEGAL_DOCUMENTS: LegalDocumentItem[] = LEGAL_SEEDS.map((seed) => ({
   ...seed,
   category: seed.category as 'ESSENTIAL' | 'AI_DATA' | 'ENTERPRISE',
-  effectiveDate: 'November 5, 2026',
-  lastUpdatedDate: 'November 5, 2026',
+  effectiveDate: seed.effectiveDate || 'November 5, 2026',
+  lastUpdatedDate: seed.lastUpdatedDate || 'November 5, 2026',
 }));
 
 export function getLegalDocumentBySlug(slug: string): LegalDocumentItem | undefined {

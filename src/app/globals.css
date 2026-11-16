@@ -44,6 +44,33 @@ select[class*="rounded"],
   border-radius: 18px !important;
 }
 
+/* Cookie consent UI exemption for modern enterprise rounded corners */
+.cookie-consent-scope,
+.cookie-consent-scope [class*="rounded-full"],
+.cookie-consent-scope button.rounded-full {
+  border-radius: 9999px !important;
+}
+.cookie-consent-scope.rounded-2xl,
+.cookie-consent-scope .rounded-2xl {
+  border-radius: 16px !important;
+}
+.cookie-consent-scope.rounded-xl,
+.cookie-consent-scope .rounded-xl {
+  border-radius: 12px !important;
+}
+.cookie-consent-scope.rounded-lg,
+.cookie-consent-scope .rounded-lg,
+.cookie-consent-scope button.rounded-lg,
+.cookie-consent-scope a.rounded-lg {
+  border-radius: 8px !important;
+}
+.cookie-consent-scope.rounded-md,
+.cookie-consent-scope .rounded-md,
+.cookie-consent-scope button.rounded-md,
+.cookie-consent-scope span.rounded-md {
+  border-radius: 6px !important;
+}
+
 * {
   box-sizing: border-box;
 }

@@ -46,6 +46,8 @@ export interface LegalSeedDocument {
   initialVersion: string;
   changeSummary: string;
   content: string;
+  effectiveDate?: string;
+  lastUpdatedDate?: string;
 }
 
 export const LEGAL_SEEDS: LegalSeedDocument[] = [
@@ -62,72 +64,405 @@ export const LEGAL_SEEDS: LegalSeedDocument[] = [
     metaTitle: 'Terms of Service | Yedii Legal & Compliance',
     metaDescription: 'Read the Terms of Service governing access, accounts, subscriptions, and AI agent operations on Yedii.',
     displayOrder: 1,
-    initialVersion: '1.0',
-    changeSummary: 'Initial release of enterprise Terms of Service.',
+    initialVersion: '1.1',
+    changeSummary: 'Updated Terms of Service covering AI Agent operations, third-party foundation models, knowledge ingestion, subscriptions, and dispute resolution.',
+    effectiveDate: 'November 5, 2026',
+    lastUpdatedDate: 'November 16, 2026',
     content: `# Terms of Service
 
 **Effective Date:** November 5, 2026  
-**Last Updated:** November 5, 2026  
-**Version:** 1.0
+**Last Updated:** November 16, 2026  
+**Version:** 1.1
 
-PLEASE READ THESE TERMS OF SERVICE ("TERMS") CAREFULLY BEFORE ACCESSING OR USING THE YEDII PLATFORM. BY REGISTERING AN ACCOUNT, ACCESSING OUR APIS, OR DEPLOYING AI AGENTS THROUGH YEDII, YOU AGREE TO BE BOUND BY THESE TERMS.
+> *Draft for legal review. This document is a working template, not legal advice. Before publication, replace every bracketed placeholder, verify that the provisions match Yedii's actual product and vendor arrangements, and obtain review from qualified counsel in the jurisdictions where Yedii operates and sells its services.*
+
+PLEASE READ THESE TERMS OF SERVICE ("Terms") CAREFULLY BEFORE ACCESSING OR USING THE YEDII PLATFORM. BY CREATING AN ACCOUNT, ACCESSING OUR WEBSITES OR APIS, CONNECTING AN INTEGRATION, OR DEPLOYING AN AI AGENT THROUGH YEDII, YOU AGREE TO THESE TERMS.
 
 ---
 
-### 1. Introduction and Agreement
-These Terms constitute a legally binding agreement between you (whether individually or on behalf of an enterprise or entity, "Customer", "You", or "User") and Yedii Inc. ("Yedii", "we", "us", or "our"). Yedii provides an enterprise-grade artificial intelligence customer support SaaS platform encompassing autonomous AI agents, knowledge ingestion, multi-tenant workspace management, vector retrieval, and third-party integrations.
+## 1. Introduction and Agreement
+These Terms form a legally binding agreement between you ("Customer," "you," or "your") and Yedii Inc., doing business as Yedii ("Yedii," "we," "us," or "our").
 
-If you are entering into these Terms on behalf of an organization or company, you represent and warrant that you possess full corporate authority to bind such entity. If you do not have such authority or do not agree with any provision of these Terms, you must not access or use the platform.
+Yedii provides a software-as-a-service platform for configuring and deploying AI-powered customer-support agents, managing workspaces, connecting knowledge sources, crawling and processing website content, retrieving information using retrieval-augmented generation (RAG), and integrating with supported third-party services (the "Services").
 
-### 2. Account Registration and Security
-- **Eligibility:** You must be at least 18 years old or the age of majority in your jurisdiction to create an account.
-- **Accuracy:** You must provide complete, accurate, and current information during registration.
-- **Credentials:** You are responsible for safeguarding your login credentials, API keys, and session tokens. You must immediately notify Yedii of any unauthorized access or breach of security.
-- **Workspaces & Organizations:** Workspaces represent distinct administrative boundaries. Account Owners and Admins are legally liable for all actions conducted under their workspace.
+If you accept these Terms on behalf of a company or other organization, you represent that you have authority to bind that organization. If you do not have that authority, or do not agree to these Terms, you must not access or use the Services.
 
-### 3. Permitted Use and Service Scope
-Subject to these Terms and timely payment of subscription fees, Yedii grants you a non-exclusive, non-transferable, revocable right to access and use the platform for your internal business customer support operations.
+These Terms incorporate the policies and documents referenced below, as applicable:
+- [Privacy Policy](/legal/privacy-policy)
+- [Data Processing Agreement (DPA)](/legal/data-processing-agreement)
+- [Acceptable Use Policy](/legal/acceptable-use-policy)
+- [Cookie Policy](/legal/cookie-policy)
+- [Data Retention and Deletion Policy](/legal/data-retention-policy)
+- Any applicable order form, enterprise agreement, or service-level agreement signed by the parties.
 
-You shall not:
-1. Reverse engineer, decompile, or disassemble any aspect of Yedii's software, crawlers, or proprietary embeddings.
-2. Circumvent usage quotas, rate limits, credit caps, or licensing tiers.
-3. Access Yedii to build a competitive benchmarking service or copy platform architecture.
-4. Use Yedii in violation of export control laws, sanction regimes, or applicable regulations.
+If an executed order form or enterprise agreement conflicts with these Terms, that document controls only to the extent of the conflict and only for the Services covered by it. A DPA governs the parties' processing of personal data to the extent it applies.
 
-### 4. Subscriptions, Invoicing, and Billing
-- **Merchant of Record:** All customer payments, subscriptions, and invoicing are handled through our global Merchant of Record, **Paddle** (Paddle.com Market Ltd / Paddle Payments Ltd).
-- **Billing Intervals:** Subscriptions are billed in advance on a recurring monthly or annual basis.
-- **Credits & Quotas:** AI response credits, ingestion capacities, and workspace limits are allocated based on your purchased plan tier. Unused monthly credits do not roll over unless explicitly provided in an Enterprise Order Form.
-- **Taxes:** Paddle collects and remits applicable VAT, GST, and sales taxes depending on your billing address.
-- **Default & Suspension:** Failure to pay subscription fees within 14 days of due date may result in automatic suspension of AI agents and API access.
+## 2. Definitions
+For purposes of these Terms:
+- **Account** means the registered account used to access the Services.
+- **AI Agent** means an AI-powered assistant configured or deployed through Yedii.
+- **Customer Data** means data, content, documents, prompts, instructions, files, website content, conversation records, and other materials submitted to or generated for the Customer through its use of the Services, excluding Yedii Materials and Usage Data.
+- **End User** means an individual who interacts with a Customer's deployed AI Agent or other customer-facing integration.
+- **Workspace** means a logical environment in the Services used to organize agents, users, settings, knowledge sources, and related data.
+- **Yedii Materials** means the Services and their software, interfaces, designs, documentation, APIs, models or systems developed by Yedii, and all related intellectual property, excluding Customer Data.
+- **Usage Data** means technical, diagnostic, and usage information about how the Services are accessed and used, which does not identify an individual except where permitted by applicable law and the Privacy Policy.
 
-### 5. Intellectual Property Rights
-- **Yedii Ownership:** Yedii retains all right, title, and interest in and to the platform, including UI/UX, database designs, proprietary vector algorithms, APIs, logos, and system prompts.
-- **Customer Content:** You retain ownership of all knowledge-base documents, PDFs, crawled domain content, FAQs, customer conversation logs, and proprietary data uploaded to your workspace ("Customer Data").
-- **License to Yedii:** You grant Yedii a worldwide, limited, non-exclusive license to host, process, vectorize, and retrieve Customer Data strictly to operate, maintain, and provide the services to you.
+## 3. Eligibility and Account Registration
+You must be at least 18 years old or the age of legal majority in your jurisdiction, whichever is higher, to create an Account.
 
-### 6. AI Agent Behavior and Disclosures
-- **Agent Nature:** AI agents generated through Yedii utilize third-party foundation models (including OpenAI, Anthropic, Google Gemini, and DeepSeek).
-- **Hallucination Disclaimer:** AI outputs are probabilistic. While Yedii provides grounding mechanisms (RAG), Yedii does not guarantee that every AI-generated response is 100% accurate, complete, or error-free.
-- **Customer Oversight:** You are responsible for configuring system prompts, guardrails, human escalation rules, and reviewing high-risk automated interactions.
+You agree to:
+1. Provide accurate, complete, and current registration and billing information.
+2. Keep your Account information up to date.
+3. Protect your passwords, API keys, access tokens, and other credentials.
+4. Restrict access to authorized users and use appropriate access controls.
+5. Notify Yedii promptly at \`security@yedii.com\` if you suspect unauthorized access, credential compromise, or a security incident involving your Account.
+6. Ensure that each person using your Account is authorized to do so.
 
-### 7. Limitation of Liability
-TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL YEDII, ITS DIRECTORS, EMPLOYEES, OR AFFILIATES BE LIABLE FOR ANY INDIRECT, PUNITIVE, INCIDENTAL, SPECIAL, OR CONSEQUENTIAL DAMAGES, INCLUDING LOSS OF PROFITS, DATA LOSS, BUSINESS INTERRUPTION, OR SERVICE INTERRUPTIONS.
+You are responsible for activity conducted through your Account and Workspaces, except to the extent caused by Yedii's breach of these Terms or applicable law. You must not share credentials in a way that circumvents plan or user limits.
 
-IN NO EVENT SHALL YEDII'S TOTAL AGGREGATE LIABILITY EXCEED THE GREATER OF ONE HUNDRED US DOLLARS ($100 USD) OR THE TOTAL FEES ACTUALLY PAID BY YOU TO YEDII IN THE TWELVE (12) MONTHS PRECEDING THE CLAIM.
+Yedii may require identity, business, or payment verification where reasonably necessary for security, fraud prevention, legal compliance, or payment-provider requirements.
 
-### 8. Term, Suspension, and Termination
-- Either party may terminate these Terms for convenience with 30 days' notice, or immediately for material breach remaining uncured after 15 days written notice.
-- Upon termination, your right to access AI agents terminates, and Customer Data will be retained or deleted according to our Data Retention & Deletion Policy.
+## 4. Workspaces, Users, and Account Administration
+The Services may allow you to create or manage Workspaces, invite users, assign roles, and configure AI Agents.
 
-### 9. Governing Law and Dispute Resolution
-These Terms shall be governed by and construed in accordance with the laws of the State of Delaware (for international customers) or the laws of India (where required by local statutory mandates), without regard to conflict of law principles. Any dispute arising out of or related to these Terms shall be resolved by binding arbitration under the rules of the American Arbitration Association or the Mumbai Centre for International Arbitration (MCIA).
+You are responsible for:
+- Selecting appropriate Workspace administrators and permissions.
+- Reviewing access when a user joins, changes roles, or leaves your organization.
+- Ensuring that your users comply with these Terms.
+- Maintaining appropriate copies of Customer Data and configuration information.
+- Managing the publication and availability of AI Agents connected to your websites, applications, or channels.
 
-### 10. Contact Information
-For legal inquiries, contact:
+Workspace owners and administrators may be able to access, modify, export, or delete Workspace data. You should not grant administrative access to people who do not need it.
+
+## 5. Platform Services and Service Scope
+Subject to these Terms, your subscription, and payment of applicable fees, Yedii grants you a limited, non-exclusive, non-transferable, revocable right during the subscription term to access and use the Services for your internal business operations and customer-support use cases.
+
+The Services may include:
+- AI Agent creation, configuration, testing, and deployment.
+- Knowledge-source connections and document ingestion.
+- Website crawling, sitemap processing, content extraction, chunking, embedding, indexing, and retrieval.
+- Conversation and message management.
+- APIs, hosted chat experiences, website widgets, and supported integrations.
+- Usage analytics, administrative tools, and workspace management.
+
+Features may vary by plan, region, release stage, or applicable order form. Yedii may update, improve, or modify the Services, provided that it does not materially reduce a paid feature during a committed term except where reasonably necessary for security, legal compliance, or circumstances outside Yedii's reasonable control.
+
+Yedii does not promise that every feature will be available in every region or on every plan.
+
+## 6. Acceptable Use and Restrictions
+You must use the Services lawfully and in accordance with these Terms and the [Acceptable Use Policy](/legal/acceptable-use-policy).
+
+You must not, and must not permit another person to:
+1. Reverse engineer, decompile, disassemble, or attempt to derive source code, underlying models, or non-public components of the Services, except where applicable law does not permit this restriction.
+2. Copy, resell, sublicense, lease, or commercially exploit the Services except as expressly permitted by Yedii.
+3. Circumvent usage quotas, rate limits, credit limits, authentication controls, or subscription restrictions.
+4. Access or attempt to access another customer's Account, Workspace, data, or systems without authorization.
+5. Probe, scan, test, or interfere with the security or integrity of the Services without Yedii's prior written authorization.
+6. Upload or transmit malware, malicious code, or content designed to disrupt systems.
+7. Use the Services for fraud, phishing, impersonation, spam, harassment, unlawful surveillance, or other unlawful or deceptive activity.
+8. Use the Services to infringe intellectual property, privacy, publicity, or other rights.
+9. Use the Services to develop or provide a competing service by misusing Yedii's confidential information or non-public materials.
+10. Use the Services in violation of export controls, sanctions, or other applicable laws.
+11. Use AI Agents to make decisions in high-impact or regulated contexts without appropriate human review, safeguards, and legal authorization.
+12. Use the Services in a manner that creates unreasonable risk, excessive load, or harm to Yedii, other customers, End Users, or third parties.
+
+Yedii may investigate suspected violations and may restrict, suspend, or terminate access in accordance with Section 19.
+
+## 7. AI Agents, Automated Responses, and AI Output
+### 7.1 Probabilistic Nature of AI
+AI Agents use machine-learning systems and may rely on third-party foundation-model providers. AI-generated outputs are probabilistic and may be inaccurate, incomplete, outdated, misleading, or inappropriate, even when an Agent uses Customer Data or retrieval-augmented generation.
+
+Yedii does not warrant that an AI Agent will always provide correct, complete, safe, or suitable responses, or that it will achieve a particular business outcome.
+
+### 7.2 Customer Configuration and Oversight
+You are responsible for:
+- Configuring Agent instructions, prompts, tone, tools, permissions, and guardrails.
+- Selecting and maintaining appropriate knowledge sources.
+- Testing Agents before deployment and monitoring them after deployment.
+- Establishing human review and escalation processes appropriate to your use case.
+- Reviewing high-impact, sensitive, or consequential outputs before relying on them.
+- Ensuring that disclosures about AI interaction are provided where required by law.
+
+You must not represent an AI Agent as a human when doing so would be misleading or unlawful.
+
+### 7.3 High-Risk and Professional Advice
+Unless expressly agreed in a separate written agreement and legally permitted, the Services are not designed to provide medical, legal, financial, emergency, or other regulated professional advice. You must not rely on AI outputs as a substitute for qualified professional judgment.
+
+You are responsible for determining whether your intended use is subject to laws governing automated decision-making, consumer protection, employment, healthcare, financial services, or other regulated activities.
+
+### 7.4 Model and Provider Changes
+Yedii may change, replace, or discontinue a model or AI provider where reasonably necessary for performance, security, cost, availability, or compliance. Such changes may affect response quality, latency, or behavior.
+
+## 8. Customer Data and Intellectual Property
+### 8.1 Customer Ownership
+As between you and Yedii, you retain your rights in Customer Data. You are responsible for Customer Data and represent that you have all rights, permissions, consents, and lawful bases necessary to submit it to Yedii and authorize the processing described in these Terms.
+
+### 8.2 License to Provide the Services
+You grant Yedii and its service providers a worldwide, non-exclusive, limited license to host, store, reproduce, transmit, display, process, extract, normalize, chunk, vectorize, index, retrieve, and otherwise use Customer Data only as reasonably necessary to:
+- Provide, maintain, secure, and support the Services.
+- Operate AI Agents and fulfill your instructions.
+- Prevent abuse, troubleshoot issues, and enforce these Terms.
+- Comply with applicable law and legal process.
+
+This license continues for as long as needed to provide the Services and handle permitted backups, legal obligations, disputes, and security records, subject to the applicable DPA and Data Retention and Deletion Policy.
+
+Yedii will not use Customer Data to train general-purpose models for unrelated customers unless you separately authorize that use or the parties agree otherwise in writing.
+
+### 8.3 Yedii Ownership
+Yedii and its licensors retain all rights, title, and interest in Yedii Materials, including software, source code, interfaces, designs, documentation, APIs, trademarks, logos, and proprietary technology. No rights are granted except those expressly stated in these Terms.
+
+### 8.4 Feedback
+If you provide suggestions, ideas, or feedback about the Services, Yedii may use them without restriction or compensation, provided that this does not grant Yedii ownership of your Customer Data or confidential information.
+
+## 9. Website Crawling and Knowledge Ingestion
+The Services may allow you to submit websites, domains, URLs, sitemaps, documents, or other knowledge sources for ingestion and retrieval.
+
+You represent and warrant that:
+1. You own, control, or have permission to submit and process each website, domain, URL, document, and other source.
+2. Your submission and use of content comply with applicable copyright, database, privacy, contract, and other laws.
+3. You will respect applicable website terms, access restrictions, robots.txt directives, and technical restrictions.
+4. You will not use crawling or ingestion to access protected, private, or restricted content without authorization.
+
+Yedii may apply crawling limits, request limits, concurrency controls, timeouts, retries, and rate limits to protect the Services and third-party systems. Yedii may pause or reject a crawling job that appears unauthorized, harmful, abusive, or technically unsafe.
+
+Website content may change, become unavailable, block automated access, or fail to extract correctly. Yedii does not guarantee that all submitted pages or content will be discovered, fetched, parsed, or indexed successfully.
+
+You are responsible for reviewing ingested content and ensuring that it is suitable for use by your AI Agents. Yedii may remove or disable a source where reasonably necessary to address a legal, security, or operational concern.
+
+## 10. Third-Party Services, AI Providers, and Integrations
+The Services may interoperate with third-party products and services, including AI model providers, payment processors, cloud infrastructure, vector databases, crawling tools, authentication providers, and customer integrations.
+
+Examples may include OpenAI, Anthropic, Google, DeepSeek, Paddle, Qdrant, cloud-hosting providers, Crawl4AI-related infrastructure, GitHub, Cloudflare, Shopify, and other providers or integrations made available from time to time.
+
+Third-party services are governed by their own terms, privacy policies, availability, and technical requirements. Your use of them may require a separate account or agreement.
+
+Where necessary to provide the Services, Customer Data or prompts may be transmitted to third-party providers for processing on your behalf. The applicable provider, processing purpose, data categories, and safeguards should be described in Yedii's Privacy Policy, DPA, or subprocessor information.
+
+Yedii is not responsible for independent third-party services, but this does not exclude responsibility that cannot lawfully be excluded or responsibility for Yedii's own obligations under these Terms or an applicable DPA.
+
+You authorize Yedii to connect to third-party services that you choose to enable and to process data as needed to perform the integration you request.
+
+## 11. End Users, Privacy, and Customer Responsibilities
+If you deploy an AI Agent or widget for End Users, you are responsible for your relationship with those End Users and for the content, notices, and services you provide to them.
+
+You must:
+- Provide privacy notices and other disclosures required by applicable law.
+- Obtain consent or establish another lawful basis for collecting and processing personal data.
+- Disclose AI interaction where required.
+- Ensure that your use of conversation data is lawful and consistent with your privacy notices.
+- Avoid collecting unnecessary sensitive or special-category personal data.
+- Establish appropriate retention, access, and deletion practices for End User information.
+- Respond to End User requests and complaints where you are legally responsible for doing so.
+- Configure suitable human escalation and safeguards for sensitive or high-risk interactions.
+
+Yedii's processing of personal data on your behalf is governed by the [Data Processing Agreement (DPA)](/legal/data-processing-agreement) where applicable. Yedii's handling of account, website, and other personal information for its own purposes is described in the [Privacy Policy](/legal/privacy-policy).
+
+## 12. API Access and Integrations
+If Yedii provides API keys, endpoints, SDKs, webhooks, widgets, or other developer tools, you must keep credentials confidential and use them only for authorized purposes.
+
+You are responsible for:
+1. Securing API keys and rotating or revoking compromised credentials.
+2. Implementing reasonable authentication, authorization, and rate-limit handling in your applications.
+3. Ensuring that your integrations comply with these Terms and applicable documentation.
+4. Preventing unauthorized use of your API credentials.
+5. Maintaining compatibility with supported API versions.
+
+Yedii may introduce, modify, deprecate, or discontinue APIs and integrations. Where reasonably practicable, Yedii will provide advance notice of material changes that may require customer action. Emergency changes may be made without advance notice to address security, legal, or service-integrity risks.
+
+## 13. Subscriptions, Billing, and Payments
+### 13.1 Plans and Fees
+Certain Services require a paid subscription. Plan features, prices, billing intervals, limits, and applicable taxes are presented at checkout or in an applicable order form.
+
+You agree to pay all fees associated with your subscription. Unless otherwise stated, subscriptions are billed in advance on a recurring monthly or annual basis.
+
+### 13.2 Merchant of Record
+Yedii currently uses Paddle as its Merchant of Record for applicable transactions. Paddle's relevant legal entity and role, payment terms, and customer-facing checkout disclosures will apply to those transactions. Paddle may calculate, collect, and remit applicable transaction taxes as required.
+
+### 13.3 Automatic Renewal and Cancellation
+Unless the checkout or order form states otherwise, subscriptions automatically renew for successive billing periods until cancelled.
+
+You may cancel through the available account billing controls or by contacting \`billing@yedii.com\`. Cancellation will generally take effect at the end of the current paid billing period unless applicable law or an order form requires otherwise. You remain responsible for fees incurred before cancellation takes effect.
+
+### 13.4 Failed Payments
+If a payment fails or remains unpaid, Yedii or its payment provider may retry the payment and notify you. If payment remains overdue, Yedii may restrict or suspend paid features after reasonable notice, subject to applicable law and the payment provider's processes.
+
+### 13.5 Taxes
+Fees may exclude taxes unless expressly stated otherwise. Applicable taxes may be calculated and collected by the Merchant of Record or as otherwise required by law. You are responsible for taxes imposed on your purchase that Yedii or its payment provider is not legally required to collect.
+
+### 13.6 Refunds
+Refunds are handled in accordance with applicable law, the checkout terms, the Merchant of Record's applicable policies, and any written agreement between you and Yedii. Nothing in these Terms limits a refund or cancellation right that cannot lawfully be excluded.
+
+### 13.7 Payment Disputes
+If you believe a charge is incorrect, contact \`billing@yedii.com\` promptly and provide relevant transaction details. This does not limit any statutory rights or payment-dispute rights available to you.
+
+## 14. Credits, Quotas, and Fair Usage
+Your plan may include limits on AI response credits, agents, workspaces, users, invitations, pages, storage, API requests, crawling, or other resources.
+
+The plan description and in-product usage information identify the applicable limits. Unless expressly stated in an order form:
+- Credits and quotas are for the applicable Account and billing period and are not transferable.
+- Unused recurring credits do not roll over.
+- Credits reset according to the plan's billing cycle or the schedule displayed in the Services.
+- Usage above plan limits may be blocked, require an upgrade, or incur additional charges only where those charges have been clearly disclosed and accepted.
+- Yedii may apply reasonable technical limits to protect platform stability and prevent abuse.
+
+The definition of a billable AI response, treatment of failed requests, and any credit deductions should be explained in the applicable pricing or usage documentation. Do not rely on this section as a substitute for a clear in-product credit calculation.
+
+Yedii may modify plan limits for future billing periods after providing notice where required by law or the applicable order form.
+
+## 15. Data Retention, Export, and Deletion
+Yedii retains Customer Data in accordance with the [Privacy Policy](/legal/privacy-policy), applicable [Data Processing Agreement (DPA)](/legal/data-processing-agreement), [Data Retention and Deletion Policy](/legal/data-retention-policy), and any order form.
+
+The retention period may depend on the data type, subscription plan, customer configuration, legal obligations, and technical requirements. The currently intended conversation-retention schedule is:
+
+| Plan | Intended Conversation Retention |
+|---|---|
+| Free | 30 days |
+| Starter | 60 days |
+| Growth | 90 days |
+| Pro | 120 days |
+| Enterprise | 150 days, unless an order form specifies otherwise |
+
+This schedule must be verified against the production implementation and the published plan descriptions before it is made binding.
+
+You may be able to delete agents, Workspaces, knowledge sources, conversations, or other Customer Data through the Services. Deletion may take time to propagate to active systems, caches, backups, and subprocessors. Copies may be retained for a limited period where necessary for backup integrity, security, fraud prevention, legal compliance, or dispute resolution.
+
+You are responsible for exporting any data you need before terminating your Account or Workspace. Yedii does not guarantee that deleted data can be recovered.
+
+Where the DPA applies, its deletion and return provisions control to the extent of any conflict.
+
+## 16. Confidentiality and Security
+Each party may receive non-public information from the other party that is identified as confidential or that reasonably should be understood to be confidential ("Confidential Information").
+
+The receiving party will:
+1. Use Confidential Information only to perform or exercise rights under the agreement.
+2. Protect it using reasonable care and no less than the care it uses for its own similar information.
+3. Disclose it only to personnel, professional advisers, and service providers who need to know it and are subject to confidentiality obligations.
+4. Notify the disclosing party of unauthorized use or disclosure where legally permitted and reasonably practicable.
+
+Confidential Information does not include information that the receiving party can demonstrate is public without breach, already lawfully known, independently developed, or lawfully received from another source without confidentiality restrictions.
+
+Yedii maintains technical and organizational security measures designed to protect the Services and Customer Data. No system can be guaranteed completely secure. Security commitments, incident-notification obligations, and processing safeguards are further described in the DPA and applicable security documentation.
+
+## 17. Service Availability and Maintenance
+Yedii will use commercially reasonable efforts to make the Services available, but does not guarantee uninterrupted or error-free operation unless an executed SLA expressly provides otherwise.
+
+Availability may be affected by scheduled maintenance, emergency maintenance, internet or telecommunications failures, third-party provider outages, cyberattacks, force majeure events, or other circumstances outside Yedii's reasonable control.
+
+Yedii may temporarily suspend access to all or part of the Services to perform maintenance, address security risks, comply with law, or protect the Services and other customers. Where reasonably practicable, Yedii will provide advance notice of planned maintenance likely to materially affect availability.
+
+Enterprise availability, support, response-time, and service-credit commitments must be set out in a separate signed SLA or order form.
+
+## 18. Beta and Experimental Features
+Yedii may make beta, preview, experimental, or early-access features available. These features may be incomplete, change without notice, or be discontinued.
+
+Unless a separate written agreement states otherwise, beta features are provided "as is," may not be covered by service commitments, and should not be used for production-critical or regulated workflows without appropriate testing and safeguards.
+
+## 19. Suspension and Termination
+### 19.1 Suspension
+Yedii may suspend or restrict access to an Account, Workspace, AI Agent, API, or feature if Yedii reasonably believes:
+- You have materially breached these Terms or an incorporated policy.
+- Your use presents a security, legal, fraud, or operational risk.
+- Your payment is overdue.
+- Your use may harm another customer, End User, third party, or the Services.
+- Suspension is required by law, court order, or a third-party provider.
+
+Where reasonably practicable and legally permitted, Yedii will provide notice and an opportunity to address the issue before suspension. Yedii may act immediately where necessary to prevent harm, comply with law, or protect security.
+
+### 19.2 Termination by Either Party
+Either party may terminate an affected subscription or these Terms for material breach if the other party fails to cure the breach within 30 days after receiving written notice describing it. For breaches that cannot reasonably be cured, termination may be immediate.
+
+You may terminate your Account or subscription in accordance with the cancellation process in Section 13 and any applicable order form.
+
+Yedii may terminate the Services or these Terms where required by law, where it discontinues the Services, or where continued provision becomes commercially or technically impracticable. Where reasonably practicable, Yedii will provide advance notice and any refund required by applicable law or an applicable order form.
+
+### 19.3 Effect of Termination
+Upon termination:
+- Your right to access and use the terminated Services ends.
+- You must stop using Yedii Materials and any credentials that are no longer authorized.
+- Outstanding fees become due as provided in the applicable billing terms.
+- Customer Data will be made available for export or deleted in accordance with the DPA and Data Retention and Deletion Policy, subject to lawful retention and backup processes.
+
+Sections that by their nature should survive termination will survive, including provisions concerning fees owed, intellectual property, confidentiality, disclaimers, limitation of liability, indemnification, dispute resolution, and other accrued rights.
+
+## 20. Indemnification
+To the extent permitted by applicable law, you will defend, indemnify, and hold harmless Yedii and its officers, directors, employees, and affiliates from third-party claims, losses, liabilities, damages, and reasonable costs (including legal fees) arising from:
+1. Customer Data or materials you submit, except to the extent the claim results from Yedii's unlawful use of them.
+2. Your unlawful use of the Services or violation of these Terms.
+3. Your infringement or alleged infringement of a third party's rights.
+4. Your products, services, websites, or relationship with End Users.
+5. Your failure to obtain required rights, notices, or consents.
+
+Yedii will provide reasonable notice of the claim and cooperation at your expense. You may not settle a claim in a way that imposes liability or an admission on Yedii without Yedii's prior written consent.
+
+Any indemnification obligation of Yedii must be expressly stated in a separate written agreement or order form.
+
+## 21. Disclaimer of Warranties
+TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, THE SERVICES AND YEDII MATERIALS ARE PROVIDED "AS IS" AND "AS AVAILABLE." YEDII DISCLAIMS ALL WARRANTIES THAT MAY LAWFULLY BE DISCLAIMED, WHETHER EXPRESS, IMPLIED, STATUTORY, OR OTHERWISE, INCLUDING IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND NON-INFRINGEMENT.
+
+YEDII DOES NOT WARRANT THAT THE SERVICES WILL BE UNINTERRUPTED, ERROR-FREE, COMPLETELY SECURE, OR COMPATIBLE WITH EVERY SYSTEM; THAT CRAWLING OR INGESTION WILL CAPTURE EVERY PAGE OR DOCUMENT; OR THAT AI OUTPUTS WILL BE ACCURATE, COMPLETE, OR SUITABLE FOR YOUR PURPOSE.
+
+NOTHING IN THESE TERMS EXCLUDES A WARRANTY OR RIGHT THAT CANNOT LAWFULLY BE EXCLUDED.
+
+## 22. Limitation of Liability
+TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW:
+1. NEITHER PARTY WILL BE LIABLE TO THE OTHER FOR INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, PUNITIVE, OR CONSEQUENTIAL DAMAGES, OR FOR LOSS OF PROFITS, REVENUE, GOODWILL, BUSINESS OPPORTUNITY, OR DATA, ARISING OUT OF OR RELATED TO THESE TERMS, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+2. EACH PARTY'S TOTAL AGGREGATE LIABILITY ARISING OUT OF OR RELATED TO THESE TERMS WILL NOT EXCEED THE GREATER OF (A) USD $100 OR (B) THE FEES PAID OR PAYABLE BY YOU TO YEDII FOR THE SERVICES GIVING RISE TO THE CLAIM DURING THE 12 MONTHS BEFORE THE EVENT FIRST GIVING RISE TO LIABILITY.
+
+The limitations above do not apply to liability that cannot be limited under applicable law.
+
+## 23. Governing Law and Dispute Resolution
+These Terms and any non-contractual obligations arising out of or in connection with them will be governed by the laws of the State of Delaware (or applicable local laws where mandatory), without regard to conflict-of-law principles, subject to mandatory consumer-protection and other laws that cannot lawfully be excluded.
+
+Any dispute arising out of or relating to these Terms will be resolved by binding arbitration under the rules of the American Arbitration Association (AAA) or the Mumbai Centre for International Arbitration (MCIA), or in the competent courts having jurisdiction.
+
+## 24. Changes to These Terms
+Yedii may update these Terms from time to time. The "Last Updated" date indicates when the latest version was published.
+
+For material changes, Yedii will provide reasonable notice through the Services, by email, or by another appropriate method where required by law. Changes will take effect on the date stated in the notice. If you do not agree to a material change, you must stop using the affected Services and may cancel your subscription in accordance with these Terms and applicable law.
+
+Continued use after the effective date of updated Terms constitutes acceptance where such acceptance is legally effective. Where affirmative consent is required, Yedii will request it.
+
+## 25. General Provisions
+### 25.1 Entire Agreement
+These Terms, together with incorporated policies, applicable order forms, and any signed DPA or SLA, form the entire agreement between the parties concerning their subject matter and supersede prior agreements on that subject.
+
+### 25.2 Severability
+If a provision is held invalid or unenforceable, it will be modified to the minimum extent necessary to make it enforceable, and the remaining provisions will remain in effect.
+
+### 25.3 No Waiver
+A failure or delay in enforcing a provision is not a waiver of that provision or any other right.
+
+### 25.4 Assignment
+You may not assign or transfer these Terms or any rights or obligations under them without Yedii's prior written consent, except as permitted by applicable law. Yedii may assign these Terms to an affiliate or in connection with a merger, reorganization, or sale of substantially all relevant assets, subject to applicable law.
+
+### 25.5 Independent Contractors
+The parties are independent contractors. These Terms do not create a partnership, joint venture, agency, employment, or franchise relationship.
+
+### 25.6 Force Majeure
+Neither party will be liable for delay or failure to perform caused by events beyond its reasonable control, including natural disasters, war, terrorism, civil unrest, labor disputes, government action, widespread internet or telecommunications failures, power outages, and failures of third-party infrastructure, provided the affected party takes reasonable steps to mitigate the effects.
+
+### 25.7 Notices
+Legal notices to Yedii must be sent to:
+
 **Yedii Legal Department**  
-Email: \`legal@yedii.com\`  
-Address: 100 Enterprise Way, Suite 400, Wilmington, DE 19801 / India Operations: Bangalore, Karnataka, India.
+Legal Entity: Yedii Inc.  
+Address: 100 Enterprise Way, Suite 400, Wilmington, DE 19801 / Bangalore, Karnataka, India  
+Legal Notices Email: \`legal@yedii.com\`  
+
+Notices to you may be sent to the email address associated with your Account or through the Services. You are responsible for keeping your contact details current.
+
+### 25.8 No Third-Party Beneficiaries
+Except for the indemnified persons expressly identified in these Terms, these Terms do not create rights for third-party beneficiaries.
+
+## 26. Contact Information
+For questions about these Terms, contact:
+
+**Yedii**  
+Legal Entity: Yedii Inc.  
+Website: https://yedii.com  
+Legal Inquiries: \`legal@yedii.com\`  
+Support: \`support@yedii.com\`  
+Business Address: 100 Enterprise Way, Suite 400, Wilmington, DE 19801 / Bangalore, Karnataka, India
 `,
   },
 
