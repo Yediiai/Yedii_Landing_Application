@@ -51,19 +51,6 @@ export function SolutionsMegaMenu({
               </Link>
 
               <Link
-                href="/solutions/use-cases/ecommerce-support"
-                onClick={onClose}
-                className="group block"
-              >
-                <div className="text-[13.5px] font-semibold text-[#111827] group-hover:text-black transition-colors">
-                  E-commerce Support
-                </div>
-                <div className="text-[12px] text-[#6B7280] font-normal leading-snug mt-0.5">
-                  Order tracking, returns, sizing, and product questions
-                </div>
-              </Link>
-
-              <Link
                 href="/solutions/use-cases/technical-support"
                 onClick={onClose}
                 className="group block"
@@ -99,19 +86,6 @@ export function SolutionsMegaMenu({
                 </div>
                 <div className="text-[12px] text-[#6B7280] font-normal leading-snug mt-0.5">
                   Guided onboarding, milestone setup, and feature discovery
-                </div>
-              </Link>
-
-              <Link
-                href="/solutions/use-cases/billing-support"
-                onClick={onClose}
-                className="group block"
-              >
-                <div className="text-[13.5px] font-semibold text-[#111827] group-hover:text-black transition-colors">
-                  Billing &amp; Subscription Support
-                </div>
-                <div className="text-[12px] text-[#6B7280] font-normal leading-snug mt-0.5">
-                  Demystify invoices, prorations, and subscription renewals
                 </div>
               </Link>
             </div>
@@ -188,19 +162,6 @@ export function SolutionsMegaMenu({
                 </div>
                 <div className="text-[12px] text-[#6B7280] font-normal leading-snug mt-0.5">
                   Admissions triage, enrollment schedules, and student FAQs
-                </div>
-              </Link>
-
-              <Link
-                href="/solutions/industries/logistics"
-                onClick={onClose}
-                className="group block"
-              >
-                <div className="text-[13.5px] font-semibold text-[#111827] group-hover:text-black transition-colors">
-                  Logistics &amp; Supply Chain
-                </div>
-                <div className="text-[12px] text-[#6B7280] font-normal leading-snug mt-0.5">
-                  Shipment check-calls, customs documentation, and dispatch
                 </div>
               </Link>
             </div>
