@@ -125,25 +125,25 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-xs animate-in fade-in duration-150">
       <div
-        className="relative w-full max-w-2xl bg-white rounded-2xl shadow-2xl border border-[#E5E7EB] overflow-hidden flex flex-col h-[650px] max-h-[90vh]"
+        className="relative w-full max-w-2xl bg-white dark:bg-[#0C0D12] rounded-xl shadow-2xl border border-zinc-200/90 dark:border-zinc-800 overflow-hidden flex flex-col h-[650px] max-h-[90vh]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Assistant Header */}
-        <div className="flex items-center justify-between px-5 py-3.5 border-b border-[#E5E7EB] bg-emerald-50/60">
+        <div className="flex items-center justify-between px-5 py-3.5 border-b border-zinc-200/80 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/60">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-emerald-600 text-white flex items-center justify-center shadow-xs">
-              <Sparkles className="w-4 h-4" />
+            <div className="w-7 h-7 rounded-md bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 flex items-center justify-center shadow-xs">
+              <Sparkles className="w-3.5 h-3.5" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h3 className="text-sm font-bold text-[#111827]">
+                <h3 className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">
                   Yedii AI Documentation Assistant
                 </h3>
-                <span className="px-1.5 py-0.5 rounded text-[10px] font-mono bg-emerald-100 text-emerald-800 font-semibold">
+                <span className="px-1.5 py-0.5 rounded text-[10px] font-mono bg-zinc-200 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 font-medium">
                   Grounded RAG
                 </span>
               </div>
-              <p className="text-[11px] text-[#6B7280]">
+              <p className="text-[11px] text-zinc-500 dark:text-zinc-400">
                 Grounded in official Yedii SDK, API, and platform docs
               </p>
             </div>
@@ -151,45 +151,45 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-zinc-400 hover:text-black hover:bg-zinc-100 cursor-pointer"
+            className="p-1.5 rounded text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800 cursor-pointer"
           >
-            <X className="w-5 h-5" />
+            <X className="w-4 h-4" />
           </button>
         </div>
 
         {/* Conversation Thread */}
-        <div className="flex-1 overflow-y-auto p-4 sm:p-5 space-y-4 text-xs bg-[#FAFAFA]">
+        <div className="flex-1 overflow-y-auto p-4 sm:p-5 space-y-4 text-xs bg-[#FAFAFA] dark:bg-[#09090B]">
           {messages.map((msg) => (
             <div
               key={msg.id}
               className={`flex gap-3 ${msg.sender === "user" ? "flex-row-reverse" : "flex-row"}`}
             >
               <div
-                className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 text-white text-xs ${
-                  msg.sender === "user" ? "bg-[#141C2E]" : "bg-emerald-600"
+                className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-white text-xs ${
+                  msg.sender === "user" ? "bg-zinc-900 dark:bg-zinc-100 dark:text-zinc-900" : "bg-zinc-700"
                 }`}
               >
-                {msg.sender === "user" ? <User className="w-3.5 h-3.5" /> : <Bot className="w-3.5 h-3.5" />}
+                {msg.sender === "user" ? <User className="w-3 h-3" /> : <Bot className="w-3 h-3" />}
               </div>
 
               <div
                 className={`max-w-[85%] rounded-xl p-3.5 space-y-2.5 ${
                   msg.sender === "user"
-                    ? "bg-[#141C2E] text-white"
-                    : "bg-white border border-[#E5E7EB] text-[#1F2937] shadow-2xs"
+                    ? "bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900"
+                    : "bg-white dark:bg-zinc-900/60 border border-zinc-200/80 dark:border-zinc-800 text-zinc-800 dark:text-zinc-200 shadow-2xs"
                 }`}
               >
                 <p className="leading-relaxed whitespace-pre-wrap">{msg.text}</p>
 
                 {msg.code && (
-                  <div className="p-3 rounded-lg bg-[#0B0F19] text-emerald-400 font-mono text-[11px] overflow-x-auto border border-[#E2E8F0]">
+                  <div className="p-3 rounded-lg bg-[#0C0D12] text-zinc-200 font-mono text-[11px] overflow-x-auto border border-zinc-800">
                     <pre>{msg.code.trim()}</pre>
                   </div>
                 )}
 
                 {msg.citations && msg.citations.length > 0 && (
-                  <div className="pt-2 border-t border-[#E5E7EB]">
-                    <span className="text-[10px] uppercase font-bold text-zinc-500 font-mono block mb-1">
+                  <div className="pt-2 border-t border-zinc-200/70 dark:border-zinc-800/70">
+                    <span className="text-[10px] uppercase font-semibold text-zinc-500 font-mono block mb-1">
                       Referenced Documentation:
                     </span>
                     <div className="flex flex-wrap gap-1.5">
@@ -198,7 +198,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                           key={i}
                           href={cite.href}
                           onClick={onClose}
-                          className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#F9FAFB] border border-[#E5E7EB] hover:border-emerald-600 text-[11px] text-emerald-700 font-medium transition-colors"
+                          className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 hover:border-zinc-400 dark:hover:border-zinc-500 text-[11px] text-zinc-700 dark:text-zinc-300 font-medium transition-colors"
                         >
                           <BookOpen className="w-3 h-3" />
                           <span className="truncate max-w-[200px]">{cite.title}</span>
@@ -213,8 +213,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           ))}
 
           {isSynthesizing && (
-            <div className="flex items-center gap-2 text-zinc-500 text-xs italic pl-10">
-              <Loader2 className="w-3.5 h-3.5 animate-spin text-emerald-600" />
+            <div className="flex items-center gap-2 text-zinc-500 text-xs italic pl-9">
+              <Loader2 className="w-3.5 h-3.5 animate-spin text-zinc-600 dark:text-zinc-400" />
               <span>Searching knowledge index and synthesizing answer...</span>
             </div>
           )}
@@ -223,19 +223,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Input Bar */}
         <form
           onSubmit={handleAsk}
-          className="p-3 border-t border-[#E5E7EB] bg-white flex items-center gap-2"
+          className="p-3 border-t border-zinc-200/80 dark:border-zinc-800 bg-white dark:bg-[#0C0D12] flex items-center gap-2"
         >
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Ask a question (e.g. 'How do I add allowed origins?' or 'Widget Next.js snippet')..."
-            className="flex-1 px-3.5 py-2 rounded-xl border border-[#E5E7EB] bg-[#F9FAFB] text-xs text-[#111827] placeholder:text-zinc-400 focus:outline-none focus:border-emerald-600"
+            className="flex-1 px-3.5 py-2 rounded-md border border-zinc-200/80 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/60 text-xs text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 focus:outline-none focus:border-zinc-400 dark:focus:border-zinc-600"
           />
           <button
             type="submit"
             disabled={!input.trim() || isSynthesizing}
-            className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 text-white font-medium text-xs flex items-center gap-1.5 transition-colors shadow-2xs cursor-pointer"
+            className="px-3.5 py-2 rounded-md bg-zinc-900 hover:bg-black dark:bg-zinc-100 dark:hover:bg-white disabled:opacity-50 text-white dark:text-zinc-900 font-medium text-xs flex items-center gap-1.5 transition-colors shadow-2xs cursor-pointer"
           >
             <Send className="w-3 h-3" />
             <span className="hidden sm:inline">Ask</span>

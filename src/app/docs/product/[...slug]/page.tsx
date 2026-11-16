@@ -101,12 +101,12 @@ export default async function ProductArticlePage({ params }: PageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1 flex flex-col lg:flex-row gap-8">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1 flex flex-col lg:flex-row gap-8 lg:gap-10">
         {/* Left Column: Hierarchical Navigation */}
         <DocsSidebar currentSection="product" />
 
         {/* Center Column: Main Article Content */}
-        <main className="flex-1 py-8 max-w-3xl min-w-0">
+        <main className="flex-1 py-8 lg:py-10 max-w-3xl min-w-0">
           <article>
             <ArticleHeader article={article} />
             <ArticleContentRenderer content={article.content} />

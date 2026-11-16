@@ -60,17 +60,17 @@ export function TableOfContents({ headings, onOpenAiAssistant }: TableOfContents
   };
 
   return (
-    <div className="hidden xl:block w-64 shrink-0 py-6 pl-6 border-l border-[#E5E7EB] text-xs">
-      <div className="sticky top-16 space-y-6 max-h-[calc(100vh-4rem)] overflow-y-auto pr-1">
+    <div className="hidden xl:block w-60 lg:w-64 shrink-0 py-6 pl-6 border-l border-zinc-200/80 dark:border-zinc-800/80 text-xs">
+      <div className="sticky top-14 space-y-6 max-h-[calc(100vh-3.5rem)] overflow-y-auto pr-1">
         {/* Reading progress bar */}
         <div className="space-y-1.5">
-          <div className="flex items-center justify-between text-[11px] text-zinc-500 font-mono">
+          <div className="flex items-center justify-between text-[11px] text-zinc-500 dark:text-zinc-400 font-mono">
             <span>Reading Progress</span>
             <span>{readingProgress}%</span>
           </div>
-          <div className="w-full h-1 bg-[#E5E7EB] rounded-full overflow-hidden">
+          <div className="w-full h-0.5 bg-zinc-200 dark:bg-zinc-800 rounded-full overflow-hidden">
             <div
-              className="h-full bg-[#111827] transition-all duration-150"
+              className="h-full bg-zinc-900 dark:bg-zinc-100 transition-all duration-150"
               style={{ width: `${readingProgress}%` }}
             />
           </div>
@@ -78,12 +78,12 @@ export function TableOfContents({ headings, onOpenAiAssistant }: TableOfContents
 
         {/* Headings List */}
         <div>
-          <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#111827] mb-3">
+          <div className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-3">
             <AlignLeft className="w-3.5 h-3.5" />
             <span>On This Page</span>
           </div>
 
-          <ul className="space-y-2 border-l border-[#E5E7EB] ml-1 pl-3">
+          <ul className="space-y-1.5 border-l border-zinc-200/70 dark:border-zinc-800/70 ml-1 pl-3">
             {headings.map((heading) => {
               const isActive = activeId === heading.id;
               return (
@@ -92,8 +92,8 @@ export function TableOfContents({ headings, onOpenAiAssistant }: TableOfContents
                     onClick={() => scrollToHeading(heading.id)}
                     className={`text-left block leading-snug transition-colors cursor-pointer ${
                       isActive
-                        ? "text-[#111827] font-semibold"
-                        : "text-[#6B7280] hover:text-[#111827]"
+                        ? "text-zinc-950 dark:text-zinc-50 font-medium"
+                        : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100"
                     }`}
                   >
                     {heading.title}
@@ -105,13 +105,13 @@ export function TableOfContents({ headings, onOpenAiAssistant }: TableOfContents
         </div>
 
         {/* Helper Actions */}
-        <div className="pt-4 border-t border-[#E5E7EB] space-y-2 text-[11px] text-zinc-500">
+        <div className="pt-4 border-t border-zinc-200/70 dark:border-zinc-800/70 space-y-2 text-[11px] text-zinc-500 dark:text-zinc-400">
           {onOpenAiAssistant && (
             <button
               onClick={onOpenAiAssistant}
-              className="w-full flex items-center gap-2 py-1.5 px-2.5 rounded bg-emerald-50 text-emerald-800 hover:bg-emerald-100 border border-emerald-200 font-medium transition-colors cursor-pointer shadow-2xs"
+              className="w-full flex items-center gap-2 py-1.5 px-2.5 rounded-md bg-zinc-50 dark:bg-zinc-900/60 hover:bg-zinc-100 dark:hover:bg-zinc-800 border border-zinc-200/80 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 font-medium transition-colors cursor-pointer shadow-2xs"
             >
-              <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
+              <Sparkles className="w-3.5 h-3.5 text-zinc-500 dark:text-zinc-400" />
               <span>Ask AI about this article</span>
             </button>
           )}
@@ -120,7 +120,7 @@ export function TableOfContents({ headings, onOpenAiAssistant }: TableOfContents
             href="https://github.com/yedii-ai/documentation"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 py-1 hover:text-[#111827] transition-colors"
+            className="flex items-center gap-2 py-1 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
           >
             <ExternalLink className="w-3.5 h-3.5" />
             <span>Edit this page on GitHub</span>
@@ -128,7 +128,7 @@ export function TableOfContents({ headings, onOpenAiAssistant }: TableOfContents
 
           <button
             onClick={scrollToTop}
-            className="flex items-center gap-2 py-1 hover:text-[#111827] transition-colors cursor-pointer"
+            className="flex items-center gap-2 py-1 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors cursor-pointer"
           >
             <ArrowUp className="w-3.5 h-3.5" />
             <span>Back to top</span>

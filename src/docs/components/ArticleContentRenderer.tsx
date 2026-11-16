@@ -49,7 +49,7 @@ export function ArticleContentRenderer({ content }: ArticleContentRendererProps)
         <h2
           key={`h2-${i}`}
           id={id}
-          className="text-2xl font-bold text-[#111827] mt-10 mb-4 pt-4 border-t border-[#E5E7EB] first:border-0 first:mt-0 scroll-mt-20"
+          className="text-xl sm:text-2xl font-semibold tracking-tight text-zinc-950 dark:text-zinc-50 mt-10 mb-4 pt-6 border-t border-zinc-200/80 dark:border-zinc-800/80 first:border-0 first:mt-0 first:pt-0 scroll-mt-24"
         >
           {text}
         </h2>
@@ -70,7 +70,7 @@ export function ArticleContentRenderer({ content }: ArticleContentRendererProps)
         <h3
           key={`h3-${i}`}
           id={id}
-          className="text-lg font-bold text-[#111827] mt-6 mb-3 scroll-mt-24"
+          className="text-base sm:text-lg font-semibold tracking-tight text-zinc-900 dark:text-zinc-100 mt-7 mb-3 scroll-mt-24"
         >
           {text}
         </h3>
@@ -100,9 +100,9 @@ export function ArticleContentRenderer({ content }: ArticleContentRendererProps)
         );
 
         renderedElements.push(
-          <div key={`table-${i}`} className="my-6 border border-[#E5E7EB] rounded-lg overflow-x-auto text-xs bg-white shadow-2xs">
+          <div key={`table-${i}`} className="my-6 border border-zinc-200/80 dark:border-zinc-800 rounded-lg overflow-x-auto text-xs bg-white dark:bg-zinc-900/40 shadow-2xs">
             <table className="w-full text-left">
-              <thead className="bg-[#F9FAFB] border-b border-[#E5E7EB] font-mono text-[#4B5563]">
+              <thead className="bg-zinc-50 dark:bg-zinc-900/80 border-b border-zinc-200/80 dark:border-zinc-800 font-mono text-zinc-600 dark:text-zinc-400">
                 <tr>
                   {headerCols.map((h, hIdx) => (
                     <th key={hIdx} className="p-3 font-semibold">
@@ -111,11 +111,11 @@ export function ArticleContentRenderer({ content }: ArticleContentRendererProps)
                   ))}
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#E5E7EB]">
+              <tbody className="divide-y divide-zinc-200/70 dark:divide-zinc-800/70">
                 {bodyRows.map((cols, rIdx) => (
-                  <tr key={rIdx} className="hover:bg-[#F9FAFB]">
+                  <tr key={rIdx} className="hover:bg-zinc-50/50 dark:hover:bg-zinc-800/30">
                     {cols.map((col, cIdx) => (
-                      <td key={cIdx} className="p-3 text-[#374151]">
+                      <td key={cIdx} className="p-3 text-zinc-700 dark:text-zinc-300">
                         {renderInlineFormatting(col)}
                       </td>
                     ))}
@@ -152,7 +152,7 @@ export function ArticleContentRenderer({ content }: ArticleContentRendererProps)
         i++;
       }
       renderedElements.push(
-        <ul key={`ul-${i}`} className="my-4 space-y-2 list-disc list-inside text-xs sm:text-sm text-[#374151] pl-2">
+        <ul key={`ul-${i}`} className="my-4 space-y-2 list-disc list-inside text-sm leading-relaxed text-zinc-700 dark:text-zinc-300 pl-2">
           {listItems.map((item, lIdx) => (
             <li key={lIdx} className="leading-relaxed">
               {renderInlineFormatting(item)}
@@ -171,7 +171,7 @@ export function ArticleContentRenderer({ content }: ArticleContentRendererProps)
         i++;
       }
       renderedElements.push(
-        <ol key={`ol-${i}`} className="my-4 space-y-2 list-decimal list-inside text-xs sm:text-sm text-[#374151] pl-2">
+        <ol key={`ol-${i}`} className="my-4 space-y-2 list-decimal list-inside text-sm leading-relaxed text-zinc-700 dark:text-zinc-300 pl-2">
           {listItems.map((item, lIdx) => (
             <li key={lIdx} className="leading-relaxed">
               {renderInlineFormatting(item)}
@@ -185,7 +185,7 @@ export function ArticleContentRenderer({ content }: ArticleContentRendererProps)
     // Paragraph
     if (line.trim().length > 0) {
       renderedElements.push(
-        <p key={`p-${i}`} className="my-3 text-xs sm:text-sm leading-relaxed text-[#374151]">
+        <p key={`p-${i}`} className="my-3.5 text-sm sm:text-[15px] leading-7 text-zinc-700 dark:text-zinc-300 font-normal">
           {renderInlineFormatting(line)}
         </p>
       );
@@ -232,7 +232,7 @@ function renderInlineFormatting(text: string): React.ReactNode {
         <a
           key={`link-${keyIdx++}`}
           href={linkUrl}
-          className="text-emerald-700 font-medium underline underline-offset-2 hover:text-emerald-900 transition-colors"
+          className="text-zinc-900 dark:text-zinc-100 font-medium underline underline-offset-4 decoration-zinc-300 dark:decoration-zinc-700 hover:decoration-zinc-900 dark:hover:decoration-zinc-100 transition-colors"
         >
           {linkText}
         </a>
@@ -243,7 +243,7 @@ function renderInlineFormatting(text: string): React.ReactNode {
       parts.push(
         <code
           key={`code-${keyIdx++}`}
-          className="px-1.5 py-0.5 rounded font-mono text-[11px] bg-[#F1F5F9] border border-[#E2E8F0] text-[#0F172A]"
+          className="px-1.5 py-0.5 rounded font-mono text-[12px] bg-zinc-100 dark:bg-zinc-800/80 border border-zinc-200/60 dark:border-zinc-700/60 text-zinc-800 dark:text-zinc-200 font-normal"
         >
           {codeText}
         </code>
@@ -252,7 +252,7 @@ function renderInlineFormatting(text: string): React.ReactNode {
     } else if (earliest.type === "bold") {
       const boldText = earliest.match[1];
       parts.push(
-        <strong key={`bold-${keyIdx++}`} className="font-semibold text-[#111827]">
+        <strong key={`bold-${keyIdx++}`} className="font-semibold text-zinc-950 dark:text-zinc-50">
           {boldText}
         </strong>
       );

@@ -73,19 +73,19 @@ export function DocsSidebar({
   };
 
   const sidebarContent = (
-    <div className="py-6 pr-4 text-xs space-y-6">
+    <div className="py-5 pr-3 text-xs space-y-5">
       {/* Section Switcher Pills */}
-      <div className="grid grid-cols-3 gap-1 p-1 bg-[#F3F4F6] rounded border border-[#E5E7EB]">
+      <div className="grid grid-cols-3 gap-0.5 p-0.5 bg-zinc-100 dark:bg-zinc-800/60 rounded-md border border-zinc-200/60 dark:border-zinc-800">
         <Link
           href="/docs/product"
           onClick={() => {
             onNavigate?.();
             onCloseMobileNav?.();
           }}
-          className={`py-1.5 text-center font-medium rounded transition-all ${
+          className={`py-1 text-center font-medium rounded transition-all ${
             currentSection === "product"
-              ? "bg-white text-[#111827] shadow-2xs font-semibold"
-              : "text-[#6B7280] hover:text-[#111827]"
+              ? "bg-white dark:bg-zinc-900 text-zinc-950 dark:text-zinc-50 shadow-2xs font-semibold"
+              : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
           }`}
         >
           Product
@@ -96,10 +96,10 @@ export function DocsSidebar({
             onNavigate?.();
             onCloseMobileNav?.();
           }}
-          className={`py-1.5 text-center font-medium rounded transition-all ${
+          className={`py-1 text-center font-medium rounded transition-all ${
             currentSection === "developer"
-              ? "bg-white text-[#111827] shadow-2xs font-semibold"
-              : "text-[#6B7280] hover:text-[#111827]"
+              ? "bg-white dark:bg-zinc-900 text-zinc-950 dark:text-zinc-50 shadow-2xs font-semibold"
+              : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
           }`}
         >
           Developer
@@ -110,10 +110,10 @@ export function DocsSidebar({
             onNavigate?.();
             onCloseMobileNav?.();
           }}
-          className={`py-1.5 text-center font-medium rounded transition-all ${
+          className={`py-1 text-center font-medium rounded transition-all ${
             currentSection === "learning"
-              ? "bg-white text-[#111827] shadow-2xs font-semibold"
-              : "text-[#6B7280] hover:text-[#111827]"
+              ? "bg-white dark:bg-zinc-900 text-zinc-950 dark:text-zinc-50 shadow-2xs font-semibold"
+              : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
           }`}
         >
           Learning
@@ -128,12 +128,12 @@ export function DocsSidebar({
           value={filterQuery}
           onChange={(e) => setFilterQuery(e.target.value)}
           placeholder={`Filter ${currentSection} docs...`}
-          className="w-full pl-8 pr-3 py-1.5 bg-white border border-[#E5E7EB] rounded text-xs text-[#111827] placeholder:text-zinc-400 focus:outline-none focus:border-[#141C2E] transition-colors"
+          className="w-full pl-8 pr-7 py-1.5 bg-white dark:bg-zinc-900/60 border border-zinc-200/80 dark:border-zinc-800 rounded-md text-xs text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 focus:outline-none focus:border-zinc-400 dark:focus:border-zinc-600 transition-colors shadow-2xs"
         />
         {filterQuery && (
           <button
             onClick={() => setFilterQuery("")}
-            className="absolute right-2.5 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-black"
+            className="absolute right-2.5 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100"
           >
             <X className="w-3 h-3" />
           </button>
@@ -141,7 +141,7 @@ export function DocsSidebar({
       </div>
 
       {/* Categories & Articles List */}
-      <nav className="space-y-6">
+      <nav className="space-y-5">
         {categories.map((cat) => {
           const Icon = ICON_MAP[cat.iconName] || BookOpen;
           const isCollapsed = !!collapsedCategories[cat.id];
@@ -160,26 +160,26 @@ export function DocsSidebar({
           if (catArticles.length === 0 && filterQuery) return null;
 
           return (
-            <div key={cat.id} className="space-y-1.5">
+            <div key={cat.id} className="space-y-1">
               {/* Category Header */}
               <button
                 onClick={() => toggleCategory(cat.id)}
-                className="w-full flex items-center justify-between text-left px-2 py-1 text-xs font-bold uppercase tracking-wider text-[#111827] hover:text-black group cursor-pointer"
+                className="w-full flex items-center justify-between text-left px-2 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 group cursor-pointer transition-colors"
               >
                 <div className="flex items-center gap-2">
-                  <Icon className="w-3.5 h-3.5 text-zinc-400 group-hover:text-black transition-colors" />
+                  <Icon className="w-3.5 h-3.5 text-zinc-400 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition-colors" />
                   <span>{cat.name}</span>
                 </div>
                 {isCollapsed ? (
-                  <ChevronRight className="w-3.5 h-3.5 text-zinc-400" />
+                  <ChevronRight className="w-3 h-3 text-zinc-400" />
                 ) : (
-                  <ChevronDown className="w-3.5 h-3.5 text-zinc-400" />
+                  <ChevronDown className="w-3 h-3 text-zinc-400" />
                 )}
               </button>
 
               {/* Category Article Links */}
               {!isCollapsed && (
-                <ul className="space-y-0.5 border-l border-[#E5E7EB] ml-3.5 pl-2.5">
+                <ul className="space-y-0.5 border-l border-zinc-200/70 dark:border-zinc-800/70 ml-2.5 pl-2.5 mt-0.5">
                   {catArticles.map((article) => {
                     const articleHref = `/docs/${article.section}/${article.slug}`;
                     const isActive = pathname === articleHref;
@@ -192,20 +192,16 @@ export function DocsSidebar({
                             onNavigate?.();
                             onCloseMobileNav?.();
                           }}
-                          className={`flex items-center justify-between py-1.5 px-2 rounded transition-all ${
+                          className={`flex items-center justify-between py-1.5 px-2 rounded-md transition-all text-xs ${
                             isActive
-                              ? "bg-[#F3F4F6] text-[#111827] font-semibold border-l-2 border-[#111827] -ml-[11px] pl-[9px]"
-                              : "text-[#4B5563] hover:text-[#111827] hover:bg-[#F9FAFB]"
+                              ? "bg-zinc-100 dark:bg-zinc-800/80 text-zinc-950 dark:text-zinc-50 font-medium"
+                              : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-zinc-100 hover:bg-zinc-50 dark:hover:bg-zinc-800/40"
                           }`}
                         >
                           <span className="truncate">{article.title}</span>
                           {article.badge && (
                             <span
-                              className={`ml-1.5 px-1.5 py-0.2 rounded text-[10px] font-mono uppercase font-semibold ${
-                                isActive
-                                  ? "bg-zinc-200 text-zinc-800"
-                                  : "bg-emerald-50 text-emerald-700 border border-emerald-200"
-                              }`}
+                              className="ml-1.5 px-1 py-0.2 rounded text-[9.5px] font-mono uppercase font-medium bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border border-zinc-200/60 dark:border-zinc-700/60"
                             >
                               {article.badge}
                             </span>
@@ -222,24 +218,24 @@ export function DocsSidebar({
 
         {/* API Reference Link inside Developer docs */}
         {currentSection === "developer" && (
-          <div className="pt-2 border-t border-[#E5E7EB]">
+          <div className="pt-2 border-t border-zinc-200/70 dark:border-zinc-800/70">
             <Link
               href="/docs/developer/api-reference"
               onClick={() => {
                 onNavigate?.();
                 onCloseMobileNav?.();
               }}
-              className={`flex items-center justify-between py-2 px-3 rounded font-semibold transition-all ${
+              className={`flex items-center justify-between py-2 px-2.5 rounded-md text-xs font-medium transition-all ${
                 pathname === "/docs/developer/api-reference"
-                  ? "bg-[#F3F4F6] text-[#111827] border border-[#E5E7EB]"
-                  : "bg-emerald-50 text-emerald-800 border border-emerald-200 hover:bg-emerald-100"
+                  ? "bg-zinc-100 dark:bg-zinc-800 text-zinc-950 dark:text-zinc-50 font-semibold"
+                  : "bg-zinc-50 dark:bg-zinc-900/60 text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700"
               }`}
             >
               <div className="flex items-center gap-2">
-                <Layers className="w-4 h-4 text-emerald-600" />
+                <Layers className="w-3.5 h-3.5 text-zinc-500 dark:text-zinc-400" />
                 <span>Interactive API Reference</span>
               </div>
-              <span className="text-[10px] font-mono bg-emerald-600 text-white px-1.5 py-0.5 rounded">
+              <span className="text-[10px] font-mono bg-zinc-200 dark:bg-zinc-700 text-zinc-700 dark:text-zinc-300 px-1.5 py-0.5 rounded">
                 REST
               </span>
             </Link>
@@ -252,7 +248,7 @@ export function DocsSidebar({
   return (
     <>
       {/* Desktop Sidebar: Sticky, cleanly bordered */}
-      <aside className="hidden lg:block w-72 shrink-0 lg:border-r border-[#E5E7EB] overflow-y-auto max-h-[calc(100vh-4rem)] sticky top-16">
+      <aside className="hidden lg:block w-68 lg:w-72 shrink-0 lg:border-r border-zinc-200/80 dark:border-zinc-800/80 overflow-y-auto max-h-[calc(100vh-3.5rem)] sticky top-14">
         {sidebarContent}
       </aside>
 
@@ -263,12 +259,12 @@ export function DocsSidebar({
             className="fixed inset-0 bg-black/40 backdrop-blur-xs transition-opacity"
             onClick={onCloseMobileNav}
           />
-          <div className="relative w-80 max-w-full bg-white h-full shadow-2xl p-6 overflow-y-auto border-r border-[#E5E7EB] z-10 flex flex-col">
-            <div className="flex items-center justify-between pb-4 border-b border-[#E5E7EB] mb-2">
-              <span className="font-bold text-sm text-[#111827]">Documentation Navigation</span>
+          <div className="relative w-80 max-w-full bg-white dark:bg-zinc-950 h-full shadow-2xl p-5 overflow-y-auto border-r border-zinc-200 dark:border-zinc-800 z-10 flex flex-col">
+            <div className="flex items-center justify-between pb-3 border-b border-zinc-200 dark:border-zinc-800 mb-2">
+              <span className="font-semibold text-xs uppercase tracking-wider text-zinc-900 dark:text-zinc-100">Documentation Navigation</span>
               <button
                 onClick={onCloseMobileNav}
-                className="p-1 rounded text-zinc-500 hover:text-black hover:bg-zinc-100"
+                className="p-1 rounded text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800"
               >
                 <X className="w-4 h-4" />
               </button>

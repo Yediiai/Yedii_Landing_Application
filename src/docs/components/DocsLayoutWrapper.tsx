@@ -29,7 +29,7 @@ export function DocsLayoutWrapper({ children }: DocsLayoutWrapperProps) {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#FAFAFA] text-[#141C2E] flex flex-col font-sans selection:bg-[#141C2E] selection:text-white">
+    <div className="min-h-screen bg-[#FAFAFA] dark:bg-[#09090B] text-zinc-900 dark:text-zinc-100 flex flex-col font-sans selection:bg-zinc-900 selection:text-white dark:selection:bg-zinc-100 dark:selection:text-zinc-900 transition-colors">
       {/* 1. Unified Single Documentation Header (No duplicate main Navbar) */}
       <DocsHeader
         onOpenSearch={() => setIsSearchOpen(true)}
