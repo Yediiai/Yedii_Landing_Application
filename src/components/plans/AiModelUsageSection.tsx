@@ -1,198 +1,640 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import Image from "next/image";
-import { ChevronDown, ChevronUp } from "lucide-react";
-import { OPENAI_MODELS, GEMINI_MODELS } from "./types";
+import {
+  EMBEDDING_FILTER_CHIPS,
+  EMBEDDING_MODEL_CATALOG,
+  EmbeddingCatalogItem,
+  EmbeddingUseCaseFilter,
+  MAX_MODEL_CREDITS,
+  MODEL_CATALOG,
+  MODEL_FILTER_CHIPS,
+  MODEL_PROVIDERS,
+  MODEL_TIERS,
+  ModelCatalogItem,
+  ModelCategory,
+  ModelMinPlan,
+  ModelProviderId,
+  ModelUseCaseFilter,
+  PLAN_LABELS,
+  PLAN_RANK,
+} from "./modelCatalog";
 
-function OpenAIIcon({ className = "w-5 h-5" }: { className?: string }) {
+function getCdnLogoUrl(filename: string): string {
+  const base = (
+    process.env.NEXT_PUBLIC_CLOUDFLARE_R2_PUBLIC_URL ||
+    process.env.NEXT_PUBLIC_CDN_URL ||
+    "https://cdn.yedii.com"
+  ).replace(/\/$/, "");
+  return `${base}/dev/system/logos/${filename}`;
+}
+
+function ProviderBadgeIcon({
+  provider,
+  className = "w-5 h-5",
+}: {
+  provider: string;
+  className?: string;
+}) {
+  const p = provider.toLowerCase();
+
+  if (p.includes("openai")) {
+    return (
+      <div
+        className={`relative flex items-center justify-center shrink-0 rounded-full overflow-hidden ${className}`}
+      >
+        <Image
+          src={getCdnLogoUrl("openai.jpg")}
+          alt="OpenAI"
+          width={20}
+          height={20}
+          className="w-full h-full object-cover"
+          unoptimized
+        />
+      </div>
+    );
+  }
+
+  if (p.includes("gemini") || p.includes("google")) {
+    return (
+      <div
+        className={`relative flex items-center justify-center shrink-0 rounded-full bg-white border border-[#E0E2E6] overflow-hidden ${className}`}
+      >
+        <Image
+          src={getCdnLogoUrl("gemini-color.jpg")}
+          alt="Google Gemini"
+          width={20}
+          height={20}
+          className="w-full h-full object-cover"
+          unoptimized
+        />
+      </div>
+    );
+  }
+
+  if (p.includes("deepseek")) {
+    return (
+      <div
+        className={`relative flex items-center justify-center shrink-0 rounded-full bg-[#EEF4FF] overflow-hidden ${className}`}
+      >
+        <Image
+          src={getCdnLogoUrl("deepseek.png")}
+          alt="DeepSeek"
+          width={20}
+          height={20}
+          className="w-full h-full object-cover rounded-full"
+          unoptimized
+        />
+      </div>
+    );
+  }
+
+  if (p.includes("grok") || p.includes("xai")) {
+    return (
+      <div
+        className={`relative flex items-center justify-center shrink-0 rounded-full bg-[#111111] text-white p-1 overflow-hidden ${className}`}
+      >
+        <span className="text-[10px] font-black tracking-tight">𝕏</span>
+      </div>
+    );
+  }
+
+  if (p.includes("kimi")) {
+    return (
+      <div
+        className={`relative flex items-center justify-center shrink-0 rounded-full bg-[#111827] text-white p-1 overflow-hidden ${className}`}
+      >
+        <span className="text-[10px] font-black tracking-tight">K</span>
+      </div>
+    );
+  }
+
+  if (p.includes("qwen")) {
+    return (
+      <div
+        className={`relative flex items-center justify-center shrink-0 rounded-full overflow-hidden ${className}`}
+      >
+        <Image
+          src={getCdnLogoUrl("qwen2.png")}
+          alt="Qwen"
+          width={20}
+          height={20}
+          className="w-full h-full object-cover"
+          unoptimized
+        />
+      </div>
+    );
+  }
+
+  if (p.includes("cohere")) {
+    return (
+      <div
+        className={`relative flex items-center justify-center shrink-0 rounded-full bg-[#39594D] text-white p-1 overflow-hidden ${className}`}
+      >
+        <span className="text-[9px] font-black tracking-tight">CO</span>
+      </div>
+    );
+  }
+
+  if (p.includes("voyage")) {
+    return (
+      <div
+        className={`relative flex items-center justify-center shrink-0 rounded-full bg-[#7C3AED] text-white p-1 overflow-hidden ${className}`}
+      >
+        <span className="text-[10px] font-black tracking-tight">V</span>
+      </div>
+    );
+  }
+
+  if (p.includes("baai")) {
+    return (
+      <div
+        className={`relative flex items-center justify-center shrink-0 rounded-full bg-[#2563EB] text-white p-1 overflow-hidden ${className}`}
+      >
+        <span className="text-[9px] font-black tracking-tight">BA</span>
+      </div>
+    );
+  }
+
   return (
     <div
-      className={`relative flex items-center justify-center shrink-0 rounded-full bg-[#111111] p-[3px] overflow-hidden ${className}`}
+      className={`relative flex items-center justify-center shrink-0 rounded-full bg-[#111827] text-white p-1 overflow-hidden ${className}`}
     >
-      <svg
-        viewBox="0 0 24 24"
-        fill="currentColor"
-        className="w-full h-full text-white fill-white"
-      >
-        <path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1683a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4947zm-9.66-4.1354a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1401-1.6564zm-1.6375-10.743a4.466 4.466 0 0 1 2.3418-1.9729v5.6015a.7712.7712 0 0 0 .3879.6766l5.8144 3.3543-2.02 1.1683a.0757.0757 0 0 1-.071 0l-4.8303-2.7866a4.4992 4.4992 0 0 1-1.6228-6.0412zm16.597 3.8558l-5.838-3.3685 2.0199-1.1683a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.4067-.6815zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L8.709 9.397V7.0646a.071.071 0 0 1 .0331-.0615l4.8816-2.8152a4.4992 4.4992 0 0 1 6.6749 4.6305zm-11.026 4.1354l-2.02-1.1683v-2.3324l5.8428-3.3685 2.02 1.1683v2.3324z" />
-      </svg>
+      <span className="text-[10px] font-black tracking-tight">AI</span>
     </div>
   );
 }
 
-function GoogleIcon({ className = "w-5 h-5" }: { className?: string }) {
+function computeLogMeterWidth(credits: number): number {
+  const clamped = Math.max(1, Math.min(MAX_MODEL_CREDITS, credits));
+  const pct = (Math.log(clamped + 1) / Math.log(MAX_MODEL_CREDITS + 1)) * 100;
+  return Math.max(8, Math.min(100, Math.round(pct)));
+}
+
+function AvailabilityPill({ minPlan }: { minPlan: ModelMinPlan }) {
+  const minPlanLabel = PLAN_LABELS[minPlan];
+  const pillText = minPlan === "free" ? "All plans" : `${minPlanLabel} +`;
+
+  if (minPlan === "free" || minPlan === "starter") {
+    return (
+      <span className="inline-flex items-center text-xs font-medium whitespace-nowrap text-[#111827]">
+        {pillText}
+      </span>
+    );
+  }
+
+  const tooltipText = `Upgrade to ${minPlanLabel} to use this model`;
+
   return (
-    <div
-      className={`relative flex items-center justify-center shrink-0 rounded-full bg-white border border-[#E0E2E6] overflow-hidden ${className}`}
-    >
-      <Image
-        src="/images/providers/gemini.png"
-        alt="Google Gemini"
-        width={18}
-        height={18}
-        className="w-full h-full object-contain"
-        unoptimized
-      />
+    <div className="relative inline-flex group/tooltip">
+      <button
+        type="button"
+        aria-label={tooltipText}
+        className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium whitespace-nowrap bg-[#F3F4F6] text-[#6B7280] hover:text-[#111827] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#141C2E] focus-visible:ring-offset-2 cursor-default"
+      >
+        <span>{pillText}</span>
+      </button>
+      <span
+        role="tooltip"
+        className="pointer-events-none opacity-0 scale-95 group-hover/tooltip:opacity-100 group-hover/tooltip:scale-100 group-focus-within/tooltip:opacity-100 group-focus-within/tooltip:scale-100 transition-all duration-150 absolute bottom-full right-0 mb-1.5 z-20 w-max max-w-[220px] rounded-md border border-[#E8E9EC] bg-white px-2.5 py-1.5 text-xs font-medium text-[#111827] shadow-md"
+      >
+        {tooltipText}
+      </span>
+    </div>
+  );
+}
+
+function ModelRow({
+  model,
+  providerLabel,
+}: {
+  model: ModelCatalogItem;
+  providerLabel: string;
+}) {
+  const meterPct = computeLogMeterWidth(model.credits);
+  const minPlanLabel = PLAN_LABELS[model.minPlan];
+  const isMostUsed = model.tags.includes("Most used");
+
+  return (
+    <div className="px-4 sm:px-5 py-3.5 border-t border-[#F1F2F4] hover:bg-slate-50/50 transition-colors">
+      <div className="grid grid-cols-[minmax(0,1fr)_auto] min-[720px]:grid-cols-[minmax(200px,1.25fr)_minmax(220px,1.5fr)_minmax(110px,0.75fr)_minmax(120px,0.8fr)] items-start min-[720px]:items-center gap-x-3 gap-y-2.5 min-[720px]:gap-4">
+        {/* Col 1 */}
+        <div className="flex items-start gap-2.5 min-w-0">
+          <div className="mt-0.5 shrink-0">
+            <ProviderBadgeIcon provider={providerLabel} className="h-5 w-5" />
+          </div>
+          <div className="min-w-0 flex-1">
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="text-sm font-semibold text-[#111827] leading-snug truncate">
+                {model.name}
+              </span>
+              {isMostUsed && (
+                <span className="inline-flex items-center rounded-full bg-[#F3F4F6] px-2 py-0.5 text-[11px] font-medium text-[#111827]">
+                  Most used
+                </span>
+              )}
+            </div>
+            <p className="text-xs font-medium text-[#6B7280] mt-0.5">
+              {minPlanLabel} and above
+            </p>
+          </div>
+        </div>
+
+        {/* Col 3 */}
+        <div className="flex flex-col items-end min-[720px]:items-start min-[720px]:order-3 shrink-0">
+          <span className="text-[13.5px] font-medium text-[#111827] tabular-nums leading-snug">
+            {model.credits} {model.credits === 1 ? "credit" : "credits"}
+          </span>
+          <div className="mt-1.5 min-[720px]:hidden">
+            <AvailabilityPill minPlan={model.minPlan} />
+          </div>
+        </div>
+
+        {/* Col 2 */}
+        <div className="col-span-2 min-[720px]:col-span-1 min-[720px]:order-2 min-w-0">
+          <p className="text-[13.5px] font-normal text-[#6B7280] leading-snug">
+            {model.useCase}
+          </p>
+          <div
+            role="meter"
+            aria-label={`${model.name} credit cost: ${model.credits} of ${MAX_MODEL_CREDITS} credits`}
+            aria-valuemin={1}
+            aria-valuemax={MAX_MODEL_CREDITS}
+            aria-valuenow={model.credits}
+            className="mt-2 h-1.5 w-full max-w-[220px] rounded-full bg-[#F3F4F6] overflow-hidden"
+          >
+            <div
+              className="h-full rounded-full bg-[#111827] transition-[width] duration-300 ease-out motion-reduce:transition-none"
+              style={{ width: `${meterPct}%` }}
+            />
+          </div>
+        </div>
+
+        {/* Col 4 */}
+        <div className="hidden min-[720px]:flex min-[720px]:order-4 justify-end">
+          <AvailabilityPill minPlan={model.minPlan} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function EmbeddingModelRow({ model }: { model: EmbeddingCatalogItem }) {
+  const minPlanLabel = PLAN_LABELS[model.minPlan];
+  const planEligibilityText =
+    model.minPlan === "free" ? "All plans" : `${minPlanLabel} and above`;
+
+  return (
+    <div className="px-4 sm:px-5 py-3.5 border-t border-[#F1F2F4] hover:bg-slate-50/50 transition-colors">
+      <div className="grid grid-cols-[minmax(0,1fr)_auto] min-[720px]:grid-cols-[minmax(200px,1.25fr)_minmax(220px,1.5fr)_minmax(110px,0.75fr)_minmax(120px,0.8fr)] items-start min-[720px]:items-center gap-x-3 gap-y-2.5 min-[720px]:gap-4">
+        <div className="flex items-start gap-2.5 min-w-0">
+          <div className="mt-0.5 shrink-0">
+            <ProviderBadgeIcon provider={model.providerLabel} className="h-5 w-5" />
+          </div>
+          <div className="min-w-0 flex-1">
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="text-sm font-semibold text-[#111827] leading-snug truncate">
+                {model.name}
+              </span>
+              {model.isRecommended && (
+                <span className="inline-flex items-center rounded-full bg-[#F3F4F6] px-2 py-0.5 text-[11px] font-medium text-[#111827]">
+                  Recommended
+                </span>
+              )}
+            </div>
+            <p className="text-xs font-medium text-[#6B7280] mt-0.5">
+              {planEligibilityText}
+            </p>
+          </div>
+        </div>
+
+        <div className="flex flex-col items-end min-[720px]:items-start min-[720px]:order-3 shrink-0">
+          <span className="text-[13.5px] font-medium text-[#111827] leading-snug">
+            No credits
+          </span>
+          <span className="text-xs font-medium text-[#6B7280] mt-0.5">
+            {model.dimensions}
+          </span>
+          <div className="mt-1.5 min-[720px]:hidden">
+            <AvailabilityPill minPlan={model.minPlan} />
+          </div>
+        </div>
+
+        <div className="col-span-2 min-[720px]:col-span-1 min-[720px]:order-2 min-w-0">
+          <p className="text-[13.5px] font-normal text-[#6B7280] leading-snug">
+            {model.useCase}
+          </p>
+        </div>
+
+        <div className="hidden min-[720px]:flex min-[720px]:order-4 justify-end">
+          <AvailabilityPill minPlan={model.minPlan} />
+        </div>
+      </div>
     </div>
   );
 }
 
 export function AiModelUsageSection() {
-  const [isOpenAiExpanded, setIsOpenAiExpanded] = useState(true);
-  const [isGeminiExpanded, setIsGeminiExpanded] = useState(false);
+  const [modelCategory, setModelCategory] = useState<ModelCategory>("chat");
+  const [selectedProvider, setSelectedProvider] = useState<ModelProviderId>("openai");
+  const [selectedFilter, setSelectedFilter] = useState<ModelUseCaseFilter>("all");
+  const [selectedEmbeddingFilter, setSelectedEmbeddingFilter] =
+    useState<EmbeddingUseCaseFilter>("all");
+
+  const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
+
+  const providerCounts = useMemo(() => {
+    const counts: Record<ModelProviderId, number> = {
+      openai: 0,
+      "google-gemini": 0,
+      grok: 0,
+      deepseek: 0,
+      kimi: 0,
+      qwen: 0,
+    };
+    for (const item of MODEL_CATALOG) {
+      counts[item.provider] += 1;
+    }
+    return counts;
+  }, []);
+
+  const activeProviderConfig =
+    MODEL_PROVIDERS.find((p) => p.id === selectedProvider) ?? MODEL_PROVIDERS[0];
+
+  const activeFilterConfig = MODEL_FILTER_CHIPS.find((c) => c.id === selectedFilter);
+  const activeEmbeddingFilterConfig = EMBEDDING_FILTER_CHIPS.find(
+    (c) => c.id === selectedEmbeddingFilter
+  );
+
+  const filteredModels = useMemo(() => {
+    return MODEL_CATALOG.filter((item) => {
+      if (item.provider !== selectedProvider) return false;
+      if (activeFilterConfig?.matchTag) {
+        return item.tags.includes(activeFilterConfig.matchTag);
+      }
+      return true;
+    }).sort((a, b) => a.credits - b.credits);
+  }, [selectedProvider, activeFilterConfig]);
+
+  const groupedByTier = useMemo(() => {
+    return MODEL_TIERS.map((tier) => ({
+      ...tier,
+      models: filteredModels
+        .filter((m) => m.tier === tier.id)
+        .sort((a, b) => a.credits - b.credits),
+    })).filter((group) => group.models.length > 0);
+  }, [filteredModels]);
+
+  const filteredEmbeddingModels = useMemo(() => {
+    if (!activeEmbeddingFilterConfig?.matchTag) {
+      return EMBEDDING_MODEL_CATALOG;
+    }
+    const tag = activeEmbeddingFilterConfig.matchTag;
+    return EMBEDDING_MODEL_CATALOG.filter((item) => item.tags.includes(tag));
+  }, [activeEmbeddingFilterConfig]);
+
+  const handleTabKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>, index: number) => {
+    if (e.key === "ArrowRight") {
+      e.preventDefault();
+      const next = (index + 1) % MODEL_PROVIDERS.length;
+      setSelectedProvider(MODEL_PROVIDERS[next].id);
+      tabRefs.current[next]?.focus();
+    } else if (e.key === "ArrowLeft") {
+      e.preventDefault();
+      const prev = (index - 1 + MODEL_PROVIDERS.length) % MODEL_PROVIDERS.length;
+      setSelectedProvider(MODEL_PROVIDERS[prev].id);
+      tabRefs.current[prev]?.focus();
+    }
+  };
+
+  // Ensure PLAN_RANK is referenced consistently
+  void PLAN_RANK;
 
   return (
-    <div className="w-full flex flex-col gap-4 pt-6 border-t-[0.8px] border-[#EAEBEE]">
-      {/* HEADER */}
-      <div>
-        <h2 className="text-[17px] font-semibold text-[#141C2E] tracking-[-0.27px]">
-          AI model usage
+    <section
+      aria-labelledby="ai-models-heading"
+      className="w-full flex flex-col gap-5 pt-6 border-t-[0.8px] border-[#EAEBEE] overflow-x-hidden"
+    >
+      {/* SECTION HEADER */}
+      <div className="space-y-1 min-w-0 text-center">
+        <h2
+          id="ai-models-heading"
+          className="text-[20px] sm:text-[22px] font-semibold text-[#111827] tracking-[-0.01em] leading-tight"
+        >
+          Choose the right model for every reply
         </h2>
-        <p className="text-[14px] font-normal text-[#6B7280] leading-[21.7px] max-w-[680px]">
-          Each reply your agent sends spends credits from your plan&apos;s allowance. More capable models use more credits.
+        <p className="text-sm font-normal text-[#6B7280] leading-relaxed">
+          Each reply uses credits based on the model that writes it.
         </p>
       </div>
 
-      {/* CARD 1: OPENAI */}
-      <div className="w-full rounded-[12px] border-[0.8px] border-[#E8E9EC] bg-white overflow-hidden shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
-        {/* CARD HEADER */}
-        <button
-          type="button"
-          onClick={() => setIsOpenAiExpanded(!isOpenAiExpanded)}
-          className="w-full p-4 sm:p-5 flex items-center justify-between hover:bg-slate-50/60 transition-colors cursor-pointer select-none text-left"
+      {/* PROVIDER TABS (FIXED ACROSS FILTERS) */}
+      <div className="w-full overflow-x-auto pb-1 flex justify-start min-[720px]:justify-center">
+        <div
+          role="tablist"
+          aria-label="AI model providers"
+          className="inline-flex h-auto p-1 rounded-[12px] bg-[#F3F4F6] border border-[#E8E9EC] min-w-max gap-1"
         >
-          <div className="flex items-center gap-2 sm:gap-2.5 flex-wrap min-w-0 pr-2">
-            <OpenAIIcon className="w-5 h-5 shrink-0" />
-            <span className="text-[14.5px] font-semibold text-[#141C2E] tracking-[-0.17px]">
-              OpenAI
-            </span>
-            <span className="text-[12.5px] sm:text-[13px] font-normal text-[#8A9099]">
-              {OPENAI_MODELS.length} models · 1–50 credits / reply
-            </span>
-          </div>
-          {isOpenAiExpanded ? (
-            <ChevronUp className="w-4 h-4 text-[#565C66]" />
-          ) : (
-            <ChevronDown className="w-4 h-4 text-[#565C66]" />
-          )}
-        </button>
-
-        {/* OPENAI MODELS TABLE */}
-        {isOpenAiExpanded && (
-          <div className="w-full overflow-x-auto border-t border-[#F1F2F4]">
-            <table className="w-full text-left border-collapse min-w-[700px]">
-              <thead>
-                <tr className="border-b border-[#F1F2F4] bg-[#F8F9FA]/60">
-                  <th className="py-2.5 px-4 text-[11.5px] font-semibold uppercase tracking-[0.81px] text-[#8A9099]">
-                    Model
-                  </th>
-                  <th className="py-2.5 px-4 text-[11.5px] font-semibold uppercase tracking-[0.81px] text-[#8A9099]">
-                    Credits
-                  </th>
-                  <th className="py-2.5 px-4 text-[11.5px] font-semibold uppercase tracking-[0.81px] text-[#8A9099]">
-                    Capability
-                  </th>
-                  <th className="py-2.5 px-4 text-[11.5px] font-semibold uppercase tracking-[0.81px] text-[#8A9099] text-right">
-                    Availability
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-[#F1F2F4] text-[13.5px]">
-                {OPENAI_MODELS.map((model, idx) => (
-                  <tr key={idx} className="hover:bg-slate-50/50">
-                    <td className="py-3 px-4 font-medium text-[#22262E]">
-                      <div className="flex items-center gap-2.5">
-                        <OpenAIIcon className="w-[18px] h-[18px] shrink-0" />
-                        <span>{model.name}</span>
-                      </div>
-                    </td>
-                    <td className="py-3 px-4 font-semibold text-[#22262E]">
-                      {model.credits}
-                    </td>
-                    <td className="py-3 px-4 font-normal text-[#6B7280]">
-                      {model.capability}
-                    </td>
-                    <td className="py-3 px-4 font-normal text-[#4A5058] text-right">
-                      {model.availability}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
+          {MODEL_PROVIDERS.map((provider, idx) => {
+            const isSelected = selectedProvider === provider.id;
+            return (
+              <button
+                key={provider.id}
+                ref={(el) => {
+                  tabRefs.current[idx] = el;
+                }}
+                type="button"
+                role="tab"
+                aria-selected={isSelected}
+                tabIndex={isSelected ? 0 : -1}
+                onClick={() => setSelectedProvider(provider.id)}
+                onKeyDown={(e) => handleTabKeyDown(e, idx)}
+                className={`inline-flex items-center rounded-[8px] px-3 py-1.5 text-[13px] font-medium gap-2 transition-all cursor-pointer select-none whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#141C2E] focus-visible:ring-offset-1 ${
+                  isSelected
+                    ? "bg-white text-[#111827] shadow-xs font-semibold"
+                    : "text-[#6B7280] hover:text-[#111827]"
+                }`}
+              >
+                <ProviderBadgeIcon provider={provider.label} className="h-4 w-4" />
+                <span>{provider.label}</span>
+                <span className="text-xs font-medium text-[#6B7280] tabular-nums">
+                  {providerCounts[provider.id]}
+                </span>
+              </button>
+            );
+          })}
+        </div>
       </div>
 
-      {/* CARD 2: GOOGLE GEMINI (COLLAPSIBLE) */}
-      <div className="w-full rounded-[12px] border-[0.8px] border-[#E8E9EC] bg-white overflow-hidden shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
-        {/* COLLAPSIBLE HEADER */}
-        <button
-          type="button"
-          onClick={() => setIsGeminiExpanded(!isGeminiExpanded)}
-          className="w-full p-4 sm:p-5 flex items-center justify-between hover:bg-slate-50/60 transition-colors cursor-pointer select-none text-left"
-        >
-          <div className="flex items-center gap-2 sm:gap-2.5 flex-wrap min-w-0 pr-2">
-            <GoogleIcon className="w-5 h-5 shrink-0" />
-            <span className="text-[14.5px] font-semibold text-[#141C2E] tracking-[-0.17px]">
-              Google Gemini
-            </span>
-            <span className="text-[12.5px] sm:text-[13px] font-normal text-[#8A9099]">
-              {GEMINI_MODELS.length} models · 1–12 credits / reply
-            </span>
-          </div>
-          {isGeminiExpanded ? (
-            <ChevronUp className="w-4 h-4 text-[#565C66]" />
-          ) : (
-            <ChevronDown className="w-4 h-4 text-[#565C66]" />
-          )}
-        </button>
+      {/* FILTER ROW: USE-CASE / ACCURACY CHIPS (CENTER) + CHAT MODEL / AI TRAINING (RIGHT) */}
+      <div className="w-full flex flex-col min-[720px]:grid min-[720px]:grid-cols-[1fr_auto_1fr] items-center gap-3">
+        <div className="hidden min-[720px]:block" aria-hidden="true" />
 
-        {/* GEMINI TABLE */}
-        {isGeminiExpanded && (
-          <div className="w-full overflow-x-auto border-t border-[#F1F2F4]">
-            <table className="w-full text-left border-collapse min-w-[700px]">
-              <thead>
-                <tr className="border-b border-[#F1F2F4] bg-[#F8F9FA]/60">
-                  <th className="py-2.5 px-4 text-[11.5px] font-semibold uppercase tracking-[0.81px] text-[#8A9099]">
-                    Model
-                  </th>
-                  <th className="py-2.5 px-4 text-[11.5px] font-semibold uppercase tracking-[0.81px] text-[#8A9099]">
-                    Credits
-                  </th>
-                  <th className="py-2.5 px-4 text-[11.5px] font-semibold uppercase tracking-[0.81px] text-[#8A9099]">
-                    Capability
-                  </th>
-                  <th className="py-2.5 px-4 text-[11.5px] font-semibold uppercase tracking-[0.81px] text-[#8A9099] text-right">
-                    Availability
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-[#F1F2F4] text-[13.5px]">
-                {GEMINI_MODELS.map((model, idx) => (
-                  <tr key={idx} className="hover:bg-slate-50/50">
-                    <td className="py-3 px-4 font-medium text-[#22262E]">
-                      <div className="flex items-center gap-2.5">
-                        <GoogleIcon className="w-[18px] h-[18px] shrink-0" />
-                        <span>{model.name}</span>
-                      </div>
-                    </td>
-                    <td className="py-3 px-4 font-semibold text-[#22262E]">
-                      {model.credits}
-                    </td>
-                    <td className="py-3 px-4 font-normal text-[#6B7280]">
-                      {model.capability}
-                    </td>
-                    <td className="py-3 px-4 font-normal text-[#4A5058] text-right">
-                      {model.availability}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+        {modelCategory === "chat" ? (
+          <div
+            role="group"
+            aria-label="Filter models by use case"
+            className="flex items-center justify-center gap-2 flex-wrap"
+          >
+            {MODEL_FILTER_CHIPS.map((chip) => {
+              const isActive = selectedFilter === chip.id;
+              return (
+                <button
+                  key={chip.id}
+                  type="button"
+                  aria-pressed={isActive}
+                  onClick={() => setSelectedFilter(chip.id)}
+                  className={`inline-flex items-center rounded-full px-3.5 py-1.5 text-xs font-medium transition-colors cursor-pointer select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#141C2E] focus-visible:ring-offset-2 ${
+                    isActive
+                      ? "bg-[#111111] text-white shadow-xs"
+                      : "bg-white text-[#6B7280] border border-[#E8E9EC] hover:text-[#111827] hover:bg-slate-50"
+                  }`}
+                >
+                  {chip.label}
+                </button>
+              );
+            })}
+          </div>
+        ) : (
+          <div
+            role="group"
+            aria-label="Filter AI training models by accuracy"
+            className="flex items-center justify-center gap-2 flex-wrap"
+          >
+            {EMBEDDING_FILTER_CHIPS.map((chip) => {
+              const isActive = selectedEmbeddingFilter === chip.id;
+              return (
+                <button
+                  key={chip.id}
+                  type="button"
+                  aria-pressed={isActive}
+                  onClick={() => setSelectedEmbeddingFilter(chip.id)}
+                  className={`inline-flex items-center rounded-full px-3.5 py-1.5 text-xs font-medium transition-colors cursor-pointer select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#141C2E] focus-visible:ring-offset-2 ${
+                    isActive
+                      ? "bg-[#111111] text-white shadow-xs"
+                      : "bg-white text-[#6B7280] border border-[#E8E9EC] hover:text-[#111827] hover:bg-slate-50"
+                  }`}
+                >
+                  {chip.label}
+                </button>
+              );
+            })}
           </div>
         )}
+
+        <div className="flex justify-center min-[720px]:justify-end w-full min-[720px]:w-auto">
+          <div
+            role="group"
+            aria-label="Filter by model type"
+            className="inline-flex items-center p-1 rounded-[10px] bg-[#F3F4F6] border border-[#E8E9EC] gap-1"
+          >
+            <button
+              type="button"
+              aria-pressed={modelCategory === "chat"}
+              onClick={() => setModelCategory("chat")}
+              className={`px-3 py-1.5 rounded-[7px] text-xs font-medium transition-all cursor-pointer select-none whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#141C2E] focus-visible:ring-offset-1 ${
+                modelCategory === "chat"
+                  ? "bg-white text-[#111827] shadow-xs font-semibold"
+                  : "text-[#6B7280] hover:text-[#111827]"
+              }`}
+            >
+              Chat Model
+            </button>
+            <button
+              type="button"
+              aria-pressed={modelCategory === "embedding"}
+              onClick={() => setModelCategory("embedding")}
+              className={`px-3 py-1.5 rounded-[7px] text-xs font-medium transition-all cursor-pointer select-none whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#141C2E] focus-visible:ring-offset-1 ${
+                modelCategory === "embedding"
+                  ? "bg-white text-[#111827] shadow-xs font-semibold"
+                  : "text-[#6B7280] hover:text-[#111827]"
+              }`}
+            >
+              AI Training
+            </button>
+          </div>
+        </div>
       </div>
-    </div>
+
+      {/* MODEL TIERS / AI TRAINING / EMPTY STATE */}
+      {modelCategory === "embedding" ? (
+        <div className="w-full rounded-[12px] bg-white border-[0.8px] border-[#E8E9EC] shadow-[0_1px_2px_rgba(0,0,0,0.02)] overflow-hidden">
+          <div className="px-4 sm:px-5 py-3.5 bg-white flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
+            <div className="flex items-baseline gap-2.5 flex-wrap">
+              <h3 className="text-[15px] font-semibold text-[#111827]">
+                AI Training
+              </h3>
+              <p className="text-[13px] font-normal text-[#6B7280]">
+                Embedding models index your knowledge base for search and use no reply credits.
+              </p>
+            </div>
+          </div>
+
+          <div className="hidden min-[720px]:grid grid-cols-[minmax(200px,1.25fr)_minmax(220px,1.5fr)_minmax(110px,0.75fr)_minmax(120px,0.8fr)] gap-4 px-5 py-2.5 border-t border-[#F1F2F4] bg-[#F8F9FA]/60 text-[11.5px] font-semibold uppercase tracking-[0.81px] text-[#9CA3AF]">
+            <div>Model</div>
+            <div>Use case</div>
+            <div>Credits</div>
+            <div className="text-right">Availability</div>
+          </div>
+
+          <div>
+            {filteredEmbeddingModels.map((model) => (
+              <EmbeddingModelRow key={model.id} model={model} />
+            ))}
+          </div>
+        </div>
+      ) : groupedByTier.length === 0 ? (
+        <div className="p-8 sm:p-10 rounded-[12px] bg-white border-[0.8px] border-[#E8E9EC] shadow-[0_1px_2px_rgba(0,0,0,0.02)] flex flex-col items-center justify-center text-center gap-3">
+          <p className="text-sm font-medium text-[#111827]">
+            No models match this filter.
+          </p>
+          <button
+            type="button"
+            onClick={() => setSelectedFilter("all")}
+            className="inline-flex items-center justify-center rounded-md border border-[#E8E9EC] bg-white px-3 py-1.5 text-xs font-medium text-[#111827] hover:bg-slate-50 transition-colors cursor-pointer"
+          >
+            Clear filter
+          </button>
+        </div>
+      ) : (
+        <div className="flex flex-col gap-4">
+          {groupedByTier.map((tier) => (
+            <div
+              key={tier.id}
+              className="w-full rounded-[12px] bg-white border-[0.8px] border-[#E8E9EC] shadow-[0_1px_2px_rgba(0,0,0,0.02)] overflow-hidden"
+            >
+              <div className="px-4 sm:px-5 py-3.5 bg-white flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
+                <div className="flex items-baseline gap-2.5 flex-wrap">
+                  <h3 className="text-[15px] font-semibold text-[#111827]">
+                    {tier.label}
+                  </h3>
+                  <p className="text-[13px] font-normal text-[#6B7280]">
+                    {tier.description}
+                  </p>
+                </div>
+              </div>
+
+              <div className="hidden min-[720px]:grid grid-cols-[minmax(200px,1.25fr)_minmax(220px,1.5fr)_minmax(110px,0.75fr)_minmax(120px,0.8fr)] gap-4 px-5 py-2.5 border-t border-[#F1F2F4] bg-[#F8F9FA]/60 text-[11.5px] font-semibold uppercase tracking-[0.81px] text-[#9CA3AF]">
+                <div>Model</div>
+                <div>Use case</div>
+                <div>Credits</div>
+                <div className="text-right">Availability</div>
+              </div>
+
+              <div>
+                {tier.models.map((model) => (
+                  <ModelRow
+                    key={model.id}
+                    model={model}
+                    providerLabel={activeProviderConfig.label}
+                  />
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </section>
   );
 }
