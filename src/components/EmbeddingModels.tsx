@@ -130,21 +130,39 @@ export function EmbeddingModels() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row lg:items-start gap-8 lg:gap-10">
-          {/* Left Column: Section Header & Subtext */}
-          <div className="lg:w-[320px] xl:w-[340px] lg:shrink-0 text-center lg:text-left lg:pt-4">
-            <div className="inline-flex items-center px-3 py-1 rounded-full bg-white/80 backdrop-blur-xs border border-zinc-200 text-zinc-700 text-xs font-semibold mb-3.5 shadow-2xs">
-              <span>Embedding models</span>
+          {/* Left Column: Data & AI Model Training Content + Embedding Models Header */}
+          <div className="lg:w-[320px] xl:w-[340px] lg:shrink-0 space-y-8 text-center lg:text-left lg:pt-2">
+            {/* Data & AI Model Training Content */}
+            <div>
+              <div className="inline-flex items-center px-3 py-1 rounded-full bg-white/80 backdrop-blur-xs border border-zinc-200 text-zinc-700 text-xs font-semibold mb-3 shadow-2xs">
+                <span>Data &amp; AI model training</span>
+              </div>
+              <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-950 font-serif leading-snug">
+                Trained on your knowledge, never generic guesses
+              </h3>
+              <p className="mt-2.5 text-sm sm:text-base text-zinc-600 leading-relaxed max-w-xl mx-auto lg:mx-0">
+                Yedii ingests your websites, docs, and help articles, chunks them cleanly, and
+                generates high-precision vector embeddings so your AI agents retrieve exact answers
+                in milliseconds.
+              </p>
             </div>
-            <h2
-              id="embedding-models-heading"
-              className="text-3xl sm:text-4xl font-bold tracking-tight text-zinc-950 font-serif leading-[1.15]"
-            >
-              Choose how much accuracy you need
-            </h2>
-            <p className="mt-4 text-base text-zinc-600 leading-relaxed max-w-xl mx-auto lg:mx-0">
-              Every Yedii embedding model comes in several dimensions. Pick one and see what you
-              gain in accuracy and what it costs in speed and storage.
-            </p>
+
+            {/* Embedding Models Header & Subtext */}
+            <div className="pt-6 border-t border-zinc-200/70">
+              <div className="inline-flex items-center px-3 py-1 rounded-full bg-white/80 backdrop-blur-xs border border-zinc-200 text-zinc-700 text-xs font-semibold mb-3.5 shadow-2xs">
+                <span>Embedding models</span>
+              </div>
+              <h2
+                id="embedding-models-heading"
+                className="text-3xl sm:text-4xl font-bold tracking-tight text-zinc-950 font-serif leading-[1.15]"
+              >
+                Choose how much accuracy you need
+              </h2>
+              <p className="mt-4 text-base text-zinc-600 leading-relaxed max-w-xl mx-auto lg:mx-0">
+                Every Yedii embedding model comes in several dimensions. Pick one and see what you
+                gain in accuracy and what it costs in speed and storage.
+              </p>
+            </div>
           </div>
 
           {/* Right Column: Main Interactive Card */}
