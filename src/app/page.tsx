@@ -34,6 +34,7 @@ export const metadata: Metadata = {
 import { Hero } from "@/components/Hero";
 import { InteractivePlayground } from "@/components/InteractivePlayground";
 import { SocialProof } from "@/components/SocialProof";
+import { EmbeddingModels } from "@/components/EmbeddingModels";
 import { WhyChooseYediiSection } from "@/components/WhyChooseYediiSection";
 import { Testimonials } from "@/components/Testimonials";
 import { PricingSection } from "@/components/PricingSection";
@@ -55,6 +56,9 @@ export default function Home() {
 
         {/* Social Proof Marquee & Platform Statistics */}
         <SocialProof />
+
+        {/* Interactive Embedding Models Comparison */}
+        <EmbeddingModels />
 
         {/* Why Teams Choose Yedii (6 Core Differentiator Cards) */}
         <WhyChooseYediiSection />

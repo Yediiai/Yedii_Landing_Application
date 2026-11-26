@@ -71,6 +71,32 @@ select[class*="rounded"],
   border-radius: 6px !important;
 }
 
+/* Embedding models comparison UI exemption for rounded corners */
+.embedding-models-scope,
+.embedding-models-scope .rounded-full,
+.embedding-models-scope button.rounded-full {
+  border-radius: 9999px !important;
+}
+.embedding-models-scope.rounded-2xl,
+.embedding-models-scope .rounded-2xl {
+  border-radius: 16px !important;
+}
+.embedding-models-scope.rounded-xl,
+.embedding-models-scope .rounded-xl,
+.embedding-models-scope button.rounded-xl {
+  border-radius: 12px !important;
+}
+.embedding-models-scope.rounded-lg,
+.embedding-models-scope .rounded-lg,
+.embedding-models-scope button.rounded-lg {
+  border-radius: 8px !important;
+}
+.embedding-models-scope.rounded-md,
+.embedding-models-scope .rounded-md,
+.embedding-models-scope button.rounded-md {
+  border-radius: 6px !important;
+}
+
 * {
   box-sizing: border-box;
 }
