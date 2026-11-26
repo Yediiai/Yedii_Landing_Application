@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
   partialPrefetching: true,
   experimental: {
     cpus: 4,
+    agentUpgrade: "security",
   },
 
   async redirects() {
