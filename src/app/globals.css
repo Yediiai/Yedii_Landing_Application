@@ -144,6 +144,36 @@ select[class*="rounded"],
   border-radius: 8px !important;
 }
 
+/* AI Playground Showcase exemption for rounded corners */
+.ai-playground-scope,
+.ai-playground-scope .rounded-full,
+.ai-playground-scope button.rounded-full {
+  border-radius: 9999px !important;
+}
+.ai-playground-scope.rounded-2xl,
+.ai-playground-scope .rounded-2xl {
+  border-radius: 16px !important;
+}
+.ai-playground-scope.rounded-xl,
+.ai-playground-scope .rounded-xl,
+.ai-playground-scope button.rounded-xl {
+  border-radius: 12px !important;
+}
+.ai-playground-scope.rounded-lg,
+.ai-playground-scope .rounded-lg,
+.ai-playground-scope button.rounded-lg,
+.ai-playground-scope a.rounded-lg,
+.ai-playground-scope input.rounded-lg,
+.ai-playground-scope textarea.rounded-lg {
+  border-radius: 9px !important;
+}
+.ai-playground-scope.rounded-md,
+.ai-playground-scope .rounded-md,
+.ai-playground-scope button.rounded-md,
+.ai-playground-scope span.rounded-md {
+  border-radius: 6px !important;
+}
+
 * {
   box-sizing: border-box;
 }
