@@ -87,7 +87,7 @@ export function Footer() {
 
           {/* Right Columns: All in 1 Row */}
           <div className="lg:col-span-9 xl:col-span-10">
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-6 sm:gap-6 lg:gap-2.5 xl:gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 sm:gap-6 lg:gap-2.5 xl:gap-4">
               {/* Column 1: Company */}
               <div>
                 <h4 className="text-[14px] font-semibold text-white tracking-tight mb-4">
@@ -100,23 +100,8 @@ export function Footer() {
                     </Link>
                   </li>
                   <li>
-                    <Link href="/careers" className="hover:text-white transition-colors">
+                    <Link href="/about" className="hover:text-white transition-colors">
                       About us
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/brand" className="hover:text-white transition-colors">
-                      Brand
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/entity-map" className="hover:text-white transition-colors">
-                      Entity Map
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/ai-instructions" className="hover:text-white transition-colors">
-                      AI Instructions
                     </Link>
                   </li>
                 </ul>
@@ -219,40 +204,6 @@ export function Footer() {
                   <li>
                     <Link href={industriesHref} className="hover:text-white transition-colors">
                       Healthcare
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-
-              {/* Column 5: Resources */}
-              <div>
-                <h4 className="text-[14px] font-semibold text-white tracking-tight mb-4">
-                  Resources
-                </h4>
-                <ul className="space-y-2.5 text-[13.5px]">
-                  <li>
-                    <Link href="/docs/product" className="hover:text-white transition-colors">
-                      Documentation
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/docs/developer/api-reference" className="hover:text-white transition-colors">
-                      API Reference
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/blog" className="hover:text-white transition-colors">
-                      Blog
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/help-center" className="hover:text-white transition-colors">
-                      Help Center
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/changelog" className="hover:text-white transition-colors">
-                      Changelog
                     </Link>
                   </li>
                 </ul>

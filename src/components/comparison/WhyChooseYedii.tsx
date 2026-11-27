@@ -27,7 +27,7 @@ const pillars = [
     icon: Sliders,
     title: "Customizable Agent Personas",
     desc: "Calibrate system tone, domain expertise, greeting triggers, and negative constraints to embody your exact brand voice.",
-    link: "/ai-instructions",
+    link: "/ai-agents",
   },
   {
     icon: PlaySquare,

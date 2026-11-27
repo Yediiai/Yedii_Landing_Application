@@ -125,6 +125,25 @@ select[class*="rounded"],
   border-radius: 6px !important;
 }
 
+/* About page exemption for rounded corners */
+.about-page-scope,
+.about-page-scope .rounded-full {
+  border-radius: 9999px !important;
+}
+.about-page-scope.rounded-2xl,
+.about-page-scope .rounded-2xl {
+  border-radius: 16px !important;
+}
+.about-page-scope.rounded-xl,
+.about-page-scope .rounded-xl {
+  border-radius: 12px !important;
+}
+.about-page-scope.rounded-lg,
+.about-page-scope .rounded-lg,
+.about-page-scope a.rounded-lg {
+  border-radius: 8px !important;
+}
+
 * {
   box-sizing: border-box;
 }
