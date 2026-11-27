@@ -114,8 +114,8 @@ export function Footer() {
                 </h4>
                 <ul className="space-y-2.5 text-[13.5px]">
                   <li>
-                    <Link href="/customer-support-platform" className="hover:text-white transition-colors">
-                      Customer Support Platform
+                    <Link href="/solutions/customer-support" className="hover:text-white transition-colors">
+                      Inbox
                     </Link>
                   </li>
                   <li>
@@ -134,8 +134,8 @@ export function Footer() {
                     </Link>
                   </li>
                   <li>
-                    <Link href="/pricing" className="hover:text-white transition-colors">
-                      Pricing
+                    <Link href="/solutions/customer-success" className="hover:text-white transition-colors">
+                      Analytics
                     </Link>
                   </li>
                 </ul>
