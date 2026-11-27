@@ -282,31 +282,6 @@ export default async function CompareDynamicPage({
           </div>
         </section>
 
-        {/* Final CTA */}
-        <section className="py-16 px-4 md:px-8 bg-[#141C2E] text-white">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-2xl md:text-3xl font-bold font-sans mb-3">
-              Ready to upgrade to next-generation AI support?
-            </h2>
-            <p className="text-zinc-400 text-xs md:text-sm max-w-xl mx-auto mb-6">
-              Deploy your first AI agent in under 5 minutes without writing code.
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-3">
-              <Link
-                href="https://app.yedii.com/signup"
-                className="px-5 py-3 rounded-xl bg-white text-[#141C2E] text-xs font-semibold hover:bg-zinc-100 transition-colors"
-              >
-                Create Free Agent Now
-              </Link>
-              <Link
-                href="/customer-support-platform"
-                className="px-5 py-3 rounded-xl bg-white/10 border border-white/20 text-white text-xs font-semibold hover:bg-white/15 transition-colors"
-              >
-                Explore Support Platform
-              </Link>
-            </div>
-          </div>
-        </section>
       </main>
 
       <Footer />

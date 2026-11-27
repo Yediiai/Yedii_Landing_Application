@@ -267,33 +267,6 @@ async function IndustryContent({ params }: PageProps) {
           ))}
         </div>
       </section>
-
-      {/* 8. FINAL CTA */}
-      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 text-center">
-        <div className="p-8 sm:p-12 rounded-[20px] bg-[#F4F5F7] border border-[#EAEAEC] space-y-4">
-          <h2 className="text-2xl sm:text-3xl font-bold text-[#141C2E]">
-            Scale your {ind.title} support with Yedii
-          </h2>
-          <p className="text-xs sm:text-sm text-[#6B7280] max-w-xl mx-auto leading-relaxed">
-            Experience seamless conversational AI tailored to your industry standards. Deploy in minutes with zero engineering overhead.
-          </p>
-          <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
-            <Link
-              href="https://app.yedii.com/signup"
-              className="w-full sm:w-auto px-6 py-3 rounded-[8px] bg-[#141C2E] text-white font-semibold text-xs sm:text-sm hover:bg-black transition-all shadow-xs inline-flex items-center justify-center gap-2"
-            >
-              <span>Start Free Trial</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
-            <Link
-              href="/solutions/use-cases"
-              className="w-full sm:w-auto px-6 py-3 rounded-[8px] bg-white text-[#141C2E] font-semibold text-xs sm:text-sm border border-[#E4E5E8] hover:bg-zinc-50 transition-all shadow-xs inline-flex items-center justify-center gap-2"
-            >
-              <span>Browse All Solutions</span>
-            </Link>
-          </div>
-        </div>
-      </section>
     </>
   );
 }

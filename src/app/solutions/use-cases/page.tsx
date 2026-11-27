@@ -331,34 +331,6 @@ export default function UseCasesLandingPage() {
           </div>
         </section>
 
-        {/* ======================================================== */}
-        {/* F. FINAL ENTERPRISE CTA                                  */}
-        {/* ======================================================== */}
-        <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
-          <div className="rounded-[20px] bg-[#141C2E] text-white p-8 sm:p-12 text-center relative overflow-hidden">
-            <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-white max-w-2xl mx-auto leading-tight">
-              Ready to elevate your customer support experience?
-            </h2>
-            <p className="mt-3 text-xs sm:text-sm text-zinc-300 max-w-xl mx-auto leading-relaxed">
-              Join leading organizations automating customer conversations, accelerating resolution times, and delivering delight 24/7.
-            </p>
-            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-              <Link
-                href="https://app.yedii.com/signup"
-                className="w-full sm:w-auto px-6 py-3 rounded-[8px] bg-white text-[#141C2E] font-semibold text-xs sm:text-sm hover:bg-zinc-100 transition-all shadow-xs inline-flex items-center justify-center gap-2"
-              >
-                <span>Start Free Trial</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
-              <Link
-                href="/pricing"
-                className="w-full sm:w-auto px-6 py-3 rounded-[8px] bg-transparent text-white font-semibold text-xs sm:text-sm border border-white/20 hover:bg-white/10 transition-all shadow-xs inline-flex items-center justify-center gap-2"
-              >
-                <span>Schedule Enterprise Demo</span>
-              </Link>
-            </div>
-          </div>
-        </section>
       </main>
 
       <Footer />

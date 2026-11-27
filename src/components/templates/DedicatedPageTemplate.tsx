@@ -395,32 +395,6 @@ export function DedicatedPageTemplate(props: DedicatedPageProps) {
           </section>
         )}
 
-        {/* H. Final CTA */}
-        <section className="py-12 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-[#141C2E] rounded-[20px] p-8 sm:p-12 text-center text-white space-y-4 shadow-md">
-            <h2 className="text-2xl sm:text-4xl font-bold tracking-tight">
-              {props.cta.title}
-            </h2>
-            <p className="text-xs sm:text-sm text-zinc-300 max-w-xl mx-auto leading-relaxed">
-              {props.cta.subtitle}
-            </p>
-            <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
-              <Link
-                href={props.cta.primaryHref || "https://app.yedii.com/signup"}
-                className="px-6 py-3 rounded-[8px] bg-white text-[#141C2E] font-semibold text-xs sm:text-sm hover:bg-zinc-100 transition-all inline-flex items-center gap-2"
-              >
-                <span>{props.cta.primaryText || "Create an AI Agent Now"}</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-              <Link
-                href="/pricing"
-                className="px-6 py-3 rounded-[8px] border border-white/20 text-white font-semibold text-xs sm:text-sm hover:bg-white/10 transition-all"
-              >
-                <span>Explore Yedii Plans</span>
-              </Link>
-            </div>
-          </div>
-        </section>
       </main>
 
       <Footer />

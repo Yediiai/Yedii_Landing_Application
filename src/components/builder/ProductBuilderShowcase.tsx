@@ -2,611 +2,757 @@
 
 import React, { useState } from "react";
 import {
-  Palette,
-  Sliders,
-  Database,
-  Play,
-  Code2,
+  ChevronDown,
+  ChevronRight,
+  SquarePen,
+  History,
+  Maximize2,
+  X,
+  Paperclip,
+  Mic,
+  ArrowUp,
+  MessageSquare,
+  RotateCcw,
   Check,
   Copy,
-  Send,
-  RotateCcw,
-  Sun,
-  Moon,
-  Globe,
-  FileText,
+  ThumbsUp,
+  ThumbsDown,
 } from "lucide-react";
 
-type WorkspaceTab = "appearance" | "agent" | "knowledge" | "test" | "deploy";
+type SectionKey =
+  | "palette"
+  | "header"
+  | "launcher"
+  | "typography"
+  | "style"
+  | "startScreen"
+  | "composer"
+  | "footer"
+  | "messageActions"
+  | "reset";
 
-const FONT_OPTIONS = ["Inter", "System UI", "Plus Jakarta Sans"] as const;
-const RADIUS_OPTIONS = [
-  { id: "sharp", label: "Sharp", px: "4px" },
-  { id: "rounded", label: "Rounded", px: "12px" },
-  { id: "pill", label: "Soft", px: "18px" },
-] as const;
-
-const ACCENT_PRESETS = ["#141C2E", "#2563EB", "#0F766E", "#4F46E5"] as const;
-
-const KNOWLEDGE_SOURCES = [
-  { name: "https://docs.yedii.com/sitemap.xml", type: "Website", pages: "42 pages", status: "Ready" },
-  { name: "product-handbook-2026.pdf", type: "PDF", pages: "18 pages", status: "Ready" },
-  { name: "Support SLA & Refund Guidelines", type: "Text", pages: "Coming soon", status: "Planned" },
-  { name: "Notion Help Center Wiki", type: "Notion", pages: "Coming soon", status: "Planned" },
-  { name: "Google Docs Onboarding FAQ", type: "Google Docs", pages: "Coming soon", status: "Planned" },
+const DEFAULT_QUESTIONS = [
+  "What is the Nidan AI-Powered Face Scan?",
+  "How does Nidan use face scans to revolutionize triage?",
+  "Where can I learn more about Nidan?",
 ];
 
+const ACCENT_COLORS = ["#141C2E", "#2563EB", "#0F766E", "#4F46E5"] as const;
+
 export function ProductBuilderShowcase() {
-  const [activeTab, setActiveTab] = useState<WorkspaceTab>("appearance");
-
-  // Builder appearance state (mirrors BuilderConfig)
-  const [isDark, setIsDark] = useState(false);
+  // Builder configuration state (matches BuilderConfig in Yedii_Application)
+  const [colorScheme, setColorScheme] = useState<"light" | "dark">("light");
   const [accentColor, setAccentColor] = useState<string>("#141C2E");
-  const [headerTitle, setHeaderTitle] = useState("Yedii Support Agent");
-  const [welcomeMessage, setWelcomeMessage] = useState(
-    "Hi! I'm your Yedii AI agent. Ask me anything based on our verified knowledge."
+  const [headerTitle, setHeaderTitle] = useState("https://nidan.ai/");
+  const [showHeaderActions, setShowHeaderActions] = useState(true);
+  const [showLauncher, setShowLauncher] = useState(true);
+  const [fontFamily, setFontFamily] = useState("Inter");
+  const [fontSize, setFontSize] = useState<"sm" | "md" | "lg">("md");
+  const [radius, setRadius] = useState<"sharp" | "rounded" | "pill">("rounded");
+  const [greeting, setGreeting] = useState("Hi there! 👋");
+  const [subtitle, setSubtitle] = useState(
+    "I'm here to help you with any questions or issues. Whether you need assistance, have a question about a product, or just want to learn more, I'm happy to help."
   );
-  const [fontFamily, setFontFamily] = useState<(typeof FONT_OPTIONS)[number]>("Inter");
-  const [radiusId, setRadiusId] = useState<"sharp" | "rounded" | "pill">("rounded");
-  const [language, setLanguage] = useState("English (US)");
-  const [country, setCountry] = useState("Global");
-  const [hasUnsaved, setHasUnsaved] = useState(false);
+  const [promptLead, setPromptLead] = useState("What can I help you with today?");
+  const [placeholder, setPlaceholder] = useState("Ask a question...");
+  const [showAttachments, setShowAttachments] = useState(true);
+  const [showMic, setShowMic] = useState(true);
+  const [showFooter, setShowFooter] = useState(true);
+  const [footerText, setFooterText] = useState("Powered by Yedii");
+  const [showMessageActions, setShowMessageActions] = useState(true);
 
-  // Agent & model config state
-  const [agentName, setAgentName] = useState("Customer Support");
-  const [agentRole, setAgentRole] = useState("Customer Support");
-  const [primaryModel, setPrimaryModel] = useState("GPT-4o (OpenAI)");
-  const [systemPrompt, setSystemPrompt] = useState(
-    "You are Yedii's customer support agent. Answer concisely using verified documentation and escalate billing disputes to a human specialist."
-  );
+  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
+  const [savedNotice, setSavedNotice] = useState(false);
 
-  // Preview chat state
-  const [previewInput, setPreviewInput] = useState("");
-  const [previewMsgs, setPreviewMsgs] = useState<{ sender: "bot" | "user"; text: string }[]>([
-    {
-      sender: "bot",
-      text: "Hi! I'm your Yedii AI agent. Ask me anything based on our verified knowledge.",
-    },
-  ]);
+  // Accordion state (matches BuilderSidebar.tsx)
+  const [openSection, setOpenSection] = useState<SectionKey | null>("palette");
 
-  // Deploy state
-  const [deployMethod, setDeployMethod] = useState<"js" | "hosted" | "iframe">("js");
-  const [copiedSnippet, setCopiedSnippet] = useState(false);
+  // Preview interaction state
+  const [isChatOpen, setIsChatOpen] = useState(true);
+  const [inputText, setInputText] = useState("");
+  const [messages, setMessages] = useState<{ sender: "user" | "bot"; text: string }[]>([]);
 
-  const activeRadius = RADIUS_OPTIONS.find((r) => r.id === radiusId)?.px ?? "12px";
+  const radiusPx = radius === "sharp" ? "6px" : radius === "pill" ? "20px" : "14px";
+  const isDark = colorScheme === "dark";
 
-  const deploySnippet =
-    deployMethod === "js"
-      ? `<script>\n  (function () {\n    const script = document.createElement("script");\n    script.src = "https://chat.yedii.com/widget.js";\n    script.async = true;\n    script.onload = function () {\n      window.Yedii.init({\n        agentId: "yedii_builder_demo_01"\n      });\n    };\n    document.head.appendChild(script);\n  })();\n</script>`
-      : deployMethod === "hosted"
-      ? `https://chat.yedii.com/yedii_builder_demo_01`
-      : `<iframe\n  src="https://chat.yedii.com/embed/yedii_builder_demo_01"\n  width="100%"\n  height="600"\n  frameborder="0"\n  allow="clipboard-write"\n  title="Yedii AI Chatbot"\n></iframe>`;
+  const markDirty = () => {
+    setHasUnsavedChanges(true);
+    setSavedNotice(false);
+  };
 
-  const handleSendPreview = (quickText?: string) => {
-    const msg = (quickText ?? previewInput).trim();
+  const handleToggle = (key: SectionKey) => {
+    setOpenSection((prev) => (prev === key ? null : key));
+  };
+
+  const handleSend = (text?: string) => {
+    const msg = (text ?? inputText).trim();
     if (!msg) return;
-    setPreviewMsgs((prev) => [
+    setMessages((prev) => [
       ...prev,
       { sender: "user", text: msg },
       {
         sender: "bot",
-        text: `[Demo · ${primaryModel}] Based on your indexed docs, ${agentName} responds in ${language} (${country}) using your configured tone.`,
+        text: `Here is a grounded answer based on ${headerTitle} knowledge sources. Everything in this preview reflects your live Builder configuration.`,
       },
     ]);
-    if (!quickText) setPreviewInput("");
+    if (!text) setInputText("");
   };
 
-  const handleReset = () => {
-    setIsDark(false);
+  const handleResetAll = () => {
+    setColorScheme("light");
     setAccentColor("#141C2E");
-    setHeaderTitle("Yedii Support Agent");
-    setWelcomeMessage(
-      "Hi! I'm your Yedii AI agent. Ask me anything based on our verified knowledge."
+    setHeaderTitle("https://nidan.ai/");
+    setShowHeaderActions(true);
+    setShowLauncher(true);
+    setFontFamily("Inter");
+    setFontSize("md");
+    setRadius("rounded");
+    setGreeting("Hi there! 👋");
+    setSubtitle(
+      "I'm here to help you with any questions or issues. Whether you need assistance, have a question about a product, or just want to learn more, I'm happy to help."
     );
-    setRadiusId("rounded");
-    setHasUnsaved(false);
+    setPromptLead("What can I help you with today?");
+    setPlaceholder("Ask a question...");
+    setShowAttachments(true);
+    setShowMic(true);
+    setShowFooter(true);
+    setFooterText("Powered by Yedii");
+    setShowMessageActions(true);
+    setMessages([]);
+    setIsChatOpen(true);
+    setHasUnsavedChanges(false);
   };
 
-  const handleCopy = () => {
-    if (typeof navigator !== "undefined" && navigator.clipboard) {
-      navigator.clipboard.writeText(deploySnippet);
-    }
-    setCopiedSnippet(true);
-    setTimeout(() => setCopiedSnippet(false), 1600);
+  const handleSave = () => {
+    setHasUnsavedChanges(false);
+    setSavedNotice(true);
+    setTimeout(() => setSavedNotice(false), 1800);
   };
 
   return (
-    <div className="product-showcase-scope w-full rounded-2xl border border-[#E8E9EC] bg-[#F9FAFB] shadow-sm overflow-hidden text-[#17181C]">
-      {/* Builder Top Header */}
-      <div className="bg-white border-b border-[#EAEAEC] px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3">
+    <div className="product-showcase-scope w-full rounded-2xl border border-[#EAEAEC] bg-white shadow-sm overflow-hidden text-[#17181C]">
+      {/* Top Builder Header Bar */}
+      <div className="bg-white border-b border-[#EAEAEC] px-5 py-3 flex items-center justify-between gap-3">
         <div className="flex items-center gap-2.5">
-          <span className="text-sm font-semibold text-[#141C2E]">Yedii Builder</span>
+          <span className="text-sm font-semibold text-[#17181C]">Builder</span>
           <span className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-[#F4F5F7] border border-[#E4E5E8] text-[#6B7280]">
-            {hasUnsaved ? "Draft (Unsaved)" : "Published"}
-          </span>
-          <span className="text-[11px] text-[#8A9099] hidden md:inline">
-            · Interactive Demo (Sample Data)
+            {hasUnsavedChanges ? "Unsaved changes" : savedNotice ? "Saved" : "Live config"}
           </span>
         </div>
 
         <div className="flex items-center gap-2">
+          {hasUnsavedChanges && (
+            <button
+              type="button"
+              onClick={handleResetAll}
+              className="h-[30px] px-3 rounded-lg border border-[#E4E5E8] bg-white hover:bg-[#F9FAFB] text-xs font-medium text-[#565C66] cursor-pointer"
+            >
+              Discard
+            </button>
+          )}
           <button
             type="button"
-            onClick={handleReset}
-            className="h-[32px] px-3 rounded-lg border border-[#E4E5E8] bg-white hover:bg-[#F9FAFB] text-xs font-medium text-[#6B7280] hover:text-[#17181C] cursor-pointer inline-flex items-center gap-1.5"
-          >
-            <RotateCcw className="w-3.5 h-3.5" />
-            <span>Reset</span>
-          </button>
-          <button
-            type="button"
-            onClick={() => setHasUnsaved(false)}
-            className="h-[32px] px-3.5 rounded-lg bg-[#141C2E] hover:bg-black text-white text-xs font-semibold cursor-pointer inline-flex items-center gap-1.5"
+            onClick={handleSave}
+            className="h-[30px] px-3.5 rounded-lg bg-[#141C2E] hover:bg-black text-white text-xs font-semibold cursor-pointer inline-flex items-center gap-1.5"
           >
             <Check className="w-3.5 h-3.5" />
-            <span>Save &amp; Publish</span>
+            <span>{savedNotice ? "Saved" : "Save"}</span>
           </button>
         </div>
       </div>
 
-      {/* Builder Area Tabs */}
-      <div className="bg-white border-b border-[#EAEAEC] px-4 sm:px-6 py-2 flex items-center gap-1.5 overflow-x-auto scrollbar-hide">
-        {[
-          { id: "appearance", label: "Appearance & Branding", Icon: Palette },
-          { id: "agent", label: "Agent & AI Model", Icon: Sliders },
-          { id: "knowledge", label: "Knowledge Sources", Icon: Database },
-          { id: "test", label: "Test Playground", Icon: Play },
-          { id: "deploy", label: "Deploy & Embed", Icon: Code2 },
-        ].map((tab) => {
-          const Icon = tab.Icon;
-          const active = activeTab === tab.id;
-          return (
-            <button
-              key={tab.id}
-              type="button"
-              onClick={() => setActiveTab(tab.id as WorkspaceTab)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap inline-flex items-center gap-1.5 cursor-pointer transition-colors ${
-                active
-                  ? "bg-[#141C2E] text-white"
-                  : "text-[#6B7280] hover:text-[#141C2E] hover:bg-[#F4F5F7]"
+      {/* Main Split: Center Preview Canvas + Right BuilderSidebar */}
+      <div className="flex flex-col lg:flex-row min-h-[600px]">
+        {/* Center Canvas (Matches BuilderPreview.tsx) */}
+        <div className="flex-1 min-w-0 bg-[#F9FAFB] p-6 sm:p-10 relative flex items-center justify-center">
+          {/* Chat Widget Card */}
+          {isChatOpen ? (
+            <div
+              className={`w-full max-w-[380px] border shadow-[0_12px_36px_rgba(16,24,40,0.08)] overflow-hidden flex flex-col transition-colors ${
+                isDark
+                  ? "bg-[#111318] border-zinc-800 text-zinc-100"
+                  : "bg-white border-[#E8E9EC] text-[#17181C]"
               }`}
+              style={{
+                borderRadius: radiusPx,
+                fontFamily: fontFamily === "System UI" ? "system-ui, sans-serif" : undefined,
+              }}
             >
-              <Icon className="w-3.5 h-3.5" />
-              <span>{tab.label}</span>
-            </button>
-          );
-        })}
-      </div>
-
-      {/* Main Split: Left Config Sidebar + Right Live Builder Preview */}
-      <div className="grid grid-cols-1 lg:grid-cols-12">
-        {/* Left Sidebar Controls */}
-        <div className="lg:col-span-6 border-b lg:border-b-0 lg:border-r border-[#EAEAEC] bg-white p-5 sm:p-6 space-y-5">
-          {activeTab === "appearance" && (
-            <>
-              <div className="grid grid-cols-2 gap-3">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setIsDark(false);
-                    setHasUnsaved(true);
-                  }}
-                  className={`p-3 rounded-xl border text-xs font-medium flex items-center justify-center gap-2 cursor-pointer ${
-                    !isDark
-                      ? "border-[#141C2E] bg-[#F4F5F7] text-[#141C2E]"
-                      : "border-[#E8E9EC] text-[#6B7280]"
-                  }`}
-                >
-                  <Sun className="w-3.5 h-3.5" />
-                  <span>Light Theme</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setIsDark(true);
-                    setHasUnsaved(true);
-                  }}
-                  className={`p-3 rounded-xl border text-xs font-medium flex items-center justify-center gap-2 cursor-pointer ${
-                    isDark
-                      ? "border-[#141C2E] bg-[#141C2E] text-white"
-                      : "border-[#E8E9EC] text-[#6B7280]"
-                  }`}
-                >
-                  <Moon className="w-3.5 h-3.5" />
-                  <span>Dark Theme</span>
-                </button>
-              </div>
-
-              <div>
-                <div className="text-xs font-medium text-[#17181C] mb-2">Brand Accent Color</div>
-                <div className="flex items-center gap-2.5">
-                  {ACCENT_PRESETS.map((hex) => (
+              {/* PreviewHeader */}
+              <div
+                className={`px-4 py-3.5 border-b flex items-center justify-between gap-2 ${
+                  isDark ? "border-zinc-800" : "border-[#F0F1F3]"
+                }`}
+              >
+                <span className="text-[13.5px] font-semibold truncate">{headerTitle}</span>
+                {showHeaderActions && (
+                  <div className="flex items-center gap-2 text-[#6B7280] shrink-0">
                     <button
-                      key={hex}
                       type="button"
-                      onClick={() => {
-                        setAccentColor(hex);
-                        setHasUnsaved(true);
-                      }}
-                      aria-label={`Select color ${hex}`}
-                      className={`w-7 h-7 rounded-full cursor-pointer border-2 transition-transform ${
-                        accentColor === hex ? "border-[#141C2E] scale-110" : "border-white shadow-xs"
-                      }`}
-                      style={{ backgroundColor: hex }}
-                    />
-                  ))}
-                </div>
+                      onClick={() => setMessages([])}
+                      aria-label="New chat"
+                      className="hover:text-[#17181C] cursor-pointer"
+                    >
+                      <SquarePen className="w-3.5 h-3.5" />
+                    </button>
+                    <History className="w-3.5 h-3.5" />
+                    <Maximize2 className="w-3.5 h-3.5" />
+                    <button
+                      type="button"
+                      onClick={() => setIsChatOpen(false)}
+                      aria-label="Close widget"
+                      className="hover:text-[#17181C] cursor-pointer"
+                    >
+                      <X className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                )}
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div>
-                  <label className="text-xs font-medium text-[#17181C] block mb-1">
-                    Header Title
-                  </label>
+              {/* Body: Start Screen OR Messages */}
+              <div className="p-4 sm:p-5 space-y-4 h-[350px] overflow-y-auto">
+                {messages.length === 0 ? (
+                  <>
+                    <div className="space-y-2">
+                      <h3
+                        className={`font-semibold tracking-tight ${
+                          fontSize === "sm" ? "text-base" : fontSize === "lg" ? "text-xl" : "text-lg"
+                        }`}
+                      >
+                        {greeting}
+                      </h3>
+                      <p
+                        className={`leading-relaxed ${
+                          isDark ? "text-zinc-400" : "text-[#6B7280]"
+                        } ${fontSize === "sm" ? "text-xs" : "text-[13px]"}`}
+                      >
+                        {subtitle}
+                      </p>
+                      <p
+                        className={`font-medium pt-0.5 ${
+                          fontSize === "sm" ? "text-xs" : "text-[13px]"
+                        }`}
+                      >
+                        {promptLead}
+                      </p>
+                    </div>
+
+                    {/* Quick Questions */}
+                    <div className="space-y-2 pt-1">
+                      {DEFAULT_QUESTIONS.map((q) => (
+                        <button
+                          key={q}
+                          type="button"
+                          onClick={() => handleSend(q)}
+                          className={`w-full px-3.5 py-2.5 border text-left text-[12.5px] flex items-center gap-2 transition-colors cursor-pointer ${
+                            isDark
+                              ? "bg-zinc-900 border-zinc-800 text-zinc-200 hover:border-zinc-700"
+                              : "bg-white border-[#E4E5E8] text-[#17181C] hover:bg-[#F9FAFB]"
+                          }`}
+                          style={{ borderRadius: radiusPx }}
+                        >
+                          <ChevronRight className="w-3.5 h-3.5 text-[#8A9099] shrink-0" />
+                          <span className="truncate">{q}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </>
+                ) : (
+                  <div className="space-y-3">
+                    {messages.map((m, idx) => (
+                      <div key={idx} className="space-y-1">
+                        <div className={`flex ${m.sender === "user" ? "justify-end" : "justify-start"}`}>
+                          <div
+                            className="max-w-[85%] px-3 py-2 text-xs leading-relaxed"
+                            style={{
+                              borderRadius: radiusPx,
+                              backgroundColor:
+                                m.sender === "user"
+                                  ? accentColor
+                                  : isDark
+                                  ? "#1F2430"
+                                  : "#F4F5F7",
+                              color:
+                                m.sender === "user" ? "#FFFFFF" : isDark ? "#F4F4F5" : "#17181C",
+                            }}
+                          >
+                            {m.text}
+                          </div>
+                        </div>
+                        {m.sender === "bot" && showMessageActions && (
+                          <div className="flex items-center gap-2 text-[#9AA0A8] pl-1">
+                            <Copy className="w-3 h-3" />
+                            <ThumbsUp className="w-3 h-3" />
+                            <ThumbsDown className="w-3 h-3" />
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* PreviewComposer */}
+              <div className="px-4 pb-3">
+                <div
+                  className={`border p-2.5 space-y-2 ${
+                    isDark ? "bg-zinc-900 border-zinc-800" : "bg-white border-[#E4E5E8]"
+                  }`}
+                  style={{ borderRadius: radiusPx }}
+                >
                   <input
                     type="text"
-                    value={headerTitle}
-                    onChange={(e) => {
-                      setHeaderTitle(e.target.value);
-                      setHasUnsaved(true);
+                    value={inputText}
+                    onChange={(e) => setInputText(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") handleSend();
                     }}
-                    className="w-full h-[36px] px-3 rounded-lg border border-[#E0E2E6] text-xs bg-white"
+                    placeholder={placeholder}
+                    className="w-full text-xs bg-transparent focus:outline-none placeholder:text-[#9AA0A8] px-1"
                   />
+                  <div className="flex items-center justify-between pt-1">
+                    <div className="flex items-center gap-2.5 text-[#8A9099] px-1">
+                      {showAttachments && <Paperclip className="w-3.5 h-3.5" />}
+                      {showMic && <Mic className="w-3.5 h-3.5" />}
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => handleSend()}
+                      aria-label="Send message"
+                      className="w-7 h-7 rounded-full flex items-center justify-center text-white cursor-pointer transition-opacity"
+                      style={{
+                        backgroundColor: inputText.trim() ? accentColor : "#E5E7EB",
+                        color: inputText.trim() ? "#FFFFFF" : "#9CA3AF",
+                      }}
+                    >
+                      <ArrowUp className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
                 </div>
+              </div>
 
-                <div>
-                  <label className="text-xs font-medium text-[#17181C] block mb-1">
-                    Typography
-                  </label>
+              {/* Footer */}
+              {showFooter && (
+                <div className="pb-3 text-center text-[11px] text-[#8A9099]">
+                  {footerText}
+                </div>
+              )}
+            </div>
+          ) : (
+            <div className="text-xs text-[#6B7280]">
+              Click the launcher bubble to reopen the chat widget.
+            </div>
+          )}
+
+          {/* Floating Launcher Bubble (Matches PreviewLauncherWidget.tsx) */}
+          {showLauncher && (
+            <button
+              type="button"
+              onClick={() => setIsChatOpen((prev) => !prev)}
+              aria-label="Toggle chat launcher"
+              className="absolute bottom-5 right-5 w-11 h-11 rounded-full text-white shadow-lg flex items-center justify-center cursor-pointer transition-transform hover:scale-105"
+              style={{ backgroundColor: accentColor }}
+            >
+              <MessageSquare className="w-4 h-4" />
+            </button>
+          )}
+        </div>
+
+        {/* Right Accordion Sidebar (Matches BuilderSidebar.tsx) */}
+        <aside className="w-full lg:w-[340px] bg-white border-t lg:border-t-0 lg:border-l border-[#EAEAEC] divide-y divide-[#F0F1F3] text-[13px] shrink-0">
+          {/* 1. Palette */}
+          <div>
+            <button
+              type="button"
+              onClick={() => handleToggle("palette")}
+              className="w-full px-5 py-3.5 flex items-center justify-between font-medium text-[#17181C] hover:bg-[#FAFAFA] cursor-pointer"
+            >
+              <span>Palette</span>
+              <ChevronDown
+                className={`w-4 h-4 text-[#8A9099] transition-transform ${
+                  openSection === "palette" ? "rotate-180" : ""
+                }`}
+              />
+            </button>
+            {openSection === "palette" && (
+              <div className="px-5 pb-4 space-y-3">
+                <div className="grid grid-cols-2 gap-2">
+                  {(["light", "dark"] as const).map((mode) => (
+                    <button
+                      key={mode}
+                      type="button"
+                      onClick={() => {
+                        setColorScheme(mode);
+                        markDirty();
+                      }}
+                      className={`py-1.5 rounded-lg border text-xs font-medium capitalize cursor-pointer ${
+                        colorScheme === mode
+                          ? "bg-[#141C2E] border-[#141C2E] text-white"
+                          : "bg-white border-[#E4E5E8] text-[#565C66]"
+                      }`}
+                    >
+                      {mode} mode
+                    </button>
+                  ))}
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-xs text-[#565C66]">Accent color</span>
+                  <div className="flex items-center gap-1.5">
+                    {ACCENT_COLORS.map((hex) => (
+                      <button
+                        key={hex}
+                        type="button"
+                        onClick={() => {
+                          setAccentColor(hex);
+                          markDirty();
+                        }}
+                        aria-label={`Color ${hex}`}
+                        className={`w-5 h-5 rounded-full cursor-pointer border ${
+                          accentColor === hex ? "ring-2 ring-offset-1 ring-[#141C2E]" : "border-zinc-200"
+                        }`}
+                        style={{ backgroundColor: hex }}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* 2. Header */}
+          <div>
+            <button
+              type="button"
+              onClick={() => handleToggle("header")}
+              className="w-full px-5 py-3.5 flex items-center justify-between font-medium text-[#17181C] hover:bg-[#FAFAFA] cursor-pointer"
+            >
+              <span>Header</span>
+              <ChevronDown
+                className={`w-4 h-4 text-[#8A9099] transition-transform ${
+                  openSection === "header" ? "rotate-180" : ""
+                }`}
+              />
+            </button>
+            {openSection === "header" && (
+              <div className="px-5 pb-4 space-y-2.5">
+                <input
+                  type="text"
+                  value={headerTitle}
+                  onChange={(e) => {
+                    setHeaderTitle(e.target.value);
+                    markDirty();
+                  }}
+                  className="w-full h-[34px] px-3 rounded-lg border border-[#E4E5E8] text-xs"
+                />
+                <label className="flex items-center justify-between text-xs text-[#565C66] cursor-pointer">
+                  <span>Show header actions</span>
+                  <input
+                    type="checkbox"
+                    checked={showHeaderActions}
+                    onChange={(e) => {
+                      setShowHeaderActions(e.target.checked);
+                      markDirty();
+                    }}
+                  />
+                </label>
+              </div>
+            )}
+          </div>
+
+          {/* 3. Launcher */}
+          <div>
+            <button
+              type="button"
+              onClick={() => handleToggle("launcher")}
+              className="w-full px-5 py-3.5 flex items-center justify-between font-medium text-[#17181C] hover:bg-[#FAFAFA] cursor-pointer"
+            >
+              <span>Launcher</span>
+              <ChevronDown
+                className={`w-4 h-4 text-[#8A9099] transition-transform ${
+                  openSection === "launcher" ? "rotate-180" : ""
+                }`}
+              />
+            </button>
+            {openSection === "launcher" && (
+              <div className="px-5 pb-4">
+                <label className="flex items-center justify-between text-xs text-[#565C66] cursor-pointer">
+                  <span>Show floating launcher</span>
+                  <input
+                    type="checkbox"
+                    checked={showLauncher}
+                    onChange={(e) => {
+                      setShowLauncher(e.target.checked);
+                      markDirty();
+                    }}
+                  />
+                </label>
+              </div>
+            )}
+          </div>
+
+          {/* 4. Typography */}
+          <div>
+            <button
+              type="button"
+              onClick={() => handleToggle("typography")}
+              className="w-full px-5 py-3.5 flex items-center justify-between font-medium text-[#17181C] hover:bg-[#FAFAFA] cursor-pointer"
+            >
+              <span>Typography</span>
+              <ChevronDown
+                className={`w-4 h-4 text-[#8A9099] transition-transform ${
+                  openSection === "typography" ? "rotate-180" : ""
+                }`}
+              />
+            </button>
+            {openSection === "typography" && (
+              <div className="px-5 pb-4 space-y-2.5">
+                <div className="flex items-center justify-between gap-2">
+                  <span className="text-xs text-[#565C66]">Font family</span>
                   <select
                     value={fontFamily}
                     onChange={(e) => {
-                      setFontFamily(e.target.value as (typeof FONT_OPTIONS)[number]);
-                      setHasUnsaved(true);
+                      setFontFamily(e.target.value);
+                      markDirty();
                     }}
-                    className="w-full h-[36px] px-3 rounded-lg border border-[#E0E2E6] text-xs bg-white"
+                    className="h-[30px] px-2 rounded-md border border-[#E4E5E8] text-xs"
                   >
-                    {FONT_OPTIONS.map((f) => (
-                      <option key={f}>{f}</option>
-                    ))}
+                    <option>Inter</option>
+                    <option>System UI</option>
                   </select>
                 </div>
-              </div>
-
-              <div>
-                <label className="text-xs font-medium text-[#17181C] block mb-1">
-                  Start Screen Welcome Message
-                </label>
-                <textarea
-                  rows={2}
-                  value={welcomeMessage}
-                  onChange={(e) => {
-                    setWelcomeMessage(e.target.value);
-                    setPreviewMsgs([{ sender: "bot", text: e.target.value }]);
-                    setHasUnsaved(true);
-                  }}
-                  className="w-full px-3 py-2 rounded-lg border border-[#E0E2E6] text-xs bg-white resize-none"
-                />
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                <div>
-                  <label className="text-xs font-medium text-[#17181C] block mb-1">
-                    Corner Style
-                  </label>
+                <div className="flex items-center justify-between gap-2">
+                  <span className="text-xs text-[#565C66]">Font size</span>
                   <select
-                    value={radiusId}
+                    value={fontSize}
                     onChange={(e) => {
-                      setRadiusId(e.target.value as "sharp" | "rounded" | "pill");
-                      setHasUnsaved(true);
+                      setFontSize(e.target.value as "sm" | "md" | "lg");
+                      markDirty();
                     }}
-                    className="w-full h-[36px] px-3 rounded-lg border border-[#E0E2E6] text-xs bg-white"
+                    className="h-[30px] px-2 rounded-md border border-[#E4E5E8] text-xs"
                   >
-                    {RADIUS_OPTIONS.map((r) => (
-                      <option key={r.id} value={r.id}>
-                        {r.label}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div>
-                  <label className="text-xs font-medium text-[#17181C] block mb-1">
-                    Language
-                  </label>
-                  <select
-                    value={language}
-                    onChange={(e) => {
-                      setLanguage(e.target.value);
-                      setHasUnsaved(true);
-                    }}
-                    className="w-full h-[36px] px-3 rounded-lg border border-[#E0E2E6] text-xs bg-white"
-                  >
-                    <option>English (US)</option>
-                    <option>English (UK)</option>
-                    <option>Spanish</option>
-                    <option>German</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="text-xs font-medium text-[#17181C] block mb-1">
-                    Country / Region
-                  </label>
-                  <select
-                    value={country}
-                    onChange={(e) => {
-                      setCountry(e.target.value);
-                      setHasUnsaved(true);
-                    }}
-                    className="w-full h-[36px] px-3 rounded-lg border border-[#E0E2E6] text-xs bg-white"
-                  >
-                    <option>Global</option>
-                    <option>United States</option>
-                    <option>India</option>
-                    <option>European Union</option>
+                    <option value="sm">Small</option>
+                    <option value="md">Medium</option>
+                    <option value="lg">Large</option>
                   </select>
                 </div>
               </div>
-            </>
-          )}
+            )}
+          </div>
 
-          {activeTab === "agent" && (
-            <div className="space-y-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div>
-                  <label className="text-xs font-medium text-[#17181C] block mb-1">
-                    Agent Name
-                  </label>
-                  <input
-                    type="text"
-                    value={agentName}
-                    onChange={(e) => {
-                      setAgentName(e.target.value);
-                      setHasUnsaved(true);
-                    }}
-                    className="w-full h-[36px] px-3 rounded-lg border border-[#E0E2E6] text-xs bg-white"
-                  />
-                </div>
-                <div>
-                  <label className="text-xs font-medium text-[#17181C] block mb-1">
-                    Agent Role
-                  </label>
-                  <select
-                    value={agentRole}
-                    onChange={(e) => {
-                      setAgentRole(e.target.value);
-                      setHasUnsaved(true);
-                    }}
-                    className="w-full h-[36px] px-3 rounded-lg border border-[#E0E2E6] text-xs bg-white"
-                  >
-                    <option>Customer Support</option>
-                    <option>Technical Specialist</option>
-                    <option>Sales Assistant</option>
-                    <option>Internal Knowledge</option>
-                  </select>
-                </div>
-              </div>
-
-              <div>
-                <label className="text-xs font-medium text-[#17181C] block mb-1">
-                  Primary AI Model
-                </label>
-                <select
-                  value={primaryModel}
-                  onChange={(e) => {
-                    setPrimaryModel(e.target.value);
-                    setHasUnsaved(true);
-                  }}
-                  className="w-full h-[36px] px-3 rounded-lg border border-[#E0E2E6] text-xs bg-white"
-                >
-                  <option>GPT-4o (OpenAI)</option>
-                  <option>Claude 3.7 Sonnet (Anthropic)</option>
-                  <option>Gemini 2.5 Pro (Google)</option>
-                  <option>DeepSeek Chat (DeepSeek)</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="text-xs font-medium text-[#17181C] block mb-1">
-                  System Prompt Instructions
-                </label>
-                <textarea
-                  rows={4}
-                  value={systemPrompt}
-                  onChange={(e) => {
-                    setSystemPrompt(e.target.value);
-                    setHasUnsaved(true);
-                  }}
-                  className="w-full px-3 py-2 rounded-lg border border-[#E0E2E6] text-xs bg-white resize-none"
-                />
-              </div>
-            </div>
-          )}
-
-          {activeTab === "knowledge" && (
-            <div className="space-y-3">
-              <div className="text-xs font-medium text-[#6B7280]">
-                Connected &amp; Supported Knowledge Sources
-              </div>
-              <div className="space-y-2">
-                {KNOWLEDGE_SOURCES.map((src) => (
-                  <div
-                    key={src.name}
-                    className="p-3 rounded-xl bg-[#FAFAFA] border border-[#E8E9EC] flex items-center justify-between gap-3"
-                  >
-                    <div className="flex items-center gap-2.5 min-w-0">
-                      {src.type === "Website" ? (
-                        <Globe className="w-4 h-4 text-[#141C2E] shrink-0" />
-                      ) : (
-                        <FileText className="w-4 h-4 text-[#141C2E] shrink-0" />
-                      )}
-                      <div className="min-w-0">
-                        <div className="text-xs font-semibold text-[#17181C] truncate">
-                          {src.name}
-                        </div>
-                        <div className="text-[11px] text-[#6B7280]">
-                          {src.type} · {src.pages}
-                        </div>
-                      </div>
-                    </div>
-                    <span
-                      className={`text-[10.5px] font-medium px-2 py-0.5 rounded-md shrink-0 ${
-                        src.status === "Ready"
-                          ? "bg-[#EAF8EE] text-[#15803D]"
-                          : "bg-[#F0F1F3] text-[#6B7280]"
-                      }`}
-                    >
-                      {src.status === "Ready" ? "Trained" : "Coming soon"}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {activeTab === "test" && (
-            <div className="space-y-4">
-              <div className="text-xs text-[#6B7280] leading-relaxed">
-                Send a sample prompt to test how <strong>{agentName}</strong> ({primaryModel})
-                responds with your live branding and welcome settings on the right.
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {[
-                  "How do I reset my API key?",
-                  "What is your refund window?",
-                  "Can I connect Okta SSO?",
-                ].map((q) => (
-                  <button
-                    key={q}
-                    type="button"
-                    onClick={() => handleSendPreview(q)}
-                    className="px-3 py-1.5 rounded-lg bg-[#F4F5F7] hover:bg-[#E8E9EC] text-xs font-medium text-[#141C2E] cursor-pointer"
-                  >
-                    {q}
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {activeTab === "deploy" && (
-            <div className="space-y-3">
-              <div className="flex flex-wrap gap-1.5">
-                {[
-                  { id: "js", label: "JavaScript Embed" },
-                  { id: "hosted", label: "Hosted Chat Page" },
-                  { id: "iframe", label: "Inline Embed / iframe" },
-                ].map((tab) => (
-                  <button
-                    key={tab.id}
-                    type="button"
-                    onClick={() => setDeployMethod(tab.id as "js" | "hosted" | "iframe")}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-medium cursor-pointer ${
-                      deployMethod === tab.id
-                        ? "bg-[#141C2E] text-white"
-                        : "bg-[#F4F5F7] text-[#565C66]"
-                    }`}
-                  >
-                    {tab.label}
-                  </button>
-                ))}
-              </div>
-
-              <div className="relative rounded-xl bg-[#0F1117] text-zinc-200 p-4 font-mono text-[11px] leading-relaxed overflow-x-auto">
-                <button
-                  type="button"
-                  onClick={handleCopy}
-                  className="absolute top-2.5 right-2.5 px-2.5 py-1 rounded-md bg-white/10 hover:bg-white/20 text-white text-[10.5px] font-sans font-medium inline-flex items-center gap-1 cursor-pointer"
-                >
-                  {copiedSnippet ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
-                  <span>{copiedSnippet ? "Copied" : "Copy"}</span>
-                </button>
-                <pre className="pr-16">{deploySnippet}</pre>
-              </div>
-            </div>
-          )}
-        </div>
-
-        {/* Right Live Builder Preview (Mirrors BuilderPreview.tsx) */}
-        <div className="lg:col-span-6 p-6 sm:p-8 flex items-center justify-center bg-[#F4F5F7]/70">
-          <div
-            className={`w-full max-w-[360px] border shadow-lg overflow-hidden flex flex-col transition-colors ${
-              isDark
-                ? "bg-[#111318] border-zinc-800 text-zinc-100"
-                : "bg-white border-[#E4E5E8] text-[#17181C]"
-            }`}
-            style={{ borderRadius: activeRadius }}
-          >
-            <div
-              className="px-4 py-3.5 text-white flex items-center justify-between"
-              style={{ backgroundColor: accentColor }}
+          {/* 5. Style */}
+          <div>
+            <button
+              type="button"
+              onClick={() => handleToggle("style")}
+              className="w-full px-5 py-3.5 flex items-center justify-between font-medium text-[#17181C] hover:bg-[#FAFAFA] cursor-pointer"
             >
-              <div>
-                <div className="text-xs font-semibold">{headerTitle || "Yedii Support"}</div>
-                <div className="text-[10.5px] text-white/80 mt-0.5">
-                  {agentRole} · {language}
-                </div>
-              </div>
-              <span className="text-[10px] font-mono text-white/80">Live Preview</span>
-            </div>
-
-            <div className="p-4 space-y-3 h-[240px] overflow-y-auto">
-              {previewMsgs.map((m, idx) => (
-                <div
-                  key={idx}
-                  className={`flex ${m.sender === "user" ? "justify-end" : "justify-start"}`}
-                >
-                  <div
-                    className="max-w-[85%] px-3 py-2 text-xs leading-relaxed"
-                    style={{
-                      borderRadius: activeRadius,
-                      backgroundColor:
-                        m.sender === "user"
-                          ? accentColor
-                          : isDark
-                          ? "#1F2430"
-                          : "#F4F5F7",
-                      color: m.sender === "user" ? "#FFFFFF" : isDark ? "#F4F4F5" : "#17181C",
-                    }}
-                  >
-                    {m.text}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div
-              className={`p-3 border-t flex items-center gap-2 ${
-                isDark ? "border-zinc-800" : "border-[#EAEAEC]"
-              }`}
-            >
-              <input
-                type="text"
-                value={previewInput}
-                onChange={(e) => setPreviewInput(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") handleSendPreview();
-                }}
-                placeholder="Message your agent..."
-                className={`flex-1 h-[34px] px-3 rounded-lg text-xs focus:outline-none ${
-                  isDark
-                    ? "bg-zinc-900 border border-zinc-700 text-white placeholder:text-zinc-500"
-                    : "bg-[#FAFAFA] border border-[#E4E5E8] text-[#17181C]"
+              <span>Style</span>
+              <ChevronDown
+                className={`w-4 h-4 text-[#8A9099] transition-transform ${
+                  openSection === "style" ? "rotate-180" : ""
                 }`}
               />
-              <button
-                type="button"
-                onClick={() => handleSendPreview()}
-                aria-label="Send test message"
-                className="h-[34px] w-[34px] rounded-lg text-white flex items-center justify-center cursor-pointer shrink-0"
-                style={{ backgroundColor: accentColor }}
-              >
-                <Send className="w-3.5 h-3.5" />
-              </button>
-            </div>
+            </button>
+            {openSection === "style" && (
+              <div className="px-5 pb-4 flex items-center justify-between gap-2">
+                <span className="text-xs text-[#565C66]">Corner radius</span>
+                <div className="flex gap-1">
+                  {(["sharp", "rounded", "pill"] as const).map((r) => (
+                    <button
+                      key={r}
+                      type="button"
+                      onClick={() => {
+                        setRadius(r);
+                        markDirty();
+                      }}
+                      className={`px-2 py-1 rounded-md text-[11px] capitalize cursor-pointer border ${
+                        radius === r
+                          ? "bg-[#141C2E] border-[#141C2E] text-white"
+                          : "bg-white border-[#E4E5E8] text-[#565C66]"
+                      }`}
+                    >
+                      {r}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
-        </div>
+
+          {/* 6. Start screen */}
+          <div>
+            <button
+              type="button"
+              onClick={() => handleToggle("startScreen")}
+              className="w-full px-5 py-3.5 flex items-center justify-between font-medium text-[#17181C] hover:bg-[#FAFAFA] cursor-pointer"
+            >
+              <span>Start screen</span>
+              <ChevronDown
+                className={`w-4 h-4 text-[#8A9099] transition-transform ${
+                  openSection === "startScreen" ? "rotate-180" : ""
+                }`}
+              />
+            </button>
+            {openSection === "startScreen" && (
+              <div className="px-5 pb-4 space-y-2">
+                <input
+                  type="text"
+                  value={greeting}
+                  onChange={(e) => {
+                    setGreeting(e.target.value);
+                    markDirty();
+                  }}
+                  className="w-full h-[32px] px-2.5 rounded-lg border border-[#E4E5E8] text-xs"
+                />
+                <textarea
+                  rows={2}
+                  value={subtitle}
+                  onChange={(e) => {
+                    setSubtitle(e.target.value);
+                    markDirty();
+                  }}
+                  className="w-full px-2.5 py-1.5 rounded-lg border border-[#E4E5E8] text-xs resize-none"
+                />
+              </div>
+            )}
+          </div>
+
+          {/* 7. Composer */}
+          <div>
+            <button
+              type="button"
+              onClick={() => handleToggle("composer")}
+              className="w-full px-5 py-3.5 flex items-center justify-between font-medium text-[#17181C] hover:bg-[#FAFAFA] cursor-pointer"
+            >
+              <span>Composer</span>
+              <ChevronDown
+                className={`w-4 h-4 text-[#8A9099] transition-transform ${
+                  openSection === "composer" ? "rotate-180" : ""
+                }`}
+              />
+            </button>
+            {openSection === "composer" && (
+              <div className="px-5 pb-4 space-y-2">
+                <input
+                  type="text"
+                  value={placeholder}
+                  onChange={(e) => {
+                    setPlaceholder(e.target.value);
+                    markDirty();
+                  }}
+                  className="w-full h-[32px] px-2.5 rounded-lg border border-[#E4E5E8] text-xs"
+                />
+                <label className="flex items-center justify-between text-xs text-[#565C66] cursor-pointer">
+                  <span>Allow attachments</span>
+                  <input
+                    type="checkbox"
+                    checked={showAttachments}
+                    onChange={(e) => {
+                      setShowAttachments(e.target.checked);
+                      markDirty();
+                    }}
+                  />
+                </label>
+                <label className="flex items-center justify-between text-xs text-[#565C66] cursor-pointer">
+                  <span>Voice input button</span>
+                  <input
+                    type="checkbox"
+                    checked={showMic}
+                    onChange={(e) => {
+                      setShowMic(e.target.checked);
+                      markDirty();
+                    }}
+                  />
+                </label>
+              </div>
+            )}
+          </div>
+
+          {/* 8. Footer */}
+          <div>
+            <button
+              type="button"
+              onClick={() => handleToggle("footer")}
+              className="w-full px-5 py-3.5 flex items-center justify-between font-medium text-[#17181C] hover:bg-[#FAFAFA] cursor-pointer"
+            >
+              <span>Footer</span>
+              <ChevronDown
+                className={`w-4 h-4 text-[#8A9099] transition-transform ${
+                  openSection === "footer" ? "rotate-180" : ""
+                }`}
+              />
+            </button>
+            {openSection === "footer" && (
+              <div className="px-5 pb-4 space-y-2">
+                <label className="flex items-center justify-between text-xs text-[#565C66] cursor-pointer">
+                  <span>Show footer</span>
+                  <input
+                    type="checkbox"
+                    checked={showFooter}
+                    onChange={(e) => {
+                      setShowFooter(e.target.checked);
+                      markDirty();
+                    }}
+                  />
+                </label>
+                <input
+                  type="text"
+                  value={footerText}
+                  onChange={(e) => {
+                    setFooterText(e.target.value);
+                    markDirty();
+                  }}
+                  className="w-full h-[32px] px-2.5 rounded-lg border border-[#E4E5E8] text-xs"
+                />
+              </div>
+            )}
+          </div>
+
+          {/* 9. Message actions */}
+          <div>
+            <button
+              type="button"
+              onClick={() => handleToggle("messageActions")}
+              className="w-full px-5 py-3.5 flex items-center justify-between font-medium text-[#17181C] hover:bg-[#FAFAFA] cursor-pointer"
+            >
+              <span>Message actions</span>
+              <ChevronDown
+                className={`w-4 h-4 text-[#8A9099] transition-transform ${
+                  openSection === "messageActions" ? "rotate-180" : ""
+                }`}
+              />
+            </button>
+            {openSection === "messageActions" && (
+              <div className="px-5 pb-4">
+                <label className="flex items-center justify-between text-xs text-[#565C66] cursor-pointer">
+                  <span>Copy &amp; feedback icons</span>
+                  <input
+                    type="checkbox"
+                    checked={showMessageActions}
+                    onChange={(e) => {
+                      setShowMessageActions(e.target.checked);
+                      markDirty();
+                    }}
+                  />
+                </label>
+              </div>
+            )}
+          </div>
+
+          {/* 10. Reset */}
+          <div className="px-5 py-4 space-y-2.5 bg-[#FAFAFA]/60">
+            <div className="text-xs font-medium text-[#17181C]">Reset</div>
+            <div className="text-[11.5px] text-[#6B7280]">Reset all settings to default</div>
+            <button
+              type="button"
+              onClick={handleResetAll}
+              className="w-full h-[34px] rounded-lg border border-[#E4E5E8] bg-white hover:bg-[#F4F5F7] text-xs font-medium text-[#17181C] cursor-pointer inline-flex items-center justify-center gap-1.5"
+            >
+              <RotateCcw className="w-3.5 h-3.5" />
+              <span>Reset</span>
+            </button>
+          </div>
+        </aside>
       </div>
     </div>
   );

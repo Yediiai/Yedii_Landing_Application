@@ -64,36 +64,6 @@ export default function BuilderPage() {
         <section id="builder-workspace" className="pb-16 md:pb-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
           <ProductBuilderShowcase />
         </section>
-
-        {/* Final CTA */}
-        <section className="pb-20 pt-4 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
-          <div className="rounded-2xl bg-black border border-[#1C1C1E] text-white p-8 sm:p-12 flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-md">
-            <div className="max-w-xl space-y-2">
-              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">
-                Your AI Support Agent Starts Here.
-              </h2>
-              <p className="text-sm sm:text-base text-zinc-300">
-                Build your AI agent, connect your knowledge, customize its experience, and bring
-                intelligent customer support to your business.
-              </p>
-            </div>
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0">
-              <a
-                href="#builder-workspace"
-                className="px-5 py-3 rounded-lg bg-white text-black text-sm font-semibold hover:bg-zinc-100 transition-colors inline-flex items-center justify-center gap-2"
-              >
-                <span>Explore Builder</span>
-                <ArrowRight className="w-4 h-4" />
-              </a>
-              <Link
-                href="https://app.yedii.com/signup"
-                className="px-5 py-3 rounded-lg border border-white/20 text-white text-sm font-semibold hover:bg-white/10 transition-colors inline-flex items-center justify-center"
-              >
-                Get Started
-              </Link>
-            </div>
-          </div>
-        </section>
       </main>
 
       <Footer />

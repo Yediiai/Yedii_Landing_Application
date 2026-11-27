@@ -10,7 +10,6 @@ import { PricingComparison } from "./PricingComparison";
 import { ProsAndConsiderations } from "./ProsAndConsiderations";
 import { WhyChooseYedii } from "./WhyChooseYedii";
 import { ComparisonFAQ } from "./ComparisonFAQ";
-import { ComparisonCTA } from "./ComparisonCTA";
 
 export function ComparisonTemplate({ comparison }: { comparison: CompetitorComparison }) {
   return (
@@ -41,9 +40,6 @@ export function ComparisonTemplate({ comparison }: { comparison: CompetitorCompa
 
         {/* H. Frequently Asked Questions */}
         <ComparisonFAQ faqs={comparison.faqs} competitorName={comparison.name} />
-
-        {/* I. Final CTA */}
-        <ComparisonCTA />
       </main>
 
       <Footer />
