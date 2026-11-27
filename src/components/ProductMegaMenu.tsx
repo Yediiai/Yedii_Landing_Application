@@ -89,23 +89,23 @@ export function ProductMegaMenu({
           </div>
 
           <div className="space-y-4">
-            {/* 4. Website Chat */}
+            {/* 4. Builder */}
             <Link
-              href="/customer-support-platform"
+              href="/builder"
               onClick={onClose}
               className="group block"
             >
               <div className="text-[14px] font-semibold text-[#111827] group-hover:text-black transition-colors">
-                Website Chat
+                Builder
               </div>
               <div className="text-[12.5px] text-[#6B7280] font-normal leading-snug mt-0.5">
-                Deploy customizable AI support on any website
+                Create, customize, and deploy AI agents
               </div>
             </Link>
 
             {/* 5. Inbox */}
             <Link
-              href="/solutions/customer-support"
+              href="/inbox"
               onClick={onClose}
               className="group block"
             >
@@ -119,7 +119,7 @@ export function ProductMegaMenu({
 
             {/* 6. Agent Analytics */}
             <Link
-              href="/solutions/customer-success"
+              href="/agent-analytics"
               onClick={onClose}
               className="group block"
             >

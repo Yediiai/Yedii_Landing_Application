@@ -437,7 +437,7 @@ export function Navbar() {
             </div>
 
             <Link
-              href="/customer-support-platform"
+              href="/builder"
               onClick={() => setIsMobileMenuOpen(false)}
               className="flex items-center justify-between px-3 py-2.5 rounded-xl text-zinc-800 hover:bg-zinc-50 active:bg-zinc-100 transition-colors"
             >
@@ -446,15 +446,15 @@ export function Navbar() {
                   <MessageSquare className="w-4 h-4" />
                 </div>
                 <div>
-                  <div className="text-[13.5px] font-semibold text-zinc-900">Website Chat</div>
-                  <div className="text-[11.5px] text-zinc-500">Customizable chat launcher & branded widget</div>
+                  <div className="text-[13.5px] font-semibold text-zinc-900">Builder</div>
+                  <div className="text-[11.5px] text-zinc-500">Create, customize, and deploy AI agents</div>
                 </div>
               </div>
               <ArrowRight className="w-4 h-4 text-zinc-400 shrink-0" />
             </Link>
 
             <Link
-              href="/solutions/customer-support"
+              href="/inbox"
               onClick={() => setIsMobileMenuOpen(false)}
               className="flex items-center justify-between px-3 py-2.5 rounded-xl text-zinc-800 hover:bg-zinc-50 active:bg-zinc-100 transition-colors"
             >
@@ -471,7 +471,7 @@ export function Navbar() {
             </Link>
 
             <Link
-              href="/solutions/customer-success"
+              href="/agent-analytics"
               onClick={() => setIsMobileMenuOpen(false)}
               className="flex items-center justify-between px-3 py-2.5 rounded-xl text-zinc-800 hover:bg-zinc-50 active:bg-zinc-100 transition-colors"
             >

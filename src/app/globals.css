@@ -174,6 +174,37 @@ select[class*="rounded"],
   border-radius: 6px !important;
 }
 
+/* Product Showcases (Website Chat, Inbox, Agent Analytics) rounded corners */
+.product-showcase-scope,
+.product-showcase-scope .rounded-full,
+.product-showcase-scope button.rounded-full {
+  border-radius: 9999px !important;
+}
+.product-showcase-scope.rounded-2xl,
+.product-showcase-scope .rounded-2xl {
+  border-radius: 16px !important;
+}
+.product-showcase-scope.rounded-xl,
+.product-showcase-scope .rounded-xl,
+.product-showcase-scope button.rounded-xl {
+  border-radius: 12px !important;
+}
+.product-showcase-scope.rounded-lg,
+.product-showcase-scope .rounded-lg,
+.product-showcase-scope button.rounded-lg,
+.product-showcase-scope a.rounded-lg,
+.product-showcase-scope input.rounded-lg,
+.product-showcase-scope textarea.rounded-lg,
+.product-showcase-scope select.rounded-lg {
+  border-radius: 9px !important;
+}
+.product-showcase-scope.rounded-md,
+.product-showcase-scope .rounded-md,
+.product-showcase-scope button.rounded-md,
+.product-showcase-scope span.rounded-md {
+  border-radius: 6px !important;
+}
+
 * {
   box-sizing: border-box;
 }
