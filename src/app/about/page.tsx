@@ -2,10 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import {
   ArrowRight,
-  Bot,
-  BookOpen,
-  BarChart3,
-  Plug,
   Compass,
   Eye,
 } from "lucide-react";
@@ -31,22 +27,18 @@ export const metadata: Metadata = {
 
 const CAPABILITIES = [
   {
-    icon: Bot,
     title: "AI Support Agents",
     description: "Intelligent agents that answer customer questions.",
   },
   {
-    icon: BookOpen,
     title: "Knowledge Intelligence",
     description: "Turn business knowledge into useful answers.",
   },
   {
-    icon: BarChart3,
     title: "Performance Insights",
     description: "Understand conversations and support performance.",
   },
   {
-    icon: Plug,
     title: "Seamless Integration",
     description: "Bring AI support to websites and customer touchpoints.",
   },
@@ -118,13 +110,9 @@ export default function AboutPage() {
               </div>
             </div>
 
-            {/* Abstract Minimalist AI Visual */}
+            {/* Abstract Minimalist AI Visual (transparent over grid background) */}
             <div className="lg:col-span-5">
-              <div className="rounded-2xl bg-white border border-[#E8E9EC] p-6 sm:p-8 shadow-sm relative overflow-hidden">
-                <div
-                  className="absolute inset-0 bg-gradient-to-br from-[#F4F5F7]/70 via-white to-[#FAFAFA] pointer-events-none"
-                  aria-hidden="true"
-                />
+              <div className="p-2 sm:p-4 relative">
                 <svg
                   viewBox="0 0 360 280"
                   className="relative w-full h-auto"
@@ -171,7 +159,7 @@ export default function AboutPage() {
                   <circle cx="180" cy="140" r="8" fill="#FFFFFF" />
                 </svg>
 
-                <div className="relative mt-4 pt-4 border-t border-[#F0F1F3] flex items-center justify-between text-xs text-[#6B7280] font-mono">
+                <div className="relative mt-4 pt-4 border-t border-[#E8E9EC]/80 flex items-center justify-between text-xs text-[#6B7280] font-mono">
                   <span>Grounded Knowledge</span>
                   <span className="text-[#141C2E] font-semibold">Autonomous Resolution</span>
                 </div>
@@ -183,7 +171,7 @@ export default function AboutPage() {
         {/* ================================================================= */}
         {/* SECTION 02: OUR STORY                                             */}
         {/* ================================================================= */}
-        <section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 border-t border-zinc-200/70 bg-white/75 backdrop-blur-xs">
+        <section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 border-t border-zinc-200/70">
           <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
             <div className="lg:col-span-6 space-y-5">
               <div className="text-[11px] font-semibold uppercase tracking-wider text-[#8A9099]">
@@ -299,7 +287,7 @@ export default function AboutPage() {
         {/* ================================================================= */}
         {/* SECTION 04: WHAT WE DO                                            */}
         {/* ================================================================= */}
-        <section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 border-t border-zinc-200/70 bg-white/75 backdrop-blur-xs">
+        <section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 border-t border-zinc-200/70">
           <div className="max-w-6xl mx-auto">
             <div className="text-center max-w-2xl mx-auto mb-12">
               <div className="text-[11px] font-semibold uppercase tracking-wider text-[#8A9099] mb-2">
@@ -311,27 +299,21 @@ export default function AboutPage() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-              {CAPABILITIES.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <div
-                    key={item.title}
-                    className="group rounded-2xl bg-white border border-[#E8E9EC] p-6 transition-all duration-200 hover:border-zinc-300 hover:shadow-md flex flex-col justify-between"
-                  >
-                    <div>
-                      <div className="w-10 h-10 rounded-xl bg-[#141C2E] text-white flex items-center justify-center mb-5 group-hover:scale-105 transition-transform duration-200">
-                        <Icon className="w-5 h-5" />
-                      </div>
-                      <h3 className="text-base font-bold tracking-tight text-[#141C2E]">
-                        {item.title}
-                      </h3>
-                      <p className="mt-2 text-sm text-[#6B7280] leading-relaxed">
-                        {item.description}
-                      </p>
-                    </div>
+              {CAPABILITIES.map((item) => (
+                <div
+                  key={item.title}
+                  className="group rounded-2xl bg-white border border-[#E8E9EC] p-6 transition-all duration-200 hover:border-zinc-300 hover:shadow-md flex flex-col justify-between"
+                >
+                  <div>
+                    <h3 className="text-base font-bold tracking-tight text-[#141C2E]">
+                      {item.title}
+                    </h3>
+                    <p className="mt-2 text-sm text-[#6B7280] leading-relaxed">
+                      {item.description}
+                    </p>
                   </div>
-                );
-              })}
+                </div>
+              ))}
             </div>
           </div>
         </section>
@@ -377,7 +359,7 @@ export default function AboutPage() {
         {/* CLOSING CTA                                                       */}
         {/* ================================================================= */}
         <section className="pb-20 pt-4 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
-          <div className="rounded-2xl bg-[#141C2E] text-white p-8 sm:p-12 flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-md">
+          <div className="rounded-2xl bg-black border border-[#1C1C1E] text-white p-8 sm:p-12 flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-md">
             <div className="max-w-xl space-y-2">
               <h2 className="text-2xl sm:text-3xl font-bold tracking-tight font-sans">
                 Ready to see Yedii in action?
@@ -389,7 +371,7 @@ export default function AboutPage() {
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0">
               <Link
                 href="/ai-agents"
-                className="px-5 py-3 rounded-lg bg-white text-[#141C2E] text-sm font-semibold hover:bg-zinc-100 transition-colors inline-flex items-center justify-center gap-2"
+                className="px-5 py-3 rounded-lg bg-white text-black text-sm font-semibold hover:bg-zinc-100 transition-colors inline-flex items-center justify-center gap-2"
               >
                 <span>Explore Yedii</span>
                 <ArrowRight className="w-4 h-4" />
