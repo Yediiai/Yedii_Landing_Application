@@ -267,7 +267,7 @@ export default function HelpCenterPage() {
                 <h3 className="font-bold text-base mb-1">Enterprise Slack Connect</h3>
                 <p className="text-xs text-zinc-400 mb-4">Dedicated private Slack channel for Enterprise plan customers.</p>
                 <Link
-                  href="/enterprise"
+                  href="/pricing"
                   className="text-xs font-semibold text-purple-400 hover:text-purple-300 inline-flex items-center gap-1 mt-auto"
                 >
                   Learn About Enterprise <ArrowRight className="w-3.5 h-3.5" />

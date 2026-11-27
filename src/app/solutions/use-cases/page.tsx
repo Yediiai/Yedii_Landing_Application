@@ -351,7 +351,7 @@ export default function UseCasesLandingPage() {
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
               <Link
-                href="/enterprise"
+                href="/pricing"
                 className="w-full sm:w-auto px-6 py-3 rounded-[8px] bg-transparent text-white font-semibold text-xs sm:text-sm border border-white/20 hover:bg-white/10 transition-all shadow-xs inline-flex items-center justify-center gap-2"
               >
                 <span>Schedule Enterprise Demo</span>

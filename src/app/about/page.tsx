@@ -102,7 +102,7 @@ export default function AboutPage() {
                   <ArrowRight className="w-4 h-4" />
                 </Link>
                 <Link
-                  href="/enterprise"
+                  href="/pricing"
                   className="px-6 py-3 rounded-lg bg-white text-[#141C2E] text-sm font-semibold border border-[#E0E2E6] hover:bg-zinc-50 transition-colors inline-flex items-center justify-center shadow-2xs"
                 >
                   Get in Touch
@@ -377,7 +377,7 @@ export default function AboutPage() {
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
-                href="/enterprise"
+                href="/pricing"
                 className="px-5 py-3 rounded-lg border border-white/20 text-white text-sm font-semibold hover:bg-white/10 transition-colors inline-flex items-center justify-center"
               >
                 Get in Touch

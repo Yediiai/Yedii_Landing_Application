@@ -37,7 +37,7 @@ export default function SalesAssistanceSolutionPage() {
         subtitle:
           "Don't let interested enterprise buyers bounce while waiting for an SDR response. Yedii AI sales agents engage visitors proactively, answer deep product questions with verified citations, qualify ICP criteria, and schedule calendar meetings directly in chat.",
         primaryCta: { text: "Deploy Sales Agent", href: "https://app.yedii.com/signup" },
-        secondaryCta: { text: "See ROI Calculator", href: "/enterprise#roi" },
+        secondaryCta: { text: "View Pricing & Plans", href: "/pricing" },
       }}
       mockPreview={
         <div className="bg-[#141C2E] rounded-[14px] p-6 text-white font-mono text-xs space-y-4">

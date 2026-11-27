@@ -52,7 +52,7 @@ const differentiators: DifferentiatorCard[] = [
     title: "Enterprise-Ready Support",
     description: "Deliver consistent, reliable customer service across all communication channels.",
     linkText: "Learn About Enterprise",
-    linkHref: "/enterprise",
+    linkHref: "/pricing",
   },
   {
     icon: Layers,
