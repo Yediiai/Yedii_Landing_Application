@@ -43,7 +43,7 @@ export function ComparisonFAQ({
         <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-zinc-500">
           Got Questions?
         </span>
-        <h2 className="text-2xl sm:text-3xl font-bold font-serif text-zinc-950 mt-1">
+        <h2 className="text-2xl sm:text-3xl font-bold font-sans text-zinc-950 mt-1">
           Frequently Asked Questions: Yedii vs {competitorName}
         </h2>
         <p className="text-xs sm:text-sm text-zinc-600 mt-2">

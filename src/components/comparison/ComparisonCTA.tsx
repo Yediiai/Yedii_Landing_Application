@@ -14,7 +14,7 @@ export function ComparisonCTA() {
           Deploy in 5 Minutes
         </div>
 
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold font-serif tracking-tight text-white max-w-2xl mx-auto">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold font-sans tracking-tight text-white max-w-2xl mx-auto">
           Ready to Build Your AI Customer Support Agent?
         </h2>
 

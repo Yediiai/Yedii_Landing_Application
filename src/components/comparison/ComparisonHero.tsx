@@ -37,7 +37,7 @@ export function ComparisonHero({ comparison }: { comparison: CompetitorCompariso
       </div>
 
       {/* Main H1 Heading */}
-      <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-zinc-950 font-serif leading-tight mb-5">
+      <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-zinc-950 font-sans leading-tight mb-5">
         {comparison.hero.title}
       </h1>
 

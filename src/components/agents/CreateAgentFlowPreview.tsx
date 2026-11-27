@@ -187,7 +187,7 @@ export function CreateAgentFlowPreview() {
           <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-[#F4F5F7] border border-[#E8E9EC] text-[11px] font-semibold uppercase tracking-wider text-[#141C2E]">
             Step 01 · Agent Details
           </span>
-          <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#141C2E] font-serif">
+          <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#141C2E] font-sans">
             Create your AI agent
           </h3>
           <p className="text-sm sm:text-base text-[#6B7280] leading-relaxed">
@@ -205,7 +205,7 @@ export function CreateAgentFlowPreview() {
           <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-[#F4F5F7] border border-[#E8E9EC] text-[11px] font-semibold uppercase tracking-wider text-[#141C2E]">
             Step 02 · Add Knowledge
           </span>
-          <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#141C2E] font-serif">
+          <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#141C2E] font-sans">
             Connect websites &amp; PDFs
           </h3>
           <p className="text-sm sm:text-base text-[#6B7280] leading-relaxed">
@@ -444,7 +444,7 @@ export function CreateAgentFlowPreview() {
           <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-[#F4F5F7] border border-[#E8E9EC] text-[11px] font-semibold uppercase tracking-wider text-[#141C2E]">
             Step 03 · Configure &amp; Train
           </span>
-          <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#141C2E] font-serif">
+          <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#141C2E] font-sans">
             Pick your embedding model &amp; train
           </h3>
           <p className="text-sm sm:text-base text-[#6B7280] leading-relaxed">
@@ -462,7 +462,7 @@ export function CreateAgentFlowPreview() {
           <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-[#F4F5F7] border border-[#E8E9EC] text-[11px] font-semibold uppercase tracking-wider text-[#141C2E]">
             Step 04 · Agent Ready
           </span>
-          <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#141C2E] font-serif">
+          <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#141C2E] font-sans">
             Test in Playground &amp; launch
           </h3>
           <p className="text-sm sm:text-base text-[#6B7280] leading-relaxed">

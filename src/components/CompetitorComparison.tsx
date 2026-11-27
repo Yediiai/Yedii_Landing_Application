@@ -231,7 +231,7 @@ export function CompetitorComparison() {
         <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
           <h2
             id="comparison-heading"
-            className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-zinc-950 font-serif"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-zinc-950 font-sans"
           >
             See how Yedii compares
           </h2>

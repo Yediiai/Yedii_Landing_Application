@@ -12,7 +12,7 @@ export function PricingComparison({ comparison }: { comparison: CompetitorCompar
         <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-zinc-500">
           Cost Transparency
         </span>
-        <h2 className="text-2xl sm:text-3xl font-bold font-serif text-zinc-950 mt-1">
+        <h2 className="text-2xl sm:text-3xl font-bold font-sans text-zinc-950 mt-1">
           Pricing &amp; Total Cost of Ownership
         </h2>
         <p className="text-xs sm:text-sm text-zinc-600 mt-2">
@@ -32,7 +32,7 @@ export function PricingComparison({ comparison }: { comparison: CompetitorCompar
             </div>
 
             <div className="mb-4">
-              <span className="text-3xl sm:text-4xl font-extrabold text-zinc-950 font-serif">
+              <span className="text-3xl sm:text-4xl font-extrabold text-zinc-950 font-sans">
                 {yedii.startingPrice}
               </span>
               <span className="text-xs text-zinc-500 ml-1.5 font-sans">/ month starting</span>
@@ -76,7 +76,7 @@ export function PricingComparison({ comparison }: { comparison: CompetitorCompar
             </div>
 
             <div className="mb-4">
-              <span className="text-3xl sm:text-4xl font-extrabold text-zinc-950 font-serif">
+              <span className="text-3xl sm:text-4xl font-extrabold text-zinc-950 font-sans">
                 {competitor.startingPrice}
               </span>
             </div>

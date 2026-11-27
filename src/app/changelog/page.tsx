@@ -133,7 +133,7 @@ export default function ChangelogPage() {
             <History className="w-3.5 h-3.5 text-zinc-600" />
             Product Updates & Release Log
           </div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-[#141C2E] mb-6 font-serif">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-[#141C2E] mb-6 font-sans">
             Changelog
           </h1>
           <p className="text-lg md:text-xl text-[#141C2E]/70 max-w-2xl leading-relaxed">
@@ -195,7 +195,7 @@ export default function ChangelogPage() {
         {/* Bottom CTA */}
         <section className="py-16 px-4 md:px-8 bg-[#141C2E] text-white">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-2xl md:text-3xl font-bold font-serif mb-3">
+            <h2 className="text-2xl md:text-3xl font-bold font-sans mb-3">
               Want to request a feature or integration?
             </h2>
             <p className="text-zinc-400 text-xs md:text-sm max-w-xl mx-auto mb-6">

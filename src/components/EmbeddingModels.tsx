@@ -137,7 +137,7 @@ export function EmbeddingModels() {
               <div className="inline-flex items-center px-3 py-1 rounded-full bg-white/80 backdrop-blur-xs border border-zinc-200 text-zinc-700 text-xs font-semibold mb-3 shadow-2xs">
                 <span>Data &amp; AI model training</span>
               </div>
-              <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-950 font-serif leading-snug">
+              <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-950 font-sans leading-snug">
                 Trained on your knowledge, never generic guesses
               </h3>
               <p className="mt-2.5 text-sm sm:text-base text-zinc-600 leading-relaxed max-w-xl mx-auto lg:mx-0">
@@ -154,7 +154,7 @@ export function EmbeddingModels() {
               </div>
               <h2
                 id="embedding-models-heading"
-                className="text-3xl sm:text-4xl font-bold tracking-tight text-zinc-950 font-serif leading-[1.15]"
+                className="text-3xl sm:text-4xl font-bold tracking-tight text-zinc-950 font-sans leading-[1.15]"
               >
                 Choose how much accuracy you need
               </h2>

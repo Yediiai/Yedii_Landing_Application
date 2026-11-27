@@ -134,7 +134,7 @@ export function Testimonials() {
                       ★
                     </span>
                   ) : (
-                    <span className="text-3xl text-zinc-300 font-serif leading-none select-none">
+                    <span className="text-3xl text-zinc-300 font-sans leading-none select-none">
                       ”
                     </span>
                   )}

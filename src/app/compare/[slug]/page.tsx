@@ -172,7 +172,7 @@ export default async function CompareDynamicPage({
             <Sparkles className="w-3.5 h-3.5 text-zinc-600" />
             Product Comparison • Yedii vs {data.competitorName}
           </div>
-          <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-[#141C2E] mb-6 font-serif leading-tight">
+          <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-[#141C2E] mb-6 font-sans leading-tight">
             {data.title}
           </h1>
           <p className="text-base md:text-lg text-[#141C2E]/70 max-w-3xl leading-relaxed mb-8">
@@ -198,7 +198,7 @@ export default async function CompareDynamicPage({
         {/* Comparison Table */}
         <section className="py-16 px-4 md:px-8 max-w-5xl mx-auto">
           <div className="mb-8">
-            <h2 className="text-2xl font-bold font-serif mb-2">Side-by-Side Capability Comparison</h2>
+            <h2 className="text-2xl font-bold font-sans mb-2">Side-by-Side Capability Comparison</h2>
             <p className="text-xs md:text-sm text-[#141C2E]/70">
               How Yedii stacks up against {data.competitorName} across modern AI intelligence and autonomous support.
             </p>
@@ -245,7 +245,7 @@ export default async function CompareDynamicPage({
 
         {/* Why Choose Yedii Section */}
         <section className="py-16 px-4 md:px-8 max-w-5xl mx-auto border-t border-[#141C2E]/10">
-          <h2 className="text-2xl font-bold font-serif mb-8 text-center">
+          <h2 className="text-2xl font-bold font-sans mb-8 text-center">
             Why Modern Brands Switch to Yedii
           </h2>
 
@@ -285,7 +285,7 @@ export default async function CompareDynamicPage({
         {/* Final CTA */}
         <section className="py-16 px-4 md:px-8 bg-[#141C2E] text-white">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-2xl md:text-3xl font-bold font-serif mb-3">
+            <h2 className="text-2xl md:text-3xl font-bold font-sans mb-3">
               Ready to upgrade to next-generation AI support?
             </h2>
             <p className="text-zinc-400 text-xs md:text-sm max-w-xl mx-auto mb-6">

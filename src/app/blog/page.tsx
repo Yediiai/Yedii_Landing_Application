@@ -110,7 +110,7 @@ export default function BlogPage() {
             <BookOpen className="w-3.5 h-3.5 text-zinc-600" />
             Yedii Engineering & Research
           </div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-[#141C2E] mb-6 font-serif">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-[#141C2E] mb-6 font-sans">
             The Yedii Blog
           </h1>
           <p className="text-lg md:text-xl text-[#141C2E]/70 max-w-2xl leading-relaxed mb-8">
@@ -155,7 +155,7 @@ export default function BlogPage() {
               </span>
             </div>
 
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold font-serif mb-4 text-[#141C2E] group-hover:text-blue-900 transition-colors">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold font-sans mb-4 text-[#141C2E] group-hover:text-blue-900 transition-colors">
               <Link href={`/blog/${featuredPost.slug}`}>{featuredPost.title}</Link>
             </h2>
 
@@ -187,7 +187,7 @@ export default function BlogPage() {
         {/* Blog Posts Grid */}
         <section className="py-8 pb-20 px-4 md:px-8 max-w-6xl mx-auto">
           <div className="flex items-center justify-between mb-8">
-            <h3 className="text-xl md:text-2xl font-bold font-serif">Latest Articles</h3>
+            <h3 className="text-xl md:text-2xl font-bold font-sans">Latest Articles</h3>
             <span className="text-xs text-zinc-500 font-mono">Showing 6 articles</span>
           </div>
 
@@ -207,7 +207,7 @@ export default function BlogPage() {
                     </span>
                   </div>
 
-                  <h4 className="text-base font-bold text-[#141C2E] mb-2 leading-snug group-hover:text-blue-900 transition-colors font-serif">
+                  <h4 className="text-base font-bold text-[#141C2E] mb-2 leading-snug group-hover:text-blue-900 transition-colors font-sans">
                     <Link href={`/blog/${post.slug}`}>{post.title}</Link>
                   </h4>
 
@@ -236,7 +236,7 @@ export default function BlogPage() {
             <span className="text-xs uppercase tracking-wider text-emerald-400 font-mono font-semibold">
               Stay Informed
             </span>
-            <h2 className="text-2xl md:text-3xl font-bold font-serif mt-2 mb-3">
+            <h2 className="text-2xl md:text-3xl font-bold font-sans mt-2 mb-3">
               Get the latest AI architecture breakthroughs in your inbox
             </h2>
             <p className="text-zinc-400 text-xs md:text-sm max-w-xl mx-auto mb-6">

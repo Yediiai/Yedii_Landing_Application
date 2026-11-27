@@ -60,7 +60,7 @@ export default function CareersPage() {
             <Briefcase className="w-3.5 h-3.5 text-zinc-600" />
             We&apos;re Hiring
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-[#141C2E] mb-6 font-serif">
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-[#141C2E] mb-6 font-sans">
             Build the Autonomous AI Support Layer
           </h1>
           <p className="text-lg md:text-xl text-[#141C2E]/70 max-w-2xl leading-relaxed mb-8">
@@ -89,7 +89,7 @@ export default function CareersPage() {
           </div>
 
           <div className="mb-8">
-            <h2 className="text-2xl font-bold font-serif mb-2">Open Opportunities</h2>
+            <h2 className="text-2xl font-bold font-sans mb-2">Open Opportunities</h2>
             <p className="text-xs md:text-sm text-[#141C2E]/70">Explore roles across our engineering and customer teams.</p>
           </div>
 
@@ -107,7 +107,7 @@ export default function CareersPage() {
                     <span className="text-xs text-zinc-500">• {role.location}</span>
                     <span className="text-xs text-zinc-500">• {role.type}</span>
                   </div>
-                  <h3 className="text-base font-bold text-[#141C2E] mb-1 font-serif">{role.title}</h3>
+                  <h3 className="text-base font-bold text-[#141C2E] mb-1 font-sans">{role.title}</h3>
                   <p className="text-xs text-[#141C2E]/70 max-w-xl">{role.desc}</p>
                 </div>
 

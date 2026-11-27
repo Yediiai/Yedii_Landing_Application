@@ -142,7 +142,7 @@ export default function HelpCenterPage() {
             </div>
           </div>
 
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-[#141C2E] mb-6 font-serif">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-[#141C2E] mb-6 font-sans">
             How can we help you today?
           </h1>
           <p className="text-lg md:text-xl text-[#141C2E]/70 max-w-2xl leading-relaxed mb-8">
@@ -164,7 +164,7 @@ export default function HelpCenterPage() {
         {/* Categories Grid */}
         <section className="py-16 px-4 md:px-8 max-w-6xl mx-auto">
           <div className="mb-10">
-            <h2 className="text-2xl md:text-3xl font-bold font-serif mb-2">Browse by Topic</h2>
+            <h2 className="text-2xl md:text-3xl font-bold font-sans mb-2">Browse by Topic</h2>
             <p className="text-[#141C2E]/70 text-sm">Select a category to find targeted answers and guides.</p>
           </div>
 
@@ -200,7 +200,7 @@ export default function HelpCenterPage() {
 
         {/* Top FAQs Section */}
         <section className="py-16 px-4 md:px-8 max-w-4xl mx-auto border-t border-[#141C2E]/10">
-          <h2 className="text-2xl md:text-3xl font-bold font-serif mb-8 text-center">
+          <h2 className="text-2xl md:text-3xl font-bold font-sans mb-8 text-center">
             Frequently Asked Help Questions
           </h2>
           <div className="space-y-4">
@@ -223,7 +223,7 @@ export default function HelpCenterPage() {
               <span className="text-xs uppercase tracking-wider text-emerald-400 font-mono font-semibold">
                 Direct Assistance
               </span>
-              <h2 className="text-2xl md:text-3xl font-bold font-serif mt-2 mb-3">
+              <h2 className="text-2xl md:text-3xl font-bold font-sans mt-2 mb-3">
                 Still need help? We’re here for you.
               </h2>
               <p className="text-zinc-400 text-xs md:text-sm">

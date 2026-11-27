@@ -91,7 +91,7 @@ export default function AboutPage() {
                 About Yedii
               </div>
 
-              <h1 className="text-4xl sm:text-5xl md:text-[54px] font-bold tracking-tight text-[#141C2E] font-serif leading-[1.08]">
+              <h1 className="text-4xl sm:text-5xl md:text-[54px] font-bold tracking-tight text-[#141C2E] font-sans leading-[1.08]">
                 Better conversations. Smarter support. Powered by AI.
               </h1>
 
@@ -189,7 +189,7 @@ export default function AboutPage() {
               <div className="text-[11px] font-semibold uppercase tracking-wider text-[#8A9099]">
                 Our Story
               </div>
-              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#141C2E] font-serif">
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#141C2E] font-sans">
                 Why We Started Yedii
               </h2>
 
@@ -273,7 +273,7 @@ export default function AboutPage() {
                 <div className="text-xs font-semibold uppercase tracking-wider text-[#8A9099]">
                   Our Mission
                 </div>
-                <p className="mt-3 text-xl sm:text-2xl font-bold tracking-tight text-[#141C2E] font-serif leading-snug">
+                <p className="mt-3 text-xl sm:text-2xl font-bold tracking-tight text-[#141C2E] font-sans leading-snug">
                   Make intelligent AI-powered customer support accessible to every business.
                 </p>
               </div>
@@ -288,7 +288,7 @@ export default function AboutPage() {
                 <div className="text-xs font-semibold uppercase tracking-wider text-zinc-400">
                   Our Vision
                 </div>
-                <p className="mt-3 text-xl sm:text-2xl font-bold tracking-tight text-white font-serif leading-snug">
+                <p className="mt-3 text-xl sm:text-2xl font-bold tracking-tight text-white font-sans leading-snug">
                   A world where every customer gets helpful, timely, and reliable support.
                 </p>
               </div>
@@ -305,7 +305,7 @@ export default function AboutPage() {
               <div className="text-[11px] font-semibold uppercase tracking-wider text-[#8A9099] mb-2">
                 What We Do
               </div>
-              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#141C2E] font-serif">
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#141C2E] font-sans">
                 One Platform. Smarter Customer Experiences.
               </h2>
             </div>
@@ -345,7 +345,7 @@ export default function AboutPage() {
               <div className="text-[11px] font-semibold uppercase tracking-wider text-[#8A9099] mb-2">
                 Our Values
               </div>
-              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#141C2E] font-serif">
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#141C2E] font-sans">
                 Principles Behind Everything We Build.
               </h2>
             </div>
@@ -379,7 +379,7 @@ export default function AboutPage() {
         <section className="pb-20 pt-4 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
           <div className="rounded-2xl bg-[#141C2E] text-white p-8 sm:p-12 flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-md">
             <div className="max-w-xl space-y-2">
-              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight font-serif">
+              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight font-sans">
                 Ready to see Yedii in action?
               </h2>
               <p className="text-sm sm:text-base text-zinc-300">

@@ -72,7 +72,7 @@ export function WhyChooseYediiSection() {
           <div className="inline-flex items-center px-3 py-1 rounded-full bg-white/80 backdrop-blur-xs border border-zinc-200 text-zinc-700 text-xs font-semibold mb-3.5 shadow-2xs">
             <span>AI-First Customer Support</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-zinc-950 font-serif">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-zinc-950 font-sans">
             What Makes Yedii Different
           </h2>
           <p className="mt-4 text-base sm:text-lg text-zinc-600 leading-relaxed max-w-2xl mx-auto">
