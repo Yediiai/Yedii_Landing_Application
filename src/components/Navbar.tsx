@@ -402,7 +402,7 @@ export function Navbar() {
                   <Database className="w-4 h-4" />
                 </div>
                 <div>
-                  <div className="text-[13.5px] font-semibold text-zinc-900">Knowledge Base</div>
+                  <div className="text-[13.5px] font-semibold text-zinc-900">Agent Memory</div>
                   <div className="text-[11.5px] text-zinc-500">Vector RAG grounded on websites, PDFs & docs</div>
                 </div>
               </div>

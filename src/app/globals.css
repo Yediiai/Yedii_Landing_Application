@@ -97,6 +97,34 @@ select[class*="rounded"],
   border-radius: 6px !important;
 }
 
+/* Create Agent Flow preview exemption for rounded corners */
+.create-agent-flow-scope,
+.create-agent-flow-scope .rounded-full,
+.create-agent-flow-scope button.rounded-full {
+  border-radius: 9999px !important;
+}
+.create-agent-flow-scope.rounded-2xl,
+.create-agent-flow-scope .rounded-2xl {
+  border-radius: 14px !important;
+}
+.create-agent-flow-scope.rounded-xl,
+.create-agent-flow-scope .rounded-xl,
+.create-agent-flow-scope button.rounded-xl {
+  border-radius: 12px !important;
+}
+.create-agent-flow-scope.rounded-lg,
+.create-agent-flow-scope .rounded-lg,
+.create-agent-flow-scope button.rounded-lg,
+.create-agent-flow-scope input.rounded-lg,
+.create-agent-flow-scope textarea.rounded-lg {
+  border-radius: 9px !important;
+}
+.create-agent-flow-scope.rounded-md,
+.create-agent-flow-scope .rounded-md,
+.create-agent-flow-scope span.rounded-md {
+  border-radius: 6px !important;
+}
+
 * {
   box-sizing: border-box;
 }

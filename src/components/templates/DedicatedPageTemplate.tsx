@@ -55,10 +55,11 @@ export interface DedicatedPageProps {
     text: string;
   };
   hero: {
-    title: string;
+    title?: string;
     subtitle: string;
     primaryCta?: { text: string; href: string };
     secondaryCta?: { text: string; href: string };
+    hideCtas?: boolean;
   };
   mockPreview?: React.ReactNode;
   problemSolution?: {
@@ -86,7 +87,7 @@ export interface DedicatedPageProps {
     subtitle: string;
     items: BenefitMetric[];
   };
-  faqs: {
+  faqs?: {
     title?: string;
     subtitle?: string;
     items: FaqItem[];
@@ -116,30 +117,34 @@ export function DedicatedPageTemplate(props: DedicatedPageProps) {
             </div>
           )}
 
-          <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-[#141C2E] leading-tight max-w-4xl mx-auto">
-            {props.hero.title}
-          </h1>
+          {props.hero.title && (
+            <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-[#141C2E] leading-tight max-w-4xl mx-auto">
+              {props.hero.title}
+            </h1>
+          )}
 
           <p className="mt-4 text-sm sm:text-base md:text-lg text-[#6B7280] max-w-2xl mx-auto leading-relaxed">
             {props.hero.subtitle}
           </p>
 
-          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-            <Link
-              href={props.hero.primaryCta?.href || "https://app.yedii.com/signup"}
-              className="w-full sm:w-auto px-6 py-3 rounded-[8px] bg-[#141C2E] text-white font-semibold text-xs sm:text-sm hover:bg-black transition-all shadow-xs inline-flex items-center justify-center gap-2"
-            >
-              <span>{props.hero.primaryCta?.text || "Deploy an Agent in 5 Minutes"}</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
+          {!props.hero.hideCtas && (
+            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+              <Link
+                href={props.hero.primaryCta?.href || "https://app.yedii.com/signup"}
+                className="w-full sm:w-auto px-6 py-3 rounded-[8px] bg-[#141C2E] text-white font-semibold text-xs sm:text-sm hover:bg-black transition-all shadow-xs inline-flex items-center justify-center gap-2"
+              >
+                <span>{props.hero.primaryCta?.text || "Deploy an Agent in 5 Minutes"}</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
 
-            <Link
-              href={props.hero.secondaryCta?.href || "/pricing"}
-              className="w-full sm:w-auto px-6 py-3 rounded-[8px] bg-white text-[#141C2E] font-semibold text-xs sm:text-sm border border-[#E4E5E8] hover:bg-zinc-50 transition-all shadow-2xs inline-flex items-center justify-center gap-2"
-            >
-              <span>{props.hero.secondaryCta?.text || "View Pricing & Plans"}</span>
-            </Link>
-          </div>
+              <Link
+                href={props.hero.secondaryCta?.href || "/pricing"}
+                className="w-full sm:w-auto px-6 py-3 rounded-[8px] bg-white text-[#141C2E] font-semibold text-xs sm:text-sm border border-[#E4E5E8] hover:bg-zinc-50 transition-all shadow-2xs inline-flex items-center justify-center gap-2"
+              >
+                <span>{props.hero.secondaryCta?.text || "View Pricing & Plans"}</span>
+              </Link>
+            </div>
+          )}
         </section>
 
         {/* Visual / Interface Illustration */}
@@ -368,25 +373,27 @@ export function DedicatedPageTemplate(props: DedicatedPageProps) {
         </section>
 
         {/* G. FAQ Section */}
-        <section className="py-12 bg-white border-t border-[#E8E9EC]">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-10">
-              <span className="text-[11px] font-semibold uppercase tracking-wider text-[#8A9099]">
-                Got Questions?
-              </span>
-              <h2 className="text-2xl sm:text-3xl font-bold text-[#141C2E] mt-1">
-                {props.faqs.title || "Frequently Asked Questions"}
-              </h2>
-              {props.faqs.subtitle && (
-                <p className="text-xs sm:text-sm text-[#6B7280] mt-1.5">
-                  {props.faqs.subtitle}
-                </p>
-              )}
-            </div>
+        {props.faqs && (
+          <section className="py-12 bg-white border-t border-[#E8E9EC]">
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center mb-10">
+                <span className="text-[11px] font-semibold uppercase tracking-wider text-[#8A9099]">
+                  Got Questions?
+                </span>
+                <h2 className="text-2xl sm:text-3xl font-bold text-[#141C2E] mt-1">
+                  {props.faqs.title || "Frequently Asked Questions"}
+                </h2>
+                {props.faqs.subtitle && (
+                  <p className="text-xs sm:text-sm text-[#6B7280] mt-1.5">
+                    {props.faqs.subtitle}
+                  </p>
+                )}
+              </div>
 
-            <DedicatedFaqAccordion items={props.faqs.items} />
-          </div>
-        </section>
+              <DedicatedFaqAccordion items={props.faqs.items} />
+            </div>
+          </section>
+        )}
 
         {/* H. Final CTA */}
         <section className="py-12 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -50,14 +50,14 @@ export function ProductMegaMenu({
               </div>
             </Link>
 
-            {/* 2. Knowledge Base */}
+            {/* 2. Agent Memory */}
             <Link
               href="/knowledge-base"
               onClick={onClose}
               className="group block"
             >
               <div className="text-[14px] font-semibold text-[#111827] group-hover:text-black transition-colors">
-                Knowledge Base
+                Agent Memory
               </div>
               <div className="text-[12.5px] text-[#6B7280] font-normal leading-snug mt-0.5">
                 Train AI using websites, PDFs, text &amp; RAG
