@@ -107,10 +107,10 @@ export function Footer() {
                 </ul>
               </div>
 
-              {/* Column 2: Platform */}
+              {/* Column 2: Product */}
               <div>
                 <h4 className="text-[14px] font-semibold text-white tracking-tight mb-4">
-                  Platform
+                  Product
                 </h4>
                 <ul className="space-y-2.5 text-[13.5px]">
                   <li>
